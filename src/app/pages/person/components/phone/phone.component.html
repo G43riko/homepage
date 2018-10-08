@@ -12,7 +12,7 @@
         <div class="two wide field">
             <div class="ui checkbox">
                 <label for="{{'numberInput' + i}}">Platný</label>
-                <input [(ngModel)]="numberList[i].number"
+                <input [(ngModel)]="numberList[i].active"
                        [disabled]="disabled"
                        class="hidden"
                        id="{{'numberInput' + i}}"

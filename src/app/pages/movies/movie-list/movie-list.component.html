@@ -56,7 +56,7 @@
         </td>
     </tr>
     -->
-    <tbody>
+    <tbody *ngIf="paginator">
     <tr *ngFor="let movie of paginator.getList() | movieFilter: searchPattern" (click)="showDetail(movie.movie_id)">
         <th></th>
         <td>

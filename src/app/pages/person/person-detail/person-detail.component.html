@@ -356,10 +356,6 @@
             </div>
         </div>
 
-        <div class="field">
-            <h3><label for="jobInput">Práca</label></h3>
-            <input [disabled]="disabled" id="jobInput" name="empty">
-        </div>
         <app-phone [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-phone>
         <app-email [disabled]="disabled" [emailList]="selectedPerson.emails"></app-email>
         <app-account [accountList]="selectedPerson.accounts" [disabled]="disabled"></app-account>

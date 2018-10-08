@@ -12,6 +12,7 @@ import { NotificationService } from "./services/notification.service";
 import { PersonService } from "./services/person.service";
 import { SongsService } from "./services/songs.service";
 import { YoutubeService } from "./services/youtube.service";
+import { fakeBackendProvider } from "./services/fake-backend-interceptor.service";
 
 @NgModule({
     imports: [
@@ -31,6 +32,8 @@ import { YoutubeService } from "./services/youtube.service";
         MoviesService,
         MapsService,
         PersonService,
+
+        fakeBackendProvider,
     ],
     exports: [
         CommonModule,

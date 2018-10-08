@@ -12,7 +12,7 @@ export class SongsListComponent implements OnInit {
     public songs: any[]    = [];
     @ViewChild(SongsNavBarComponent) private readonly _navComponent: SongsNavBarComponent;
 
-    constructor(private readonly songsService: SongsService) {
+    public constructor(private readonly songsService: SongsService) {
 
     }
 
@@ -40,7 +40,7 @@ export class SongsListComponent implements OnInit {
         }
     }
 
-    public clickOnModal(e: MouseEvent) {
+    public clickOnModal(e: MouseEvent): void {
         const target = e.target as HTMLElement;
         if (!target.matches("#modalContent")) {
             target.classList.add("hidden");
