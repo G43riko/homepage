@@ -7,7 +7,7 @@ export class AuthService {
     private _token: string | null;
 
     public constructor() {
-        this.checkIfIsLoggedIn();
+        this._checkIfIsLoggedIn();
     }
 
     private _loggedIn = false;
@@ -37,7 +37,7 @@ export class AuthService {
         return this._token || "";
     }
 
-    private checkIfIsLoggedIn(): void {
+    private _checkIfIsLoggedIn(): void {
         this._token    = sessionStorage.getItem(AppConfig.AUTH_COOKIE_KEY);
         this._loggedIn = Boolean(this._token);
     }

@@ -1,12 +1,12 @@
 import { AppConfig } from "../../app.config";
 
 export class Paginator<T = any> {
-    private static readonly itemsPerPage = AppConfig.ITEMS_PER_PAGE;
+    private static readonly _itemsPerPage = AppConfig.ITEMS_PER_PAGE;
     private _actList: T[];
     private readonly _lastPage: number;
 
     public constructor(private readonly allItems: T[]) {
-        this._lastPage = allItems ? Math.floor(allItems.length / Paginator.itemsPerPage) : 0;
+        this._lastPage = allItems ? Math.floor(allItems.length / Paginator._itemsPerPage) : 0;
         this._actList  = this._reCalcList();
     }
 
@@ -69,8 +69,8 @@ export class Paginator<T = any> {
     }
 
     private _reCalcList(): T[] {
-        const start   = this._actualPage * Paginator.itemsPerPage;
-        this._actList = this.allItems ? this.allItems.slice(start, start + Paginator.itemsPerPage) : [];
+        const start = this._actualPage * Paginator._itemsPerPage;
+        this._actList = this.allItems ? this.allItems.slice(start, start + Paginator._itemsPerPage) : [];
         return this._actList;
     }
 }

@@ -23,11 +23,16 @@
         "import-blacklist": [
             true
         ],
+        "array-type": [
+            true,
+            "array"
+        ],
         "import-spacing": true,
         "indent": [
             true,
             "spaces"
         ],
+        "prefer-for-of": false,
         "interface-over-type-literal": true,
         "label-position": true,
         "max-line-length": [

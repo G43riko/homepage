@@ -10,7 +10,7 @@ import { Paginator } from "../../utils/Paginator";
 export class PaginatorComponent implements OnInit {
     @Input() public paginator: Paginator;
 
-    public ngOnInit() {
+    public ngOnInit(): void {
     }
 
 }

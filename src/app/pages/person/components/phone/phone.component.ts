@@ -13,7 +13,7 @@ export class PhoneComponent implements OnInit {
     @Input() public disabled = true;
     @Input() public numberList: Phone[];
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         setTimeout(() => $(".ui.checkbox").checkbox(), 100);
     }
 

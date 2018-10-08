@@ -43,7 +43,7 @@ export class SongsNavBarComponent implements OnInit {
 
     public pausePreview(): void {
         this.previewPlayer.pause();
-        this.changeState("pause");
+        this._changeState("pause");
     }
 
     public play(): void {
@@ -58,16 +58,16 @@ export class SongsNavBarComponent implements OnInit {
             lastPlayed.innerText = "Play";
         }
         this.player.pause();
-        this.changeState("pause");
+        this._changeState("pause");
     }
 
     public stop(): void {
         this.player.stop();
-        this.changeState("stop");
+        this._changeState("stop");
     }
 
     private _startPlaying(): void {
-        this.changeState("play");
+        this._changeState("play");
         this.actDuration    = "00:00";
         this.numberDuration = this.player.getDuration();
         this._interval      = setInterval(() => {
@@ -77,7 +77,7 @@ export class SongsNavBarComponent implements OnInit {
         }, 1000);
     }
 
-    private changeState(state: "play" | "pause" | "stop"): void {
+    private _changeState(state: "play" | "pause" | "stop"): void {
         switch (state) {
             case "play":
                 this.isPaused  = false;

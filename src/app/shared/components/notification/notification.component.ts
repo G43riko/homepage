@@ -24,7 +24,7 @@ export interface IAlert {
                 right: 10px;
                 z-index: 100
             }
-            `
+        `,
     ],
 })
 export class NotificationComponent implements OnInit, NotificationInterface {
@@ -39,15 +39,15 @@ export class NotificationComponent implements OnInit, NotificationInterface {
     }
 
     public showError(title: string, text: string): void {
-        this.showAlert("danger", title, text);
+        this._showAlert("danger", title, text);
     }
 
     public showSuccess(title: string, text: string): void {
-        this.showAlert("success", title, text);
+        this._showAlert("success", title, text);
     }
 
     public showWarn(title: string, text: string): void {
-        this.showAlert("success", title, text);
+        this._showAlert("success", title, text);
     }
 
     public ngOnInit(): void {
@@ -64,7 +64,7 @@ export class NotificationComponent implements OnInit, NotificationInterface {
         // this.alerts = this.backup.map((alert: IAlert) => Object.assign({}, alert));
     }
 
-    private showAlert(type: AlertType, title: string, message: string): void {
+    private _showAlert(type: AlertType, title: string, message: string): void {
         this.alerts.push({
             id: 3,
             type,

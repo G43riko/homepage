@@ -18,33 +18,33 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
     public mapUrl = "";
     public timer: any;
 
-    constructor(private readonly route: ActivatedRoute,
-                private readonly mapService: MapsService,
-                private readonly personService: PersonService) {
+    public constructor(private readonly route: ActivatedRoute,
+                       private readonly mapService: MapsService,
+                       private readonly personService: PersonService) {
         super();
     }
 
-    private static preparePerson(person: Person): Person {
+    private static _preparePerson(person: Person): Person {
         if (!person.address) {
             person.address = new Address();
         }
         return person;
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.route.params.subscribe((data) => {
             const actId = data["id"];
             if (actId === "new") {
                 this.selectedPerson = new Person();
-                this.bindEvents();
-                this.isNew    = true;
+                this._bindEvents();
+                this.isNew = true;
                 this.disabled = false;
             } else {
-                this.isNew    = false;
+                this.isNew = false;
                 this.disabled = true;
                 this.personService.getDetail(actId).subscribe((person) => {
-                    this.selectedPerson = PersonDetailComponent.preparePerson(person);
-                    this.bindEvents();
+                    this.selectedPerson = PersonDetailComponent._preparePerson(person);
+                    this._bindEvents();
                 });
             }
         });
@@ -54,19 +54,19 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         clearTimeout(this.timer);
     }
 
-    public save() {
+    public save(): void {
         if (this.isNew) {
             this.personService.add(this.selectedPerson).subscribe((data) => {
-                this.selectedPerson = PersonDetailComponent.preparePerson(data);
-                this.bindEvents();
+                this.selectedPerson = PersonDetailComponent._preparePerson(data);
+                this._bindEvents();
                 // this.showMessage();
                 this.disabled = true;
                 // this.router.navigate(["/" + Config.PATH_IMAGE_UPLOAD]);
             });
         } else {
             this.personService.update(this.selectedPerson).subscribe((data) => {
-                this.selectedPerson = PersonDetailComponent.preparePerson(data);
-                this.bindEvents();
+                this.selectedPerson = PersonDetailComponent._preparePerson(data);
+                this._bindEvents();
                 // this.showMessage();
                 this.disabled = true;
             });
@@ -84,10 +84,10 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
     }
     */
 
-    public showMap() {
+    public showMap(): void {
         const iframe: any = window.document.getElementById("mapIframe");
-        iframe.src        = iframe.src;
-        let address       = this.selectedPerson.address.city + " ";
+        iframe.src = iframe.src;
+        let address = this.selectedPerson.address.city + " ";
         address += this.selectedPerson.address.street + " ";
         address += this.selectedPerson.address.streetNumber;
 
@@ -95,16 +95,16 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         $(".modal").modal("show");
     }
 
-    public edit() {
+    public edit(): void {
         this.disabled = false;
-        this.bindEvents();
+        this._bindEvents();
     }
 
-    public back() {
+    public back(): void {
         this.disabled = true;
     }
 
-    private bindEvents(): void {
+    private _bindEvents(): void {
         this.timer = setTimeout(() => {
             $(".ui.radio.checkbox").checkbox();
             $("select.dropdown").dropdown();

@@ -15,7 +15,7 @@ export class GPlayerService {
     public constructor(private readonly _youtubeService: YoutubeService) {
         this._player = new YT.Player(this._id, {
             events: {
-                onStateChange: (event: any) => this.onStateChange(event),
+                onStateChange: (event: any) => this._onStateChange(event),
             },
             playerVars: {
                 disablekb: 1, // disable keyboard
@@ -79,7 +79,7 @@ export class GPlayerService {
         });
     }
 
-    private onStateChange(event: any): void {
+    private _onStateChange(event: any): void {
 
     }
 

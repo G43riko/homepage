@@ -13,7 +13,7 @@ export class EmailComponent implements OnInit {
     @Input() public disabled = true;
     @Input() public emailList: Email[];
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         setTimeout(() => $(".ui.checkbox").checkbox(), 100);
     }
 

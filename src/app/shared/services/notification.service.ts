@@ -4,25 +4,25 @@ import { ErrorManagerService } from "./error-manager.service";
 
 @Injectable()
 export class NotificationService {
-    private readonly defaultError = "Undefined error";
-    private notificationComponent: NotificationInterface;
+    private readonly _defaultError = "Undefined error";
+    private _notificationComponent: NotificationInterface;
 
     constructor(private readonly _errorManager: ErrorManagerService) {
     }
 
     public setComponent(notificationComponent: NotificationInterface): void {
-        this.notificationComponent = notificationComponent;
+        this._notificationComponent = notificationComponent;
     }
 
     public showErrorMessage(error: string | Response): void {
-        this.notificationComponent.showError("Chyba: ", this.getMessage(error));
+        this._notificationComponent.showError("Chyba: ", this._getMessage(error));
     }
 
     public showSuccessMessage(error: string | Response): void {
-        this.notificationComponent.showSuccess("Úspech: ", this.getMessage(error));
+        this._notificationComponent.showSuccess("Úspech: ", this._getMessage(error));
     }
 
-    private getMessage(error: string | Response): string {
-        return this._errorManager.getMessageFromError(error, this.defaultError);
+    private _getMessage(error: string | Response): string {
+        return this._errorManager.getMessageFromError(error, this._defaultError);
     }
 }

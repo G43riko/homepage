@@ -26,13 +26,10 @@ export abstract class AbstractHttpService {
     }
 
     protected getHeaders(): HttpHeaders {
-        const headers: HttpHeaders = new HttpHeaders();
-        headers.set("Content-Type", "application/json");
-        headers.set("content-type", "application/json");
-        headers.append("Content-Type", "application/json");
-        headers.append("content-type", "application/json");
-        // headers.set("x-access-token", this._authService.getToken());
-        // headers.set("__auth_token__", "3KJNUIHZobnkN3ZIa66ddsnsmvslDDD88d");
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append("Content-type", "application/json");
+        headers = headers.append("x-access-token", this._authService.getToken());
+        headers = headers.append("__auth_token__", "3KJNUIHZobnkN3ZIa66ddsnsmvslDDD88d");
         // headers.append("cache-control", "no-cache");
         return headers;
     }

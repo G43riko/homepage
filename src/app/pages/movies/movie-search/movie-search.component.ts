@@ -20,14 +20,14 @@ export class MovieSearchComponent implements OnInit {
     }
 
     public searchMovie(): void {
-        this.searchKey ? this.searchByName(this.searchKey) : this.searchById(this.searchId);
+        this.searchKey ? this._searchByName(this.searchKey) : this._searchById(this.searchId);
     }
 
-    private searchById(id: string): void {
+    private _searchById(id: string): void {
 
     }
 
-    private searchByName(name: string): void {
+    private _searchByName(name: string): void {
 
     }
 

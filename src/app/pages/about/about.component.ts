@@ -54,7 +54,7 @@ export class AboutComponent implements OnInit {
 
     ];
 
-    public ngOnInit() {
+    public ngOnInit(): void {
 
         $(".ui.dropdown")
             .dropdown({

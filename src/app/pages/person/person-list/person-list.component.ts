@@ -29,7 +29,7 @@ export class PersonListComponent implements OnInit {
                        private readonly notificationService: NotificationService) {
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.personService.getPersons().subscribe((data: Person[]) => {
             // this.allPersonList = data;
             this.paginator = new Paginator(data);

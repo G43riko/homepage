@@ -14,30 +14,29 @@ export class AccountComponent implements OnInit {
     @Input() public accountList: Account[] = [new Account("FACEBOOK", "gcsollei")];
     public accountTypes                    = Account.types;
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         console.log(this.accountList);
-        this.bindEvents();
+        this._bindEvents();
     }
 
     public removeAccount(index: number): void {
         this.accountList.splice(index, 1);
     }
 
-    public changeType(index: number, event: any) {
-
+    public changeType(index: number, event: any): void {
         this.accountList[index].type = event.target.value;
     }
 
     public addAccount(): void {
         this.accountList.push(new Account("", ""));
-        this.bindEvents();
+        this._bindEvents();
     }
 
-    public goTo(account: Account) {
+    public goTo(account: Account): void {
         window.open(Account.getLink(account), "_blank");
     }
 
-    private bindEvents() {
+    private _bindEvents(): void {
         setTimeout(() => {
             $(".ui.dropdown.button").dropdown({
                 maxSelections: 3,

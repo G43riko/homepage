@@ -16,10 +16,10 @@ export class ExternalMakerDirective {
     public onClick($event: MouseEvent): void {
         $event.preventDefault();
         $event.stopPropagation();
-        window.open(this.getLink(), "_blank");
+        window.open(this._getLink(), "_blank");
     }
 
-    private getLink(): string {
+    private _getLink(): string {
         switch (this.appExternalMaker.type) {
             case "csfd":
                 return MovieUtils.getMakerCsfdLink(this.appExternalMaker.id);

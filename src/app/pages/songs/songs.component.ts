@@ -15,7 +15,7 @@ declare let window: any;
 })
 export class SongsComponent implements OnInit {
     public gplayer: GPlayer;
-    private playing: HTMLAudioElement | null = null;
+    private _playing: HTMLAudioElement | null = null;
 
     public constructor(private readonly songService: SongsService, private readonly notificationService: NotificationService) {
     }
@@ -38,7 +38,7 @@ export class SongsComponent implements OnInit {
             }
         });
         */
-        this.loadAllSongs();
+        this._loadAllSongs();
 
         // document.getElementById("search").onkeydown = (event: any) => this.search(event.target.value);
 
@@ -72,12 +72,12 @@ export class SongsComponent implements OnInit {
         });
     }
 
-    private play(url: string, button: HTMLButtonElement): void {
+    private _play(url: string, button: HTMLButtonElement): void {
         let oldUrl = "";
-        if (this.playing) {
-            oldUrl = this.playing.currentSrc;
-            this.playing.pause();
-            this.playing = null;
+        if (this._playing) {
+            oldUrl = this._playing.currentSrc;
+            this._playing.pause();
+            this._playing = null;
             $(".playing").text("play").removeClass("playing");
         }
         if (oldUrl === url) {
@@ -86,13 +86,13 @@ export class SongsComponent implements OnInit {
             return;
         }
 
-        this.playing = new Audio(url);
-        this.playing.play();
+        this._playing = new Audio(url);
+        this._playing.play();
         button.classList.add("playing");
         button.innerText = "stop";
     }
 
-    private loadAllSongs(): void {
+    private _loadAllSongs(): void {
         // $.get("http://localhost:3000/songs/list", function (data) {
         this.songService.getSongs().subscribe((data) => {
             GPlayer.songList = data;

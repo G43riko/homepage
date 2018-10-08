@@ -30,11 +30,11 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
             if (actId === "new") {
                 this.selectedMovie = new Movie();
                 this.isNew         = true;
-                this.initComponents();
+                this._initComponents();
             } else {
                 this.movieService.getDetail(actId).subscribe((movie: Movie) => {
                     this.selectedMovie = movie;
-                    this.initComponents();
+                    this._initComponents();
                 }, (error) => this.notificationService.showErrorMessage(error));
             }
         });
@@ -61,7 +61,7 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
         this.setDisabled();
     }
 
-    private initComponents(): void {
+    private _initComponents(): void {
         const countries$ = this.movieService.getCountries();
         const genres$    = this.movieService.getGenres();
         forkJoin(countries$, genres$).subscribe((data: string[][]) => {

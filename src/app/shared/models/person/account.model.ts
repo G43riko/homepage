@@ -1,6 +1,6 @@
 type AccountType = "" | "FACEBOOK" | "GOOGLEPLUS" | "SKYPE" | "LINKEDIN" | "TWITTER" | "YOUTUBE" | "INSTAGRAM" | "GITHUB";
 
-function getLink(account: AccountType) {
+function getLink(account: AccountType): string {
     switch (account) {
         case "FACEBOOK":
             return "https://www.facebook.com/";
@@ -19,10 +19,11 @@ function getLink(account: AccountType) {
         case "SKYPE":
             return "";
     }
+    return "";
 }
 
 export class Account {
-    public static types = [
+    public static types: { label: string, value: string, icon: string }[] = [
         {
             label: "Facebook",
             value: "FACEBOOK",
@@ -87,7 +88,8 @@ export class Account {
     }
 
     public static getIcon(account: Account): string {
-        const type = Account.types.find((e) => e.value === account.type);
+        // @ts-ignore
+        const type: any = Account.types.find((e) => e.value === account.type);
         return type ? type.icon : "";
     }
 

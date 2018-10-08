@@ -16,10 +16,10 @@ export class ExternalMovieDirective {
     public onClick($event: MouseEvent): void {
         $event.preventDefault();
         $event.stopPropagation();
-        window.open(this.getLink(), "_blank");
+        window.open(this._getLink(), "_blank");
     }
 
-    private getLink(): string {
+    private _getLink(): string {
         switch (this.appExternalMovie.type) {
             case "csfd":
                 return MovieUtils.getMovieCsfdLink(this.appExternalMovie.id);
