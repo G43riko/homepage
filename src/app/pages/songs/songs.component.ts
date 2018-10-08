@@ -57,8 +57,8 @@ export class SongsComponent implements OnInit {
     public search(key: string): void {
         const searchString = key.toLowerCase();
         const result       = document.querySelector("#songList tbody tr");
-        $("#songList tbody tr").each(function(): void {
-            const thisElement: HTMLElement = this as any;
+        $("#songList tbody tr").each(function(this: any): void {
+            const thisElement: HTMLElement = this;
             const tr                       = $(thisElement);
             if (tr.text().toLowerCase().indexOf(searchString) < 0) {
                 // tr.addClass("hidden");

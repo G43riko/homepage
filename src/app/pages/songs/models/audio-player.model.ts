@@ -15,7 +15,7 @@ export class AudioPlayerModel implements PlayerInterface {
     public fullscreen(): void {
     }
 
-    public play(preview?: string): Promise<any> | null {
+    public play(preview?: string): Promise<any> {
         if (!this._actualPreview) {
             if (!preview) {
                 throw new Error("Nieje možné vytvoriť pesničku bez URL");
@@ -26,7 +26,7 @@ export class AudioPlayerModel implements PlayerInterface {
             this._actualPreview.src = preview;
         }
         this._actualPreview.play();
-        return null;
+        return Promise.resolve(null);
     }
 
     public pause(): void {

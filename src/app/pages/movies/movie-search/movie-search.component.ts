@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import "rxjs/add/observable/forkJoin";
 
 declare const $: any;
 

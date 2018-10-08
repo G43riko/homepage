@@ -28,13 +28,10 @@ export class SongsNavBarComponent implements OnInit {
     public playPreview(preview: string): void {
         this.player = this.previewPlayer as any;
         this.youtubePlayer.stop();
-        const play = this.previewPlayer.play(preview);
-        if (play) {
-            play.then(() => {
-                this.duration = TimeUtils.getStringFromSeconds(parseInt(this.previewPlayer.getDuration().toString(), 10));
-                this._startPlaying();
-            });
-        }
+        this.previewPlayer.play(preview).then(() => {
+            this.duration = TimeUtils.getStringFromSeconds(parseInt(this.previewPlayer.getDuration().toString(), 10));
+            this._startPlaying();
+        });
     }
 
     public playFrom(time: number): void {

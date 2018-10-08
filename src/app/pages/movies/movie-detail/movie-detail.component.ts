@@ -25,7 +25,7 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
     }
 
     public ngOnInit(): void {
-        this.route.params.subscribe((data: { id: any }) => {
+        this.route.params.subscribe((data: any) => {
             const actId = data["id"];
             if (actId === "new") {
                 this.selectedMovie = new Movie();

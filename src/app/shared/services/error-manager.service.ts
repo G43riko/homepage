@@ -1,7 +1,4 @@
 import { Injectable } from "@angular/core";
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
 
 @Injectable()
 export class ErrorManagerService {

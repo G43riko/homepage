@@ -16,8 +16,8 @@ export class AlertComponent implements OnInit {
 
     public ngOnInit(): void {
         const instance = this;
-        $(this.el.nativeElement).find(".close").on("click", function(): void {
-            $(this as any).closest(".message").transition({
+        $(this.el.nativeElement).find(".close").on("click", function(this: any): void {
+            $(this).closest(".message").transition({
                 animation: "fade",
                 onComplete: () => {
                     instance.exit.emit();
