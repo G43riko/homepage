@@ -1,0 +1,147 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#modalContent {
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    bottom: 100px;
+    right: 100px;
+
+    iframe {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+#footer {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background-color: #e6fdfd;;
+    transition: all 0.5s;
+    bottom: -60px;
+
+    &.isPlaying {
+        bottom: 0;
+
+    }
+}
+
+#button {
+    width: calc(70% - 50px);
+    float: right;
+    height: 100%;
+    line-height: 72px;
+    height: 100%;
+}
+
+#slider input {
+    width: calc(100% - 110px);
+}
+
+#fileName {
+    width: calc(30% - 200px);
+    float: right;
+    height: 100%;
+}
+
+#controls {
+    position: relative;
+    width: 250px;
+    float: right;
+    line-height: 60px;
+    text-align: center;
+    height: 100%;
+
+    i {
+        font-size: 21px;
+        background-color: #89E399;
+        width: 30px;
+        cursor: pointer;
+        border-radius: 59px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+
+        &:hover {
+            background-color: rgb(111, 187, 124);
+        }
+    }
+}
+
+#timeHolder {
+    display: inline-block;
+    font-size: 19px;
+}
+
+#songList {
+    width: 100%;
+    transition: all 0.5s;
+    margin-top: 60px;
+
+    * {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    tr {
+        &:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    &.isPlaying {
+        margin-bottom: 60px;
+    }
+}
+
+#navBar {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    top: 0px;
+    left: 0px;
+    background: #e6fdfd;
+}
+
+#sideBar {
+    position: fixed;
+    width: 400px;
+    height: 600px;
+    top: 60px;
+    left: -400px;
+    transition: 1s all;
+    background-color: blanchedalmond;
+
+    &.visible {
+        left: 0;
+    }
+}

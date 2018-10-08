@@ -1,0 +1,42 @@
+<div class="field emailComponent">
+    <label>
+        <h3 class="addable-title">Accounts</h3>
+        <button (click)="addAccount()" *ngIf="!disabled" class="circular ui icon button">
+            <i class="icon plus"></i>
+        </button>
+    </label>
+    <div *ngFor="let account of accountList; let i = index" class="inline fields">
+
+        <div class="five wide field">
+            <div class="field">
+                <label for="{{'nickInput' + i}}">Username</label>
+                <input [(ngModel)]="accountList[i].userName" [disabled]="disabled" id="{{'nickInput' + i}}" name="nick">
+            </div>
+        </div>
+        <div class="eleven wide field">
+            <label for="{{'linkInput' + i}}">Link</label>
+            <input [(ngModel)]="accountList[i].link" [disabled]="disabled" id="{{'linkInput' + i}}" name="link">
+        </div>
+        <div class="three wide field">
+            <div [ngClass]="{'disabled': disabled}" class="ui floating dropdown button">
+                <input (change)="changeType(i, $event)" [(ngModel)]="accountList[i].type" name="account" type="hidden">
+                <span class="text">Účet</span>
+
+                <div class="menu">
+                    <div *ngFor="let accountType of accountTypes" [attr.data-value]="accountType.value" class="item">
+                        <i class="{{accountType.icon}} icon"></i>
+                        {{accountType.label}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="one wide field">
+            <button (click)="goTo(account)" class="circular ui icon button">
+                <i class="icon angle right"></i>
+            </button>
+            <button (click)="removeAccount(i)" *ngIf="!disabled" class="circular ui icon button">
+                <i class="icon remove"></i>
+            </button>
+        </div>
+    </div>
+</div>

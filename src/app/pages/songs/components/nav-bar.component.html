@@ -1,0 +1,22 @@
+<div [ngClass]="{'isPlaying': isPlaying || isPaused}" id="footer">
+    <div id="controls">
+        <i (click)="player.previous()" class="fa fa-step-backward" id="back"></i>
+        <i (click)="pause()" [hidden]="!isPlaying" class="fa fa-pause" id="pause"></i>
+        <i (click)="play()" [hidden]="isPlaying" class="fa fa-play" id="play"></i>
+        <i (click)="stop()" class="fa fa-stop" id="stop"></i>
+        <i (click)="player.next()" class="fa fa-step-forward" id="next"></i>
+        <i (click)="player.minimalize()" class="fa fa-window-minimize" id="minimalize"></i>
+        <i (click)="player.fullscreen()" class="fa fa-arrows-alt" id="fullscreen"></i>
+    </div>
+    <div id="button">
+        <span id="slider">
+            <input #d (change)="playFrom(d.value)" max="{{numberDuration}}" step="0.1" type="range"
+                   value="{{elapsedValue}}">
+        </span>
+        <div id="timeHolder">
+            <span id="actTime">{{actDuration}}</span>/
+            <span id="duration">{{duration}}</span>
+        </div>
+    </div>
+    <!--<div id="fileName">{{fileName}}</div>-->
+</div>

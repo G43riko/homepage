@@ -1,0 +1,46 @@
+<div id="navBar">
+    <button onclick="document.getElementById('sideBar').classList.toggle('visible')">Sidebar</button>
+    <input #query (keyup)="search(query.value)" id="search">
+</div>
+<div id="sideBar"></div>
+<table boder="1" id="songList">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Autory</th>
+        <th>Názov</th>
+        <th>Dĺžka (ms)</th>
+        <th>Popularita</th>
+        <th>Hodnotenie</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div id="modal" (click)="clickOnModal($event)">
+    <div id="modalContent">
+        <div id="player"></div>
+    </div>
+</div>
+<div id="footer">
+    <div id="controls">
+        <i id="back" (click)="gplayer.previous()" class="fa fa-step-backward"></i>
+        <i id="pause" (click)="gplayer.pause()" class="fa fa-pause hidden"></i>
+        <i id="play" (click)="gplayer.play()" class="fa fa-play"></i>
+        <i id="stop" (click)="gplayer.stop()" class="fa fa-stop"></i>
+        <i id="next" (click)="gplayer.next()" class="fa fa-step-forward"></i>
+        <i id="minimalize" (click)="gplayer.minimalize()" class="fa fa-window-minimize"></i>
+        <i id="fullscreen" (click)="gplayer.fullscreen()" class="fa fa-arrows-alt"></i>
+    </div>
+    <div id="button">
+            <span id="slider">
+                <input type="range" value="0">
+            </span>
+        <div id="timeHolder">
+            <span id="actTime">00:00</span>/
+            <span id="duration">00:00</span>
+        </div>
+    </div>
+    <div id="fileName">
+
+    </div>
+</div>

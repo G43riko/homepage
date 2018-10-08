@@ -1,0 +1,54 @@
+<div class="ui big relaxed divided list">
+    <div *ngFor="let maker of makers; let i = index" class="item">
+        <div *ngIf="!disabled" class="right floated content">
+            <button *ngIf="maker.csfd"
+                    [appExternalMaker]="{type: 'csfd', id: maker.csfd}"
+                    class="ui blue mini basic button">
+                CSFD
+            </button>
+            <button *ngIf="maker.imdb"
+                    [appExternalMaker]="{type: 'imdb', id: maker.imdb}"
+                    class="ui blue mini basic button">
+                IMDB
+            </button>
+            <button *ngIf="maker.movieDb"
+                    [appExternalMaker]="{type: 'movieDb', id: maker.movieDb}"
+                    class="ui blue mini basic button">
+                MovieDB
+            </button>
+            <button (click)="removeMaker(i)" class="circular ui icon button">
+                <i class="icon info circle"></i>
+            </button>
+            <button (click)="removeMaker(i)" class="circular ui icon button">
+                <i class="icon remove"></i>
+            </button>
+        </div>
+        <img *ngIf="maker.avatar" [src]="maker.avatar" class="ui avatar image">
+        <div class="content">
+            <a (click)="showMakerDetail(maker)" class="header">{{maker.name}}</a>
+            <div class="description">{{maker.birthday}}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Detail herca
+    </div>
+    <div class="image content">
+        <app-maker-detail [selectedMaker]="activeMaker"></app-maker-detail>
+    </div>
+    <!--
+    <div class="actions">
+        <div class="ui black deny button">
+            Nope
+        </div>
+        <div class="ui positive right labeled icon button">
+            Yep, that's me
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+    -->
+</div>

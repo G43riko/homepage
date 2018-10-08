@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <script src="/public/jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #modal {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #modalContent {
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            bottom: 100px;
+            right: 100px;
+        }
+
+        #modalContent iframe {
+            height: 100%;
+            width: 100%;
+        }
+
+        #footer {
+            position: fixed;
+            width: 100%;
+            height: 60px;
+            background-color: #e6fdfd;;
+            transition: all 0.5s;
+            bottom: -60px;
+        }
+
+        #footer.isPlaying {
+            bottom: 0;
+
+        }
+
+        #button {
+            width: calc(70% - 50px);
+            float: right;
+            height: 100%;
+            line-height: 72px;
+            height: 100%;
+        }
+
+        #slider input {
+            width: calc(100% - 110px);
+        }
+
+        #fileName {
+            width: calc(30% - 200px);
+            float: right;
+            height: 100%;
+        }
+
+        #controls {
+            position: relative;
+            width: 250px;
+            float: right;
+            line-height: 60px;
+            text-align: center;
+            height: 100%;
+        }
+
+        #controls i {
+            font-size: 21px;
+            background-color: #89E399;
+            width: 30px;
+            cursor: pointer;
+            border-radius: 59px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        #controls i:hover {
+            background-color: rgb(111, 187, 124);
+        }
+
+        #timeHolder {
+            display: inline-block;
+            font-size: 19px;
+        }
+
+        #songList {
+            margin-top: 60px;
+        }
+
+        #songList * {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+        }
+
+        #songList td, #songList th {
+            border: 1px solid #ddd;
+            padding: 8px;
+
+            /*
+            display:inline-block;
+            white-space: nowrap;
+            overflow:hidden !important;
+            text-overflow: ellipsis;
+            */
+        }
+
+        #songList tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #songList tr:hover {
+            background-color: #ddd;
+        }
+
+        #songList th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #songList {
+            width: 100%;
+            transition: all 0.5s;
+        }
+
+        #songList.isPlaying {
+            margin-bottom: 60px;
+        }
+
+        #navBar {
+            position: fixed;
+            width: 100%;
+            height: 60px;
+            top: 0px;
+            left: 0px;
+            background: #e6fdfd;
+        }
+
+        #sideBar {
+            position: fixed;
+            width: 400px;
+            height: 600px;
+            top: 60px;
+            left: -400px;
+            transition: 1s all;
+            background-color: blanchedalmond;
+        }
+
+        #sideBar.visible {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="navBar">
+    <button onclick="document.getElementById('sideBar').classList.toggle('visible')">Sidebar</button>
+    <input id="search">
+</div>
+<div id="sideBar"></div>
+<table boder="1" id="songList">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Autory</th>
+        <th>Názov</th>
+        <th>Dĺžka (ms)</th>
+        <th>Popularita</th>
+        <th>Hodnotenie</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div id="modal">
+    <div id="modalContent">
+        <div id="player"></div>
+        <!--
+        <iframe width="560"
+                height="315"
+                src="https://www.youtube.com/embed/Cbvqv19Nf0E"
+                frameborder="0"
+                allowfullscreen></iframe>-->
+    </div>
+</div>
+<div id="footer">
+    <div id="controls">
+        <i class="fa fa-step-backward" id="back"></i>
+        <i class="fa fa-pause hidden" id="pause"></i>
+        <i class="fa fa-play" id="play"></i>
+        <i class="fa fa-stop" id="stop"></i>
+        <i class="fa fa-step-forward" id="next"></i>
+        <i class="fa fa-window-minimize" id="minimalize"></i>
+        <i class="fa fa-arrows-alt" id="fullscreen"></i>
+    </div>
+    <div id="button">
+        <span id="slider"><input type="range" value="0"></span>
+        <div id="timeHolder">
+            <span id="actTime">00:00</span>/
+            <span id="duration">00:00</span>
+        </div>
+    </div>
+    <div id="fileName">
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    let songList;
+    let playing = null;
+    const modal = $("#modal");
+    modal.hide();
+    modal.click(function (e) {
+        if (!e.target.matches("#modalContent")) {
+            modal.hide();
+        }
+    });
+
+    function playYoutube(title) {
+        modal.show();
+        if (playing) {
+            oldUrl = playing.currentSrc;
+            playing.pause();
+            playing = null;
+            $(".playing").text("play").removeClass("playing");
+        }
+        $.get("/songs/search/" + encodeURI(title), function (data) {
+            if (data.items.length && player) {
+
+                player.loadVideoById(data.items[0].id.videoId)
+            }
+        }, "json");
+    }
+
+    function play(url, button) {
+        let oldUrl = "";
+        if (playing) {
+            oldUrl = playing.currentSrc;
+            playing.pause();
+            playing = null;
+            $(".playing").text("play").removeClass("playing");
+        }
+        if (oldUrl === url) {
+            button.classList.remove("playing");
+            button.innerText = "play";
+            return;
+        }
+
+        playing = new Audio(url);
+        playing.play();
+        button.classList.add("playing");
+        button.innerText = "stop";
+    }
+
+    function loadAllSongs() {
+        $.get("songs/list", function (data) {
+            songList = data;
+            let result = "";
+            let counter = 1;
+            data.forEach((item, index) => {
+                result += "<tr>";
+                result += "<td>" + counter++ + "</td>";
+                result += "<td>" + item.artists.map(a => a.name).join(" And ") + "</td>";
+                result += "<td><a href=\"" + item.spotifi_link + "\">" + item.title + "<a></td>";
+                result += "<td>" + item.duration + "</td>";
+                result += "<td>" + item.popularity + "</td>";
+                if (item.preview) {
+                    result += "<td><button onclick=\"play('" + item.preview + "', this)\">play</button>";
+                } else {
+                    result += "<td><button disabled>play</button>";
+                }
+                result += "<button onclick=\"gplayer.playByIndex('" + index + "')\">youtube</button></td>";
+                result += "</tr>";
+            });
+            $("table tbody").append(result);
+        }, "json");
+    }
+
+    loadAllSongs();
+</script>
+<script>
+
+    function search(key) {
+        const searchString = key.toLowerCase();
+        const result = document.querySelector("#songList tbody tr");
+        $("#songList tbody tr").each(function () {
+            const tr = $(this);
+            if (tr.text().toLowerCase().indexOf(searchString) < 0) {
+                // tr.addClass("hidden");
+                this.classList.add("hidden");
+                // this.style.display = "none";
+            } else {
+                // tr.removeClass("hidden");
+                this.classList.remove("hidden");
+                // this.style.display = "table-row";
+            }
+        })
+    }
+
+    document.getElementById("search").onkeydown = (event) => search(event.target.value);
+
+    class Utils {
+        static pad(num, size) {
+            const s = "000000000" + num;
+            return s.substr(s.length - size);
+        }
+    }
+
+    class GPlayer {
+        constructor(id = "gplayer") {
+            this._id = id;
+            this._initButtons();
+            this._player = new YT.Player(id, {
+                events: {
+                    "onStateChange": (event) => this.onStateChange(event),
+                },
+                playerVars: {
+                    disablekb: 1, //disable keyboard
+                    controls: 0, //hide controlls
+                    fs: 0, // hide fullscreen button
+                    showinfo: 0, // hide info
+                }
+            });
+        }
+
+        _initButtons() {
+            function setFullscreen(fullscreen, el = document.documentElement) {
+                if (fullscreen) {
+                    let rfs = el.requestFullscreen
+                        || el.webkitRequestFullScreen
+                        || el.mozRequestFullScreen
+                        || el.msRequestFullscreen;
+                    rfs.call(el);
+                } else {
+                    let rfs = document.exitFullscreen
+                        || document.webkitExitFullscreen
+                        || document.mozExitFullscreen
+                        || document.msExitFullscreen;
+                    rfs.call(document);
+                }
+            }
+
+            this.inputSlider = document.querySelector("#slider input");
+            document.getElementById("play").onclick = () => this.play();
+            document.getElementById("pause").onclick = () => this.pause();
+            document.getElementById("stop").onclick = () => this.stop();
+            document.getElementById("minimalize").onclick = () => this.minimalize();
+            document.getElementById("back").onclick = () => this.previous();
+            document.getElementById("next").onclick = () => this.next();
+            document.getElementById("fullscreen").onclick = () => {
+                setFullscreen(true, document.getElementById("player"))
+            };
+            this.inputSlider.onchange = (event) => {
+                this.playFrom(event.target.value);
+            }
+        }
+
+        onStateChange(arg) {
+            switch (this.getState()) {
+                case -1: //unstarted
+                    break;
+                case 0: //ended
+                    clearInterval(this._interval);
+                    break;
+                case 1: //playing
+                    document.getElementById("play").classList.add("hidden");
+                    document.getElementById("pause").classList.remove("hidden");
+                    break;
+                case 2: //paused
+                    document.getElementById("pause").classList.add("hidden");
+                    document.getElementById("play").classList.remove("hidden");
+                    break;
+                case 3: //buffering
+                    break;
+                case 5: //video cued
+                    break;
+            }
+        }
+
+        _setPlaying(isPlaying,) {
+            document.getElementById("songList").classList.toggle("isPlaying", isPlaying);
+            document.getElementById("footer").classList.toggle("isPlaying", isPlaying);
+        }
+
+        isPlaying() {
+            const state = this._player.getPlayerState();
+        }
+
+        getState() {
+            return this._player.getPlayerState();
+        }
+
+        minimalize() {
+            const value = document.getElementById("modal").classList.toggle("hidden");
+            // $("#modal").toggle();
+            document.getElementById("minimalize").classList.toggle("fa-window-maximize", value);
+            document.getElementById("minimalize").classList.toggle("fa-window-minimize", !value);
+            //fa fa-window-maximize
+        }
+
+        getTime() {
+            return this._player && parseInt(this._player.getCurrentTime());
+        }
+
+        pause() {
+            this._player && this._player.pauseVideo();
+        }
+
+        play() {
+            this._player && this._player.playVideo();
+        }
+
+        stop() {
+            this._player && this._player.stopVideo();
+        }
+
+        next() {
+            this._player && this._player.nextVideo()
+        }
+
+        previous() {
+            this._player && this._player.previousVideo()
+        }
+
+        mute() {
+            this._player && this._player.mute();
+        }
+
+        unmute() {
+            this._player && this._player.unmute();
+        }
+
+        setVolume(value) {
+            this._player && this._player.setVolume(value);
+        }
+
+        getVolume() {
+            return this._player && this._player.getVolume();
+        }
+
+        playFrom(seconds) {
+            this._player && this._player.seekTo(seconds, true);
+        }
+
+        playByName(title) {
+            this._setPlaying(true);
+            $("#modal").show();
+            $.get("/songs/search/" + encodeURI(title), (data) => {
+                if (data.items.length && this._player) {
+                    this._player.loadVideoById(data.items[0].id.videoId);
+                }
+            }, "json");
+        }
+
+        _getStringFromS(time) {
+            const minutes = parseInt(time / 60);
+            const seconds = time % 60;
+            return Utils.pad(minutes, 2) + ":" + Utils.pad(seconds, 2);
+        }
+
+        set playingSong(song) {
+            const durationInS = parseInt(song.duration / 1000);
+            document.getElementById("duration").innerText = this._getStringFromS(durationInS);
+
+            const artists = song.artists.map(a => a.name).join(" AND ");
+            document.getElementById("fileName").innerHTML = artists + "<br/>" + song.title;
+
+            this.inputSlider.max = durationInS;
+
+
+            this._playingSong = song;
+        }
+
+        getFullName(song) {
+            const selectedSong = song || this._playingSong;
+            if (!selectedSong) {
+                return "";
+            }
+            const artists = selectedSong.artists.map(a => a.name).join(" AND ");
+            return artists + " - " + selectedSong.title;
+        }
+
+        playByIndex(index) {
+            if (songList && songList[index]) {
+                this.playingSong = songList[index];
+                this.playByName(this._playingSong.artists.map(a => a.name).join(" ") + " " + this._playingSong.title);
+
+                const element = document.getElementById("actTime");
+                this._interval = setInterval(() => {
+                    const timeElapsed = this.getTime();
+                    this.inputSlider.value = timeElapsed;
+                    element.innerText = this._getStringFromS(timeElapsed);
+                }, 1000);
+            }
+        }
+
+        addToQueebyName(name) {
+            $.get("/songs/search/" + encodeURI(title), function (data) {
+                if (data.items.length && this._player) {
+                    this._player.cueVideoById(data.items[0].id.videoId)
+                }
+            }, "json");
+        }
+    }
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var gplayer;
+
+    function onYouTubeIframeAPIReady() {
+        gplayer = new GPlayer("player");
+    }
+
+</script>

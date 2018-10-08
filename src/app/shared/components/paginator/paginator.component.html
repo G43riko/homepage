@@ -1,0 +1,31 @@
+<div *ngIf="paginator" class="ui icon buttons">
+    <button (click)="paginator.firstPage()"
+            [ngClass]="{'disabled': paginator.actualPage === 1}"
+            class="ui button">
+        <i class="angle double left icon"></i>
+    </button>
+    <button (click)="paginator.previousPage()"
+            [ngClass]="{'disabled': paginator.actualPage === 1}"
+            class="ui button">
+        <i class="angle left icon"></i>
+    </button>
+
+    <div *ngFor="let number of paginator.pagesAround">
+        <button (click)="paginator.setPage(number - 1)"
+                [ngClass]="{'active': paginator.actualPage === number}"
+                class="ui button"
+                style="width: 37px">
+            {{number }}
+        </button>
+    </div>
+    <button (click)="paginator.nextPage()"
+            [ngClass]="{'disabled': paginator.actualPage === paginator.pages}"
+            class="ui button">
+        <i class="angle right icon"></i>
+    </button>
+    <button (click)="paginator.lastPage()"
+            [ngClass]="{'disabled': paginator.actualPage === paginator.pages}"
+            class="ui button">
+        <i class="angle double right icon"></i>
+    </button>
+</div>

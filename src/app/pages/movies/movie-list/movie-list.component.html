@@ -1,0 +1,111 @@
+<div class="ui checkbox" style="margin: 20px 0 10px 10px">
+    <input [(ngModel)]="showExternalServices" id="idShowExternalServices" name="example" type="checkbox">
+    <label for="idShowExternalServices">Zobraziť externé služby</label>
+    <div class="ui icon input">
+        <i class="search icon"></i>
+        <input [(ngModel)]="searchPattern" placeholder="Search..." type="text">
+    </div>
+    <div class="ui mini buttons">
+        <button class="ui button">Grid</button>
+        <div class="or"></div>
+        <button class="ui button">List</button>
+    </div>
+</div>
+<table class="ui celled striped selectable table hoverable">
+    <thead>
+    <tr>
+        <th width="75px">
+            <div class="ui checkbox">
+                <input type="checkbox" #selecteAllInput [(ngModel)]="selectedAll" (click)="selectAll(selecteAllInput)">
+                <label></label>
+            </div>
+            <div class="ui compact icon button left pointing dropdown link item">
+                <i class="ellipsis vertical icon"></i>
+                <div class="menu">
+                    <div class="header">Označené:</div>
+                    <div class="item">Zmazať</div>
+                    <div class="divider"></div>
+                    <div class="item">Pridať tag</div>
+                </div>
+            </div>
+        </th>
+        <th>Názov</th>
+        <th>Režisér</th>
+        <th>Rok</th>
+        <th>Hodnotenie</th>
+        <th>Dĺžka</th>
+        <th>Žánre</th>
+        <!--<th width="110px"></th>-->
+        <th *ngIf="showExternalServices">CSFD</th>
+        <th *ngIf="showExternalServices">IMDB</th>
+        <th *ngIf="showExternalServices">MOVIE DB</th>
+    </tr>
+    </thead>
+    <!--
+    <tr>
+        <th></th>
+        <td>Temný rytier</td>
+        <td>Christopher Nolan</td>
+        <td>2009</td>
+        <td>136 min</td>
+        <td>Akčný / Thriller</td>
+        <td>
+            <button>CSFD</button>
+            <button>IMDB</button>
+            <button>MOVIE DB</button>
+        </td>
+    </tr>
+    -->
+    <tbody>
+    <tr *ngFor="let movie of paginator.getList() | movieFilter: searchPattern" (click)="showDetail(movie.movie_id)">
+        <th></th>
+        <td>
+            <h4 class="ui image header">
+                <img *ngIf="movie.avatar" [src]="movie.avatar" class="ui tiny rounded image">
+                <div class="content">
+                    {{movie.title_sk || movie.title}}
+                    <div class="sub header" *ngIf="movie.title_sk">{{movie.title}}</div>
+                </div>
+            </h4>
+        </td>
+        <td>DIRECTOR</td>
+        <td>{{movie.year}}</td>
+        <td>{{movie.rating}}</td>
+        <td>{{movie.duration}} min</td>
+        <td>{{movie.genres.join(" / ")}}</td>
+        <td *ngIf="showExternalServices">
+            <i class="large green checkmark icon"
+               *ngIf="movie.csfd_id"
+               [appExternalMovie]="{type: 'csfd', id: movie.csfd_id}"></i>
+            <i *ngIf="!movie.csfd_id" class="large red close icon"></i>
+        </td>
+        <td *ngIf="showExternalServices">
+            <i class="large green checkmark icon"
+               *ngIf="movie.imdb_id"
+               [appExternalMovie]="{type: 'imdb', id: movie.imdb_id}"></i>
+            <i *ngIf="!movie.imdb_id" class="large red close icon"></i>
+        </td>
+        <td *ngIf="showExternalServices">
+            <i class="large green checkmark icon"
+               *ngIf="movie.moviedb_id"
+               [appExternalMovie]="{type: 'movieDb', id: movie.moviedb_id}"></i>
+            <i *ngIf="!movie.moviedb_id" class="large red close icon"></i>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot class="full-width">
+    <tr>
+        <th>
+            <app-paginator [paginator]="paginator"></app-paginator>
+        </th>
+        <th colspan="100">
+            <div [routerLink]="['new']" class="ui right floated small primary labeled icon button">
+                <i class="user icon"></i> Pridať film
+            </div>
+            <div class="ui small  button">
+                Zoznam hercov
+            </div>
+        </th>
+    </tr>
+    </tfoot>
+</table>

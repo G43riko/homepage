@@ -1,0 +1,11 @@
+tr {
+    height: 57px;
+
+    .hiddenable {
+        display: none;
+    }
+}
+
+tr:hover .hiddenable {
+    display: inline-block;
+}

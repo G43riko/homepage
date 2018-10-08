@@ -1,0 +1,23 @@
+<form *ngIf="state !== 'loggedIn'" class="ui form" style="width: 250px;">
+    <div class="field">
+        <label>Nickname</label>
+        <input [(ngModel)]="userAccount.login" name="nickname" placeholder="Nickname">
+    </div>
+    <div *ngIf="state === 'signUp'" class="field">
+        <label>Email</label>
+        <input [(ngModel)]="userAccount.email" name="email" placeholder="Email" type="email">
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <input [(ngModel)]="userAccount.password" name="password" placeholder="Password" type="password">
+    </div>
+    <div class="fields">
+        <button (click)="signUp()" *ngIf="state === 'signUp'" class="ui button" type="button">Sign up</button>
+        <button (click)="logIn()" *ngIf="state === 'logIn'" class="ui button" type="button">Login</button>
+        <button (click)="state = 'logIn'" *ngIf="state === 'signUp'" class="ui button" type="button">Log in</button>
+        <button (click)="state = 'signUp'" *ngIf="state === 'logIn'" class="ui button" type="button">Sign up</button>
+    </div>
+</form>
+<div *ngIf="state === 'loggedIn'">
+    <button class="ui button" *ngIf="state === 'loggedIn'" (click)="logOut()" type="button">Logout</button>
+</div>

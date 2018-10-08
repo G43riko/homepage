@@ -1,0 +1,8 @@
+<div class="ui left demo vertical inverted sidebar labeled icon menu" id="sidebar">
+
+    <a *ngFor="let item of items" class="item" routerLink="{{item.link}}">
+        <i class="{{item.icon}} icon"></i>
+        {{item.label}}
+    </a>
+
+</div>

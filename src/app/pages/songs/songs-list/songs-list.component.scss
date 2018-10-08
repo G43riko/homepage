@@ -1,0 +1,69 @@
+
+#modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#modalContent {
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    bottom: 100px;
+    right: 100px;
+
+    iframe {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+/*
+#songList {
+  width: 100%;
+  transition: all 0.5s;
+  margin-top: 60px;
+
+  * {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  tr {
+    &:nth-child(even){background-color: #f2f2f2;}
+    &:hover {background-color: #ddd;}
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  &.isPlaying {
+    margin-bottom: 60px;
+  }
+}
+*/
+#sideBar {
+    position: fixed;
+    width: 400px;
+    height: 600px;
+    top: 60px;
+    left: -400px;
+    transition: 1s all;
+    background-color: blanchedalmond;
+
+    &.visible {
+        left: 0;
+    }
+}

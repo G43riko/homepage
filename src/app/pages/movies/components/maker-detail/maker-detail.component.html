@@ -1,0 +1,33 @@
+<div *ngIf="selectedMaker">
+    <!--
+    <div class="ui medium image">
+        <img [src]="selectedMaker.avatar">
+    </div>
+    -->
+    <h1>{{selectedMaker.name}}</h1>
+    <h3>{{selectedMaker.birthday}}</h3>
+    <div class="description">
+        <div>
+            <button *ngIf="selectedMaker.csfd"
+                    [appExternalMaker]="{type: 'csfd', id: selectedMaker.csfd}"
+                    class="ui blue basic button">
+                CSFD
+            </button>
+            <button *ngIf="selectedMaker.imdb"
+                    [appExternalMaker]="{type: 'imdb', id: selectedMaker.imdb}"
+                    class="ui blue basic button">
+                IMDB
+            </button>
+            <button *ngIf="selectedMaker.movieDb"
+                    [appExternalMaker]="{type: 'movieDb', id: selectedMaker.movieDb}"
+                    class="ui blue basic button">
+                MovieDB
+            </button>
+        </div>
+        <div class="ui header">We've auto-chosen a profile image for you.</div>
+        <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a>
+            image
+            associated with your registered e-mail address.</p>
+        <p>Is it okay to use this photo?</p>
+    </div>
+</div>

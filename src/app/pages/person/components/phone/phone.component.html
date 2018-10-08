@@ -1,0 +1,30 @@
+<div class="field emailComponent">
+    <label>
+        <h3 class="addable-title">Numbers</h3>
+        <button (click)="addNumber()" *ngIf="!disabled" class="circular ui icon button">
+            <i class="icon plus"></i>
+        </button>
+    </label>
+    <div *ngFor="let number of numberList; let i = index" class="inline fields">
+        <div class="thirteen wide field">
+            <input [(ngModel)]="numberList[i].number" [disabled]="disabled" name="phone" type="tel">
+        </div>
+        <div class="two wide field">
+            <div class="ui checkbox">
+                <label for="{{'numberInput' + i}}">Platný</label>
+                <input [(ngModel)]="numberList[i].number"
+                       [disabled]="disabled"
+                       class="hidden"
+                       id="{{'numberInput' + i}}"
+                       tabindex="0"
+                       type="checkbox">
+            </div>
+        </div>
+        <div *ngIf="!disabled" class="one wide field">
+            <button (click)="removeNumber(i)" class="circular ui icon button">
+                <i class="icon remove"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
