@@ -19,7 +19,6 @@
             "node_modules/@types"
         ],
         "types": [
-            "node_modules/gtools/out"
         ],
         "lib": [
             "es2017",

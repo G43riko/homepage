@@ -15,8 +15,7 @@ describe("PhoneComponent", () => {
             imports: [
                 FormsModule,
             ],
-        })
-               .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

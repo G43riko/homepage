@@ -15,11 +15,11 @@ export class NotificationService {
     }
 
     public showErrorMessage(error: string | Response): void {
-        this._notificationComponent.showError("Chyba: ", this._getMessage(error));
+        this._notificationComponent.showError("Error: ", this._getMessage(error));
     }
 
     public showSuccessMessage(error: string | Response): void {
-        this._notificationComponent.showSuccess("Úspech: ", this._getMessage(error));
+        this._notificationComponent.showSuccess("Success: ", this._getMessage(error));
     }
 
     private _getMessage(error: string | Response): string {

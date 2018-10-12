@@ -4,7 +4,6 @@ import { Account } from "../../../shared/models/person/account.model";
 import { Email } from "../../../shared/models/person/email.model";
 import { Person } from "../../../shared/models/person/person.model";
 import { Phone } from "../../../shared/models/person/phone.model";
-import { FileService } from "../../../shared/services/file.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { PersonService } from "../../../shared/services/person.service";
 import { Paginator } from "../../../shared/utils/Paginator";
@@ -24,7 +23,6 @@ export class PersonListComponent implements OnInit {
     public paginator: Paginator<Person>;
 
     public constructor(private readonly route: ActivatedRoute,
-                       private readonly fileService: FileService,
                        private readonly personService: PersonService,
                        private readonly notificationService: NotificationService) {
     }

@@ -1,38 +1,26 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { AuthService } from "./auth.service";
 import { SharedComponentsModule } from "./components/shared-components.module";
 import { SharedDirectivesModule } from "./directives/shared-directives.module";
-import { AccountsService } from "./services/accounts.service";
-import { ErrorManagerService } from "./services/error-manager.service";
-import { FileService } from "./services/file.service";
-import { MapsService } from "./services/maps.service";
-import { MoviesService } from "./services/movies.service";
-import { NotificationService } from "./services/notification.service";
-import { PersonService } from "./services/person.service";
-import { SongsService } from "./services/songs.service";
-import { YoutubeService } from "./services/youtube.service";
 import { fakeBackendProvider } from "./services/fake-backend-interceptor.service";
+import { CoreModule } from "./services/core.module";
+import { AppComponent } from "../app.component";
+import { HomeComponent } from "../pages/home/home.component";
+import { AboutComponent } from "../pages/about/about.component";
 
 @NgModule({
     imports: [
         CommonModule,
+        CoreModule,
         SharedDirectivesModule,
         SharedComponentsModule,
     ],
-    declarations: [],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        AboutComponent,
+    ],
     providers: [
-        FileService,
-        SongsService,
-        AuthService,
-        NotificationService,
-        ErrorManagerService,
-        AccountsService,
-        YoutubeService,
-        MoviesService,
-        MapsService,
-        PersonService,
-
         fakeBackendProvider,
     ],
     exports: [

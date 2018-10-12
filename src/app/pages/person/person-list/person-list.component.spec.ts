@@ -2,7 +2,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "../../../app-routing.module";
-import { FileService } from "../../../shared/services/file.service";
 import { PersonService } from "../../../shared/services/person.service";
 import { AboutComponent } from "../../about/about.component";
 import { HomeComponent } from "../../home/home.component";
@@ -26,7 +25,6 @@ describe("PersonListComponent", () => {
                 PersonModule,
             ],
             providers: [
-                FileService,
                 PersonService,
             ],
         })

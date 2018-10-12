@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { FormsModule } from "@angular/forms";
 import { EmailComponent } from "./email.component";
+import { PersonModule } from "../../person.module";
+import { SharedComponentsModule } from "../../../../shared/components/shared-components.module";
 
 describe("EmailComponent", () => {
     let component: EmailComponent;
@@ -9,11 +9,10 @@ describe("EmailComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EmailComponent,
-            ],
+
             imports: [
-                FormsModule,
+                SharedComponentsModule,
+                PersonModule,
             ],
         })
                .compileComponents();
