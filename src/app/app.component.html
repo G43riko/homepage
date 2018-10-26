@@ -1,11 +1,34 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Responsive App</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav
+                     [mode]="mobileQuery.matches ? 'over' : 'side'"
+                     [fixedInViewport]="mobileQuery.matches"
+                     fixedTopGap="56">
+            <mat-nav-list>
+                <a *ngFor="let menu of menuItems" mat-list-item routerLink="{{menu.link}}" routerLinkActive="'active'">{{menu.label}}</a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+            <p *ngFor="let content of fillerContent">{{content}}</p>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<!--
 <app-top-menu></app-top-menu>
 <app-side-bar></app-side-bar>
 <notification-component></notification-component>
 <app-search-bar></app-search-bar>
 
 <div style="margin-top: 50px;">
-    <router-outlet></router-outlet>
 </div>
-
-
+-->

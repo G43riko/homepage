@@ -6,7 +6,7 @@ declare let $: any;
 @Component({
     selector: "app-phone",
     templateUrl: "./phone.component.html",
-    styleUrls: ["./phone.component.css"],
+    styleUrls: ["./phone.component.scss"],
 })
 
 export class PhoneComponent implements OnInit {

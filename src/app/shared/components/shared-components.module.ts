@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { AppRoutingModule } from "../../app-routing.module";
 import { AccountsService } from "../services/accounts.service";
 import { AlertComponent } from "./alert/alert.component";
 import { NotificationComponent } from "./notification/notification.component";
@@ -15,7 +14,6 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
     imports: [
         CommonModule,
         FormsModule,
-        AppRoutingModule,
     ],
     declarations: [
         AlertComponent,

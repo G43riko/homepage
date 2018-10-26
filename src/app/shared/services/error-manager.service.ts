@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class ErrorManagerService {
     public getMessageFromError(error: Response | string, defaultError: string): string {
         let message = defaultError;

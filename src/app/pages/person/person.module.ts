@@ -9,9 +9,12 @@ import { EmailComponent } from "./components/email/email.component";
 import { PhoneComponent } from "./components/phone/phone.component";
 import { PersonDetailComponent } from "./person-detail/person-detail.component";
 import { PersonListComponent } from "./person-list/person-list.component";
+import { MaterialModule } from "../../shared/material-module/material.module";
+import { NumberComponent } from "./components/number/number.component";
 
 @NgModule({
     imports: [
+        MaterialModule,
         CommonModule,
         SharedPipesModule,
         ReactiveFormsModule,
@@ -25,6 +28,7 @@ import { PersonListComponent } from "./person-list/person-list.component";
         EmailComponent,
         PhoneComponent,
         AccountComponent,
+        NumberComponent,
     ],
 })
 export class PersonModule {

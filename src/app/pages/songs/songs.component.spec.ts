@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { SongsComponent } from "./songs.component";
 import { SongsModule } from "./songs.module";
-import { CoreModule } from "../../shared/services/core.module";
+import { CoreModule } from "../../core.module";
 
 describe("SongsComponent", () => {
     let component: SongsComponent;

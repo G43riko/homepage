@@ -355,7 +355,7 @@
                 </button>
             </div>
         </div>
-
+        <app-numbers [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-numbers>
         <app-phone [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-phone>
         <app-email [disabled]="disabled" [emailList]="selectedPerson.emails"></app-email>
         <app-account [accountList]="selectedPerson.accounts" [disabled]="disabled"></app-account>
