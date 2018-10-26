@@ -23,25 +23,26 @@ export class Person {
         result.person_id = person.person_id;
         result.name      = person.name;
         result.surName   = person.surName;
+        result.gender = person.gender;
         result.birthday  = person.birthday;
         result.nick      = person.nick;
-
-        if (person.address) {
-            result.address = Address.parse(person.address);
-        }
-
-        if (Array.isArray(person.emails)) {
-            result.emails = person.emails.map(Email.parse);
-        }
-        if (Array.isArray(person.numbers)) {
-            result.numbers = person.numbers.map(Phone.parse);
-        }
-        if (Array.isArray(person.accounts)) {
-            result.accounts = person.accounts.map(Account.parse);
-        }
-
-        result.person_id = person.person_id;
+        result.address = person.address ? Address.parse(person.address) : new Address();
+        result.emails = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
+        result.emails = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
+        result.numbers = Array.isArray(person.numbers) ? person.numbers.map(Phone.parse) : [];
+        result.accounts = Array.isArray(person.accounts) ? person.accounts.map(Account.parse) : [];
 
         return result;
+    }
+
+    public toModel(): any {
+        return {
+            name: this.name || "",
+            surName: this.surName || "",
+            nick: this.nick || "",
+            gender: this.gender || "",
+            birthday: this.birthday || "",
+            address: this.address.toModel(),
+        };
     }
 }

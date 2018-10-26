@@ -6,9 +6,9 @@ export class Address {
 
     public constructor(country: string = "SK", city: string = "", street: string = "", streetNumber: string = "") {
         this.streetNumber = streetNumber;
-        this.country      = country;
-        this.street       = street;
-        this.city         = city;
+        this.country = country;
+        this.street = street;
+        this.city = city;
     }
 
     public static parse(address: any): Address {
@@ -17,11 +17,20 @@ export class Address {
             return result;
         }
         result.streetNumber = address.streetNumber;
-        result.street       = address.street;
-        result.country      = address.country;
-        result.city         = address.city;
+        result.street = address.street;
+        result.country = address.country;
+        result.city = address.city;
 
         return result;
+    }
+
+    public toModel(): any {
+        return {
+            country: this.country || "",
+            city: this.city || "",
+            street: this.street || "",
+            streetNumber: this.streetNumber || "",
+        };
     }
 
 }

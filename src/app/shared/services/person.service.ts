@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "../../app.config";
 import { AuthService } from "../auth.service";
 import { Person } from "../models/person/person.model";
@@ -24,6 +24,7 @@ export class PersonService extends AbstractHttpService {
 
     public getDetail(id: number): Observable<Person> {
         return this.http.get<Person>(URL + "/" + id).pipe(
+            map(Person.parse),
             catchError(this.handleError<Person>("getDetail")),
         );
     }
@@ -32,6 +33,7 @@ export class PersonService extends AbstractHttpService {
         return this.http.put<Person>(URL + "/" + person.person_id, person, {
             headers: this.getHeaders(),
         }).pipe(
+            map(Person.parse),
             catchError(this.handleError<Person>("update person with id" + person.person_id)),
         );
     }
@@ -46,6 +48,7 @@ export class PersonService extends AbstractHttpService {
         return this.http.post<Person>(URL, JSON.stringify(person), {
             headers: this.getHeaders(),
         }).pipe(
+            map(Person.parse),
             catchError(this.handleError<Person>("add person")),
         );
     }
@@ -54,6 +57,7 @@ export class PersonService extends AbstractHttpService {
         return this.http.post<Person[]>(URL + "/all", JSON.stringify(persons), {
             headers: this.getHeaders(),
         }).pipe(
+            map((data) => data.map(Person.parse)),
             catchError(this.handleError<Person[]>("addAll persons")),
         );
     }

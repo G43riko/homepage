@@ -1,3 +1,100 @@
+<mat-card>
+    <form *ngIf="selectedPerson" [formGroup]="personForm" class="example-form" style="align-content: center">
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="name"
+                               placeholder="Meno">
+                        <mat-error *ngIf="personForm.controls.name.invalid">Meno je povinné</mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="surName"
+                               placeholder="Priezvisko">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="nick"
+                               placeholder="Prezívka">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="birthday"
+                               placeholder="Dátum narodenia">
+                    </mat-form-field>
+                </td>
+                <td>
+                    Pohlavie:
+                    <mat-button-toggle-group formControlName="gender"
+                                             aria-label="Font Style">
+                        <mat-button-toggle value="MALE">Muž</mat-button-toggle>
+                        <mat-button-toggle value="FEMALE">Žena</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width"
+               formGroupName="address"
+               cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               type="text"
+                               placeholder="Štát"
+                               formControlName="country"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                                {{country}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="city"
+                               placeholder="Mesto">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="street"
+                               placeholder="Ulica">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput
+                               formControlName="streetNumber"
+                               placeholder="Číslo domu">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <button mat-icon-button (click)="showMap()">
+                        <mat-icon>map</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <app-numbers [disabled]="personForm.disabled" [numberList]="selectedPerson.numbers"></app-numbers>
+    </form>
+</mat-card>
 <div *ngIf="selectedPerson" style="padding: 20px 200px;">
     <div class="ui floating positive message hidden">
         <i class="close icon"></i>
@@ -355,14 +452,13 @@
                 </button>
             </div>
         </div>
-        <app-numbers [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-numbers>
         <app-phone [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-phone>
         <app-email [disabled]="disabled" [emailList]="selectedPerson.emails"></app-email>
         <app-account [accountList]="selectedPerson.accounts" [disabled]="disabled"></app-account>
 
         <div (click)="save()" *ngIf="!disabled" class="ui button">Uložiť</div>
-        <div (click)="back()" *ngIf="!disabled" class="ui button">Naspäť</div>
         <div (click)="edit()" *ngIf="disabled" class="ui button">Upraviť</div>
+        <div (click)="back()" class="ui button">Naspäť</div>
         <div class="ui error message"></div>
     </form>
 </div>

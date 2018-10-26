@@ -1,10 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 import { AbstractDetailComponent } from "../../../shared/components/abstract-detail.component";
-import { Address } from "../../../shared/models/person/address.model";
 import { Person } from "../../../shared/models/person/person.model";
 import { MapsService } from "../../../shared/services/maps.service";
 import { PersonService } from "../../../shared/services/person.service";
+import { UtilsService } from "../../../shared/services/utils.service";
 
 declare let $: any;
 
@@ -15,81 +18,73 @@ declare let $: any;
 })
 export class PersonDetailComponent extends AbstractDetailComponent implements OnInit {
     public selectedPerson: Person;
+    public personForm: FormGroup;
     public mapUrl = "";
     public timer: any;
+    public readonly countries: string[] = [];
+    public filteredCountries: Observable<string[]>;
 
     public constructor(private readonly route: ActivatedRoute,
                        private readonly mapService: MapsService,
+                       private readonly router: Router,
+                       private readonly utilService: UtilsService,
+                       private readonly formBuilder: FormBuilder,
                        private readonly personService: PersonService) {
         super();
     }
 
-    private static _preparePerson(person: Person): Person {
-        if (!person.address) {
-            person.address = new Address();
-        }
-        return person;
-    }
-
     public ngOnInit(): void {
+        this.personForm = this.createForm();
+        this.utilService.getCountries().subscribe((countries) => {
+            this.countries.push(...countries);
+            this.filteredCountries = this.personForm.controls.address.controls.country.valueChanges.pipe(
+                startWith(""),
+                map((value) => this._filter(value)),
+            );
+        });
+
         this.route.params.subscribe((data) => {
             const actId = data["id"];
-            if (actId === "new") {
-                this.selectedPerson = new Person();
+            this.isNew = actId === "new";
+            if (this.isNew) {
+                this.processChangedData(new Person(), {disabled: false});
                 this._bindEvents();
-                this.isNew = true;
-                this.disabled = false;
             } else {
-                this.isNew = false;
-                this.disabled = true;
                 this.personService.getDetail(actId).subscribe((person) => {
-                    this.selectedPerson = PersonDetailComponent._preparePerson(person);
+                    this.processChangedData(person);
                     this._bindEvents();
                 });
             }
+
         });
     }
 
-    public unbindEvents(): void {
-        clearTimeout(this.timer);
+    public createForm(): FormGroup {
+        return this.formBuilder.group({
+            name: ["", {validators: Validators.required}],
+            surName: ["", {validators: Validators.required}],
+            nick: ["", {validators: Validators.required}],
+            birthday: ["", {validators: Validators.required}],
+            gender: ["", {validators: Validators.required}],
+            address: this.formBuilder.group({
+                country: ["", {validators: Validators.required}],
+                city: ["", {validators: Validators.required}],
+                street: ["", {validators: Validators.required}],
+                streetNumber: ["", {validators: Validators.required}],
+            }),
+        });
     }
 
     public save(): void {
-        if (this.isNew) {
-            this.personService.add(this.selectedPerson).subscribe((data) => {
-                this.selectedPerson = PersonDetailComponent._preparePerson(data);
-                this._bindEvents();
-                // this.showMessage();
-                this.disabled = true;
-                // this.router.navigate(["/" + Config.PATH_IMAGE_UPLOAD]);
-            });
-        } else {
-            this.personService.update(this.selectedPerson).subscribe((data) => {
-                this.selectedPerson = PersonDetailComponent._preparePerson(data);
-                this._bindEvents();
-                // this.showMessage();
-                this.disabled = true;
-            });
-        }
-    }
+        const method = this.isNew ? this.personService.add : this.personService.update;
 
-    /*
-    private showMessage(text: string = "", delay: number = 2000) {
-        const box = $(".positive.message");
-
-        box.removeClass("hidden");
-        setTimeout(() => {
-            box.transition("fade");
-        }, delay);
+        method(this.selectedPerson).subscribe((data) => this.processChangedData(data));
     }
-    */
 
     public showMap(): void {
-        const iframe: any = window.document.getElementById("mapIframe");
-        iframe.src = iframe.src;
-        let address = this.selectedPerson.address.city + " ";
-        address += this.selectedPerson.address.street + " ";
-        address += this.selectedPerson.address.streetNumber;
+        let address = this.personForm.value.address.city + " ";
+        address += this.personForm.value.address.street + " ";
+        address += this.personForm.value.address.streetNumber;
 
         this.mapUrl = this.mapService.getLocationEmbedUrl(encodeURI(address));
         $(".modal").modal("show");
@@ -97,11 +92,31 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
 
     public edit(): void {
         this.disabled = false;
+        this.personForm.enable();
         this._bindEvents();
     }
 
     public back(): void {
-        this.disabled = true;
+        if (this.isNew || this.disabled) {
+            this.router.navigate(["persons"]);
+        }
+        else {
+            this.personService.getDetail(this.selectedPerson.person_id).subscribe((data) => this.processChangedData(data));
+        }
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.countries.filter((country) => country.toLowerCase().includes(filterValue));
+    }
+
+    private processChangedData(data: Person, options?: { disabled?: boolean }): void {
+        this.selectedPerson = data;
+        this.personForm.setValue(this.selectedPerson.toModel(), {onlySelf: true});
+        this.disabled = options && typeof options.disabled === "boolean" ? options.disabled : true;
+
+        this.disabled ? this.personForm.disable() : this.personForm.enable();
     }
 
     private _bindEvents(): void {

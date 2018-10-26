@@ -78,7 +78,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 account_id: "TestPersonAccountLIId",
                             },
                         ],
-                        gender: "WOMAN",
+                        gender: "FEMALE",
                         address: {
                             country: "SK",
                             city: "TestPersonAddressCity",
