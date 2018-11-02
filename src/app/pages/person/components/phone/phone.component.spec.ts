@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { FormsModule } from "@angular/forms";
+import { SharedModule } from "../../../../shared/shared.module";
 import { PhoneComponent } from "./phone.component";
 
 describe("PhoneComponent", () => {
@@ -13,7 +12,7 @@ describe("PhoneComponent", () => {
                 PhoneComponent,
             ],
             imports: [
-                FormsModule,
+                SharedModule,
             ],
         }).compileComponents();
     }));

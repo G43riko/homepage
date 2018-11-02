@@ -18,9 +18,6 @@ describe("ScriptService", () => {
                 RouterModule,
                 HttpClientModule,
             ],
-            providers: [
-                ScriptService,
-            ],
         }).compileComponents();
     }));
 

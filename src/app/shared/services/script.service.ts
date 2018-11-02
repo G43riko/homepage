@@ -14,7 +14,7 @@ export const StylesStore: any = {
 };
 
 @Injectable({
-    providedIn: "root"
+    providedIn: "root",
 })
 export class ScriptService {
     private readonly _scriptsQueue: { scriptName: string, loadScriptMethod: ReplaySubject<ScriptsLoadResponse> }[] = [];

@@ -23,14 +23,14 @@ export class Person {
         result.person_id = person.person_id;
         result.name      = person.name;
         result.surName   = person.surName;
-        result.gender = person.gender;
+        result.gender    = person.gender;
         result.birthday  = person.birthday;
         result.nick      = person.nick;
-        result.address = person.address ? Address.parse(person.address) : new Address();
-        result.emails = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
-        result.emails = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
-        result.numbers = Array.isArray(person.numbers) ? person.numbers.map(Phone.parse) : [];
-        result.accounts = Array.isArray(person.accounts) ? person.accounts.map(Account.parse) : [];
+        result.address   = person.address ? Address.parse(person.address) : new Address();
+        result.emails    = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
+        result.emails    = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
+        result.emails    = Array.isArray(person.emails) ? person.emails.map(Phone.parse) : [];
+        result.accounts  = Array.isArray(person.accounts) ? person.accounts.map(Account.parse) : [];
 
         return result;
     }

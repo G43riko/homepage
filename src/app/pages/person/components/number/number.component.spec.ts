@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { SharedModule } from "../../../../shared/shared.module";
 
 import { NumberComponent } from "./number.component";
 
@@ -8,13 +9,17 @@ describe("NumberComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [NumberComponent]
-        })
-               .compileComponents();
+            imports: [
+                SharedModule,
+            ],
+            declarations: [
+                NumberComponent,
+            ],
+        }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(NumberComponent);
+        fixture   = TestBed.createComponent(NumberComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

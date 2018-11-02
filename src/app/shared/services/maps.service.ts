@@ -21,7 +21,9 @@ export interface PlaceAroundParam {
     radius?: number;
 }
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class MapsService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);

@@ -12,7 +12,7 @@ function setFullScreen(fullScreen: boolean, el: any = document.documentElement):
         rfs.call(el);
     } else {
         const rfs = document.exitFullscreen
-            || document.webkitExitFullscreen;
+            || (document as any).webkitExitFullscreen;
         // || document.mozExitFullscreen
         // || document.msExitFullscreen
         rfs.call(document);

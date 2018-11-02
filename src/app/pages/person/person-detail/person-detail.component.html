@@ -93,6 +93,7 @@
             </tr>
         </table>
         <app-numbers [disabled]="personForm.disabled" [numberList]="selectedPerson.numbers"></app-numbers>
+        <app-email [disabled]="personForm.disabled" [emailList]="selectedPerson.emails"></app-email>
     </form>
 </mat-card>
 <div *ngIf="selectedPerson" style="padding: 20px 200px;">
@@ -453,7 +454,7 @@
             </div>
         </div>
         <app-phone [disabled]="disabled" [numberList]="selectedPerson.numbers"></app-phone>
-        <app-email [disabled]="disabled" [emailList]="selectedPerson.emails"></app-email>
+        <app-contact [disabled]="disabled" [emailList]="selectedPerson.emails"></app-contact>
         <app-account [accountList]="selectedPerson.accounts" [disabled]="disabled"></app-account>
 
         <div (click)="save()" *ngIf="!disabled" class="ui button">Uložiť</div>

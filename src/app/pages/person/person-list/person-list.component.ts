@@ -90,7 +90,7 @@ export class PersonListComponent implements OnInit {
                 }
             }
 
-            person.numbers = [];
+            person.emails = [];
 
             // TODO format tel number
             const number1 = new Phone(columns[7].innerText);

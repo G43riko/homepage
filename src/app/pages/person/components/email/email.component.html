@@ -1,25 +1,17 @@
-<div class="field emailComponent">
-    <label>
-        <h3 class="addable-title">Emails</h3>
-        <button (click)="addEmail()" *ngIf="!disabled" class="circular ui icon button">
-            <i class="icon plus"></i>
-        </button>
-    </label>
-    <div *ngFor="let email of emailList; let i = index" class="inline fields">
-        <div class="thirteen wide field">
-            <input [(ngModel)]="emailList[i].email" [disabled]="disabled" name="email">
-        </div>
-        <div class="two wide field">
-            <div class="ui checkbox">
-                <label for="{{'emailInput' + i}}">Platný</label>
-                <input [(ngModel)]="emailList[i].active" [disabled]="disabled" class="hidden" id="{{'emailInput' + i}}"
-                       tabindex="0" type="checkbox">
-            </div>
-        </div>
-        <div *ngIf="!disabled" class="one wide field">
-            <button (click)="removeEmail(i)" class="circular ui icon button">
-                <i class="icon remove"></i>
-            </button>
-        </div>
-    </div>
-</div>
+<mat-form-field class="email-list">
+    <mat-chip-list #chipList [disabled]="disabled">
+        <mat-chip (removed)="remove(i)"
+                  *ngFor="let email of  emailList | activePipe: showInactive.value; let i = index"
+                  [removable]="!disabled"
+                  [selectable]="false">
+            {{email.email}}
+            <mat-icon *ngIf="!disabled" matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input (matChipInputTokenEnd)="add($event)"
+               [matChipInputAddOnBlur]="addOnBlur"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               placeholder="Emaily:">
+    </mat-chip-list>
+</mat-form-field>
+<mat-slide-toggle class="show-all-emails" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>

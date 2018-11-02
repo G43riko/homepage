@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { AccountsService } from "../services/accounts.service";
 import { AlertComponent } from "./alert/alert.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { PaginatorComponent } from "./paginator/paginator.component";
@@ -34,9 +33,6 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
         NotificationComponent,
         TopMenuComponent,
         PaginatorComponent,
-    ],
-    providers: [
-        AccountsService,
     ],
 })
 export class SharedComponentsModule {

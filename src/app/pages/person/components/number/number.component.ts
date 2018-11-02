@@ -1,7 +1,8 @@
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { Component, Input, OnInit } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { MatChipInputEvent } from "@angular/material";
 import { Phone } from "../../../../shared/models/person/phone.model";
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
 
 @Component({
     selector: "app-numbers",
@@ -9,10 +10,11 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
     styleUrls: ["./number.component.scss"],
 })
 export class NumberComponent implements OnInit {
-    @Input() public disabled = true;
+    @Input() public disabled            = true;
     @Input() public numberList: Phone[] = [];
-    public visible = true;
-    public addOnBlur = true;
+    public showInactive                 = new FormControl(false);
+    public visible                      = true;
+    public addOnBlur                    = true;
 
     public readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 

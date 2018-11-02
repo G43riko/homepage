@@ -37,7 +37,8 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         this.personForm = this.createForm();
         this.utilService.getCountries().subscribe((countries) => {
             this.countries.push(...countries);
-            this.filteredCountries = this.personForm.controls.address.controls.country.valueChanges.pipe(
+            const formAddress      = this.personForm.controls.address as FormGroup;
+            this.filteredCountries = formAddress.controls.country.valueChanges.pipe(
                 startWith(""),
                 map((value) => this._filter(value)),
             );

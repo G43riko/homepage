@@ -9,9 +9,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // array in local storage for registered users
-        const users: any[] = JSON.parse(localStorage.getItem("users") || "{}") || [];
-
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
             if (request.url.endsWith("/persons/list") && request.method === "GET") {

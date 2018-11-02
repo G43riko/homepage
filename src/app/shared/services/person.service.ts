@@ -10,7 +10,9 @@ import { NotificationService } from "./notification.service";
 
 const URL = AppConfig.BASE_URL + "/persons";
 
-@Injectable()
+@Injectable({
+    providedIn: "root",
+})
 export class PersonService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);

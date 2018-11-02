@@ -1,11 +1,11 @@
-import { browser, by, element } from "protractor";
+import { browser, by, element, promise as wdpromise } from "protractor";
 
 export class AppPage {
-    public navigateTo() {
+    public navigateTo(): wdpromise.Promise<any> {
         return browser.get("/");
     }
 
-    public getParagraphText() {
+    public getParagraphText(): wdpromise.Promise<string> {
         return element(by.css("app-root h1")).getText();
     }
 }

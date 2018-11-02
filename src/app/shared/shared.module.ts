@@ -1,16 +1,18 @@
 import { NgModule } from "@angular/core";
+import { CoreModule } from "../core.module";
 import { AboutComponent } from "../pages/about/about.component";
 import { HomeComponent } from "../pages/home/home.component";
 import { SharedComponentsModule } from "./components/shared-components.module";
 import { SharedDirectivesModule } from "./directives/shared-directives.module";
+import { SharedPipesModule } from "./pipes/shared-pipes.module";
 import { fakeBackendProvider } from "./services/fake-backend-interceptor.service";
-import { CoreModule } from "../core.module";
 
 @NgModule({
     imports: [
         CoreModule,
         SharedDirectivesModule,
         SharedComponentsModule,
+        SharedPipesModule,
     ],
     declarations: [
         HomeComponent,
@@ -23,6 +25,7 @@ import { CoreModule } from "../core.module";
         CoreModule,
         SharedDirectivesModule,
         SharedComponentsModule,
+        SharedPipesModule,
     ],
 })
 export class SharedModule {

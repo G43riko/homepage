@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { SharedModule } from "../../../../shared/shared.module";
+
 import { EmailComponent } from "./email.component";
-import { PersonModule } from "../../person.module";
-import { SharedComponentsModule } from "../../../../shared/components/shared-components.module";
 
 describe("EmailComponent", () => {
     let component: EmailComponent;
@@ -9,10 +9,11 @@ describe("EmailComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-
             imports: [
-                SharedComponentsModule,
-                PersonModule,
+                SharedModule,
+            ],
+            declarations: [
+                EmailComponent,
             ],
         })
                .compileComponents();
@@ -24,7 +25,7 @@ describe("EmailComponent", () => {
         fixture.detectChanges();
     });
 
-    it("should be created", () => {
+    it("should create", () => {
         expect(component).toBeTruthy();
     });
 });
