@@ -54,7 +54,7 @@
             <button (click)="remove(person.person_id)" class="circular ui icon button hiddenable">
                 <i class="icon remove"></i>
             </button>
-            <button [routerLink]="[person.person_id]" class="circular ui icon button hiddenable">
+            <button (click)="showDetail(person.person_id)" class="circular ui icon button hiddenable">
                 <i class="icon angle right"></i>
             </button>
         </td>
@@ -65,7 +65,7 @@
     <app-paginator [paginator]="paginator"></app-paginator>
 </div>
 <div style="padding: 10px;">
-    <button class="ui button" [routerLink]="['new']">
+    <button class="ui button" (click)="createNew()">
         Vytvoriť nový
     </button>
     <button class="ui button" (click)="loadItems()">

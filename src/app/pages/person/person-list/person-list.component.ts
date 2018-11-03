@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Account } from "../../../shared/models/person/account.model";
 import { Email } from "../../../shared/models/person/email.model";
 import { Person } from "../../../shared/models/person/person.model";
@@ -23,6 +23,7 @@ export class PersonListComponent implements OnInit {
     public paginator: Paginator<Person>;
 
     public constructor(private readonly route: ActivatedRoute,
+                       private readonly router: Router,
                        private readonly personService: PersonService,
                        private readonly notificationService: NotificationService) {
     }
@@ -141,5 +142,13 @@ export class PersonListComponent implements OnInit {
 
     public getIcon(account: Account): string {
         return Account.getIcon(account);
+    }
+
+    public showDetail(person_id: number | string): void {
+        this.router.navigateByUrl("/persons/" + person_id);
+    }
+
+    public createNew(): void {
+        this.router.navigateByUrl("/persons/new");
     }
 }

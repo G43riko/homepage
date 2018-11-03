@@ -99,7 +99,7 @@
             <app-paginator [paginator]="paginator"></app-paginator>
         </th>
         <th colspan="100">
-            <div [routerLink]="['new']" class="ui right floated small primary labeled icon button">
+            <div (click)="createNew()" class="ui right floated small primary labeled icon button">
                 <i class="user icon"></i> Pridať film
             </div>
             <div class="ui small  button">

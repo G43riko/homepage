@@ -1,10 +1,10 @@
-import { MovieModule } from "./movies.module";
+import { MoviesModule } from "./movies.module";
 
 describe("MovieModule", () => {
-    let personsModule: MovieModule;
+    let personsModule: MoviesModule;
 
     beforeEach(() => {
-        personsModule = new MovieModule();
+        personsModule = new MoviesModule();
     });
 
     it("should create an instance", () => {

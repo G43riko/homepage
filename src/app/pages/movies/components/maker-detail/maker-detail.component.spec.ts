@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { MakerDetailComponent } from "./maker-detail.component";
-import { MoviesModule } from "../../movies.module";
-import { SharedModule } from "../../../../shared/shared.module";
+import { TestingModule } from "../../../../testing-module/testing.module";
+import { ExternalMakerDirective } from "../../directives/external-maker.directive";
 
 describe("MakerDetailComponent", () => {
     let component: MakerDetailComponent;
@@ -11,8 +10,11 @@ describe("MakerDetailComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MoviesModule,
-                SharedModule,
+                TestingModule,
+            ],
+            declarations: [
+                MakerDetailComponent,
+                ExternalMakerDirective,
             ],
         }).compileComponents();
     }));

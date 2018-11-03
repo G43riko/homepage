@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { TopMenuComponent } from "./top-menu.component";
-import { AppModule } from "../../../app.module";
+import { SharedComponentsModule } from "../shared-components.module";
+import { TestingModule } from "../../../testing-module/testing.module";
 
 describe("TopMenuComponent", () => {
     let component: TopMenuComponent;
@@ -9,10 +10,12 @@ describe("TopMenuComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [AppModule],
-            declarations: [TopMenuComponent],
-        })
-               .compileComponents();
+            imports     : [
+                TestingModule,
+                SharedComponentsModule,
+            ],
+            declarations: [],
+        }).compileComponents();
     }));
 
     beforeEach(() => {

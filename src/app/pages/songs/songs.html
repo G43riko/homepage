@@ -368,8 +368,10 @@
             document.getElementById("fullscreen").onclick = () => {
                 setFullscreen(true, document.getElementById("player"))
             };
-            this.inputSlider.onchange = (event) => {
-                this.playFrom(event.target.value);
+            if (this.inputSlider) {
+                this.inputSlider.onchange = (event) => {
+                    this.playFrom(event.target.value);
+                }
             }
         }
 

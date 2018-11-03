@@ -1,10 +1,7 @@
-import { HttpClientModule } from "@angular/common/http";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule } from "@angular/forms";
-import { AppRoutingModule } from "../../../app-routing.module";
-import { AboutComponent } from "../../about/about.component";
 import { PersonModule } from "../person.module";
 import { PersonListComponent } from "./person-list.component";
+import { TestingModule } from "../../../testing-module/testing.module";
 
 describe("PersonListComponent", () => {
     let component: PersonListComponent;
@@ -13,16 +10,12 @@ describe("PersonListComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AboutComponent,
             ],
             imports: [
-                FormsModule,
-                AppRoutingModule,
-                HttpClientModule,
+                TestingModule,
                 PersonModule,
             ],
-        })
-               .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

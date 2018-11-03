@@ -64,9 +64,11 @@ export class GPlayer {
 
     public _initButtons(): void {
         this.inputSlider          = document.querySelector("#slider input");
-        this.inputSlider.onchange = (event: any) => {
-            this.playFrom(event.target.value);
-        };
+        if (this.inputSlider) {
+            this.inputSlider.onchange = (event: any) => {
+                this.playFrom(event.target.value);
+            };
+        }
     }
 
     public fullscreen(): void {

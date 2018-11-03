@@ -41,4 +41,8 @@ export class MovieListComponent implements OnInit {
     public showDetail(movie_id: number | string): void {
         this.router.navigateByUrl("/movies/" + movie_id);
     }
+
+    public createNew(): void {
+        this.router.navigateByUrl("/movies/new");
+    }
 }

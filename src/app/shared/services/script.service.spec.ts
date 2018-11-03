@@ -6,7 +6,7 @@ import { forkJoin } from "rxjs";
 import { last } from "rxjs/operators";
 import { ScriptService, ScriptStore, StylesStore } from "./script.service";
 
-describe("ScriptService", () => {
+xdescribe("ScriptService", () => {
     let scriptService: ScriptService;
 
     // load appComponent to test the scriptService on
