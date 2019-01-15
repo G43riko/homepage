@@ -1,7 +1,7 @@
 import { async, TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { AppModule } from "./app.module";
-import { CoreModule } from "./core.module";
+import { CoreModule } from "./shared/core.module";
 import { TestingModule } from "./testing-module/testing.module";
 
 describe("AppComponent", () => {

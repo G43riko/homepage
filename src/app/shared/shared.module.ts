@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CoreModule } from "../core.module";
+import { CoreModule } from "./core.module";
 import { AboutComponent } from "../pages/about/about.component";
 import { HomeComponent } from "../pages/home/home.component";
 import { SharedComponentsModule } from "./components/shared-components.module";

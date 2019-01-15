@@ -4,6 +4,39 @@
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="example-app-name">Welcome to Homepage-FE!</h1>
+        <span class="example-spacer"></span>
+        <div *ngIf="authService.user$ | async as user; else login">
+            <div *ngIf="user.displayName !== 'Anonym'; else login">
+                <button [matMenuTriggerFor]="accountMenu" mat-menu-item>
+                    <img [src]="user.photoURL"
+                         alt="avatar"
+                         class="profile-avatar"
+                    >
+                </button>
+                <mat-menu #accountMenu="matMenu">
+                    <button disabled mat-menu-item>
+                        <span>Hi {{user.displayName}}</span>
+                    </button>
+                    <button disabled mat-menu-item>
+                        <span>{{user.email}}</span>
+                    </button>
+                    <button (click)="authService.signOut()" mat-menu-item>
+                        <mat-icon>logout</mat-icon>
+                        <span>Log out</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <ng-template #login>
+            <button [matMenuTriggerFor]="loginMenu" mat-icon-button>
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #loginMenu="matMenu">
+                <button (click)="authService.googleSigning()" mat-menu-item>Log in with Google</button>
+                <!--<button mat-menu-item (click)="authService.signOut()">Sign up</button>-->
+            </mat-menu>
+        </ng-template>
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container"
@@ -13,7 +46,12 @@
                      [fixedInViewport]="mobileQuery.matches"
                      fixedTopGap="56">
             <mat-nav-list>
-                <a *ngFor="let menu of menuItems" mat-list-item routerLink="{{menu.link}}" routerLinkActive="'active'">{{menu.label}}</a>
+                <div *ngFor="let menu of menuItems">
+                    <a *ngIf="!menu.access || authService.access.includes(menu.access)"
+                       mat-list-item
+                       routerLink="/{{menu.link}}"
+                       routerLinkActive="'active'">{{menu.label}}</a>
+                </div>
             </mat-nav-list>
         </mat-sidenav>
 
@@ -23,12 +61,3 @@
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
-<!--
-<app-top-menu></app-top-menu>
-<app-side-bar></app-side-bar>
-<notification-component></notification-component>
-<app-search-bar></app-search-bar>
-
-<div style="margin-top: 50px;">
-</div>
--->
