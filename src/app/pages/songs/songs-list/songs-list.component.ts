@@ -10,7 +10,7 @@ import { SongsNavBarComponent } from "../components/nav-bar.component";
 export class SongsListComponent implements OnInit {
     public readonly titles = ["#", "Autory", "Názov", "Dĺžka (ms)", "Popularita", "Ukážka", "Video"];
     public songs: any[]    = [];
-    @ViewChild(SongsNavBarComponent) private readonly _navComponent: SongsNavBarComponent;
+    @ViewChild(SongsNavBarComponent, {static: false}) private readonly _navComponent: SongsNavBarComponent;
 
     public constructor(private readonly songsService: SongsService) {
 

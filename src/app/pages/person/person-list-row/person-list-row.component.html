@@ -1,0 +1,35 @@
+<td>
+    <div class="ui checkbox">
+        <input [(ngModel)]="selected" name="personSelector" title="Označiť" type="checkbox">
+        <label></label>
+    </div>
+    <div class="ui label">
+        <i class="mail icon"></i> {{person.emails?.length || 0}}
+    </div>
+    <div class="ui label">
+        <i class="mail icon"></i> {{person.numbers?.length || 0}}
+    </div>
+</td>
+<td>
+    {{(person.name || "") + " " + (person.surName || "")}}
+</td>
+<td>{{person.nick}}</td>
+<td>{{person.birthday}}</td>
+<td>
+    <button *ngFor="let account of person.accounts"
+            [title]="getTitle(account)"
+            class="ui circular {{ getIcon(account) }} icon button"
+            externalLink="getLink(account)">
+        <i class="{{ getIcon(account) }} icon"></i>
+    </button>
+</td>
+<td>
+    <button (click)="remove()"
+            *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"
+            class="circular ui icon button hiddenable">
+        <i class="icon remove"></i>
+    </button>
+    <button (click)="showDetail(person.person_id)" class="circular ui icon button hiddenable">
+        <i class="icon angle right"></i>
+    </button>
+</td>

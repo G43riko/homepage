@@ -3,12 +3,15 @@ import { NgModule } from "@angular/core";
 import { ExternalLinkDirective } from "./external-link.directive";
 
 @NgModule({
-    imports: [
+    imports     : [
         CommonModule,
     ],
     declarations: [
         ExternalLinkDirective,
     ],
+    exports     : [
+        ExternalLinkDirective
+    ]
 })
 export class SharedDirectivesModule {
 }

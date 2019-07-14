@@ -5,9 +5,8 @@ import { Router } from "@angular/router";
 import { auth } from "firebase/app";
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { AppConfig } from "../../app.config";
+import { Roles } from "../enums/roles.enum";
 import { User } from "../models/auth.model";
-import { firestore } from "firebase";
 
 @Injectable({
     providedIn: "root",
@@ -23,27 +22,41 @@ export class AuthService {
             switchMap((user) => {
                 if (user) {
                     return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-                } else {
-                    return of(undefined);
                 }
+                return of(undefined);
             }),
         );
-    }
-
-    public get access(): string[] {
-        return this._user && this._user.access || [];
     }
 
     public async googleSigning(): Promise<void> {
         const provider = new auth.GoogleAuthProvider();
 
         const credentials = await this.afAuth.auth.signInWithPopup(provider);
-        return this.updateUserData(credentials.user as User);
+        return this.updateUserData(credentials.user);
     }
 
     public async signOut(): Promise<boolean> {
         await this.afAuth.auth.signOut();
         return this.router.navigate(["/"]);
+    }
+
+    public canShowMenuItem(user: User, role: "" | Roles[]): boolean {
+        return this.checkAuthorization(user, role);
+    }
+
+    public checkAuthorization(user: User, allowedRoles: "" | Roles[]): boolean {
+        if (allowedRoles === "") {
+            return true;
+        }
+        if (!user) {
+            return false;
+        }
+        for (const role of allowedRoles) {
+            if (user.roles[role]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private updateUserData(user: any): Promise<void> {
@@ -54,13 +67,20 @@ export class AuthService {
             email      : user.email,
             displayName: user.displayName || providerData.displayName || null,
             photoURL   : user.photoURL || providerData.photoURL || null,
+            roles      : {
+                [Roles.ROLE_VISITOR]      : true,
+                [Roles.ROLE_VISIT_ABOUT]  : true,
+                [Roles.ROLE_VISIT_MOVIES] : true,
+                [Roles.ROLE_VISIT_SONGS]  : true,
+                [Roles.ROLE_VISIT_PERSONS]: true,
+            },
         };
-        userRef.get().subscribe((e) => {
-            console.log("Data: ", e);
-        });
-        userRef.update({
-            access: firestore.FieldValue.arrayUnion(AppConfig.PATH_PROFILE) as any,
-        });
+        // userRef.get().subscribe((e) => {
+        //     console.log("Data: ", e);
+        // });
+        // userRef.update({
+        //     access: firestore.FieldValue.arrayUnion(AppConfig.PATH_PROFILE) as any,
+        // });
         return userRef.set(this._user, {merge: true});
     }
 }

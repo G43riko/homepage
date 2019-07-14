@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
-import { AppRoutingModule } from "./shared/app-routing.module";
-import { AppComponent } from "./app.component";
-import { MoviesModule } from "./pages/movies/movies.module";
-import { PersonModule } from "./pages/person/person.module";
-import { SongsModule } from "./pages/songs/songs.module";
-import { SharedModule } from "./shared/shared.module";
 import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 import { AppConfig } from "./app.config";
 import { AccountProfileComponent } from "./pages/account-profile/account-profile.component";
+import { CoreModule } from "./shared/core.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -18,12 +18,11 @@ import { AccountProfileComponent } from "./pages/account-profile/account-profile
         AccountProfileComponent,
     ],
     imports: [
+        BrowserAnimationsModule, // NoopAnimationsModule
+        CoreModule,
         SharedModule,
         AppRoutingModule,
-        PersonModule,
-        SongsModule,
-        MoviesModule,
-
+        BrowserModule,
         AngularFireModule.initializeApp(AppConfig.FIREBASE_AUTH),
         AngularFirestoreModule,
         AngularFireAuthModule,

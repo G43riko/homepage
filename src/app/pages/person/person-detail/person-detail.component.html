@@ -457,7 +457,7 @@
         <app-contact [disabled]="disabled" [emailList]="selectedPerson.emails"></app-contact>
         <app-account [accountList]="selectedPerson.accounts" [disabled]="disabled"></app-account>
 
-        <div (click)="save()" *ngIf="!disabled" class="ui button">Uložiť</div>
+        <button (click)="save()" *ngIf="!disabled" [disabled]="personForm.invalid" class="ui button">Uložiť</button>
         <div (click)="edit()" *ngIf="disabled" class="ui button">Upraviť</div>
         <div (click)="back()" class="ui button">Naspäť</div>
         <div class="ui error message"></div>

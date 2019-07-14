@@ -12,7 +12,7 @@ export class AlertComponent implements OnInit {
     @Input() public title: string;
     @Input() public text: string;
     @Output() public exit: EventEmitter<any> = new EventEmitter();
-    @ViewChild("dialog") private readonly el: ElementRef;
+    @ViewChild("dialog", {static: true}) private readonly el: ElementRef;
 
     public ngOnInit(): void {
         const instance = this;

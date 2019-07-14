@@ -73,4 +73,9 @@ export class Paginator<T = any> {
         this._actList = this.allItems ? this.allItems.slice(start, start + Paginator._itemsPerPage) : [];
         return this._actList;
     }
+
+    public remove(index: number): T[] {
+        this.allItems.splice(index + this._actualPage * Paginator._itemsPerPage, 1);
+        return this._reCalcList();
+    }
 }

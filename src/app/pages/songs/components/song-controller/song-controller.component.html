@@ -1,0 +1,18 @@
+<p>song-controller works!</p>
+<div class="controller-wrapper">
+    <div class="time">
+        {{time + "/" + audio.duration}}
+    </div>
+    <div class="controlls">
+        <button (click)="pause()" mat-icon-button>
+            <i class="pause material-icons">
+                pause_circle_filled
+            </i>
+        </button>
+        <button (click)="play()" mat-icon-button>
+            <i class="play material-icons">
+                play_arrow
+            </i>
+        </button>
+    </div>
+</div>

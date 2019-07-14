@@ -79,7 +79,7 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
     public save(): void {
         const method = this.isNew ? this.personService.add : this.personService.update;
 
-        method(this.selectedPerson).subscribe((data) => this.processChangedData(data));
+        method.call(this.personService, this.selectedPerson).subscribe((data) => this.processChangedData(data));
     }
 
     public showMap(): void {

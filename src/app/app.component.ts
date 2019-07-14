@@ -13,7 +13,6 @@ export class AppComponent implements OnDestroy {
     public mobileQuery: MediaQueryList;
     public menuItems: MenuItemModel[] = AppConfig.MENU_ITEMS;
     public readonly title             = "Homepage-FE";
-    public fillerContent              = ["content"];
     private _mobileQueryListener: () => void;
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,

@@ -1,5 +1,6 @@
 import { environment } from "../environments/environment";
 import { MenuItemModel } from "./shared/components/menu-item.model";
+import { Roles } from "./shared/enums/roles.enum";
 
 export class AppConfig {
     public static TITLE = "DemoPage";
@@ -53,7 +54,7 @@ export class AppConfig {
         {
             icon  : "account",
             link  : AppConfig.PATH_PROFILE,
-            access: AppConfig.PATH_PROFILE,
+            access: [Roles.ROLE_VISITOR],
             label : "profile",
         },
         /*
@@ -71,12 +72,12 @@ export class AppConfig {
         {
             icon  : "address book",
             link  : AppConfig.PATH_PERSONS,
-            access: AppConfig.PATH_PERSONS,
+            access: [Roles.ROLE_VISIT_PERSONS],
             label : "persons",
         }, {
             icon  : "address book",
             link  : AppConfig.PATH_MOVIES,
-            access: AppConfig.PATH_MOVIES,
+            access: [Roles.ROLE_VISIT_MOVIES],
             label : "movies",
         },
         /*
@@ -89,7 +90,7 @@ export class AppConfig {
         {
             icon  : "music",
             link  : AppConfig.PATH_SONGS,
-            access: AppConfig.PATH_SONGS,
+            access: [Roles.ROLE_VISIT_SONGS],
             label : "songs",
         },
         /*

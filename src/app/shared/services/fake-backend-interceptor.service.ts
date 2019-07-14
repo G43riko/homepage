@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { delay, dematerialize, materialize, mergeMap } from "rxjs/operators";
+import { MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock } from "../../testing-module/mock.data";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -13,133 +14,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
             if (request.url.endsWith("/persons/list") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: [
-                        {
-                            person_id: "TestPersonId",
-                            name: "TestPersonName",
-                            surName: "TestPersonSurName",
-                            birthday: "1999-11-22",
-                            nick: "TestPersonNick",
-                            numbers: [],
-                            emails: [],
-                            accounts: [],
-                            address: {},
-                        },
-                    ],
+                    status: 200, body: UserListMock,
                 }));
             }
             if (request.url.endsWith("/persons/TestPersonId") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: {
-                        person_id: "TestPersonId",
-                        name: "TestPersonName",
-                        surName: "TestPersonSurName",
-                        birthday: "1999-11-22",
-                        nick: "TestPersonNick",
-                        numbers: [
-                            {
-                                number: "0905123456",
-                                active: true,
-                                number_id: "TestPersonNumber1Id",
-                            },
-                            {
-                                number: "0905654321",
-                                active: false,
-                                number_id: "TestPersonNumber2Id",
-                            },
-                        ],
-                        emails: [
-                            {
-                                email: "abc@gmail.com",
-                                active: true,
-                                email_id: "TestPersonEmail1Id",
-                            },
-                            {
-                                email: "gmail@abc.com",
-                                active: false,
-                                email_id: "TestPersonEmail2Id",
-                            },
-                        ],
-                        accounts: [
-                            {
-                                type: "FACEBOOK",
-                                userName: "TestPersonAccountFbUserName",
-                                active: true,
-                                link: "TestPersonAccountFbLink",
-                                account_id: "TestPersonAccountFbId",
-                            }, {
-                                type: "LINKEDIN",
-                                userName: "TestPersonAccountLIUserName",
-                                active: true,
-                                link: "TestPersonAccountLILink",
-                                account_id: "TestPersonAccountLIId",
-                            },
-                        ],
-                        gender: "FEMALE",
-                        address: {
-                            country: "SK",
-                            city: "TestPersonAddressCity",
-                            street: "TestPersonAddressStreet",
-                            streetNumber: "TestPersonAddressStreetNumber",
-                        },
-                    },
+                    status: 200, body: UserDetailMock.TestPersonId,
+                }));
+            }
+            if (request.url.endsWith("/persons/EmptyPersonId") && request.method === "GET") {
+                return of(new HttpResponse({
+                    status: 200, body: UserDetailMock.EmptyPersonId,
                 }));
             }
 
             if (request.url.match(/\/movies\/list/g) && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: [
-                        {
-                            movie_id: "TestMovieId",
-                            imdb_id: "TestMovieImdbId",
-                            csfd_id: "TestMovieCsfdId",
-                            moviedb_id: "TestMovieMovieDbId",
-                            title: "TestMovieTitle",
-                            title_sk: "TestMovieTitleSk",
-                            year: "1999",
-                            genres: ["akcny", "komedie"],
-                            classification: "PG-13",
-                            rating: "96%",
-                            duration: 213,
-                        },
-                    ],
+                    status: 200, body: MovieListMock,
                 }));
             }
             if (request.url.endsWith("/movies/TestMovieId") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: {
-                        movie_id: "TestMovieId",
-                        imdb_id: "TestMovieImdbId",
-                        csfd_id: "TestMovieCsfdId",
-                        moviedb_id: "TestMovieMovieDbId",
-                        content: "TestMovieContent",
-                        title: "TestMovieTitle",
-                        classification: "PG-13",
-                        title_sk: "TestMovieTitleSk",
-                        countries: ["SK", "HU"],
-                        makers: [
-                            {
-                                name: "Test movie maker1",
-                                birthday: "1995-05-23",
-                                csfd: "TestMovieMaker1CsfdId",
-                                imdb: "TestMovieMaker1ImdbId",
-                                movieDb: "TestMovieMaker1MoviedbId",
-                                avatar: "TestMovieMaker1Avatar.jpg",
-                            },
-                            {
-                                name: "Test movie maker2",
-                                birthday: "1995-05-23",
-                                csfd: "TestMovieMaker2CsfdId",
-                                imdb: "TestMovieMaker2ImdbId",
-                                movieDb: "TestMovieMaker2MoviedbId",
-                                avatar: "TestMovieMaker2Avatar.jpg",
-                            },
-                        ],
-                        year: "1999",
-                        genres: ["akcny", "komedie"],
-                        rating: "96%",
-                        duration: 213,
-                    },
+                    status: 200, body: MovieDetailMock,
                 }));
             }
 
@@ -161,16 +57,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (request.url.endsWith("/songs/list") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: [
-                        {
-                            artists: "TestSongArtist",
-                            title: "TestSongTitle",
-                            spotifi_link: "TestSongSpotifyLink",
-                            duration: 3511361,
-                            popularity: "TestSongPopularity",
-                            preview: "https://www.w3schools.com/html/horse.ogg",
-                        },
-                    ],
+                    status: 200, body: SongListMock,
                 }));
             }
 

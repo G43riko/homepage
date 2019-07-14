@@ -1,20 +1,24 @@
+<div *ngIf="authService.user$ | async as user">
 <table class="ui celled selectable table hoverable">
     <thead>
     <tr>
         <th width="175px">
             <div class="ui checkbox">
-                <input #selecteAllInput (click)="selectAll(selecteAllInput)" [(ngModel)]="selectedAll" type="checkbox">
+                <input (click)="selectAll()" [(ngModel)]="selectedAll" type="checkbox">
                 <label></label>
             </div>
-            <div class="ui compact icon button left pointing dropdown link item">
-                <i class="ellipsis vertical icon"></i>
-                <div class="menu">
-                    <div class="header">Označené:</div>
-                    <div class="item">Zmazať</div>
-                    <div class="divider"></div>
-                    <div class="item">Pridať tag</div>
-                </div>
-            </div>
+            <button [disabled]="!isAnySelected"
+                    [matMenuTriggerFor]="menu"
+                    aria-label="Example icon-button with a menu"
+                    mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="removeSelected()" mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>Zmazať</span>
+                </button>
+            </mat-menu>
         </th>
         <th>Meno</th>
         <th>Prezivka</th>
@@ -24,40 +28,12 @@
     </tr>
     </thead>
     <tbody *ngIf="paginator">
-    <tr *ngFor="let person of paginator.getList()">
-        <td>
-            <div class="ui checkbox">
-                <input name="personSelector" title="Označiť" type="checkbox">
-                <label></label>
-            </div>
-            <div class="ui label">
-                <i class="mail icon"></i> {{person.emails.length}}
-            </div>
-            <div class="ui label">
-                <i class="mail icon"></i> {{person.numbers.length}}
-            </div>
-        </td>
-        <td>
-            {{person.name + " " + person.surName}}
-        </td>
-        <td>{{person.nick}}</td>
-        <td>{{person.birthday}}</td>
-        <td>
-            <button (click)="goTo(account)"
-                    *ngFor="let account of person.accounts"
-                    [title]="getTitle(account)"
-                    class="ui circular {{ getIcon(account) }} icon button">
-                <i class="{{ getIcon(account) }} icon"></i>
-            </button>
-        </td>
-        <td>
-            <button (click)="remove(person.person_id)" class="circular ui icon button hiddenable">
-                <i class="icon remove"></i>
-            </button>
-            <button (click)="showDetail(person.person_id)" class="circular ui icon button hiddenable">
-                <i class="icon angle right"></i>
-            </button>
-        </td>
+    <tr *ngFor="let person of paginator.getList(), let idx = index">
+        <app-person-list-row (onRemove)="paginator.remove($event)"
+                             [index]="idx"
+                             [person]="person"
+                             [user]="user"
+                             style="display: contents"></app-person-list-row>
     </tr>
     </tbody>
 </table>
@@ -65,10 +41,9 @@
     <app-paginator [paginator]="paginator"></app-paginator>
 </div>
 <div style="padding: 10px;">
-    <button class="ui button" (click)="createNew()">
+    <button (click)="createNew()"
+            *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])" class="ui button">
         Vytvoriť nový
     </button>
-    <button class="ui button" (click)="loadItems()">
-        Načítať
-    </button>
+</div>
 </div>
