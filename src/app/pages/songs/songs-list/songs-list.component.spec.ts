@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { TestingModule } from "../../../testing-module/testing.module";
-import { SongsListComponent } from "./songs-list.component";
 import { SongsNavBarComponent } from "../components/nav-bar.component";
+import { SongControllerComponent } from "../components/song-controller/song-controller.component";
+import { SongsListComponent } from "./songs-list.component";
 
 describe("SongsListComponent", () => {
     let component: SongsListComponent;
@@ -13,6 +14,7 @@ describe("SongsListComponent", () => {
                 TestingModule,
             ],
             declarations: [
+                SongControllerComponent,
                 SongsListComponent,
                 SongsNavBarComponent,
             ],

@@ -1,11 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { AuthService } from "../auth.service";
 import { IpInfo } from "../models/ip-info.model";
 import { AbstractHttpService } from "./abstract-http.service";
 import { NotificationService } from "./notification.service";
-import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class LocationService extends AbstractHttpService {

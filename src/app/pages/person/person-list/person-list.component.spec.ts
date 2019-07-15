@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { PersonModule } from "../person.module";
 import { PersonListComponent } from "./person-list.component";
 import { TestingModule } from "../../../testing-module/testing.module";
+import { FirebaseModule } from "../../../shared/modules/firebase.module";
+import { MaterialModule } from "../../../shared/modules/material.module";
+import { PersonListRowComponent } from "../person-list-row/person-list-row.component";
+import { PaginatorComponent } from "../../../shared/components/paginator/paginator.component";
 
 describe("PersonListComponent", () => {
     let component: PersonListComponent;
@@ -10,10 +13,14 @@ describe("PersonListComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
+                PersonListComponent,
+                PersonListRowComponent,
+                PaginatorComponent,
             ],
             imports: [
+                FirebaseModule,
                 TestingModule,
-                PersonModule,
+                MaterialModule,
             ],
         }).compileComponents();
     }));

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { SharedModule } from "../../../../shared/shared.module";
 import { PhoneComponent } from "./phone.component";
+import { TestingModule } from "../../../../testing-module/testing.module";
 
 describe("PhoneComponent", () => {
     let component: PhoneComponent;
@@ -12,6 +13,7 @@ describe("PhoneComponent", () => {
                 PhoneComponent,
             ],
             imports: [
+                TestingModule,
                 SharedModule,
             ],
         }).compileComponents();

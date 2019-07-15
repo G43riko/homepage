@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { SharedModule } from "../../../../shared/shared.module";
 import { AccountComponent } from "./account.component";
+import { CoreModule } from "../../../../shared/core.module";
 
 describe("AccountComponent", () => {
     let component: AccountComponent;
@@ -12,6 +13,7 @@ describe("AccountComponent", () => {
                 AccountComponent,
             ],
             imports: [
+                CoreModule,
                 SharedModule,
             ],
         }).compileComponents();
