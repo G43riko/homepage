@@ -7,7 +7,17 @@ import { ErrorManagerService } from "./error-manager.service";
 })
 export class NotificationService {
     private readonly _defaultError = "Undefined error";
-    private _notificationComponent: NotificationInterface;
+    private _notificationComponent: NotificationInterface = {
+        showError(title: string, text: string): void {
+            console.error(title + ": " + text);
+        },
+        showSuccess(title: string, text: string): void {
+            console.log(title + ": " + text);
+        },
+        showWarn(title: string, text: string): void {
+            console.warn(title + ": " + text);
+        },
+    };
 
     constructor(private readonly _errorManager: ErrorManagerService) {
     }

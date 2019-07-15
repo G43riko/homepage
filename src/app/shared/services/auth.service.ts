@@ -7,6 +7,7 @@ import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { Roles } from "../enums/roles.enum";
 import { User } from "../models/auth.model";
+import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable({
     providedIn: "root",
@@ -44,12 +45,15 @@ export class AuthService {
         return this.checkAuthorization(user, role);
     }
 
-    public checkAuthorization(user: User, allowedRoles: "" | Roles[]): boolean {
+    public checkAuthorization(user: User, allowedRoles: "" | Roles | Roles[]): boolean {
         if (allowedRoles === "") {
             return true;
         }
         if (!user) {
             return false;
+        }
+        if (!Array.isArray(allowedRoles)) {
+            allowedRoles = [allowedRoles];
         }
         for (const role of allowedRoles) {
             if (user.roles[role]) {
@@ -59,19 +63,33 @@ export class AuthService {
         return false;
     }
 
+    public getAccounts(): Observable<User[]> {
+        // return this.afs.collection("users").get().toPromise();
+        return this.afs.collection("users").valueChanges() as any;
+    }
+
+    public updateRole(role: any, user: any, checked: boolean): Observable<void> {
+        return fromPromise(this.afs.doc(`users/${user.uid}`).set({
+            roles: {
+                [role]: checked,
+            },
+        }, {merge: true}));
+    }
+
     private updateUserData(user: any): Promise<void> {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-        const providerData                            = user.providerData && user.providerData[0] || {};
-        this._user                                    = {
-            uid        : user.uid,
-            email      : user.email,
+        const providerData = user.providerData && user.providerData[0] || {};
+        this._user = {
+            uid: user.uid,
+            email: user.email,
             displayName: user.displayName || providerData.displayName || null,
-            photoURL   : user.photoURL || providerData.photoURL || null,
-            roles      : {
-                [Roles.ROLE_VISITOR]      : true,
-                [Roles.ROLE_VISIT_ABOUT]  : true,
-                [Roles.ROLE_VISIT_MOVIES] : true,
-                [Roles.ROLE_VISIT_SONGS]  : true,
+            photoURL: user.photoURL || providerData.photoURL || null,
+            roles: {
+                [Roles.ROLE_VISITOR]: true,
+                [Roles.ROLE_VISIT_ABOUT]: true,
+                [Roles.ROLE_VISIT_MOVIES]: true,
+                [Roles.ROLE_VISIT_SONGS]: true,
+                [Roles.ROLE_VISIT_ACCOUNTS]: false,
                 [Roles.ROLE_VISIT_PERSONS]: true,
             },
         };

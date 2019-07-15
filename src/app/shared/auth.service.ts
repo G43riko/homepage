@@ -43,4 +43,8 @@ export class AuthService {
         this._token    = sessionStorage.getItem(AppConfig.AUTH_COOKIE_KEY);
         this._loggedIn = Boolean(this._token);
     }
+
+    public updateRole(role: any, user: any, checked: boolean): void {
+
+    }
 }

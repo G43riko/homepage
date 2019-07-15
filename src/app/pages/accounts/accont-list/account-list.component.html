@@ -1,0 +1,32 @@
+<div *ngIf="authService.user$ | async as user"
+     class="example-container mat-elevation-z8">
+    <table [dataSource]="accounts" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="displayName">
+            <th *matHeaderCellDef mat-header-cell> Name</th>
+            <td *matCellDef="let element" mat-cell>
+                <img [src]="element.photoURL" alt="" class="example-header-image">
+                <span>{{element.displayName}}</span>
+            </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="email">
+            <th *matHeaderCellDef mat-header-cell> Email</th>
+            <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container *ngFor="let role of roles" matColumnDef="{{role}}">
+            <th *matHeaderCellDef mat-header-cell> {{role}} </th>
+            <td *matCellDef="let element" mat-cell>
+                <mat-checkbox (change)="changeRole(role, element, user, $event)"
+                              [checked]="element.roles[role]"
+                              [disabled]="!authService.checkAuthorization(user, Roles.ROLE_UPDATE_ACCOUNTS)"></mat-checkbox>
+            </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+</div>

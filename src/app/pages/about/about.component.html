@@ -97,3 +97,30 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col basic-info">
+            <h3>Basic info</h3>
+            <div *ngFor="let info of infos" class="info-row">
+                <span class="key">{{info.key}}</span>
+                <span class="value">{{info.value}}</span>
+            </div>
+        </div>
+        <div class="col">
+            <h3>Education</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Work</h3>
+        </div>
+        <div class="col technologies">
+            <h3>Technology</h3>
+            <div *ngFor="let technology of technologies">
+                <div [ngStyle]="{width: technology.skill + '%'}" class="slider"></div>
+                <span class="name">{{technology.name}}</span>
+                <span class="skill">{{technology.skill}}%</span>
+            </div>
+        </div>
+    </div>
+</div>

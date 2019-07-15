@@ -33,7 +33,15 @@ export const AppRoutes: Routes = [
         loadChildren    : "./pages/songs/songs.module#SongsModule",
         canActivateChild: [AuthGuard],
         data            : {
-            allowedFor: [Roles.ROLE_VISIT_SONGS, Roles.ROLE_UPDATE_SONGS],
+            allowedFor: [Roles.ROLE_VISIT_SONGS],
+        },
+    },
+    {
+        path: AppConfig.PATH_ACCOUNTS,
+        loadChildren: "./pages/accounts/accounts.module#AccountsModule",
+        canActivateChild: [AuthGuard],
+        data: {
+            allowedFor: [Roles.ROLE_VISIT_ACCOUNTS],
         },
     },
     {
@@ -41,7 +49,7 @@ export const AppRoutes: Routes = [
         loadChildren    : "./pages/movies/movies.module#MoviesModule",
         canActivateChild: [AuthGuard],
         data            : {
-            allowedFor: [Roles.ROLE_VISIT_MOVIES, Roles.ROLE_UPDATE_MOVIES],
+            allowedFor: [Roles.ROLE_VISIT_MOVIES],
         },
     },
     {
@@ -49,7 +57,7 @@ export const AppRoutes: Routes = [
         loadChildren    : "./pages/person/person.module#PersonModule",
         canActivateChild: [AuthGuard],
         data            : {
-            allowedFor: [Roles.ROLE_VISIT_PERSONS, Roles.ROLE_UPDATE_PERSONS],
+            allowedFor: [Roles.ROLE_VISIT_PERSONS],
         },
     },
 ];

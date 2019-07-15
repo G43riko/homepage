@@ -27,6 +27,7 @@ export class AppConfig {
         messagingSenderId: "265768844504",
     };
     public static PATH_ABOUT        = "about";
+    public static PATH_ACCOUNTS = "accounts";
     public static PATH_LOCATION     = "location";
     public static PATH_DEMOS        = "demos";
     public static PATH_HOME         = "home";
@@ -56,6 +57,12 @@ export class AppConfig {
             link  : AppConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
             label : "profile",
+        },
+        {
+            icon: "account",
+            link: AppConfig.PATH_ACCOUNTS,
+            access: [Roles.ROLE_VISIT_ACCOUNTS],
+            label: "accounts",
         },
         /*
         {

@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { PersonListComponent } from "./person-list.component";
-import { TestingModule } from "../../../testing-module/testing.module";
+import { PaginatorComponent } from "../../../shared/components/paginator/paginator.component";
 import { FirebaseModule } from "../../../shared/modules/firebase.module";
 import { MaterialModule } from "../../../shared/modules/material.module";
+import { TestingModule } from "../../../testing-module/testing.module";
 import { PersonListRowComponent } from "../person-list-row/person-list-row.component";
-import { PaginatorComponent } from "../../../shared/components/paginator/paginator.component";
+import { PersonListComponent } from "./person-list.component";
 
 describe("PersonListComponent", () => {
     let component: PersonListComponent;

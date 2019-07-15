@@ -5,12 +5,38 @@ declare let $: any;
 @Component({
     selector: "app-about",
     templateUrl: "./about.component.html",
-    styleUrls: ["./about.component.css"],
+    styleUrls: ["./about.component.scss"],
 })
 export class AboutComponent implements OnInit {
     public readonly telNumber = "0905123456";
-    public readonly email     = "gcsollei@hotmail.com";
-    public items              = [
+    public readonly email = "gcsollei@hotmail.com";
+    public readonly infos = [{
+        key: "name",
+        value: "Gabriel Csollei",
+    }, {
+        key: "email",
+        value: "gcsollei@hotmail.com",
+    }, {
+        key: "birthday",
+        value: "12.11.1993",
+    }];
+
+    public readonly technologies = [
+        {
+            name: "Javascript",
+            skill: 90,
+        },
+        {
+            name: "Typescript",
+            skill: 90,
+        },
+        {
+            name: "Java",
+            skill: 80,
+        },
+    ];
+
+    public items = [
         {
             label: "Github",
             icon: "github",
