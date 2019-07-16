@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from "@angular/core";
     styleUrls  : ["./song-controller.component.scss"],
 })
 export class SongControllerComponent implements OnInit {
-    private readonly audio = new Audio();
-    private time           = 0;
+    public readonly audio = new Audio();
+    public time = 0;
 
     public constructor() {
     }

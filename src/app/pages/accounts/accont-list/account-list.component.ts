@@ -16,7 +16,7 @@ export class AccountListComponent implements OnInit {
     public displayedColumns = ["displayName", "email", ...this.roles];
     public accounts: User[] = [];
 
-    public constructor(private readonly authService: AuthService,
+    public constructor(public readonly authService: AuthService,
                        private readonly notificationService: NotificationService) {
     }
 
