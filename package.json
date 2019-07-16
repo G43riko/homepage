@@ -3,8 +3,9 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "serve": "ng serve",
         "build": "ng build",
+        "start": "node server.js",
         "precache": "sw-precache --verbose --config=sw-precache-config.js",
         "buildProd": "ng build --prod --base-href .",
         "postinstall": "npm run buildProd && npm run precache",
