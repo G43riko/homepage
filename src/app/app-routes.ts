@@ -37,6 +37,14 @@ export const AppRoutes: Routes = [
         },
     },
     {
+        path: AppConfig.PATH_FILES,
+        loadChildren: "./pages/files/files.module#FilesModule",
+        canActivateChild: [AuthGuard],
+        data: {
+            allowedFor: [Roles.ROLE_VISIT_FILES],
+        },
+    },
+    {
         path: AppConfig.PATH_ACCOUNTS,
         loadChildren: "./pages/accounts/accounts.module#AccountsModule",
         canActivateChild: [AuthGuard],

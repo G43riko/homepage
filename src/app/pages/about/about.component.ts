@@ -2,6 +2,12 @@ import { Component, OnInit } from "@angular/core";
 
 declare let $: any;
 
+export interface Info {
+    key: string;
+    value: string;
+    flag?: "mail" | "phone";
+}
+
 @Component({
     selector: "app-about",
     templateUrl: "./about.component.html",
@@ -10,14 +16,19 @@ declare let $: any;
 export class AboutComponent implements OnInit {
     public readonly telNumber = "0905123456";
     public readonly email = "gcsollei@hotmail.com";
-    public readonly infos = [{
-        key: "name",
+    public readonly infos: Info[] = [{
+        key: "Name",
         value: "Gabriel Csollei",
     }, {
-        key: "email",
+        key: "Email",
         value: "gcsollei@hotmail.com",
+        flag: "mail",
     }, {
-        key: "birthday",
+        key: "Phone",
+        value: "0905 123 456",
+        flag: "phone",
+    }, {
+        key: "Birthday",
         value: "12.11.1993",
     }];
 
@@ -33,6 +44,10 @@ export class AboutComponent implements OnInit {
         {
             name: "Java",
             skill: 80,
+        },
+        {
+            name: "PHP",
+            skill: 20,
         },
     ];
 

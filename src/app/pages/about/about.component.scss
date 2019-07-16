@@ -13,31 +13,37 @@
         }
 
         .basic-info {
-            .key {
-                font-weight: 500;
-            }
+            .info-row {
+                margin-bottom: 0.5em;
 
-            .value {
-                float: right;
+                .key {
+                    font-weight: 500;
+                }
+
+                .value {
+                    float: right;
+                }
             }
         }
 
         .technologies {
             position: relative;
 
-            .name {
-
-            }
-
-            .skill {
-                float: right;
-            }
-
-            .slider {
+            .technology-row {
                 margin-bottom: 0.5em;
-                height: 10px;
-                border-radius: 10px;
-                background: blue;
+
+                .name {
+                }
+
+                .skill {
+                    float: right;
+                }
+
+                .slider {
+                    margin-bottom: 0.1em;
+                    height: 10px;
+                    border-radius: 10px;
+                }
             }
         }
     }

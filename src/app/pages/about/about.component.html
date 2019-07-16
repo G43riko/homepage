@@ -101,9 +101,11 @@
     <div class="row">
         <div class="col basic-info">
             <h3>Basic info</h3>
-            <div *ngFor="let info of infos" class="info-row">
+            <div *ngFor="let info of infos" [ngSwitch]="info.flag" class="info-row">
                 <span class="key">{{info.key}}</span>
-                <span class="value">{{info.value}}</span>
+                <a *ngSwitchCase="'mail'" [href]="'mailto:' + info.value" class="value">{{info.value}}</a>
+                <a *ngSwitchCase="'phone'" [href]="'tel:' + info.value" class="value">{{info.value}}</a>
+                <span *ngSwitchDefault class="value">{{info.value}}</span>
             </div>
         </div>
         <div class="col">
@@ -116,10 +118,22 @@
         </div>
         <div class="col technologies">
             <h3>Technology</h3>
-            <div *ngFor="let technology of technologies">
-                <div [ngStyle]="{width: technology.skill + '%'}" class="slider"></div>
+            <div *ngFor="let technology of technologies" class="technology-row">
+                <div [ngStyle]="{width: technology.skill + '%', background: 'rgb(' + (255 - technology.skill * 2.5) + ', ' + (technology.skill * 2.5) + ', 0)'}"
+                     class="slider"></div>
                 <span class="name">{{technology.name}}</span>
                 <span class="skill">{{technology.skill}}%</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Languages</h3>
+            <div class="language-row">
+                <div class="language"></div>
+                <div>
+                    <!--                    <span *ngFor="let " class="star">&#9733;</span>-->
+                </div>
             </div>
         </div>
     </div>

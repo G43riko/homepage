@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ExternalLinkDirective } from "./external-link.directive";
+import { DropZoneDirective } from "./drop-zone.directive";
 
 @NgModule({
     imports     : [
@@ -8,6 +9,7 @@ import { ExternalLinkDirective } from "./external-link.directive";
     ],
     declarations: [
         ExternalLinkDirective,
+        DropZoneDirective,
     ],
     exports     : [
         ExternalLinkDirective

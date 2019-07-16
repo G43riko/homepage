@@ -5,6 +5,9 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "precache": "sw-precache --verbose --config=sw-precache-config.js",
+        "buildProd": "ng build --prod --base-href .",
+        "postinstall": "npm run buildProd && npm run precache",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"

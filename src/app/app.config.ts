@@ -38,6 +38,7 @@ export class AppConfig {
     public static PATH_IMAGE_UPLOAD = "upload";
     public static PATH_YOUTUBE      = "youtube";
     public static PATH_SONGS        = "songs";
+    public static PATH_FILES = "files";
     public static PATH_TODO         = "todo";
     public static PATH_BROWSER      = "browser";
     public static PATH_FOODS        = "food";
@@ -63,6 +64,12 @@ export class AppConfig {
             link: AppConfig.PATH_ACCOUNTS,
             access: [Roles.ROLE_VISIT_ACCOUNTS],
             label: "accounts",
+        },
+        {
+            icon: "file",
+            link: AppConfig.PATH_FILES,
+            access: [Roles.ROLE_VISIT_FILES],
+            label: "files",
         },
         /*
         {
