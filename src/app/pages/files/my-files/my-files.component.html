@@ -1,4 +1,13 @@
 <p>my-files works!</p>
-<div *ngFor="let file of files">
-    <img [src]="file | async" alt="">
+<div class="image-container">
+    <figure *ngFor="let file of files"
+            class="image-holder">
+        <img [src]="file | async" alt="A deep blue lake sits in the middle of vast hills covered with evergreen trees"/>
+        <div class="info">
+            <span class="title"><a href="https://unsplash.com/photos/zshyCr6HGw0" rel="noopener" target="_blank">Lake Walchen</a></span>
+            <span class="created">
+               12.11.1993
+           </span>
+        </div>
+    </figure>
 </div>

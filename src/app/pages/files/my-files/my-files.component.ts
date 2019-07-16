@@ -20,6 +20,7 @@ export class MyFilesComponent implements OnInit {
         images.listAll().then((data) => {
             this.files = data.items.map((item) => fromPromise(item.getDownloadURL()));
         });
+
     }
 
 }

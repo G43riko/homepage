@@ -1,0 +1,64 @@
+$image-padding: 5px;
+$image-padding-2: #{$image-padding * 2};
+
+$info-height: 40px;
+
+.image-container {
+    width: 1200px;
+    position: relative;
+    margin: 0 auto;
+
+    column-count: 5;
+    column-gap: 0;
+
+    figure.image-holder {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        padding: $image-padding;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+
+        img {
+            cursor: pointer;
+            width: 100%;
+            filter: blur(0);
+            transition: filter 0.3s;
+            overflow: hidden;
+        }
+
+        .info {
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            width: calc(100% - #{$image-padding-2});
+            height: 0;
+            transition: height 0.3s;
+            line-height: $info-height;
+            bottom: $image-padding-2;
+            padding: 0 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+
+            .title {
+            }
+
+            .created {
+                float: right;
+                color: white;
+            }
+        }
+
+        &:hover {
+            .info {
+                height: $info-height;
+            }
+
+            img {
+                filter: blur(6px);
+            }
+
+        }
+    }
+}
