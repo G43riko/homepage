@@ -19,6 +19,7 @@ export class FileUploadComponent implements OnInit {
     public downloadUrl: Observable<string>;
     public isHovering: boolean;
     private task: AngularFireUploadTask;
+    public files: FileList = {length: 0, item: (index: number) => null};
 
     public constructor(private readonly storage: AngularFireStorage,
                        public readonly authService: AuthService,
