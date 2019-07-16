@@ -1,5 +1,11 @@
 <div *ngIf="authService.user$ | async as user">
-    <input (change)="startUpload($event.target.files, user)" type="file">
+
+    <div class="box_input">
+        <input #file_input class="box__file" data-multiple-caption="{count} files selected" id="file" multiple
+               name="files[]" type="file"/>
+        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+        <button (click)="startUpload(file_input.files, user)" class="box_button">Upload</button>
+    </div>
 
     <div *ngIf="percentage | async as pct">
         <progress [value]="pct" max="100"></progress>
