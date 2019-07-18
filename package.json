@@ -7,7 +7,7 @@
         "build": "ng build",
         "start": "node server.js",
         "precache": "sw-precache --verbose --config=sw-precache-config.js",
-        "buildProd": "ng build --prod --base-href .",
+        "buildProd": "ng build --configuration=production",
         "postinstall": "npm run buildProd && npm run precache",
         "test": "ng test",
         "lint": "ng lint",

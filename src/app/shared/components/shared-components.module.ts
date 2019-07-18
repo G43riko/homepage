@@ -8,11 +8,14 @@ import { ProfileComponent } from "./profile-component/profile.component";
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
 import { TopMenuComponent } from "./top-menu/top-menu.component";
+import { LoginScreenComponent } from "./login-screen/login-screen.component";
+import { MaterialModule } from "../modules/material.module";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        MaterialModule,
     ],
     declarations: [
         AlertComponent,
@@ -23,6 +26,7 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
         NotificationComponent,
         TopMenuComponent,
         PaginatorComponent,
+        LoginScreenComponent,
     ],
     exports: [
         AlertComponent,
@@ -33,6 +37,7 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
         NotificationComponent,
         TopMenuComponent,
         PaginatorComponent,
+        LoginScreenComponent,
     ],
 })
 export class SharedComponentsModule {
