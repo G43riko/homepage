@@ -3,10 +3,10 @@ import { AngularFireStorage, AngularFireUploadTask } from "@angular/fire/storage
 import { UploadTaskSnapshot } from "@angular/fire/storage/interfaces";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
-import { NotificationService } from "../../../shared/services/notification.service";
-import { User } from "../../../shared/models/auth.model";
 import { AppConfig } from "../../../app.config";
+import { User } from "../../../shared/models/auth.model";
 import { AuthService } from "../../../shared/services/auth.service";
+import { NotificationService } from "../../../shared/services/notification.service";
 
 @Component({
     selector: "app-file-upload",
@@ -34,27 +34,28 @@ export class FileUploadComponent implements OnInit {
     }
 
     public startUpload(event: FileList, user: User): void {
-        const file = event.item(0);
+        for (let i = 0; i < event.length; i++) {
+            const file = event.item(i);
+            if (file) {
+                if (file.type.split("/")[0] !== "image") {
+                    this.notificationService.showErrorMessage("Unsupported file format");
+                    return;
+                }
 
-        if (file) {
-            if (file.type.split("/")[0] !== "image") {
-                this.notificationService.showErrorMessage("Unsupported file format");
-                return;
+                const path = `images/${user.uid}/${new Date().getTime()}_${file.name}`;
+                const ref = this.storage.ref(path);
+                const customMetadata = {
+                    app: AppConfig.TITLE,
+                    uploadedBy: user.uid,
+                    active: "true",
+                };
+
+                this.task = this.storage.upload(path, file, {customMetadata});
+                this.percentage = this.task.percentageChanges();
+                this.snapshot = this.task.snapshotChanges().pipe(finalize(() => {
+                    this.downloadUrl = ref.getDownloadURL();
+                }));
             }
-
-            const path = `images/${new Date().getTime()}_${file.name}`;
-            const ref = this.storage.ref(path);
-            const customMetadata = {
-                app: AppConfig.TITLE,
-                uploadedBy: user.uid,
-                active: "true",
-            };
-
-            this.task = this.storage.upload(path, file, {customMetadata});
-            this.percentage = this.task.percentageChanges();
-            this.snapshot = this.task.snapshotChanges().pipe(finalize(() => {
-                this.downloadUrl = ref.getDownloadURL();
-            }));
         }
     }
 
@@ -62,4 +63,11 @@ export class FileUploadComponent implements OnInit {
         return snapshot.state === "running" && snapshot.bytesTransferred < snapshot.totalBytes;
     }
 
+    public checkClick($event: MouseEvent, file_input: HTMLInputElement, upload_button: HTMLButtonElement): void {
+        if ($event.target === upload_button) {
+            return;
+        }
+        file_input.click();
+
+    }
 }

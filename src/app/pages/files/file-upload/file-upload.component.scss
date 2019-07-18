@@ -31,7 +31,7 @@
         margin-bottom: 40px;
     }
 
-    label {
+    .label {
         max-width: 80%;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -52,6 +52,11 @@
 
         &:hover {
             background-color: #0f3c4b;
+        }
+
+        &.disabled {
+            background-color: #92b0b3;
+            cursor: not-allowed;
         }
     }
 }
