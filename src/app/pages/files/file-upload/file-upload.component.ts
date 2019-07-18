@@ -8,6 +8,8 @@ import { User } from "../../../shared/models/auth.model";
 import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 
+const emptyFileList = {length: 0, item: (index: number) => null};
+
 @Component({
     selector: "app-file-upload",
     templateUrl: "./file-upload.component.html",
@@ -19,7 +21,7 @@ export class FileUploadComponent implements OnInit {
     public downloadUrl: Observable<string>;
     public isHovering: boolean;
     private task: AngularFireUploadTask;
-    public files: FileList = {length: 0, item: (index: number) => null};
+    public files: FileList = emptyFileList;
 
     public constructor(private readonly storage: AngularFireStorage,
                        public readonly authService: AuthService,
@@ -28,11 +30,6 @@ export class FileUploadComponent implements OnInit {
 
     public ngOnInit(): void {
     }
-
-    public toggleHover(event: boolean): void {
-        this.isHovering = false;
-    }
-
     public startUpload(event: FileList, user: User): void {
         for (let i = 0; i < event.length; i++) {
             const file = event.item(i);
@@ -54,6 +51,7 @@ export class FileUploadComponent implements OnInit {
                 this.percentage = this.task.percentageChanges();
                 this.snapshot = this.task.snapshotChanges().pipe(finalize(() => {
                     this.downloadUrl = ref.getDownloadURL();
+                    this.files = emptyFileList;
                 }));
             }
         }

@@ -1,11 +1,15 @@
 <mat-card>
-    <div class="container">
+    <div *ngIf="authService.user$ | async as user" class="container">
         <mat-tab-group>
-            <mat-tab label="Nahrať obrázok">
-                <app-file-upload></app-file-upload>
+            <mat-tab *ngIf="authService.checkAuthorization(user, Roles.ROLE_UPLOAD_FILES)" label="Nahrať obrázok">
+                <ng-template matTabContent>
+                    <app-file-upload></app-file-upload>
+                </ng-template>
             </mat-tab>
             <mat-tab label="Nahraté obrázky">
+                <!--                <ng-template matTabContent>-->
                 <app-my-files></app-my-files>
+                <!--                </ng-template>-->
             </mat-tab>
         </mat-tab-group>
     </div>

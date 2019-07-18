@@ -9,6 +9,15 @@ $border-radius: 5px;
 
     column-count: 5;
     column-gap: 0;
+    @media only screen and (max-width: 1023px) {
+        column-count: 4;
+    }
+    @media only screen and (max-width: 767px) {
+        column-count: 3;
+    }
+    @media only screen and (max-width: 320px) {
+        column-count: 2;
+    }
 
     figure.image-holder {
         position: relative;

@@ -24,22 +24,26 @@
                 [disabled]="files.length == 0"
                 class="box_button">Upload
         </button>
-    </div>
-
-    <div *ngIf="percentage | async as pct">
-        <progress [value]="pct" max="100"></progress>
-    </div>
-
-    <div *ngIf="snapshot | async as snap">
-        {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
-        <div *ngIf="downloadUrl | async as url">
-            <h3>Results!</h3>
-            <img [src]="url" alt="">
-            <a [href]="url">Download me!</a>
+        <div *ngIf="snapshot | async as snap">
+            <div *ngIf="(percentage | async) as pct" [ngStyle]="{display: isActive(snap) ? 'block' : 'none' }"
+                 class="progress-wrapper">
+                <span class="progress">{{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}</span>
+                <mat-progress-bar [value]="pct" mode="determinate"></mat-progress-bar>
+            </div>
         </div>
-
-        <button (click)="task.pause()">Pause</button>
-        <button (click)="task.cancel()">Cancel</button>
-        <button (click)="task.resume()">Resume</button>
     </div>
+
+    <!--
+        <div *ngIf="snapshot | async as snap">
+            <div *ngIf="downloadUrl | async as url">
+                <h3>Results!</h3>
+                <img [src]="url" alt="">
+                <a [href]="url">Download me!</a>
+            </div>
+
+            <button (click)="task.pause()">Pause</button>
+            <button (click)="task.cancel()">Cancel</button>
+            <button (click)="task.resume()">Resume</button>
+        </div>
+        -->
 </div>
