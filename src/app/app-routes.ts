@@ -21,10 +21,18 @@ export const AppRoutes: Routes = [
         component: AboutComponent,
     },
     {
-        path       : AppConfig.PATH_PROFILE,
-        component  : AccountProfileComponent,
+        path: AppConfig.PATH_MIXES,
+        loadChildren: "./pages/mixes/mixes.module#MixesModule",
         canActivate: [AuthGuard],
         data       : {
+            allowedFor: [Roles.ROLE_VISIT_MIXES],
+        },
+    },
+    {
+        path: AppConfig.PATH_PROFILE,
+        component: AccountProfileComponent,
+        canActivate: [AuthGuard],
+        data: {
             allowedFor: [Roles.ROLE_VISITOR],
         },
     },

@@ -32,6 +32,7 @@ export class AppConfig {
     public static PATH_DEMOS        = "demos";
     public static PATH_HOME         = "home";
     public static PATH_PROFILE      = "profile";
+    public static PATH_MIXES = "mixes";
     public static PATH_IMAGES       = "images";
     public static PATH_PERSONS      = "persons";
     public static PATH_MOVIES       = "movies";
@@ -58,6 +59,12 @@ export class AppConfig {
             link  : AppConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
             label : "profile",
+        },
+        {
+            icon: "account",
+            link: AppConfig.PATH_MIXES,
+            access: [Roles.ROLE_VISIT_MIXES],
+            label: "mixes",
         },
         {
             icon: "account",

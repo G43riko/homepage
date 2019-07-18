@@ -7,16 +7,16 @@ $border-radius: 5px;
 .image-container {
     position: relative;
 
-    column-count: 5;
+    column-count: 4;
     column-gap: 0;
     @media only screen and (max-width: 1023px) {
-        column-count: 4;
-    }
-    @media only screen and (max-width: 767px) {
         column-count: 3;
     }
-    @media only screen and (max-width: 320px) {
+    @media only screen and (max-width: 767px) {
         column-count: 2;
+    }
+    @media only screen and (max-width: 320px) {
+        column-count: 1;
     }
 
     figure.image-holder {

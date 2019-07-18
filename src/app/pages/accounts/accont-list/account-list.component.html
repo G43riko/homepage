@@ -18,7 +18,7 @@
         </ng-container>
 
         <ng-container *ngFor="let role of roles" matColumnDef="{{role}}">
-            <th *matHeaderCellDef mat-header-cell> {{role}} </th>
+            <th *matHeaderCellDef mat-header-cell> {{role.replace("ROLE_", "")}} </th>
             <td *matCellDef="let element" mat-cell>
                 <mat-checkbox (change)="changeRole(role, element, user, $event)"
                               [checked]="element.roles[role]"

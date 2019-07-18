@@ -5,7 +5,15 @@
     font-size: 1.25rem;
     position: relative;
     text-align: center;
-    padding: 100px 20px;
+    //padding: 100px 20px;
+    padding: 20px 20px;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 420px;
     transition: outline-offset .15s ease-in-out, background-color .15s linear;
 
     &.is-dragover {
@@ -32,7 +40,7 @@
     }
 
     .label {
-        max-width: 80%;
+        max-width: 100%;
         text-overflow: ellipsis;
         white-space: nowrap;
         cursor: pointer;
@@ -50,7 +58,8 @@
         color: #e5edf1;
         display: block;
         padding: 8px 16px;
-        margin: 40px auto 0;
+        //margin: 40px auto 0;
+        width: 100px;
         border: none;
         cursor: pointer;
 
@@ -63,4 +72,13 @@
             cursor: not-allowed;
         }
     }
+
+    @media only screen and (max-height: 556px) {
+        height: calc(100vh - 136px);
+
+        .box_icon {
+            margin-bottom: 10px;
+        }
+    }
+
 }
