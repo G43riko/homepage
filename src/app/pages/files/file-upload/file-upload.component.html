@@ -1,5 +1,20 @@
 <div *ngIf="authService.user$ | async as user">
-
+    <div class="share-options-wrapper">
+        <mat-slide-toggle [(ngModel)]="shared">Zdielať</mat-slide-toggle>
+        <mat-form-field *ngIf="shared" class="example-full-width">
+            <input [formControl]="shareWith" [matAutocomplete]="auto" aria-label="State" matInput
+                   placeholder="Zdielať s">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mapper">
+                <mat-option *ngFor="let account of accounts | async" [disabled]="user.uid === account.uid"
+                            [value]="account">
+                    <img [src]="account.photoURL" aria-hidden class="example-option-img">
+                    <span>{{account.displayName}}</span>
+                    &nbsp; &nbsp;
+                    <small>{{account.email}}</small>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
     <div (dropped)="files = $event"
          (hovered)="isHovering = $event"
          (click)="checkClick($event, file_input, upload_button)"

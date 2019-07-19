@@ -7,6 +7,7 @@ import { MyFilesComponent } from "./my-files/my-files.component";
 import { SharedDirectivesModule } from "../../shared/directives/shared-directives.module";
 import { MaterialModule } from "../../shared/modules/material.module";
 import { SharedPipesModule } from "../../shared/pipes/shared-pipes.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [FileListComponent, FileUploadComponent, MyFilesComponent],
@@ -16,6 +17,8 @@ import { SharedPipesModule } from "../../shared/pipes/shared-pipes.module";
         MaterialModule,
         FilesRoutingModule,
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
 })
 export class FilesModule {
