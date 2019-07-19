@@ -1,5 +1,7 @@
 .share-options-wrapper {
     padding: 1em;
+    box-sizing: border-box;
+    height: 4em;
 
     .example-full-width {
         width: 100%;
@@ -92,7 +94,7 @@
     }
 
     @media only screen and (max-height: 556px) {
-        height: calc(100vh - 136px);
+        height: calc(100vh - 136px - 4em);
 
         .box_icon {
             margin-bottom: 10px;

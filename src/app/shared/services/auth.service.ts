@@ -89,7 +89,7 @@ export class AuthService {
                 [Roles.ROLE_VISIT_ABOUT]: true,
                 [Roles.ROLE_VISIT_MOVIES]: true,
                 [Roles.ROLE_VISIT_SONGS]: true,
-                [Roles.ROLE_VISIT_ACCOUNTS]: false,
+                [Roles.ROLE_VISIT_ACCOUNTS]: true,
                 [Roles.ROLE_VISIT_PERSONS]: true,
             },
         };
