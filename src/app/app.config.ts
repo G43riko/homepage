@@ -3,22 +3,19 @@ import { MenuItemModel } from "./shared/components/menu-item.model";
 import { Roles } from "./shared/enums/roles.enum";
 
 export class AppConfig {
-    public static TITLE = "DemoPage";
-    // public static BASE_URL					      = "http://localhost:3000";
-    public static BASE_URL = environment.base_url;
-    public static ITEMS_PER_PAGE = 10;
-    public static API_ENDPOINT_ADD_IMAGE = "http://localhost:8080/images/add";
-    public static API_ENDPOINT_IMAGES = "http://localhost:8080/images";
-    public static YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search";
-    public static YOUTUBE_API_KEY = "AIzaSyAh6T37m_p-3DQ6JELbqIIhnvqXBgOXf-E";
+    public static readonly TITLE = "DemoPage";
+    public static readonly BASE_URL = environment.base_url;
+    public static readonly ITEMS_PER_PAGE = 10;
+    public static readonly YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search";
+    public static readonly YOUTUBE_API_KEY = "AIzaSyAh6T37m_p-3DQ6JELbqIIhnvqXBgOXf-E";
 
-    public static GOOGLE_MAPS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-    public static GOOGLE_MAPS_API_KEY = "AIzaSyB6feh5xBQnhLno2YRNNbjOdp17XA8Cmss";
+    public static readonly GOOGLE_MAPS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+    public static readonly GOOGLE_MAPS_API_KEY = "AIzaSyB6feh5xBQnhLno2YRNNbjOdp17XA8Cmss";
 
-    public static GOOGLE_MAPS_API_EMBED_KEY = "AIzaSyD6PqlCJNkkQy4azb6XFtyR1Zb-RVlJjW8";
-    public static GOOGLE_MAPS_API_EMBED_URL = "https://www.google.com/maps/embed/v1/place";
+    public static readonly GOOGLE_MAPS_API_EMBED_KEY = "AIzaSyD6PqlCJNkkQy4azb6XFtyR1Zb-RVlJjW8";
+    public static readonly GOOGLE_MAPS_API_EMBED_URL = "https://www.google.com/maps/embed/v1/place";
 
-    public static FIREBASE_AUTH     = {
+    public static readonly FIREBASE_AUTH     = {
         apiKey           : "AIzaSyDFjU52OiDx66u_jI5QAAiCB0QQufaLgxo",
         authDomain       : "foods-5d312.firebaseapp.com",
         databaseURL      : "https://foods-5d312.firebaseio.com",
@@ -26,28 +23,31 @@ export class AppConfig {
         storageBucket    : "foods-5d312.appspot.com",
         messagingSenderId: "265768844504",
     };
-    public static PATH_ABOUT        = "about";
-    public static PATH_ACCOUNTS = "accounts";
-    public static PATH_LOCATION     = "location";
-    public static PATH_DEMOS        = "demos";
-    public static PATH_HOME         = "home";
-    public static PATH_PROFILE      = "profile";
-    public static PATH_MIXES = "mixes";
-    public static PATH_IMAGES       = "images";
-    public static PATH_PERSONS      = "persons";
-    public static PATH_MOVIES       = "movies";
-    public static PATH_IMAGE_UPLOAD = "upload";
-    public static PATH_YOUTUBE      = "youtube";
-    public static PATH_SONGS        = "songs";
-    public static PATH_FILES = "files";
-    public static PATH_TODO         = "todo";
-    public static PATH_BROWSER      = "browser";
-    public static PATH_FOODS        = "food";
-    public static PATH_IMAGE_DETAIL = "detail";
 
-    public static AUTH_COOKIE_KEY = "__auth_key__";
+    public static readonly DEFAULT_ALERT_DURATION = 2000;
 
-    public static MENU_ITEMS: MenuItemModel[] = [
+    public static readonly PATH_ABOUT        = "about";
+    public static readonly PATH_ACCOUNTS     = "accounts";
+    public static readonly PATH_LOCATION     = "location";
+    public static readonly PATH_DEMOS        = "demos";
+    public static readonly PATH_HOME         = "home";
+    public static readonly PATH_PROFILE      = "profile";
+    public static readonly PATH_MIXES = "mixes";
+    public static readonly PATH_IMAGES       = "images";
+    public static readonly PATH_PERSONS      = "persons";
+    public static readonly PATH_MOVIES       = "movies";
+    public static readonly PATH_IMAGE_UPLOAD = "upload";
+    public static readonly PATH_YOUTUBE      = "youtube";
+    public static readonly PATH_SONGS        = "songs";
+    public static readonly PATH_FILES = "files";
+    public static readonly PATH_TODO         = "todo";
+    public static readonly PATH_BROWSER      = "browser";
+    public static readonly PATH_FOODS        = "food";
+    public static readonly PATH_IMAGE_DETAIL = "detail";
+
+    public static readonly AUTH_COOKIE_KEY = "__auth_key__";
+
+    public static readonly MENU_ITEMS: MenuItemModel[] = [
         {
             icon  : "home",
             link  : AppConfig.PATH_HOME,

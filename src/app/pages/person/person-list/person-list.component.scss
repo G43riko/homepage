@@ -2,10 +2,20 @@ tr {
     height: 57px;
 
     .hiddenable {
-        display: none;
+        //display: none;
+        display: inline-block;
     }
 }
 
-tr:hover .hiddenable {
-    display: inline-block;
+//tr:hover .hiddenable {
+//    display: inline-block;
+//}
+table {
+    width: 100%;
+}
+
+.floating-add {
+    position: fixed;
+    right: 3em;
+    bottom: 3em;
 }

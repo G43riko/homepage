@@ -1,27 +1,25 @@
-import { Component, OnInit, QueryList, ViewChildren } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Roles } from "../../../shared/enums/roles.enum";
-import { Person } from "../../../shared/models/person/person.model";
-import { AuthService } from "../../../shared/services/auth.service";
-import { NotificationService } from "../../../shared/services/notification.service";
-import { PersonService } from "../../../shared/services/person.service";
-import { Paginator } from "../../../shared/utils/Paginator";
-import { PersonListRowComponent } from "../person-list-row/person-list-row.component";
-
-declare let $: any;
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {forkJoin, Observable} from "rxjs";
+import {TableConfig} from "../../../shared/components/abstract-table/table-config";
+import {Roles} from "../../../shared/enums/roles.enum";
+import {Person} from "../../../shared/models/person/person.model";
+import {AuthService} from "../../../shared/services/auth.service";
+import {NotificationService} from "../../../shared/services/notification.service";
+import {PersonService} from "../../../shared/services/person.service";
 
 @Component({
-    selector   : "app-person-list",
+    selector: "app-person-list",
     templateUrl: "./person-list.component.html",
     // templateUrl: "./tmp-list.component.html",
-    styleUrls  : ["./person-list.component.scss"],
+    styleUrls: ["./person-list.component.scss"],
 })
 
 export class PersonListComponent implements OnInit {
-    public selectedAll: boolean;
-    public paginator: Paginator<Person>;
     public readonly Roles = Roles;
-    @ViewChildren(PersonListRowComponent) private rows: QueryList<PersonListRowComponent>;
+    public data: Person[];
+    public personData: Observable<Person[]>;
+    public personConfig: TableConfig;
 
     public constructor(private readonly route: ActivatedRoute,
                        private readonly router: Router,
@@ -30,28 +28,68 @@ export class PersonListComponent implements OnInit {
                        private readonly notificationService: NotificationService) {
     }
 
-    public get isAnySelected(): boolean {
-        return this.rows.filter((row) => row.selected).length > 0;
-    }
-
     public ngOnInit(): void {
-        $(".ui.pointing.dropdown").dropdown({
-            maxSelections: 3,
-        });
-        this.personService.getPersons().subscribe((data: Person[]) => {
-            this.paginator = new Paginator(data);
-        }, (error) => this.notificationService.showErrorMessage(error));
+        this.personData = this.personService.getPersons();
+        // this.personService.getPersons().subscribe((data: Person[]) => {
+        //     this.data = data;
+        // }, (error) => this.notificationService.showErrorMessage(error));
+
+        this.personConfig = {
+            columns: [
+                {
+                    name: "contacts",
+                },
+                {
+                    name: "name",
+                    label: "Name",
+                },
+                {
+                    name: "nick",
+                    label: "Nick",
+                    sort: true,
+                },
+                {
+                    name: "birthday",
+                    label: "Birthday",
+                    sort: true,
+                },
+                {
+                    name: "account",
+                    label: "Account",
+                    visible: false,
+                },
+                {
+                    name: "options",
+                    width: "9em",
+                },
+            ],
+            selectOptions: [
+                {
+                    action: console.log,
+                    icon: "delete",
+                    label: "Delete",
+                },
+            ],
+            stickyHeader: true,
+            selection: "multi",
+            paginateOptions: [5, 10, 20, 50, 100],
+            pageSize: 10,
+            paginator: true,
+        };
     }
 
-    public selectAll(): void {
-        this.rows.forEach((item) => item.selected = !this.selectedAll);
+    public remove(persons: Person[]): void {
+        const deleteRequests = persons.map((person) => this.personService.delete(person.person_id));
+        forkJoin(deleteRequests).subscribe(() => {
+            this.notificationService.showSuccessMessage("Person successfully removed");
+        }, (error) => this.notificationService.showErrorMessage(error));
     }
 
     public createNew(): void {
         this.router.navigateByUrl("/persons/new");
     }
 
-    public removeSelected(): void {
-        this.rows.filter((row) => row.selected).forEach((row) => row.remove());
+    public showDetail(person_id: number | string): void {
+        this.router.navigateByUrl("/persons/" + person_id);
     }
 }

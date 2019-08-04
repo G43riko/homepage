@@ -1,0 +1,27 @@
+<!--
+<div class="ui checkbox">
+    <input [(ngModel)]="selected" name="personSelector" title="Označiť" type="checkbox">
+    <label></label>
+</div>
+-->
+<button [disabled]="!person || !person.emails?.length"
+        mat-icon-button
+        [matMenuTriggerFor]="menuEmails" aria-label="Example icon-button with a menu">
+    <mat-icon [matBadge]="person.emails?.length">email</mat-icon>
+</button>
+<mat-menu #menuEmails="matMenu">
+    <button *ngFor="let email of person.emails" mat-menu-item>
+        <a href="mailto:{{email}}"><span>{{email}}</span></a>
+    </button>
+</mat-menu>
+
+<button [disabled]="!person || !person.numbers?.length"
+        mat-icon-button
+        [matMenuTriggerFor]="menuNumber" aria-label="Example icon-button with a menu">
+    <mat-icon [matBadge]="person.numbers?.length">call</mat-icon>
+</button>
+<mat-menu #menuNumber="matMenu">
+    <button *ngFor="let number of person.numbers" mat-menu-item>
+        <a href="tel:{{number}}"><span>{{number}}</span></a>
+    </button>
+</mat-menu>

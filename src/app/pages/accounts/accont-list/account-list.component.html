@@ -1,5 +1,4 @@
-<div *ngIf="authService.user$ | async as user"
-     class="example-container mat-elevation-z8">
+<div *ngIf="authService.user$ | async as user" class="example-container mat-elevation-z8">
     <table [dataSource]="accounts" mat-table>
 
         <!-- Position Column -->

@@ -30,6 +30,10 @@ export class Paginator<T = any> {
         return [this._actualPage - 1, this._actualPage, this._actualPage + 1, this._actualPage + 2, this._actualPage + 3];
     }
 
+    public get length(): number {
+        return this.allItems.length;
+    }
+
     public getList(): T[] {
         return this._actList;
     }

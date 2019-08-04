@@ -14,7 +14,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
             if (request.url.endsWith("/persons/list") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: UserListMock,
+                    status: 200, body: [...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock],
                 }));
             }
             if (request.url.endsWith("/persons/TestPersonId") && request.method === "GET") {

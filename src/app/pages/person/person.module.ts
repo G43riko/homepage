@@ -10,6 +10,8 @@ import { PersonListComponent } from "./person-list/person-list.component";
 import { CoreModule } from "../../shared/core.module";
 import { PersonRoutingModule } from "./person-routes.module";
 import { PersonListRowComponent } from "./person-list-row/person-list-row.component";
+import { PersonListRowCellSelectComponent } from './person-list-row-cell-select/person-list-row-cell-select.component';
+import { PersonListRowCellAccountComponent } from './person-list-row-cell-account/person-list-row-cell-account.component';
 
 @NgModule({
     imports: [
@@ -26,6 +28,8 @@ import { PersonListRowComponent } from "./person-list-row/person-list-row.compon
         NumberComponent,
         EmailComponent,
         PersonListRowComponent,
+        PersonListRowCellSelectComponent,
+        PersonListRowCellAccountComponent,
     ],
 })
 export class PersonModule {

@@ -1,49 +1,173 @@
 <div *ngIf="authService.user$ | async as user">
-<table class="ui celled selectable table hoverable">
-    <thead>
-    <tr>
-        <th width="175px">
-            <div class="ui checkbox">
-                <input (click)="selectAll()" [(ngModel)]="selectedAll" type="checkbox">
-                <label></label>
-            </div>
-            <button [disabled]="!isAnySelected"
-                    [matMenuTriggerFor]="menu"
-                    aria-label="Example icon-button with a menu"
-                    mat-icon-button>
-                <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button (click)="removeSelected()" mat-menu-item>
-                    <mat-icon>delete</mat-icon>
-                    <span>Zmazať</span>
+    <!--
+    <table class="ui celled selectable table hoverable">
+        <thead>
+        <tr>
+            <th width="175px">
+                <ng-template [ngIf]="paginator?.length">
+                    <div class="ui checkbox">
+                        <input (click)="selectAll()" [(ngModel)]="selectedAll" type="checkbox">
+                        <label></label>
+                    </div>
+                    <button [disabled]="!isAnySelected"
+                            [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu"
+                            mat-icon-button>
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="removeSelected()" mat-menu-item>
+                            <mat-icon>delete</mat-icon>
+                            <span>Zmazať</span>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+            </th>
+            <th>Meno</th>
+            <th>Prezivka</th>
+            <th>Dátum narodenia</th>
+            <th>Účty</th>
+            <th width="110px"></th>
+        </tr>
+        </thead>
+        <tbody *ngIf="paginator">
+        <tr *ngFor="let person of paginator.getList(), let idx = index">
+            <app-person-list-row (onRemove)="paginator.remove($event)"
+                                 [index]="idx"
+                                 [person]="person"
+                                 [user]="user"
+                                 style="display: contents"></app-person-list-row>
+        </tr>
+        </tbody>
+    </table>
+    <div style="padding: 10px;">
+        <app-paginator [paginator]="paginator"></app-paginator>
+    </div>
+    <div style="padding: 10px;">
+        <button (click)="createNew()"
+                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])" class="ui button">
+            Vytvoriť nový
+        </button>
+    </div>
+    -->
+
+    <!--
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <table *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let person">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(person) : null"
+                              [checked]="selection.isSelected(person)"
+                              [aria-label]="checkboxLabel(person)">
+                </mat-checkbox>
+
+                <button [disabled]="!person || !person.emails?.length"
+                        mat-icon-button
+                        [matMenuTriggerFor]="menuEmails" aria-label="Example icon-button with a menu">
+                    <mat-icon [matBadge]="person.emails?.length">email</mat-icon>
                 </button>
-            </mat-menu>
-        </th>
-        <th>Meno</th>
-        <th>Prezivka</th>
-        <th>Dátum narodenia</th>
-        <th>Účty</th>
-        <th width="110px"></th>
-    </tr>
-    </thead>
-    <tbody *ngIf="paginator">
-    <tr *ngFor="let person of paginator.getList(), let idx = index">
-        <app-person-list-row (onRemove)="paginator.remove($event)"
-                             [index]="idx"
-                             [person]="person"
-                             [user]="user"
-                             style="display: contents"></app-person-list-row>
-    </tr>
-    </tbody>
-</table>
-<div style="padding: 10px;">
-    <app-paginator [paginator]="paginator"></app-paginator>
-</div>
-<div style="padding: 10px;">
-    <button (click)="createNew()"
-            *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])" class="ui button">
-        Vytvoriť nový
+                <mat-menu #menuEmails="matMenu">
+                    <button *ngFor="let email of person.emails" mat-menu-item>
+                        <a href="mailto:{{email}}"><span>{{email}}</span></a>
+                    </button>
+                </mat-menu>
+
+                <button [disabled]="!person || !person.numbers?.length"
+                        mat-icon-button
+                        [matMenuTriggerFor]="menuNumber" aria-label="Example icon-button with a menu">
+                    <mat-icon [matBadge]="person.numbers?.length">call</mat-icon>
+                </button>
+                <mat-menu #menuNumber="matMenu">
+                    <button *ngFor="let number of person.numbers" mat-menu-item>
+                        <a href="tel:{{number}}"><span>{{number}}</span></a>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name</th>
+            <td mat-cell *matCellDef="let person">
+                {{(person.name || "") + " " + (person.surName || "")}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nick">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nick</th>
+            <td mat-cell *matCellDef="let person"> {{person.nick}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="birthday">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Birthday</th>
+            <td mat-cell *matCellDef="let person"> {{person.birthday}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="account">
+            <th mat-header-cell *matHeaderCellDef> Accounts</th>
+            <td mat-cell *matCellDef="let person">
+                <app-person-list-row-cell-account [person]="person">
+
+                </app-person-list-row-cell-account>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let person">
+                <button (click)="remove()"
+                        *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"
+                        class="circular ui icon button hiddenable">
+                    <i class="icon remove"></i>
+                </button>
+                <button (click)="showDetail(person.person_id)" class="circular ui icon button hiddenable">
+                    <i class="icon angle right"></i>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    <div style="padding: 10px;">
+        <button (click)="createNew()"
+                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])" class="ui button">
+            Vytvoriť nový
+        </button>
+    </div>
+    -->
+    <ng-template #cellSelect let-row="row">
+        <app-person-list-row-cell-select [person]="row"></app-person-list-row-cell-select>
+    </ng-template>
+    <ng-template #cellOptions let-row="row">
+        <button (click)="showDetail(row.person_id)" class="circular ui icon button hiddenable">
+            <i class="icon angle right"></i>
+        </button>
+        <button (click)="remove([row])"
+                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"
+                class="circular ui icon button hiddenable">
+            <i class="icon remove"></i>
+        </button>
+    </ng-template>
+    <app-abstract-table *ngIf="personData"
+                        [tableConfig]="personConfig"
+                        [templates]="{options: cellOptions, contacts: cellSelect}"
+                        [data]="personData">
+    </app-abstract-table>
+
+    <button mat-fab class="floating-add" (click)="createNew()">
+        <mat-icon>add</mat-icon>
     </button>
-</div>
 </div>

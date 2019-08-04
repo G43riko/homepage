@@ -1,15 +1,6 @@
 <ng-template [ngIf]="person">
     <td>
-        <div class="ui checkbox">
-            <input [(ngModel)]="selected" name="personSelector" title="Označiť" type="checkbox">
-            <label></label>
-        </div>
-        <div class="ui label">
-            <i class="mail icon"></i> {{person.emails?.length || 0}}
-        </div>
-        <div class="ui label">
-            <i class="mail icon"></i> {{person.numbers?.length || 0}}
-        </div>
+        <app-person-list-row-cell-select [person]="person"></app-person-list-row-cell-select>
     </td>
     <td>
         {{(person.name || "") + " " + (person.surName || "")}}
