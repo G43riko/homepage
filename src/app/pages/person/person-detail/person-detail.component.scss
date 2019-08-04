@@ -1,12 +1,16 @@
-.example-form {
-    width: 100%;
-}
 .flex-row {
     display: flex;
     flex-wrap: wrap;
 
     div {
         padding-right: 1em;
+    }
+
+    @media only screen and (max-width: 408px) {
+        div {
+            width: 100%;
+        }
+
     }
 }
 

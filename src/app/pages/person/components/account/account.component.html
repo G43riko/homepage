@@ -1,4 +1,13 @@
-<div class="field emailComponent">
+<div>
+    <div *ngFor="let account of accountList; let i = index" class="inline fields">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Favorite food" value="Sushi">
+        </mat-form-field>
+
+    </div>
+</div>
+
+<div class="field">
     <label>
         <h3 class="addable-title">Accounts</h3>
         <button (click)="addAccount()" *ngIf="!disabled" class="circular ui icon button">

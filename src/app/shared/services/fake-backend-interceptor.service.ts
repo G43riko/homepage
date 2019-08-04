@@ -14,7 +14,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
-            debugger;
             if (request.url.endsWith("/persons/list") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock],

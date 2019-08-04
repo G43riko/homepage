@@ -10,9 +10,7 @@ import { MapDialogComponent } from "./map-dialog/map-dialog.component";
 import { NotificationComponent } from "./notification/notification.component";
 import { PaginatorComponent } from "./paginator/paginator.component";
 import { ProfileComponent } from "./profile-component/profile.component";
-import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
-import { TopMenuComponent } from "./top-menu/top-menu.component";
 
 @NgModule({
     imports: [
@@ -23,12 +21,10 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
     ],
     declarations: [
         AlertComponent,
-        SearchBarComponent,
         ProfileComponent,
         SideBarComponent,
         AlertComponent,
         NotificationComponent,
-        TopMenuComponent,
         PaginatorComponent,
         LoginScreenComponent,
         AbstractTableComponent,
@@ -39,12 +35,10 @@ import { TopMenuComponent } from "./top-menu/top-menu.component";
     ],
     exports: [
         AlertComponent,
-        SearchBarComponent,
         SideBarComponent,
         ProfileComponent,
         AlertComponent,
         NotificationComponent,
-        TopMenuComponent,
         PaginatorComponent,
         LoginScreenComponent,
         AbstractTableComponent,

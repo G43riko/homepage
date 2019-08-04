@@ -1,24 +1,29 @@
 <mat-card>
-    <form *ngIf="selectedPerson" [formGroup]="personForm" class="example-form" style="align-content: center">
+    <form *ngIf="selectedPerson" [formGroup]="personForm" class="full-width" style="align-content: center">
 
         <div class="flex-row">
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="name"
                            placeholder="Meno">
-                    <mat-error *ngIf="personForm.controls.name.invalid">Meno je povinné</mat-error>
+                    <mat-error *ngIf="personForm.get('name').hasError('required')">
+                        Name is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="surName"
                            placeholder="Priezvisko">
+                    <mat-error *ngIf="personForm.get('surName').hasError('required')">
+                        Surname is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="nick"
                            placeholder="Prezívka">
@@ -27,7 +32,7 @@
         </div>
         <div class="flex-row">
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="birthday"
                            placeholder="Dátum narodenia">
@@ -45,7 +50,7 @@
         <div class="flex-row"
              formGroupName="address">
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            type="text"
                            placeholder="Štát"
@@ -59,28 +64,28 @@
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="city"
                            placeholder="Mesto">
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="street"
                            placeholder="Ulica">
                 </mat-form-field>
             </div>
             <div>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="full-width">
                     <input matInput
                            formControlName="streetNumber"
                            placeholder="Číslo domu">
                 </mat-form-field>
             </div>
             <div>
-                <button mat-icon-button (click)="showMap()">
+                <button mat-icon-button matTooltip="Show address on map" (click)="showMap()">
                     <mat-icon>map</mat-icon>
                 </button>
             </div>

@@ -3,9 +3,14 @@
     box-sizing: border-box;
     height: 4em;
 
-    .example-full-width {
-        width: 100%;
+    .share-enable {
+        display: inline-block;
+        margin: 1em;
+    }
 
+    .share-autocomplete {
+        display: inline-block;
+        width: calc(70% - 3em);
     }
 }
 

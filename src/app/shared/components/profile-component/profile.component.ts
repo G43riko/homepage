@@ -4,8 +4,6 @@ import { UserAccount } from "../../models/user-account.model";
 import { AccountsService } from "../../services/accounts.service";
 import { NotificationService } from "../../services/notification.service";
 
-declare let $: any;
-
 @Component({
     selector: "profile-component",
     templateUrl: "./profile.component.html",

@@ -3,7 +3,6 @@ import { MathUtils } from "gtools";
 import { YoutubeService } from "./youtube.service";
 
 declare let YT: any;
-declare let $: any;
 
 @Injectable()
 export class GPlayerService {

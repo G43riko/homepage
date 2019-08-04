@@ -1,7 +1,7 @@
 <div *ngIf="authService.user$ | async as user">
     <div class="share-options-wrapper" style="margin-bottom: 1em;">
-        <mat-slide-toggle [(ngModel)]="shared" style="display: inline-block; margin: 1em">Zdielať</mat-slide-toggle>
-        <mat-form-field *ngIf="shared" class="example-full-width" style="display: inline-block; width: 70%">
+        <mat-slide-toggle [(ngModel)]="shared"  class="share-enable">Zdielať</mat-slide-toggle>
+        <mat-form-field *ngIf="shared" class="full-width share-autocomplete">
             <input [formControl]="shareWith" [matAutocomplete]="auto" aria-label="State" matInput
                    placeholder="Zdielať s">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="mapper">
@@ -9,7 +9,7 @@
                             [value]="account">
                     <img [src]="account.photoURL" aria-hidden class="example-option-img">
                     <span>{{account.displayName}}</span>
-                    &nbsp; &nbsp;
+                    &nbsp; &nbsp
                     <small>{{account.email}}</small>
                 </mat-option>
             </mat-autocomplete>

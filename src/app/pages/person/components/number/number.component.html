@@ -1,4 +1,4 @@
-<mat-form-field class="number-list">
+<mat-form-field class="number-list" [ngClass]="{'full-width': isNew}">
     <mat-chip-list #chipList [disabled]="disabled">
         <mat-chip *ngFor="let number of  numberList | activePipe: showInactive.value && !isNew; let i = index"
                   [removable]="!disabled"

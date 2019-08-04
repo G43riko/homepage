@@ -1,4 +1,4 @@
-<mat-form-field class="email-list">
+<mat-form-field class="email-list" [ngClass]="{'full-width': isNew}">
     <mat-chip-list #chipList [disabled]="disabled">
         <mat-chip (removed)="remove(i)"
                   *ngFor="let email of  emailList | activePipe: showInactive.value && !isNew; let i = index"
@@ -10,8 +10,12 @@
         <input (matChipInputTokenEnd)="add($event)"
                [matChipInputAddOnBlur]="addOnBlur"
                [matChipInputFor]="chipList"
+               [formControl]="values"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                placeholder="Emaily:">
+        <mat-error *ngIf="values.hasError('email')">
+            Please enter a valid email address
+        </mat-error>
     </mat-chip-list>
 </mat-form-field>
 <mat-slide-toggle *ngIf="!isNew" class="show-all-emails" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>
