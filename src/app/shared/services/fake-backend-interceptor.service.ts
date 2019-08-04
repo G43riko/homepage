@@ -34,6 +34,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     status: 200, body: request.body,
                 }));
             }
+            if (request.url.endsWith("/persons") && request.method === "POST") {
+                const newId = Object.keys(data).length;
+                data[newId] = {
+                    ...request.body,
+                    person_id: newId,
+                };
+                return of(new HttpResponse({
+                    status: 200, body: data[newId],
+                }));
+            }
 
             if (request.url.match(/\/movies\/list/g) && request.method === "GET") {
                 return of(new HttpResponse({

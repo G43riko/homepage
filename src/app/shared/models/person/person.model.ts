@@ -8,9 +8,9 @@ type Gender = "MAN" | "WOMAN";
 export class Person {
     public person_id: number;
     public name: string;
-    public surName: string;
-    public birthday: string;
-    public nick: string;
+    public surName?: string;
+    public birthday?: string;
+    public nick?: string;
     public gender: Gender;
     public emails: Email[]     = [new Email()];
     public numbers: Phone[]    = [new Phone()];
