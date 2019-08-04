@@ -1,8 +1,10 @@
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { delay, dematerialize, materialize, mergeMap } from "rxjs/operators";
-import { MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock } from "../../testing-module/mock.data";
+import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable, of} from "rxjs";
+import {delay, dematerialize, materialize, mergeMap} from "rxjs/operators";
+import {MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock} from "../../testing-module/mock.data";
+
+const data: { [key: string]: any } = {...UserDetailMock};
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -12,19 +14,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+            debugger;
             if (request.url.endsWith("/persons/list") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock],
                 }));
             }
-            if (request.url.endsWith("/persons/TestPersonId") && request.method === "GET") {
+            if (request.url.match(/\/persons\/[a-zA-Z0-9]+$/) && request.method === "GET") {
+                const splitUrl = request.url.split("/");
+                const id = splitUrl[splitUrl.length - 1];
                 return of(new HttpResponse({
-                    status: 200, body: UserDetailMock.TestPersonId,
+                    status: 200, body: data[id],
                 }));
             }
-            if (request.url.endsWith("/persons/EmptyPersonId") && request.method === "GET") {
+            if (request.url.match(/\/persons\/[a-zA-Z0-9]+$/) && request.method === "PUT") {
+                const splitUrl = request.url.split("/");
+                const id = splitUrl[splitUrl.length - 1];
+                data[id] = request.body;
                 return of(new HttpResponse({
-                    status: 200, body: UserDetailMock.EmptyPersonId,
+                    status: 200, body: request.body,
                 }));
             }
 

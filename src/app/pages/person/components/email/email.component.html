@@ -1,7 +1,7 @@
 <mat-form-field class="email-list">
     <mat-chip-list #chipList [disabled]="disabled">
         <mat-chip (removed)="remove(i)"
-                  *ngFor="let email of  emailList | activePipe: showInactive.value; let i = index"
+                  *ngFor="let email of  emailList | activePipe: showInactive.value && !isNew; let i = index"
                   [removable]="!disabled"
                   [selectable]="false">
             {{email.email}}
@@ -14,4 +14,4 @@
                placeholder="Emaily:">
     </mat-chip-list>
 </mat-form-field>
-<mat-slide-toggle class="show-all-emails" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>
+<mat-slide-toggle *ngIf="!isNew" class="show-all-emails" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>

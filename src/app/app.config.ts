@@ -12,11 +12,13 @@ export class AppConfig {
     public static readonly GOOGLE_MAPS_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
     public static readonly GOOGLE_MAPS_API_KEY = "AIzaSyB6feh5xBQnhLno2YRNNbjOdp17XA8Cmss";
 
-    public static readonly GOOGLE_MAPS_API_EMBED_KEY = "AIzaSyD6PqlCJNkkQy4azb6XFtyR1Zb-RVlJjW8";
+    // public static readonly GOOGLE_MAPS_API_EMBED_KEY = "AIzaSyD6PqlCJNkkQy4azb6XFtyR1Zb-RVlJjW8";
+    public static readonly GOOGLE_MAPS_API_EMBED_KEY = "AIzaSyCooxFtIu4-NHFUyWXU3ANppefKsaRdyss";
+
     public static readonly GOOGLE_MAPS_API_EMBED_URL = "https://www.google.com/maps/embed/v1/place";
 
     public static readonly FIREBASE_AUTH     = {
-        apiKey           : "AIzaSyDFjU52OiDx66u_jI5QAAiCB0QQufaLgxo",
+        apiKey           : "AIzaSyCooxFtIu4-NHFUyWXU3ANppefKsaRdyss",
         authDomain       : "foods-5d312.firebaseapp.com",
         databaseURL      : "https://foods-5d312.firebaseio.com",
         projectId        : "foods-5d312",

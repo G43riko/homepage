@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { AbstractDetailComponent } from "../../../shared/components/abstract-detail.component";
-import { Person } from "../../../shared/models/person/person.model";
-import { MapsService } from "../../../shared/services/maps.service";
-import { PersonService } from "../../../shared/services/person.service";
-import { UtilsService } from "../../../shared/services/utils.service";
-
-declare let $: any;
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatDialog} from "@angular/material";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
+import {AbstractDetailComponent} from "../../../shared/components/abstract-detail.component";
+import {MapDialogComponent} from "../../../shared/components/map-dialog/map-dialog.component";
+import {Person} from "../../../shared/models/person/person.model";
+import {MapsService} from "../../../shared/services/maps.service";
+import {PersonService} from "../../../shared/services/person.service";
+import {UtilsService} from "../../../shared/services/utils.service";
 
 @Component({
     selector: "app-person-detail",
@@ -19,7 +19,6 @@ declare let $: any;
 export class PersonDetailComponent extends AbstractDetailComponent implements OnInit {
     public selectedPerson: Person;
     public personForm: FormGroup;
-    public mapUrl = "";
     public timer: any;
     public readonly countries: string[] = [];
     public filteredCountries: Observable<string[]>;
@@ -27,6 +26,7 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
     public constructor(private readonly route: ActivatedRoute,
                        private readonly mapService: MapsService,
                        private readonly router: Router,
+                       private readonly dialog: MatDialog,
                        private readonly utilService: UtilsService,
                        private readonly formBuilder: FormBuilder,
                        private readonly personService: PersonService) {
@@ -37,7 +37,7 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         this.personForm = this.createForm();
         this.utilService.getCountries().subscribe((countries) => {
             this.countries.push(...countries);
-            const formAddress      = this.personForm.controls.address as FormGroup;
+            const formAddress = this.personForm.controls.address as FormGroup;
             this.filteredCountries = formAddress.controls.country.valueChanges.pipe(
                 startWith(""),
                 map((value) => this._filter(value)),
@@ -49,11 +49,9 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
             this.isNew = actId === "new";
             if (this.isNew) {
                 this.processChangedData(new Person(), {disabled: false});
-                this._bindEvents();
             } else {
                 this.personService.getDetail(actId).subscribe((person) => {
                     this.processChangedData(person);
-                    this._bindEvents();
                 });
             }
 
@@ -64,21 +62,20 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         return this.formBuilder.group({
             name: ["", {validators: Validators.required}],
             surName: ["", {validators: Validators.required}],
-            nick: ["", {validators: Validators.required}],
-            birthday: ["", {validators: Validators.required}],
+            nick: "",
+            birthday: ["", {validators: Validators.pattern(/(\d|\?){2}\.(\d|\?){2}.(\d|\?){4}/)}],
             gender: ["", {validators: Validators.required}],
             address: this.formBuilder.group({
-                country: ["", {validators: Validators.required}],
-                city: ["", {validators: Validators.required}],
-                street: ["", {validators: Validators.required}],
-                streetNumber: ["", {validators: Validators.required}],
+                country: "",
+                city: "",
+                street: "",
+                streetNumber: "",
             }),
         });
     }
 
     public save(): void {
         const method = this.isNew ? this.personService.add : this.personService.update;
-
         method.call(this.personService, this.selectedPerson).subscribe((data) => this.processChangedData(data));
     }
 
@@ -87,21 +84,22 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         address += this.personForm.value.address.street + " ";
         address += this.personForm.value.address.streetNumber;
 
-        this.mapUrl = this.mapService.getLocationEmbedUrl(encodeURI(address));
-        $(".modal").modal("show");
+        this.dialog.open(MapDialogComponent, {
+            width: "95%",
+            height: "95%",
+            data: this.mapService.getLocationEmbedUrl(encodeURI(address)),
+        });
     }
 
     public edit(): void {
         this.disabled = false;
         this.personForm.enable();
-        this._bindEvents();
     }
 
     public back(): void {
         if (this.isNew || this.disabled) {
             this.router.navigate(["persons"]);
-        }
-        else {
+        } else {
             this.personService.getDetail(this.selectedPerson.person_id).subscribe((data) => this.processChangedData(data));
         }
     }
@@ -120,10 +118,4 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
         this.disabled ? this.personForm.disable() : this.personForm.enable();
     }
 
-    private _bindEvents(): void {
-        this.timer = setTimeout(() => {
-            $(".ui.radio.checkbox").checkbox();
-            $("select.dropdown").dropdown();
-        }, 10);
-    }
 }

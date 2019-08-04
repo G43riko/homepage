@@ -1,0 +1,15 @@
+.example-form {
+    width: 100%;
+}
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+        padding-right: 1em;
+    }
+}
+
+button, a {
+    margin-right: 1em;
+}

@@ -12,6 +12,7 @@ import { Email } from "../../../../shared/models/person/email.model";
 export class EmailComponent implements OnInit {
     @Input() public disabled           = true;
     @Input() public emailList: Email[] = [];
+    @Input() public isNew: boolean;
     public showInactive                = new FormControl(false);
     public visible                     = true;
     public addOnBlur                   = true;

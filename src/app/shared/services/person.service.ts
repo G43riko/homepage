@@ -24,10 +24,10 @@ export class PersonService extends AbstractHttpService {
         );
     }
 
-    public getDetail(id: number): Observable<Person> {
-        return this.http.get<Person>(URL + "/" + id).pipe(
+    public getDetail(personId: number): Observable<Person> {
+        return this.http.get<Person>(URL + "/" + personId).pipe(
             map(Person.parse),
-            catchError(this.handleError<Person>("getDetail")),
+            catchError(this.handleError<Person>("cannot get person with id " + personId)),
         );
     }
 

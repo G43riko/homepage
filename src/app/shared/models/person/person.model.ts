@@ -28,8 +28,7 @@ export class Person {
         result.nick      = person.nick;
         result.address   = person.address ? Address.parse(person.address) : new Address();
         result.emails    = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
-        result.emails    = Array.isArray(person.emails) ? person.emails.map(Email.parse) : [];
-        result.emails    = Array.isArray(person.emails) ? person.emails.map(Phone.parse) : [];
+        result.numbers    = Array.isArray(person.numbers) ? person.numbers.map(Phone.parse) : [];
         result.accounts  = Array.isArray(person.accounts) ? person.accounts.map(Account.parse) : [];
 
         return result;

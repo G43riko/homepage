@@ -1,6 +1,6 @@
 <mat-form-field class="number-list">
     <mat-chip-list #chipList [disabled]="disabled">
-        <mat-chip *ngFor="let number of  numberList | activePipe: showInactive.value; let i = index"
+        <mat-chip *ngFor="let number of  numberList | activePipe: showInactive.value && !isNew; let i = index"
                   [removable]="!disabled"
                   [selectable]="false"
                   (removed)="remove(i)">
@@ -14,4 +14,4 @@
                (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
 </mat-form-field>
-<mat-slide-toggle class="show-all-numbers" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>
+<mat-slide-toggle *ngIf="!isNew" class="show-all-numbers" [formControl]="showInactive">Aj neaktívne</mat-slide-toggle>

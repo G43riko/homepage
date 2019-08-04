@@ -12,6 +12,7 @@ import { Phone } from "../../../../shared/models/person/phone.model";
 export class NumberComponent implements OnInit {
     @Input() public disabled            = true;
     @Input() public numberList: Phone[] = [];
+    @Input() public isNew: boolean;
     public showInactive                 = new FormControl(false);
     public visible                      = true;
     public addOnBlur                    = true;
