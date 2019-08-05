@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import {MaterialModule} from "../../../shared/modules/material.module";
 import {SharedPipesModule} from "../../../shared/pipes/shared-pipes.module";
-import {TestingModule} from "../../../testing-module/testing.module";
+import {TestingModule} from "../../../tests/testing.module";
 import {FileUploadComponent} from "../file-upload/file-upload.component";
 import {MyFilesComponent} from "../my-files/my-files.component";
 

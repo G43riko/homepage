@@ -30,7 +30,7 @@ export class FileUploadService {
     private checkFileFormat(file: File): void {
         if (file.type.split("/")[0] !== "image") {
             throw new Error("Unsupported file format");
-            // this.notificationService.showErrorMessage("Unsupported file format");
+            // this.notificationService.openErrorNotification("Unsupported file format");
             // return;
         }
     }

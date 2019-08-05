@@ -2,9 +2,9 @@ import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {delay, dematerialize, materialize, mergeMap} from "rxjs/operators";
-import {MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock} from "../../testing-module/mock.data";
+import {MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock} from "../../tests/mock.data";
 
-const data: { [key: string]: any } = {...UserDetailMock};
+const data: any[]  = [...UserDetailMock];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -23,13 +23,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 const splitUrl = request.url.split("/");
                 const id = splitUrl[splitUrl.length - 1];
                 return of(new HttpResponse({
-                    status: 200, body: data[id],
+                    status: 200, body: data.find((person) => String(person.person_id) === id),
                 }));
             }
             if (request.url.match(/\/persons\/[a-zA-Z0-9]+$/) && request.method === "PUT") {
                 const splitUrl = request.url.split("/");
                 const id = splitUrl[splitUrl.length - 1];
-                data[id] = request.body;
+                data.splice(data.findIndex((person) => String(person.person_id) === id), 1);
+                data.push(request.body);
                 return of(new HttpResponse({
                     status: 200, body: request.body,
                 }));

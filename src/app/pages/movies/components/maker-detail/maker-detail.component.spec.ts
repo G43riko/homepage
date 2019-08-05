@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { MakerDetailComponent } from "./maker-detail.component";
-import { TestingModule } from "../../../../testing-module/testing.module";
+import { TestingModule } from "../../../../tests/testing.module";
 import { ExternalMakerDirective } from "../../directives/external-maker.directive";
 
 describe("MakerDetailComponent", () => {

@@ -32,7 +32,7 @@ export class PersonListComponent implements OnInit {
         this.personData = this.personService.getPersons();
         // this.personService.getPersons().subscribe((data: Person[]) => {
         //     this.data = data;
-        // }, (error) => this.notificationService.showErrorMessage(error));
+        // }, (error) => this.notificationService.openErrorNotification(error));
 
         this.personConfig = {
             columns: [
@@ -81,8 +81,8 @@ export class PersonListComponent implements OnInit {
     public remove(persons: Person[]): void {
         const deleteRequests = persons.map((person) => this.personService.delete(person.person_id));
         forkJoin(deleteRequests).subscribe(() => {
-            this.notificationService.showSuccessMessage("Person successfully removed");
-        }, (error) => this.notificationService.showErrorMessage(error));
+            this.notificationService.openSuccessNotification("Person successfully removed");
+        }, (error) => this.notificationService.openErrorNotification(error));
     }
 
     public createNew(): void {

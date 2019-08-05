@@ -1,18 +1,14 @@
 import { NgModule } from "@angular/core";
+import {G43SharedPipesModule} from "@g43/common";
 import { ActivePipe } from "./active.pipe";
-import { SafePipe } from "./safe.pipe";
-import { FileSizePipe } from "./file-size.pipe";
 
 @NgModule({
     declarations: [
-        SafePipe,
         ActivePipe,
-        FileSizePipe,
     ],
     exports: [
-        SafePipe,
         ActivePipe,
-        FileSizePipe,
+        G43SharedPipesModule,
     ],
 })
 export class SharedPipesModule {

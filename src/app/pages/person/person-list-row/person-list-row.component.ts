@@ -54,8 +54,8 @@ export class PersonListRowComponent implements OnInit {
     public remove(): void {
         this.personService.delete(this.person.person_id).subscribe(() => {
             this.onRemove.emit(this.index);
-            this.notificationService.showSuccessMessage("Person successfully removed");
-        }, (error) => this.notificationService.showErrorMessage(error));
+            this.notificationService.openSuccessNotification("Person successfully removed");
+        }, (error) => this.notificationService.openErrorNotification(error));
     }
     public showDetail(person_id: number | string): void {
         this.router.navigateByUrl("/persons/" + person_id);

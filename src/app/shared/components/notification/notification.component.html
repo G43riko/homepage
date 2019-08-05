@@ -1,5 +1,0 @@
-<div *ngFor="let alert of alerts; let i = index"
-     [ngStyle]="{'top.px': 60 + i * 80}"
-     class="alertParent">
-    <app-alert-component (exit)="remove(i)" [text]="alert.message" [title]="alert.title"></app-alert-component>
-</div>

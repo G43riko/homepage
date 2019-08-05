@@ -1,9 +1,9 @@
-export const UserDetailMock: any = {
-    EmptyPersonId: {
+export const UserDetailMock: any = [
+    {
         person_id: "EmptyPersonId",
         name: "EmptyPersonName",
     },
-    TestPersonId: {
+    {
         person_id: "TestPersonId",
         name: "TestPersonName",
         surName: "TestPersonSurName",
@@ -56,7 +56,7 @@ export const UserDetailMock: any = {
             streetNumber: "TestPersonAddressStreetNumber",
         },
     },
-    1: {
+    {
         person_id: "1",
         name: "Gabriel",
         surName: "Csollei",
@@ -109,9 +109,9 @@ export const UserDetailMock: any = {
             streetNumber: "23",
         },
     },
-};
+];
 
-export const UserListMock = Object.values(UserDetailMock).map((personDetail: any) => ({
+export const UserListMock = UserDetailMock.map((personDetail: any) => ({
     person_id: personDetail.person_id,
     name: personDetail.name,
     surName: personDetail.surName,

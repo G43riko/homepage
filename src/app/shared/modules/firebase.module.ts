@@ -1,10 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AngularFireModule } from "@angular/fire";
-import { AppConfig } from "../../app.config";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
+import { AppConfig } from "../../app.config";
 
 @NgModule({
     declarations: [],

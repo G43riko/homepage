@@ -27,7 +27,7 @@ export class MovieListComponent implements OnInit {
         this.moviesService.getMovies().subscribe((data) => {
             this.paginator = new Paginator(data);
             this.movieList = this.paginator.getList();
-        }, (error) => this.notificationService.showErrorMessage(error));
+        }, (error) => this.notificationService.openErrorNotification(error));
     }
 
     public selectAll(checkbox: HTMLInputElement): void {

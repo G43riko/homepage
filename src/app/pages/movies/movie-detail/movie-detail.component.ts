@@ -35,7 +35,7 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
                 this.movieService.getDetail(actId).subscribe((movie: Movie) => {
                     this.selectedMovie = movie;
                     this._initComponents();
-                }, (error) => this.notificationService.showErrorMessage(error));
+                }, (error) => this.notificationService.openErrorNotification(error));
             }
         });
     }
@@ -75,6 +75,6 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
             $(".ui.dropdown.search.genres").dropdown("set selected", this.selectedMovie.genres);
             $(".ui.dropdown.search.countries").dropdown("set selected", this.selectedMovie.countries);
             this.setDisabled();
-        }, (error: any) => this.notificationService.showErrorMessage(error));
+        }, (error: any) => this.notificationService.openErrorNotification(error));
     }
 }

@@ -16,6 +16,7 @@ if (environment.interceptor) {
 @NgModule({
     imports: [
         CoreModule,
+        SharedComponentsModule,
     ],
     declarations: [
         HomeComponent,

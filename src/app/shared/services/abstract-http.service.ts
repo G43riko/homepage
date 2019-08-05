@@ -15,7 +15,7 @@ export abstract class AbstractHttpService {
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
-            this._notificationService.showErrorMessage(error);
+            this._notificationService.openErrorNotification(error);
 
             // TODO: better job of transforming error for user consumption
             console.log(`${operation} failed: ${error.message || error}`);

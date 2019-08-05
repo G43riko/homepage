@@ -114,6 +114,6 @@ export class SongsComponent implements OnInit {
                 result += "</tr>";
             });
             $("table tbody").append(result);
-        }, (error) => this.notificationService.showErrorMessage(error));
+        }, (error) => this.notificationService.openErrorNotification(error));
     }
 }

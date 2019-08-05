@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-import { NotificationInterface } from "../interfaces/notification.interface";
-import { ErrorManagerService } from "./error-manager.service";
+import {Injectable} from "@angular/core";
+import {G43Notification} from "@g43/common";
+import {NotificationInterface} from "../interfaces/notification.interface";
+import {ErrorManagerService} from "./error-manager.service";
 
 @Injectable({
     providedIn: "root",
 })
-export class NotificationService {
+export class NotificationService implements G43Notification {
     private readonly _defaultError = "Undefined error";
-    private _notificationComponent: NotificationInterface = {
+    private readonly notificationComponent: NotificationInterface = {
         showError(title: string, text: string): void {
             console.error(title + ": " + text);
         },
@@ -19,19 +20,19 @@ export class NotificationService {
         },
     };
 
-    constructor(private readonly _errorManager: ErrorManagerService) {
+    public constructor(private readonly _errorManager: ErrorManagerService) {
     }
 
-    public setComponent(notificationComponent: NotificationInterface): void {
-        this._notificationComponent = notificationComponent;
+    public openErrorNotification(error: any): void {
+        this.notificationComponent.showError("Error: ", this._getMessage(error));
     }
 
-    public showErrorMessage(error: string | Response): void {
-        this._notificationComponent.showError("Error: ", this._getMessage(error));
+    public openInfoNotification(info: any): void {
+        this.notificationComponent.showSuccess("Info: ", this._getMessage(info));
     }
 
-    public showSuccessMessage(error: string | Response): void {
-        this._notificationComponent.showSuccess("Success: ", this._getMessage(error));
+    public openSuccessNotification(success: any): void {
+        this.notificationComponent.showSuccess("Success: ", this._getMessage(success));
     }
 
     private _getMessage(error: string | Response): string {

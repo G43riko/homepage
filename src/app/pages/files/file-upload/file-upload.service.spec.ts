@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import {TestingModule} from "../../../testing-module/testing.module";
+import {TestingModule} from "../../../tests/testing.module";
 
 import { FileUploadService } from "./file-upload.service";
 

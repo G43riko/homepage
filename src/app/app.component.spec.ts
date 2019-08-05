@@ -2,7 +2,7 @@ import { async, TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { AppModule } from "./app.module";
 import { CoreModule } from "./shared/core.module";
-import { TestingModule } from "./testing-module/testing.module";
+import { TestingModule } from "./tests/testing.module";
 
 describe("AppComponent", () => {
     beforeEach(async(() => {

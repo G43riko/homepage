@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { TestingModule } from "../../../testing-module/testing.module";
+import { TestingModule } from "../../../tests/testing.module";
 import { MoviesModule } from "../movies.module";
 import { MovieMakersComponent } from "./movie-makers.component";
 

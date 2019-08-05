@@ -31,7 +31,7 @@ export class AccountListComponent implements OnInit {
             return;
         }
         this.authService.updateRole(role, element, event.checked).subscribe(() => {
-            this.notificationService.showSuccessMessage("Role updated");
-        }, (error) => this.notificationService.showErrorMessage(error));
+            this.notificationService.openSuccessNotification("Role updated");
+        }, (error) => this.notificationService.openErrorNotification(error));
     }
 }

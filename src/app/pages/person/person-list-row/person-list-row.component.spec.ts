@@ -4,7 +4,7 @@ import {MyFilesComponent} from "../../files/my-files/my-files.component";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
 
 import { PersonListRowComponent } from "./person-list-row.component";
-import { TestingModule } from "../../../testing-module/testing.module";
+import { TestingModule } from "../../../tests/testing.module";
 import { FirebaseModule } from "../../../shared/modules/firebase.module";
 
 describe("PersonListRowComponent", () => {

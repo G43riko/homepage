@@ -42,7 +42,7 @@
         <div *ngIf="snapshot | async as snap">
             <div *ngIf="(percentage | async) as pct" [ngStyle]="{display: isActive(snap) ? 'block' : 'none' }"
                  class="progress-wrapper">
-                <span class="progress">{{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}</span>
+                <span class="progress">{{ snap.bytesTransferred | g43fileSize }} of {{ snap.totalBytes | g43fileSize }}</span>
                 <mat-progress-bar [value]="pct" mode="determinate"></mat-progress-bar>
             </div>
         </div>
