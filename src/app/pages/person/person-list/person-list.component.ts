@@ -41,7 +41,7 @@ export class PersonListComponent implements OnInit {
                 },
                 {
                     name: "name",
-                    label: "Name",
+                    customContent: (person) => (person.name || "") + " " + (person.surName || ""),
                 },
                 {
                     name: "nick",

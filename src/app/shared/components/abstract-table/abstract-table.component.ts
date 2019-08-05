@@ -31,10 +31,16 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     }
 
     public get pageSizeOptions(): number[] {
-        return this.tableConfig.paginateOptions || [5, 10, 20];
+        if (!this.tableConfig || !this.tableConfig.paginateOptions) {
+            return [5, 10, 20];
+        }
+        return this.tableConfig.paginateOptions;
     }
 
     public get visibleColumns(): ColumnConfig[] {
+        if (!this.tableConfig) {
+            return [];
+        }
         return this.tableConfig.columns.filter((column) => column.visible !== false);
     }
 
@@ -58,6 +64,9 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     }
 
     public ngAfterViewInit(): void {
+        if (!this.tableConfig) {
+            return;
+        }
         const observables: EventEmitter<any>[] = [];
 
         if (this.tableConfig.columns.some((column) => Boolean(column.sort))) {
@@ -106,6 +115,9 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     }
 
     public get displayedColumns(): string[] {
+        if (!this.tableConfig) {
+            return [];
+        }
         const columnsNames = this.visibleColumns.map((column) => column.name);
         if (this.tableConfig.selection) {
             return ["select", ...columnsNames];
@@ -115,7 +127,8 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
 
     public getLabel(columnConfig: ColumnConfig, row: T): string {
         if (typeof columnConfig.customLabel === "function") {
-            return columnConfig.customLabel(row);
+            throw new Error("'customLabel' is no implemented");
+            // return columnConfig.customLabel(row);
         }
         return columnConfig.label || "";
     }

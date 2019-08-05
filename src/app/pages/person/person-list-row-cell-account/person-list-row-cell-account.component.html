@@ -1,6 +1,8 @@
-<button *ngFor="let account of person.accounts"
-        [title]="getTitle(account)"
-        class="ui circular {{ getIcon(account) }} icon button"
-        externalLink="getLink(account)">
-    <i class="{{ getIcon(account) }} icon"></i>
-</button>
+<ng-template [ngIf]="person">
+    <button *ngFor="let account of person.accounts"
+            [title]="getTitle(account)"
+            class="ui circular {{ getIcon(account) }} icon button"
+            externalLink="getLink(account)">
+        <i class="{{ getIcon(account) }} icon"></i>
+    </button>
+</ng-template>

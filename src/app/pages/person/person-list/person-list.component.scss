@@ -1,21 +1,11 @@
-tr {
-    height: 57px;
-
-    .hiddenable {
-        //display: none;
-        display: inline-block;
+.person-wrapper {
+    padding-bottom: 10em;
+    table {
+        width: 100%;
     }
-}
-
-//tr:hover .hiddenable {
-//    display: inline-block;
-//}
-table {
-    width: 100%;
-}
-
-.floating-add {
-    position: fixed;
-    right: 3em;
-    bottom: 3em;
+    .floating-add {
+        position: fixed;
+        right: 3em;
+        bottom: 3em;
+    }
 }

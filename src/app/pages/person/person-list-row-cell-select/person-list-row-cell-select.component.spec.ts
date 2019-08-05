@@ -1,16 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {MaterialModule} from "../../../shared/modules/material.module";
+import {TestingModule} from "../../../testing-module/testing.module";
 
-import { PersonListRowCellSelectComponent } from './person-list-row-cell-select.component';
+import { PersonListRowCellSelectComponent } from "./person-list-row-cell-select.component";
 
-describe('PersonListRowCellSelectComponent', () => {
+describe("PersonListRowCellSelectComponent", () => {
   let component: PersonListRowCellSelectComponent;
   let fixture: ComponentFixture<PersonListRowCellSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonListRowCellSelectComponent ]
-    })
-    .compileComponents();
+        imports: [
+            MaterialModule,
+        ],
+      declarations: [
+          PersonListRowCellSelectComponent,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('PersonListRowCellSelectComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

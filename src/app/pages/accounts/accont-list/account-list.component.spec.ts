@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {MaterialModule} from "../../../shared/modules/material.module";
+import {TestingModule} from "../../../testing-module/testing.module";
 
 import { AccountListComponent } from "./account-list.component";
 
@@ -8,9 +10,14 @@ describe("AccountListComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AccountListComponent]
-        })
-               .compileComponents();
+            imports: [
+                TestingModule,
+                MaterialModule,
+            ],
+            declarations: [
+                AccountListComponent,
+            ],
+        }).compileComponents();
     }));
 
     beforeEach(() => {

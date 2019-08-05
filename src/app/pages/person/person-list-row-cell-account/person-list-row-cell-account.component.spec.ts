@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PersonListRowCellAccountComponent } from './person-list-row-cell-account.component';
+import { PersonListRowCellAccountComponent } from "./person-list-row-cell-account.component";
 
-describe('PersonListRowCellAccountComponent', () => {
+describe("PersonListRowCellAccountComponent", () => {
   let component: PersonListRowCellAccountComponent;
   let fixture: ComponentFixture<PersonListRowCellAccountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonListRowCellAccountComponent ]
+      declarations: [ PersonListRowCellAccountComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('PersonListRowCellAccountComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

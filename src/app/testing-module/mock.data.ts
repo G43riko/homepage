@@ -128,23 +128,7 @@ export const UserListMock = Object.values(UserDetailMock).map((personDetail: any
     },
 }));
 
-export const MovieListMock = [
-    {
-        movie_id: "TestMovieId",
-        imdb_id: "TestMovieImdbId",
-        csfd_id: "TestMovieCsfdId",
-        moviedb_id: "TestMovieMovieDbId",
-        title: "TestMovieTitle",
-        title_sk: "TestMovieTitleSk",
-        year: "1999",
-        genres: ["akcny", "komedie"],
-        classification: "PG-13",
-        rating: "96%",
-        duration: 213,
-    },
-];
-
-export const MovieDetailMock = {
+export const MovieDetailMock = [{
     movie_id: "TestMovieId",
     imdb_id: "TestMovieImdbId",
     csfd_id: "TestMovieCsfdId",
@@ -176,7 +160,19 @@ export const MovieDetailMock = {
     genres: ["akcny", "komedie"],
     rating: "96%",
     duration: 213,
-};
+}];
+export const MovieListMock = MovieDetailMock.map((movieDetail) => ({
+    movie_id: movieDetail.movie_id,
+    imdb_id: movieDetail.imdb_id,
+    csfd_id: movieDetail.csfd_id,
+    moviedb_id: movieDetail.moviedb_id,
+    title: movieDetail.title,
+    title_sk: movieDetail.title_sk,
+    year: movieDetail.year,
+    genres: movieDetail.genres,
+    rating: movieDetail.rating,
+    classification: movieDetail.classification,
+}));
 
 export const SongListMock = [
     {
