@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {GT_NOTIFICATION_TOKEN} from "@g43/common";
+import {G43_NOTIFICATION_TOKEN} from "@g43/common";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {AppConfig} from "./app.config";
@@ -27,7 +27,7 @@ import {SharedModule} from "./shared/shared.module";
     ],
     providers: [
         {
-            provide: GT_NOTIFICATION_TOKEN, useClass: NotificationService,
+            provide: G43_NOTIFICATION_TOKEN, useClass: NotificationService,
         },
         {
             provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
