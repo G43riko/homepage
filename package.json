@@ -5,10 +5,10 @@
         "ng": "ng",
         "serve": "ng serve --configuration=localhost",
         "serveMock": "ng serve --configuration=mock",
-        "build": "ng build --configuration=production",
+        "buildProd": "ng build --configuration=production",
         "start": "node server.js",
         "precache": "sw-precache --verbose --config=sw-precache-config.js",
-        "postinstall": "npm run build && npm run precache",
+        "postinstall": "npm run buildProd && npm run precache",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
@@ -36,6 +36,7 @@
         "gtools": "0.2.8",
         "hammerjs": "^2.0.8",
         "npm-check-updates": "^3.1.20",
+        "puppeteer": "^1.19.0",
         "rxjs": "^6.5.2",
         "sw-precache": "^5.2.1",
         "zone.js": "~0.10.1"
