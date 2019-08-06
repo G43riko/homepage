@@ -2,6 +2,7 @@
     <mat-chip-list #chipList [disabled]="disabled">
         <mat-chip (removed)="remove(i)"
                   *ngFor="let email of  emailList | activePipe: showInactive.value && !isNew; let i = index"
+                  class="person-email"
                   [removable]="!disabled"
                   [selectable]="false">
             {{email.email}}
@@ -13,7 +14,7 @@
                [formControl]="values"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                placeholder="Emaily:">
-        <mat-error *ngIf="values.hasError('email')">
+        <mat-error *ngIf="values.hasError('email')" class="email-error-message">
             Please enter a valid email address
         </mat-error>
     </mat-chip-list>
