@@ -13,6 +13,20 @@
         "lint": "ng lint",
         "e2e": "ng e2e"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/G43riko/Homepage-FE.git"
+    },
+    "author": {
+        "email": "gcsollei@hotmail.com",
+        "name": "Gabriel Csollei"
+    },
+    "keywords": ["Homepage", "Angular", "G43RIKO"],
+    "bugs": {
+        "email": "gcsollei@hotmail.com",
+        "url": "https://github.com/G43riko/Homepage-FE/issues"
+    },
+    "homepage": "http://csollei.herokuapp.com",
     "private": true,
     "dependencies": {
         "@angular/animations": "^8.2.0",
