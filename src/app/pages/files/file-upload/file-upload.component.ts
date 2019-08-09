@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material";
 import {Observable} from "rxjs";
 import {finalize} from "rxjs/operators";
 import {User} from "../../../shared/models/auth.model";
+import {AnalyticsService} from "../../../shared/services/analytics.service";
 import {AuthService} from "../../../shared/services/auth.service";
 import {FileUploadWrapper} from "./file-upload-wrapper";
 import {FileUploadService} from "./file-upload.service";
@@ -32,6 +33,7 @@ export class FileUploadComponent implements OnInit {
 
     public constructor(public readonly authService: AuthService,
                        private readonly snackBar: MatSnackBar,
+                       private readonly analyticsService: AnalyticsService,
                        private readonly fileUploadService: FileUploadService) {
     }
 
@@ -47,6 +49,7 @@ export class FileUploadComponent implements OnInit {
             if (!file) {
                 continue;
             }
+            this.analyticsService.eventUploadFile(file.name);
             try {
                 const uploadTask = this.fileUploadService.uploadFile(file, user, sharedWith);
                 const index = this.uploadTasks.length;

@@ -22,7 +22,8 @@ export const AppRoutes: Routes = [
     },
     {
         path: AppConfig.PATH_MIXES,
-        loadChildren: "./pages/mixes/mixes.module#MixesModule",
+        // loadChildren: "./pages/mixes/mixes.module#MixesModule",
+        loadChildren: () => import("./pages/mixes/mixes.module").then((mod) => mod.MixesModule),
         canActivate: [AuthGuard],
         data       : {
             allowedFor: [Roles.ROLE_VISIT_MIXES],
@@ -38,7 +39,7 @@ export const AppRoutes: Routes = [
     },
     {
         path            : AppConfig.PATH_SONGS,
-        loadChildren    : "./pages/songs/songs.module#SongsModule",
+        loadChildren    : () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
         canActivateChild: [AuthGuard],
         data            : {
             allowedFor: [Roles.ROLE_VISIT_SONGS],
@@ -46,7 +47,7 @@ export const AppRoutes: Routes = [
     },
     {
         path: AppConfig.PATH_FILES,
-        loadChildren: "./pages/files/files.module#FilesModule",
+        loadChildren: () => import("./pages/files/files.module").then((mod) => mod.FilesModule),
         canActivateChild: [AuthGuard],
         data: {
             allowedFor: [Roles.ROLE_VISIT_FILES],
@@ -54,7 +55,7 @@ export const AppRoutes: Routes = [
     },
     {
         path: AppConfig.PATH_ACCOUNTS,
-        loadChildren: "./pages/accounts/accounts.module#AccountsModule",
+        loadChildren: () => import("./pages/accounts/accounts.module").then((mod) => mod.AccountsModule),
         canActivateChild: [AuthGuard],
         data: {
             allowedFor: [Roles.ROLE_VISIT_ACCOUNTS],
@@ -62,7 +63,7 @@ export const AppRoutes: Routes = [
     },
     {
         path            : AppConfig.PATH_MOVIES,
-        loadChildren    : "./pages/movies/movies.module#MoviesModule",
+        loadChildren    : () => import("./pages/movies/movies.module").then((mod) => mod.MoviesModule),
         canActivateChild: [AuthGuard],
         data            : {
             allowedFor: [Roles.ROLE_VISIT_MOVIES],
@@ -70,7 +71,7 @@ export const AppRoutes: Routes = [
     },
     {
         path            : AppConfig.PATH_PERSONS,
-        loadChildren    : "./pages/person/person.module#PersonModule",
+        loadChildren    : () => import("./pages/person/person.module").then((mod) => mod.PersonModule),
         canActivateChild: [AuthGuard],
         data            : {
             allowedFor: [Roles.ROLE_VISIT_PERSONS],
