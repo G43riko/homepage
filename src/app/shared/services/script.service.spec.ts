@@ -18,6 +18,9 @@ xdescribe("ScriptService", () => {
                 RouterModule,
                 HttpClientModule,
             ],
+            providers: [
+                ScriptService,
+            ],
         }).compileComponents();
     }));
 

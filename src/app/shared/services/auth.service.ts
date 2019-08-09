@@ -4,10 +4,10 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 import { Router } from "@angular/router";
 import { auth } from "firebase/app";
 import { Observable, of } from "rxjs";
+import { fromPromise } from "rxjs/internal-compatibility";
 import { switchMap } from "rxjs/operators";
 import { Roles } from "../enums/roles.enum";
 import { User } from "../models/auth.model";
-import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable({
     providedIn: "root",

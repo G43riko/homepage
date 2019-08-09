@@ -13,9 +13,7 @@ export const StylesStore: any = {
     semantic: "assets/semantic.min.css",
 };
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable()
 export class ScriptService {
     private readonly _scriptsQueue: { scriptName: string, loadScriptMethod: ReplaySubject<ScriptsLoadResponse> }[] = [];
 

@@ -7,6 +7,9 @@ describe("AccountsService", () => {
         imports: [
             HttpClientModule,
         ],
+        providers: [
+            AccountsService,
+        ],
     }));
 
     it("should be created", () => {

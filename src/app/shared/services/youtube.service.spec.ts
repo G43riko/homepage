@@ -7,6 +7,9 @@ describe("YoutubeService", () => {
         imports: [
             HttpClientModule,
         ],
+        providers: [
+            YoutubeService,
+        ],
     }));
 
     it("should be created", () => {

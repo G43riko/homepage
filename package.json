@@ -4,11 +4,14 @@
     "scripts": {
         "ng": "ng",
         "serve": "ng serve --configuration=localhost",
-        "serveMock": "ng serve --configuration=mock",
-        "buildProd": "ng build --configuration=production",
+        "serve:mock": "ng serve --configuration=mock",
+        "build:prod": "ng build --configuration=production",
+        "build:stats": "ng build --configuration=production --stats-json",
+        "build:github": "ng build --configuration=production --outputPath=docs",
+        "analyze": "webpack-bundle-analyzer dist/stats.json",
         "start": "node server.js",
         "precache": "sw-precache --verbose --config=sw-precache-config.js",
-        "postinstall": "npm run buildProd && npm run precache",
+        "postinstall": "npm run build:prod && npm run precache",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
@@ -21,7 +24,11 @@
         "email": "gcsollei@hotmail.com",
         "name": "Gabriel Csollei"
     },
-    "keywords": ["Homepage", "Angular", "G43RIKO"],
+    "keywords": [
+        "Homepage",
+        "Angular",
+        "G43RIKO"
+    ],
     "bugs": {
         "email": "gcsollei@hotmail.com",
         "url": "https://github.com/G43riko/Homepage-FE/issues"
@@ -56,7 +63,7 @@
         "zone.js": "~0.10.1"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "~0.802.0",
+        "@angular-devkit/build-angular": "^0.802.1",
         "@angular/cli": "~8.2.0",
         "@angular/compiler-cli": "^8.2.0",
         "@angular/language-service": "^8.2.0",

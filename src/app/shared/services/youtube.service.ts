@@ -9,9 +9,7 @@ import { Person } from "../models/person/person.model";
 import { AbstractHttpService } from "./abstract-http.service";
 import { NotificationService } from "./notification.service";
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable()
 export class YoutubeService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);
