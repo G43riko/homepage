@@ -8,6 +8,7 @@ import { fromPromise } from "rxjs/internal-compatibility";
 import { switchMap } from "rxjs/operators";
 import { Roles } from "../enums/roles.enum";
 import { User } from "../models/auth.model";
+import {AnalyticsService} from "./analytics.service";
 
 @Injectable({
     providedIn: "root",
@@ -18,6 +19,7 @@ export class AuthService {
 
     public constructor(private readonly router: Router,
                        private readonly afAuth: AngularFireAuth,
+                       private readonly analyticsService: AnalyticsService,
                        private readonly afs: AngularFirestore) {
         this.user$ = this.afAuth.authState.pipe(
             switchMap((user) => {
@@ -33,11 +35,13 @@ export class AuthService {
         const provider = new auth.GoogleAuthProvider();
 
         const credentials = await this.afAuth.auth.signInWithPopup(provider);
+        this.analyticsService.login("google");
         return this.updateUserData(credentials.user);
     }
 
     public async signOut(): Promise<boolean> {
         await this.afAuth.auth.signOut();
+        this.analyticsService.signOut();
         return this.router.navigate(["/"]);
     }
 

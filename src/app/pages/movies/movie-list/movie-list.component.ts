@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { MoviesService } from "../../../shared/services/movies.service";
+import { MoviesService } from "../movies.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Paginator } from "../../../shared/utils/Paginator";
 import { Movie } from "../models/movie.model";

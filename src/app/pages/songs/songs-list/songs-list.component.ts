@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { SongsService } from "../../../shared/services/songs.service";
+import { SongsService } from "../songs.service";
 import { SongsNavBarComponent } from "../components/nav-bar.component";
 
 @Component({

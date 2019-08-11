@@ -8,7 +8,7 @@ import {AbstractDetailComponent} from "../../../shared/components/abstract-detai
 import {MapDialogComponent} from "../../../shared/components/map-dialog/map-dialog.component";
 import {Person} from "../../../shared/models/person/person.model";
 import {MapsService} from "../../../shared/services/maps.service";
-import {PersonService} from "../../../shared/services/person.service";
+import {PersonService} from "../person.service";
 import {UtilsService} from "../../../shared/services/utils.service";
 
 @Component({

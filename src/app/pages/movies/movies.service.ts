@@ -3,16 +3,14 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AppConfig } from "../../app.config";
-import { Movie } from "../../pages/movies/models/movie.model";
-import { AuthService } from "../auth.service";
-import { AbstractHttpService } from "./abstract-http.service";
-import { NotificationService } from "./notification.service";
+import { AuthService } from "../../shared/auth.service";
+import { AbstractHttpService } from "../../shared/services/abstract-http.service";
+import { NotificationService } from "../../shared/services/notification.service";
+import { Movie } from "./models/movie.model";
 
 const URL = AppConfig.BASE_URL + "/movies";
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable()
 export class MoviesService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);

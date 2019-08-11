@@ -3,16 +3,15 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "../../app.config";
-import { AuthService } from "../auth.service";
-import { Person } from "../models/person/person.model";
-import { AbstractHttpService } from "./abstract-http.service";
-import { NotificationService } from "./notification.service";
+import { AuthService } from "../../shared/auth.service";
+import { Person } from "../../shared/models/person/person.model";
+import { AbstractHttpService } from "../../shared/services/abstract-http.service";
+import { NotificationService } from "../../shared/services/notification.service";
+import {PersonModule} from "./person.module";
 
 const URL = AppConfig.BASE_URL + "/persons";
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable()
 export class PersonService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);

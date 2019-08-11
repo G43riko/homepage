@@ -9,6 +9,7 @@ import { MovieDetailComponent } from "./movie-detail/movie-detail.component";
 import { MovieListComponent } from "./movie-list/movie-list.component";
 import { MovieSearchComponent } from "./movie-search/movie-search.component";
 import { MoviesRoutingModule } from "./movies-routes.module";
+import {MoviesService} from "./movies.service";
 import { MovieFilterPipe } from "./pipes/movie-filter.pipe";
 
 @NgModule({
@@ -16,6 +17,9 @@ import { MovieFilterPipe } from "./pipes/movie-filter.pipe";
         CoreModule,
         SharedModule,
         MoviesRoutingModule,
+    ],
+    providers: [
+        MoviesService,
     ],
     declarations: [
         MovieListComponent,

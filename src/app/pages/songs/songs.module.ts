@@ -6,6 +6,7 @@ import { SongControllerComponent } from "./components/song-controller/song-contr
 import { SongsListComponent } from "./songs-list/songs-list.component";
 import { SongsRoutingModule } from "./songs-routes.module";
 import { SongsComponent } from "./songs.component";
+import {SongsService} from "./songs.service";
 
 @NgModule({
     declarations: [
@@ -13,6 +14,9 @@ import { SongsComponent } from "./songs.component";
         SongsListComponent,
         SongsNavBarComponent,
         SongControllerComponent,
+    ],
+    providers: [
+        SongsService,
     ],
     imports: [
         CoreModule,

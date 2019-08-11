@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NotificationService } from "../../shared/services/notification.service";
-import { SongsService } from "../../shared/services/songs.service";
+import { SongsService } from "./songs.service";
 import { GPlayer } from "./GPlayer.component";
 
 declare let $: any;

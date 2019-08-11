@@ -7,7 +7,7 @@ import {Account} from "../../../shared/models/person/account.model";
 import {Person} from "../../../shared/models/person/person.model";
 import {AuthService} from "../../../shared/services/auth.service";
 import {NotificationService} from "../../../shared/services/notification.service";
-import {PersonService} from "../../../shared/services/person.service";
+import {PersonService} from "../person.service";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
 
 @Component({

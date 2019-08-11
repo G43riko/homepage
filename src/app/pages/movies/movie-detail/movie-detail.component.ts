@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { forkJoin } from "rxjs";
 import { AbstractDetailComponent } from "../../../shared/components/abstract-detail.component";
-import { MoviesService } from "../../../shared/services/movies.service";
+import { MoviesService } from "../movies.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Movie } from "../models/movie.model";
 
