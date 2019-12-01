@@ -3,6 +3,7 @@ import {CoreModule} from "../../shared/core.module";
 import {SharedModule} from "../../shared/shared.module";
 import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
 import {MakersListComponent} from "./components/makers-list/makers-list.component";
+import {MovieDetailAdminViewComponent} from "./components/movie-detail-admin-view/movie-detail-admin-view.component";
 import {MovieDetailBasicInfoComponent} from "./components/movie-detail-basic-info/movie-detail-basic-info.component";
 import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
 import {MovieListComponent} from "./components/movie-list/movie-list.component";
@@ -26,6 +27,7 @@ import {MovieFilterPipe} from "./pipes/movie-filter.pipe";
     declarations: [
         MovieListComponent,
         MovieSearchComponent,
+        MovieDetailAdminViewComponent,
         MakersListComponent,
         MovieFilterPipe,
         MoviePosterPreviewComponent,

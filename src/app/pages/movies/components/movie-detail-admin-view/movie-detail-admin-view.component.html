@@ -1,0 +1,120 @@
+<button (click)="load('csfd')" *ngIf="!csfdMovie" mat-raised-button>Load CSFD</button>
+<button (click)="load('imdb')" *ngIf="!imdbMovie" mat-raised-button>Load IMDB</button>
+<button (click)="load('movieDb', movieForm.value.type)" *ngIf="!movieDbMovie" mat-raised-button>Load MovieDB</button>
+<div class="mat-elevation-z2">
+    <table [dataSource]="dataSource"
+           class="full-width"
+           mat-table
+           multiTemplateDataRows>
+        <ng-container matColumnDef="attribute">
+            <th *matHeaderCellDef mat-header-cell> Attribute</th>
+            <td *matCellDef="let element" mat-cell> {{element.attribute}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="origin">
+            <th *matHeaderCellDef mat-header-cell> Origin</th>
+            <td *matCellDef="let element" mat-cell>
+                <ng-container
+                    *ngTemplateOutlet="infoNew; context: {value: element.origin, type: element.type}"></ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="csfd">
+            <th *matHeaderCellDef mat-header-cell> CSFD</th>
+            <td *matCellDef="let element" mat-cell>
+                <ng-container
+                    *ngTemplateOutlet="infoNew; context: {value: element.csfd, type: element.type}"></ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="imdb">
+            <th *matHeaderCellDef mat-header-cell> IMDB</th>
+            <td *matCellDef="let element" mat-cell>
+                <ng-container
+                    *ngTemplateOutlet="infoNew; context: {value: element.imdb, type: element.type}"></ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="movieDb">
+            <th *matHeaderCellDef mat-header-cell> MovieDB</th>
+            <td *matCellDef="let element" mat-cell>
+                <ng-container
+                    *ngTemplateOutlet="infoNew; context: {value: element.movieDb, type: element.type}"></ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td *matCellDef="let element" [attr.colspan]="displayedColumns.length" mat-cell>
+                <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+                     class="example-element-detail">
+                    <ng-container [ngSwitch]="element.attribute">
+                        <ng-container *ngSwitchCase="'makers'">
+                            <ng-template #makerTemplate let-maker="maker">
+                                {{maker.name}}
+                            </ng-template>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <ul>
+                                    <li *ngFor="let maker of element.origin">
+                                        <ng-container
+                                            *ngTemplateOutlet="makerTemplate; context: {maker: maker}"></ng-container>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li *ngFor="let maker of element.csfd">
+                                        <ng-container
+                                            *ngTemplateOutlet="makerTemplate; context: {maker: maker}"></ng-container>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li *ngFor="let maker of element.imdb">
+                                        <ng-container
+                                            *ngTemplateOutlet="makerTemplate; context: {maker: maker}"></ng-container>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li *ngFor="let maker of element.movieDb">
+                                        <ng-container
+                                            *ngTemplateOutlet="makerTemplate; context: {maker: maker}"></ng-container>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            {{element | json}}
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr (click)="expandedElement = !isExpanded(row) || expandedElement === row ? null : row"
+            *matRowDef="let row; columns: displayedColumns;"
+            [class.example-element-row]="isExpanded(row)"
+            [class.example-expanded-row]="expandedElement === row"
+            mat-row></tr>
+        <tr *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" mat-row></tr>
+    </table>
+</div>
+<ng-template #infoNew let-type="type" let-value="value">
+    <ng-container *ngIf="value" [ngSwitch]="type">
+        <ng-container *ngSwitchCase="'html'">
+            <td [innerHTML]="value"></td>
+        </ng-container>
+        <ng-container *ngSwitchCase="'year'">
+            <td>{{value | date:"yyyy"}}</td>
+        </ng-container>
+        <ng-container *ngSwitchCase="'imageFirst'">
+            <td><img [src]="value[0]" alt="Image poster" style="height: 180px"></td>
+        </ng-container>
+        <ng-container *ngSwitchCase="'arrayLength'">
+            <td>{{value?.length || 0}}</td>
+        </ng-container>
+        <ng-container *ngSwitchCase="'join'">
+            <td>{{value.join(', ')}}</td>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <td>{{value}}</td>
+        </ng-container>
+    </ng-container>
+</ng-template>

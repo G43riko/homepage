@@ -28,3 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODO
 use https://www.npmjs.com/package/ngx-device-detector for disable animation on mobiles
+allow 

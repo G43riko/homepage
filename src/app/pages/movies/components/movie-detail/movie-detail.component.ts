@@ -2,6 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractDetailComponent} from "../../../../shared/components/abstract-detail.component";
+import {Roles} from "../../../../shared/enums/roles.enum";
+import {AuthService} from "../../../../shared/services/auth.service";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {Movie} from "../../models/movie.model";
 import {MovieHttpService} from "../../movie-http.service";
@@ -16,6 +18,7 @@ declare const $: any;
 })
 export class MovieDetailComponent extends AbstractDetailComponent implements OnInit {
     public selectedMovie: Movie;
+    public readonly Roles = Roles;
     public movieForm = this.formBuilder.group({
         saw: [false],
         wantSee: [true],
@@ -23,17 +26,21 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
         content: [""],
         csfdId: [""],
         imdbId: [""],
+        makers: [[]],
+        type: ["movie"],
         movieDbId: [""],
         duration: [0, Validators.min(0)],
+        rating: [0, [Validators.min(0), Validators.min(100)]],
         countries: [[]],
         genres: [[]],
-        avatar: [""],
+        avatar: [[]],
         title: ["", [Validators.required, Validators.minLength(3)]],
         titleSk: [""],
     });
 
     public constructor(private readonly route: ActivatedRoute,
                        private readonly router: Router,
+                       public readonly authService: AuthService,
                        private readonly formBuilder: FormBuilder,
                        private readonly notificationService: NotificationService,
                        public readonly movieService: MovieService,

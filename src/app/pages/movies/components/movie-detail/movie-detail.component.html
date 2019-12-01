@@ -150,13 +150,25 @@
         <div (click)="edit()" *ngIf="disabled" class="ui button">Upraviť</div>
     </form>
 </div>
-<form *ngIf="selectedMovie" [formGroup]="movieForm">
-
+<form *ngIf="selectedMovie && authService.user$ | async as user" [formGroup]="movieForm">
     <mat-card class="root-card">
         <mat-card-title>Movie detail</mat-card-title>
 
         <mat-card-content class="flex-row">
             <app-movie-search (movieSearched)="setMovie($event)" *ngIf="isNew" class="full-width"></app-movie-search>
+            <mat-accordion *ngIf="authService.checkAuthorization(user, Roles.ROLE_ADMIN_MOVIES)"
+                           class="full-width">
+                <mat-expansion-panel class="mat-elevation-z2">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Admin section
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <app-movie-detail-admin-view [movieForm]="movieForm">
+                    </app-movie-detail-admin-view>
+                </mat-expansion-panel>
+            </mat-accordion>
             <div class="flex-row" style="flex-grow: 2; max-width: 100%;">
                 <mat-card style="flex-grow: 1">
                     <mat-card-subtitle>Osobné info</mat-card-subtitle>
@@ -286,7 +298,11 @@
             <button (click)="back()"
                     *ngIf="!disabled" mat-raised-button>Naspäť
             </button>
-            <button (click)="edit()" *ngIf="disabled" color="primary" mat-raised-button>Upraviť</button>
+            <button (click)="edit()"
+                    *ngIf="disabled && authService.checkAuthorization(user, Roles.ROLE_UPDATE_MOVIES)"
+                    color="primary"
+                    mat-raised-button>Upraviť
+            </button>
         </mat-card-actions>
     </mat-card>
 </form>

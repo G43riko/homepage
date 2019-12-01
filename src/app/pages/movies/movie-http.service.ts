@@ -9,6 +9,7 @@ import {NotificationService} from "../../shared/services/notification.service";
 import {PaginatorService} from "../../shared/utils/paginable-service.model";
 import {Maker} from "./models/maker.model";
 import {MovieSource} from "./models/movie-source.type";
+import {MovieType} from "./models/movie-type.type";
 import {Movie} from "./models/movie.model";
 
 const URL = AppConfig.BASE_URL + "/movies";
@@ -83,8 +84,8 @@ export class MovieHttpService extends AbstractHttpService implements PaginatorSe
         );
     }
 
-    public getMovieDetailFromExternalSource(type: MovieSource, id: string): Observable<Movie> {
-        return this.http.get<Movie>(URL_EXTERNAL + "/detail/" + type + "/" + id + "?transform=true").pipe(
+    public getMovieDetailFromExternalSource(source: MovieSource, id: string, type: MovieType = "movie"): Observable<Movie> {
+        return this.http.get<Movie>(URL_EXTERNAL + "/detail/" + source + "/" + id + "?transform=true&type=" + type).pipe(
             catchError(this.handleError<Movie>("getMovieDetailFromExternalSource")),
         );
     }
