@@ -32,9 +32,9 @@ export class AppComponent {
             }
         });
 
-        matIconRegistry.addSvgIcon("imdb", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_imdb.svg"));
-        matIconRegistry.addSvgIcon("csfd", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_csfd.svg"));
-        matIconRegistry.addSvgIcon("movieDb", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_movieDb.svg"));
+        matIconRegistry.addSvgIcon("imdb", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_imdb.svg"));
+        matIconRegistry.addSvgIcon("csfd", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_csfd.svg"));
+        matIconRegistry.addSvgIcon("movieDb", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_movieDb.svg"));
 
     }
 

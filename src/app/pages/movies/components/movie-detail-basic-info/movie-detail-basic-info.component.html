@@ -1,8 +1,8 @@
 <mat-card [formGroup]="movieForm">
     <mat-card-subtitle>Základné info</mat-card-subtitle>
     <mat-card-content>
-        <div style="display: flex">
-            <div style="flex-grow: 1">
+        <div style="display: flex; flex-wrap: wrap;">
+            <div style="flex-grow: 4; flex-basis: 100px;">
                 <mat-form-field class="full-width">
                     <input formControlName="title" label="Movie title" matInput placeholder="Názov">
                 </mat-form-field>
@@ -22,7 +22,7 @@
                                     startView="multi-year"></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div *ngIf="movieForm.value.avatar" style="padding: 1em 0 1em 1em;">
+            <div *ngIf="movieForm.value.avatar" style="padding: 1em 0 1em 1em; flex-grow: 1; text-align: center;">
                 <img [src]="movieForm.value.avatar"
                      alt="Movie avatar">
             </div>

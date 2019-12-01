@@ -157,7 +157,7 @@
 
         <mat-card-content class="flex-row">
             <app-movie-search (movieSearched)="setMovie($event)" *ngIf="isNew" class="full-width"></app-movie-search>
-            <div class="flex-row" style="flex-grow: 2">
+            <div class="flex-row" style="flex-grow: 2; max-width: 100%;">
                 <mat-card style="flex-grow: 1">
                     <mat-card-subtitle>Osobné info</mat-card-subtitle>
                     <mat-card-content>
@@ -211,7 +211,7 @@
                 </mat-card>
                 <app-movie-detail-basic-info (onYearChange)="movieForm.patchValue({year: $event}, {emitEvent: false})"
                                              [movieForm]="movieForm"
-                                             style="flex-grow: 3;flex-basis: 200px;">
+                                             style="flex-grow: 3;flex-basis: 200px; max-width: 100%;">
                 </app-movie-detail-basic-info>
                 <mat-card style="flex-grow: 3">
                     <mat-card-content *ngIf="!disabled" class="full-width">
