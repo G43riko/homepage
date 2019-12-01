@@ -2,7 +2,9 @@ import {NgModule} from "@angular/core";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ServiceWorkerModule} from "@angular/service-worker";
 import {G43_NOTIFICATION_TOKEN} from "@g43/common";
+import {environment} from "../environments/environment";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {AppConfig} from "./app.config";
@@ -24,6 +26,7 @@ import {SharedModule} from "./shared/shared.module";
         AppRoutingModule,
         BrowserModule,
         FirebaseModule,
+        ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production}),
     ],
     providers: [
         {

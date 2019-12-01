@@ -10,8 +10,6 @@
         "build:github": "ng build --configuration=production --outputPath=docs",
         "analyze": "webpack-bundle-analyzer dist/stats.json",
         "start": "node server.js",
-        "precache": "sw-precache --verbose --config=sw-precache-config.js",
-        "postinstall": "npm run build:prod && npm run precache",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
@@ -47,7 +45,9 @@
         "@angular/material": "^8.1.2",
         "@angular/platform-browser": "^8.2.1",
         "@angular/platform-browser-dynamic": "^8.2.1",
+        "@angular/pwa": "^0.803.20",
         "@angular/router": "^8.2.1",
+        "@angular/service-worker": "^8.2.1",
         "@g43/common": "0.0.6",
         "@types/angularfire": "^0.8.33",
         "@types/firebase": "^3.2.1",
