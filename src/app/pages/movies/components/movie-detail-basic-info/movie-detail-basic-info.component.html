@@ -21,8 +21,8 @@
                                     startView="multi-year"></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div *ngIf="movieForm.controls.avatar.value" style="padding: 1em 0 1em 1em;">
-                <img [src]="movieForm.controls.avatar.value"
+            <div *ngIf="movieForm.value.avatar" style="padding: 1em 0 1em 1em;">
+                <img [src]="movieForm.value.avatar"
                      alt="Movie avatar">
             </div>
         </div>

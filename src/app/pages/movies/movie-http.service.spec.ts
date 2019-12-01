@@ -1,6 +1,6 @@
 import {HttpClientModule} from "@angular/common/http";
 import {TestBed} from "@angular/core/testing";
-import {MovieHttpService} from "./movies-http.service";
+import {MovieHttpService} from "./movie-http.service";
 
 describe("MoviesService", () => {
     beforeEach(() => TestBed.configureTestingModule({

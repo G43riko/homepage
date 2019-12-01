@@ -11,7 +11,7 @@ import {MovieHttpService} from "../../movie-http.service";
     styleUrls: ["./movie-detail-basic-info.component.scss"],
 })
 export class MovieDetailBasicInfoComponent implements OnInit {
-    @Input() public readonly movieForm: FormGroup;
+    @Input() public movieForm: FormGroup;
     @Output() public readonly onYearChange = new EventEmitter<Date>();
     public genres: string[] = [];
     public countries: string[] = [];

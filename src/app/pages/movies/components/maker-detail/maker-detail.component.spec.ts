@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { MakerDetailComponent } from "./maker-detail.component";
-import { TestingModule } from "../../../../tests/testing.module";
-import { ExternalMakerDirective } from "../../directives/external-maker.directive";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../../tests/testing.module";
+import {ExternalMakerDirective} from "../../directives/external-maker.directive";
+import {MovieHttpService} from "../../movie-http.service";
+import {MakerDetailComponent} from "./maker-detail.component";
 
 describe("MakerDetailComponent", () => {
     let component: MakerDetailComponent;
@@ -11,6 +12,12 @@ describe("MakerDetailComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
+            ],
+            providers: [
+                {
+                    provide: MovieHttpService,
+                    useValue: {},
+                },
             ],
             declarations: [
                 MakerDetailComponent,

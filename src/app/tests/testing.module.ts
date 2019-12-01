@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import {G43TestingModule} from "@g43/common";
+import {MaterialModule} from "../shared/modules/material.module";
 import {AngularFireAuthMockService} from "./mock-services/angular-fire-auth-mock.service";
 import {AngularFireStorageMockService} from "./mock-services/angular-fire-storage-mock.service";
 import {AngularFirestoreMockService} from "./mock-services/angular-firestore-mock.service";
@@ -26,6 +27,7 @@ import {AngularFirestoreMockService} from "./mock-services/angular-firestore-moc
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        MaterialModule,
     ],
 })
 export class TestingModule {

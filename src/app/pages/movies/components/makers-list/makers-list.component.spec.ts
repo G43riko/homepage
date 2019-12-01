@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {TestingModule} from "../../../../tests/testing.module";
 import {MoviesModule} from "../../movies.module";
-import {MakersListComponent} from "./movie-makers.component";
+import {MakersListComponent} from "./makers-list.component";
 
 describe("MovieMakersComponent", () => {
     let component: MakersListComponent;

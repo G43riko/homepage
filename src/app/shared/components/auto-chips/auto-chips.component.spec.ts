@@ -1,4 +1,5 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../tests/testing.module";
 
 import {AutoChipsComponent} from "./auto-chips.component";
 
@@ -8,7 +9,12 @@ describe("AutoChipsComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [AutoChipsComponent],
+            imports: [
+                TestingModule,
+            ],
+            declarations: [
+                AutoChipsComponent,
+            ],
         })
             .compileComponents();
     }));
