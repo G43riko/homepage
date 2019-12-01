@@ -1,0 +1,142 @@
+$title-height: 53px;
+$radius: 5px;
+
+:host {
+    position: relative;
+    width: 180px;
+    overflow: hidden;
+    margin-bottom: 1em;
+    border-radius: $radius;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    //border: 1px solid rgba(155,155, 155, 0.1);
+
+    img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+
+    .info-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 0;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5);
+
+        transition: all 0.3s;
+        color: white;
+        font-family: cursive;
+        font-size: larger;
+        font-weight: bolder;
+        overflow: hidden;
+    }
+
+    .top {
+        top: 0;
+    }
+
+    .bottom {
+        bottom: 0;
+    }
+
+    .avatar-wrapper {
+        border-radius: $radius;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+    .info-wrapper.top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-wrapper.bottom {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            span {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        div {
+            padding: 0 1em;
+
+            .year, .duration {
+                font-size: medium;
+            }
+        }
+
+
+        .content {
+            font-size: 11px;
+            line-height: 100%;
+            margin-top: 6px;
+            font-weight: 100;
+            text-align: justify;
+            position: relative;
+            flex-grow: 3;
+            overflow: auto;
+        }
+
+        .sub-info-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer {
+            width: 100%;
+            height: 40px;
+            display: flex;
+
+            .logo {
+                display: inline-block;
+                height: 40px;
+            }
+        }
+
+    }
+
+    .info-wrapper {
+        opacity: 0;
+    }
+
+    &:hover, &.opened {
+        .info-wrapper {
+            opacity: 1;
+
+            &.top {
+                height: $title-height;
+            }
+
+            &.bottom {
+                padding-top: .5em;
+                height: 33px;
+            }
+        }
+
+        .avatar {
+            //filter: grayscale(1);
+            filter: blur(3px);
+        }
+
+    }
+
+    &.opened {
+        .info-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+
+            &.bottom {
+                height: calc(100% - #{$title-height});
+            }
+        }
+    }
+}

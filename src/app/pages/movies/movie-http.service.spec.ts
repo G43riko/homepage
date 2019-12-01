@@ -1,19 +1,19 @@
 import {HttpClientModule} from "@angular/common/http";
 import {TestBed} from "@angular/core/testing";
-import {SongsService} from "./songs.service";
+import {MovieHttpService} from "./movies-http.service";
 
-describe("SongsService", () => {
+describe("MoviesService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             HttpClientModule,
         ],
         providers: [
-            SongsService,
+            MovieHttpService,
         ],
     }));
 
     it("should be created", () => {
-        const service: SongsService = TestBed.get(SongsService);
+        const service: MovieHttpService = TestBed.get(MovieHttpService);
         expect(service).toBeTruthy();
     });
 });

@@ -1,0 +1,52 @@
+<!--
+    input: title, input: id - iba jedno môže byť napísané
+    buttons: searchCsfd,searchImdb, searchMovieDb
+-->
+<form [formGroup]="movieSearchForm">
+    <mat-card>
+        <mat-card-subtitle>Search movie</mat-card-subtitle>
+        <mat-card-content>
+            <mat-form-field>
+                <input formControlName="title" matInput placeholder="Názov filmu">
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="id" matInput placeholder="ID Filmu">
+            </mat-form-field>
+
+            <mat-radio-group formControlName="type">
+                <mat-radio-button aria-label="csdf" value="csfd">
+                    CSFD
+                </mat-radio-button>
+                <mat-radio-button aria-label="imdb" value="imdb">
+                    IMDB
+                </mat-radio-button>
+                <mat-radio-button aria-label="movieDb" value="movieDb">
+                    MovieDB
+                </mat-radio-button>
+            </mat-radio-group>
+
+            <mat-list>
+                <mat-list-item *ngFor="let result of movieResults">
+                    <img [src]="result.avatar" alt="Avatar" matListAvatar>
+                    <h4 mat-line>{{result.title}}</h4>
+                    <p mat-line> {{result.year}} - {{result.genres.join("/")}} </p>
+                    <p mat-line> {{result.countries.join("/")}} </p>
+                    <button (click)="searchById(result.id)" mat-icon-button>
+                        <mat-icon>touch_app</mat-icon>
+                    </button>
+                    <button (click)="movieService.openMovieExternal(searchedType, result.id)" mat-icon-button>
+                        <mat-icon>info</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-controlls>
+            <button (click)="searchMovie()" [disabled]="loading || movieSearchForm.invalid" color="primary"
+                    mat-raised-button>
+                Hladať
+            </button>
+        </mat-card-controlls>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    </mat-card>
+</form>

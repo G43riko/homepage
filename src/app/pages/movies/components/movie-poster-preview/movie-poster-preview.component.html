@@ -1,0 +1,45 @@
+<div class="avatar-wrapper"><img [src]="movie.avatar" alt="" class="avatar"></div>
+<div class="info-wrapper top">
+    <div [title]="movie.titleSk || movie.title" class="title">
+        <span>{{movie.titleSk || movie.title}}</span>
+    </div>
+</div>
+<div class="info-wrapper bottom">
+    <div class="sub-info-wrapper">
+        <span class="year">{{movie.year}}</span>
+        <span class="rating">{{movie.rating}}%</span>
+        <span class="duration">{{movie.duration}}min</span>
+    </div>
+    <div [innerHTML]="movie.content" class="content"></div>
+    <div class="footer">
+        <button (click)="movieService.openMovieExternal('csfd', movie.csfdId)"
+                *ngIf="movie.csfdId"
+                aria-label="Example icon-button with a heart icon"
+                class="detail"
+                mat-icon-button>
+            <mat-icon svgIcon="csfd"></mat-icon>
+        </button>
+        <button (click)="movieService.openMovieExternal('imdb', movie.imdbId)"
+                *ngIf="movie.imdbId"
+                aria-label="Example icon-button with a heart icon"
+                class="detail"
+                mat-icon-button>
+            <mat-icon svgIcon="imdb"></mat-icon>
+        </button>
+        <button (click)="movieService.openMovieExternal('movieDb', movie.movieDbId, movie.type)"
+                *ngIf="movie.movieDbId"
+                aria-label="Example icon-button with a heart icon"
+                class="detail"
+                mat-icon-button>
+            <mat-icon svgIcon="movieDb"></mat-icon>
+        </button>
+        <button (click)="movieService.showMovieDetail(movie.id)"
+                aria-label="Example icon-button with a heart icon"
+                class="detail"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>info</mat-icon>
+        </button>
+        <span></span>
+    </div>
+</div>

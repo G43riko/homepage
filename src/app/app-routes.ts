@@ -1,19 +1,19 @@
-import { Routes } from "@angular/router";
-import { AppConfig } from "./app.config";
-import { AuthGuard } from "./auth.guard";
-import { AboutComponent } from "./pages/about/about.component";
-import { AccountProfileComponent } from "./pages/account-profile/account-profile.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { Roles } from "./shared/enums/roles.enum";
+import {Routes} from "@angular/router";
+import {AppConfig} from "./app.config";
+import {AuthGuard} from "./auth.guard";
+import {AboutComponent} from "./pages/about/about.component";
+import {AccountProfileComponent} from "./pages/account-profile/account-profile.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {Roles} from "./shared/enums/roles.enum";
 
 export const AppRoutes: Routes = [
     {
-        path      : "",
+        path: "",
         redirectTo: "/" + AppConfig.PATH_HOME,
-        pathMatch : "full",
+        pathMatch: "full",
     },
     {
-        path     : AppConfig.PATH_HOME,
+        path: AppConfig.PATH_HOME,
         component: HomeComponent,
     },
     {
@@ -22,7 +22,6 @@ export const AppRoutes: Routes = [
     },
     {
         path: AppConfig.PATH_MIXES,
-        // loadChildren: "./pages/mixes/mixes.module#MixesModule",
         loadChildren: () => import("./pages/mixes/mixes.module").then((mod) => mod.MixesModule),
         canActivate: [AuthGuard],
         data       : {

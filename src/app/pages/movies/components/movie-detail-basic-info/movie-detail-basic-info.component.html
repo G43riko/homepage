@@ -1,0 +1,38 @@
+<mat-card [formGroup]="movieForm">
+    <mat-card-subtitle>Základné info</mat-card-subtitle>
+    <mat-card-content>
+        <div style="display: flex">
+            <div style="flex-grow: 1">
+                <mat-form-field class="full-width">
+                    <input formControlName="title" matInput placeholder="Názov">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input formControlName="titleSk" matInput placeholder="Slovenský názov">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input [matDatepicker]="picker"
+                           formControlName="year"
+                           matInput
+                           placeholder="Rok výroby">
+                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #picker
+                                    (yearSelected)="closeDatePicker(picker, $event)"
+                                    startView="multi-year"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div *ngIf="movieForm.controls.avatar.value" style="padding: 1em 0 1em 1em;">
+                <img [src]="movieForm.controls.avatar.value"
+                     alt="Movie avatar">
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input formControlName="duration" matInput placeholder="Trvanie" type="number">
+            <span matSuffix>min</span>
+        </mat-form-field>
+        <app-auto-chips [allItems]="countries" [placeholder]="'Krajna pôvodu'"
+                        formControlName="countries"></app-auto-chips>
+        <app-auto-chips [allItems]="genres" [placeholder]="'Žánre'"
+                        formControlName="genres"></app-auto-chips>
+    </mat-card-content>
+</mat-card>

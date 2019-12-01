@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    base_url: "https://g43-api.herokuapp.com",
+    base_url: "https://homepage-nest.herokuapp.com",
     interceptor: false,
 };

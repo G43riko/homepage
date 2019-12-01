@@ -1,0 +1,11 @@
+.large.green.checkmark.icon {
+    cursor: pointer;
+}
+
+.grid-movies {
+    $title-height: 53px;
+    $radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

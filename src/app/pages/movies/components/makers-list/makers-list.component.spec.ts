@@ -1,11 +1,11 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { TestingModule } from "../../../tests/testing.module";
-import { MoviesModule } from "../movies.module";
-import { MovieMakersComponent } from "./movie-makers.component";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../../tests/testing.module";
+import {MoviesModule} from "../../movies.module";
+import {MakersListComponent} from "./movie-makers.component";
 
 describe("MovieMakersComponent", () => {
-    let component: MovieMakersComponent;
-    let fixture: ComponentFixture<MovieMakersComponent>;
+    let component: MakersListComponent;
+    let fixture: ComponentFixture<MakersListComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe("MovieMakersComponent", () => {
     }));
 
     beforeEach(() => {
-        fixture   = TestBed.createComponent(MovieMakersComponent);
+        fixture = TestBed.createComponent(MakersListComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

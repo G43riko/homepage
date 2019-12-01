@@ -1,7 +1,6 @@
 const CSFD_BASE_URL     = "https://www.csfd.cz/";
 const IMDB_BASE_URL     = "https://www.imdb.com/";
 const MOVIE_DB_BASE_URL = "https://www.themoviedb.org/";
-
 export class MovieUtils {
     public static getMakerCsfdLink(csfdId: string): string {
         return CSFD_BASE_URL + "tvurce/" + csfdId;

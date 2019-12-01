@@ -8,13 +8,13 @@
     <h3>{{selectedMaker.birthday}}</h3>
     <div class="description">
         <div>
-            <button *ngIf="selectedMaker.csfd"
-                    [appExternalMaker]="{type: 'csfd', id: selectedMaker.csfd}"
+            <button *ngIf="selectedMaker.csfdId"
+                    [appExternalMaker]="{type: 'csfd', id: selectedMaker.csfdId}"
                     class="ui blue basic button">
                 CSFD
             </button>
-            <button *ngIf="selectedMaker.imdb"
-                    [appExternalMaker]="{type: 'imdb', id: selectedMaker.imdb}"
+            <button *ngIf="selectedMaker.imdbId"
+                    [appExternalMaker]="{type: 'imdb', id: selectedMaker.imdbId}"
                     class="ui blue basic button">
                 IMDB
             </button>

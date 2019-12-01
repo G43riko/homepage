@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {FirebaseModule} from "../../../shared/modules/firebase.module";
 import {MaterialModule} from "../../../shared/modules/material.module";
+import {TestingModule} from "../../../tests/testing.module";
 import {MyFilesComponent} from "../../files/my-files/my-files.component";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
+import {PersonService} from "../person.service";
 
-import { PersonListRowComponent } from "./person-list-row.component";
-import { TestingModule } from "../../../tests/testing.module";
-import { FirebaseModule } from "../../../shared/modules/firebase.module";
+import {PersonListRowComponent} from "./person-list-row.component";
 
 describe("PersonListRowComponent", () => {
     let component: PersonListRowComponent;
@@ -18,6 +19,9 @@ describe("PersonListRowComponent", () => {
                 MaterialModule,
                 FirebaseModule,
             ],
+            providers: [
+                PersonService,
+            ],
             declarations: [
                 MyFilesComponent,
                 PersonListRowCellSelectComponent,
@@ -27,7 +31,7 @@ describe("PersonListRowComponent", () => {
     }));
 
     beforeEach(() => {
-        fixture   = TestBed.createComponent(PersonListRowComponent);
+        fixture = TestBed.createComponent(PersonListRowComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

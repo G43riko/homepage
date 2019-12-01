@@ -3,15 +3,16 @@
     <label for="idShowExternalServices">Zobraziť externé služby</label>
     <div class="ui icon input">
         <i class="search icon"></i>
-        <input [(ngModel)]="searchPattern" placeholder="Search..." type="text">
+        <!--        <input [(ngModel)]="searchPattern" placeholder="Search..." type="text">-->
+        <input #searchPatter (input)="paginator.search(searchPatter.value)" placeholder="Search..." type="text">
     </div>
     <div class="ui mini buttons">
-        <button class="ui button">Grid</button>
+        <button (click)="setPreviewType('grid')" class="ui button">Grid</button>
         <div class="or"></div>
-        <button class="ui button">List</button>
+        <button (click)="setPreviewType('table')" class="ui button">Table</button>
     </div>
 </div>
-<table class="ui celled striped selectable table hoverable">
+<table *ngIf="previewType === 'table'" class="ui celled striped selectable table hoverable">
     <thead>
     <tr>
         <th width="75px">
@@ -57,14 +58,14 @@
     </tr>
     -->
     <tbody *ngIf="paginator">
-    <tr *ngFor="let movie of paginator.getList() | movieFilter: searchPattern" (click)="showDetail(movie.movie_id)">
+    <tr (click)="showDetail(movie.id)" *ngFor="let movie of paginator.list | async | movieFilter: searchPattern">
         <th></th>
         <td>
             <h4 class="ui image header">
                 <img *ngIf="movie.avatar" [src]="movie.avatar" class="ui tiny rounded image">
                 <div class="content">
-                    {{movie.title_sk || movie.title}}
-                    <div class="sub header" *ngIf="movie.title_sk">{{movie.title}}</div>
+                    {{movie.titleSk || movie.title}}
+                    <div *ngIf="movie.titleSk" class="sub header">{{movie.title}}</div>
                 </div>
             </h4>
         </td>
@@ -75,21 +76,21 @@
         <td>{{movie.genres.join(" / ")}}</td>
         <td *ngIf="showExternalServices">
             <i class="large green checkmark icon"
-               *ngIf="movie.csfd_id"
-               [appExternalMovie]="{type: 'csfd', id: movie.csfd_id}"></i>
-            <i *ngIf="!movie.csfd_id" class="large red close icon"></i>
+               (click)="movieService.openMovieExternal('csfd', movie.csfdId)"
+               *ngIf="movie.csfdId"></i>
+            <i *ngIf="!movie.csfdId" class="large red close icon"></i>
         </td>
         <td *ngIf="showExternalServices">
             <i class="large green checkmark icon"
-               *ngIf="movie.imdb_id"
-               [appExternalMovie]="{type: 'imdb', id: movie.imdb_id}"></i>
-            <i *ngIf="!movie.imdb_id" class="large red close icon"></i>
+               (click)="movieService.openMovieExternal('imdb', movie.imdbId)"
+               *ngIf="movie.imdbId"></i>
+            <i *ngIf="!movie.imdbId" class="large red close icon"></i>
         </td>
         <td *ngIf="showExternalServices">
             <i class="large green checkmark icon"
-               *ngIf="movie.moviedb_id"
-               [appExternalMovie]="{type: 'movieDb', id: movie.moviedb_id}"></i>
-            <i *ngIf="!movie.moviedb_id" class="large red close icon"></i>
+               (click)="movieService.openMovieExternal('movieDb', movie.movieDbId, movie.type)"
+               *ngIf="movie.movieDbId"></i>
+            <i *ngIf="!movie.movieDbId" class="large red close icon"></i>
         </td>
     </tr>
     </tbody>
@@ -109,3 +110,15 @@
     </tr>
     </tfoot>
 </table>
+
+
+<ng-container *ngIf="previewType === 'grid'">
+    <div class="grid-movies">
+        <app-movie-poster-preview *ngFor="let movie of paginator.list | async | movieFilter: searchPattern"
+                                  [movie]="movie"></app-movie-poster-preview>
+    </div>
+    <div style="text-align: center">
+        <button (click)="paginator.loadNext()" class="next-loader" color="primary" mat-raised-button>Load next movies
+        </button>
+    </div>
+</ng-container>

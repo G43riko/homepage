@@ -1,13 +1,13 @@
 <div class="ui big relaxed divided list">
     <div *ngFor="let maker of makers; let i = index" class="item">
         <div *ngIf="!disabled" class="right floated content">
-            <button *ngIf="maker.csfd"
-                    [appExternalMaker]="{type: 'csfd', id: maker.csfd}"
+            <button *ngIf="maker.csfdId"
+                    [appExternalMaker]="{type: 'csfd', id: maker.csfdId}"
                     class="ui blue mini basic button">
                 CSFD
             </button>
-            <button *ngIf="maker.imdb"
-                    [appExternalMaker]="{type: 'imdb', id: maker.imdb}"
+            <button *ngIf="maker.imdbId"
+                    [appExternalMaker]="{type: 'imdb', id: maker.imdbId}"
                     class="ui blue mini basic button">
                 IMDB
             </button>
@@ -23,7 +23,7 @@
                 <i class="icon remove"></i>
             </button>
         </div>
-        <img *ngIf="maker.avatar" [src]="maker.avatar" class="ui avatar image">
+        <img *ngIf="maker.avatars && maker.avatars.length" [src]="maker.avatars[0]" class="ui avatar image">
         <div class="content">
             <a (click)="showMakerDetail(maker)" class="header">{{maker.name}}</a>
             <div class="description">{{maker.birthday}}</div>

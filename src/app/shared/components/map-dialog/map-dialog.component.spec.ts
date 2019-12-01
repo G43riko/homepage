@@ -1,4 +1,5 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {G43SafePipe} from "@g43/common";
 import {TestingModule} from "../../../tests/testing.module";
 import {MaterialModule} from "../../modules/material.module";
 import {SharedPipesModule} from "../../pipes/shared-pipes.module";
@@ -17,6 +18,7 @@ describe("MapDialogComponent", () => {
                 SharedPipesModule,
             ],
             declarations: [
+                G43SafePipe,
                 MapDialogComponent,
             ],
         }).compileComponents();

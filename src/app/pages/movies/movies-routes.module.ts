@@ -1,20 +1,25 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { MovieDetailComponent } from "./movie-detail/movie-detail.component";
-import { MovieListComponent } from "./movie-list/movie-list.component";
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
+import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
+import {MovieListComponent} from "./components/movie-list/movie-list.component";
 
 const routes: Routes = [
     {
-        path    : "",
+        path: "",
         children: [
             {
-                path     : "",
+                path: "",
                 pathMatch: "full",
                 component: MovieListComponent,
             },
             {
-                path     : ":id",
+                path: ":id",
                 component: MovieDetailComponent,
+            },
+            {
+                path: "maker/:id",
+                component: MakerDetailComponent,
             },
         ],
     }

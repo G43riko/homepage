@@ -1,0 +1,287 @@
+<div *ngIf="false" style="padding: 20px 200px;">
+    <app-movie-search *ngIf="isNew"></app-movie-search>
+    <form *ngIf="selectedMovie" class="ui form">
+        <div class="ui grid" style="display: table; width: 100%;">
+            <div class="twelve wide column middle aligned content" style="display: table-cell">
+                <div>
+                    <h3><label>Osobné info</label></h3>
+                    <div class="ui grid">
+                        <div class="two wide column middle aligned content">
+                            <div class="ui checkbox">
+                                <label for="sawInput">Videné</label>
+                                <input [(ngModel)]="selectedMovie.saw"
+                                       [disabled]="disabled"
+                                       class="ui checkbox saw"
+                                       id="sawInput"
+                                       name="saw"
+                                       type="checkbox">
+                            </div>
+                        </div>
+                        <div class="two wide column middle aligned content">
+                            <div class="ui checkbox">
+                                <label for="wantSeeInput">Chcem vidieť</label>
+                                <input [(ngModel)]="selectedMovie.want_see"
+                                       [disabled]="disabled"
+                                       class="ui checkbox want_see"
+                                       id="wantSeeInput"
+                                       name="wantSee"
+                                       type="checkbox">
+                            </div>
+                        </div>
+                        <div class="five wide stackable column middle aligned content">
+                            <button [appExternalMovie]="{type: 'csfd', id: selectedMovie.csfdId}"
+                                    class="ui blue tiny basic button">
+                                <!--<i class="icon user"></i>-->
+                                CSFD
+                            </button>
+                            <button [appExternalMovie]="{type: 'imdb', id: selectedMovie.imdbId}"
+                                    class="ui blue tiny basic button">
+                                <!--<i class="icon user"></i>-->
+                                IMDB
+                            </button>
+                            <button [appExternalMovie]="{type: 'movieDb', id: selectedMovie.movieDbId}"
+                                    class="ui blue tiny basic button">
+                                <!--<i class="icon user"></i>-->
+                                MovieDB
+                            </button>
+                        </div>
+                        <div class="seven wide column middle aligned content">
+                            <label for="classificationInput">Kategória</label>
+                            <input [(ngModel)]="selectedMovie.classification"
+                                   [disabled]="disabled"
+                                   id="classificationInput"
+                                   name="classification">
+                        </div>
+                    </div>
+                    <div class="ui grid">
+                    </div>
+                </div>
+                <div>
+                    <h3><label>Základné info</label></h3>
+                    <div class="ui grid">
+                        <div class="seven wide column">
+                            <label for="titleInput">Názov</label>
+                            <input [(ngModel)]="selectedMovie.title"
+                                   [disabled]="disabled"
+                                   id="titleInput"
+                                   name="title">
+                        </div>
+                        <div class="seven wide column">
+                            <label for="titleSkInput">SK Názov</label>
+                            <input [(ngModel)]="selectedMovie.titleSk"
+                                   [disabled]="disabled"
+                                   id="titleSkInput"
+                                   name="titleSk">
+                        </div>
+                        <div class="two wide column">
+                            <label for="yearInput">Rok výroby</label>
+                            <input [(ngModel)]="selectedMovie.year"
+                                   [disabled]="disabled"
+                                   id="yearInput"
+                                   name="nick"
+                                   type="number">
+                        </div>
+                    </div>
+                    <div class="ui grid">
+                        <div class="six wide column">
+                            <label for="countriesInput">Krajna pôvodu</label>
+                            <select [(ngModel)]="selectedMovie.countries"
+                                    [ngClass]="{'disabled': disabled}"
+                                    class="ui fluid search dropdown countries"
+                                    id="countriesInput"
+                                    multiple=""
+                                    name="countries">
+                                <option value="">Krajna pôvodu</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+                            </select>
+                        </div>
+                        <div class="seven wide column">
+                            <label for="genresInput">Žáner</label>
+                            <select [ngClass]="{'disabled': disabled}"
+                                    class="ui fluid search dropdown genres"
+                                    id="genresInput"
+                                    multiple=""
+                                    name="genres">
+                                <option value="">Žáner</option>
+                                <option *ngFor="let genre of genres" value="{{genre}}">{{genre}}</option>
+                            </select>
+                        </div>
+                        <div class="three wide column">
+                            <label for="durationInput">Dľžka</label>
+                            <div class="ui right labeled input">
+                                <input [(ngModel)]="selectedMovie.duration"
+                                       [disabled]="disabled"
+                                       id="durationInput"
+                                       name="duration"
+                                       style="width: 66px">
+                                <div class="ui basic label">
+                                    min
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column middle aligned content" style="display: table-cell; text-align: center">
+                <div class="ui  segment">
+                    <img [src]="selectedMovie.avatar" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="ui grid">
+                <div class="six wide column">
+                    <h3><label>Obsah</label></h3>
+                    <div [innerHTML]="selectedMovie.content"></div>
+                </div>
+                <div class="ten wide column">
+                    <h3><label>Herci</label></h3>
+                    <app-movie-makers [disabled]="disabled" [makers]="selectedMovie.makers"></app-movie-makers>
+                </div>
+            </div>
+        </div>
+        <div (click)="save()" *ngIf="!disabled" class="ui button">Uložiť</div>
+        <div (click)="back()" *ngIf="!disabled" class="ui button">Naspäť</div>
+        <div (click)="edit()" *ngIf="disabled" class="ui button">Upraviť</div>
+    </form>
+</div>
+<form *ngIf="selectedMovie" [formGroup]="movieForm">
+
+    <mat-card class="root-card">
+        <mat-card-title>Movie detail</mat-card-title>
+
+        <mat-card-content class="flex-row">
+            <app-movie-search (movieSearched)="setMovie($event)" *ngIf="isNew" class="full-width"></app-movie-search>
+            <div class="flex-row" style="flex-grow: 2">
+                <mat-card style="flex-grow: 1">
+                    <mat-card-subtitle>Osobné info</mat-card-subtitle>
+                    <mat-card-content>
+                        <mat-checkbox formControlName="saw">Videné</mat-checkbox>
+                        <br>
+                        <mat-checkbox formControlName="wantSee">Chcem vidieť</mat-checkbox>
+                        <br>
+                        <mat-form-field *ngIf="movieForm.value.csfdId || !disabled"
+                                        class="full-width">
+                            <input #csfdId
+                                   formControlName="csfdId"
+                                   matInput
+                                   placeholder="CSFD">
+                            <mat-icon (click)="movieService.openMovieExternal('csfd', csfdId.value)"
+                                      *ngIf="csfdId.value"
+                                      matSuffix
+                                      svgIcon="csfd">link
+                            </mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field *ngIf="movieForm.value.imdbId || !disabled"
+                                        class="full-width">
+                            <input #imdbId
+                                   formControlName="imdbId"
+                                   matInput
+                                   placeholder="IMDB">
+                            <mat-icon (click)="movieService.openMovieExternal('imdb', imdbId.value)"
+                                      *ngIf="imdbId.value"
+                                      matSuffix
+                                      svgIcon="imdb">
+                            </mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field *ngIf="movieForm.value.movieDbId || !disabled"
+                                        class="full-width">
+                            <input #movieDbId
+                                   formControlName="movieDbId"
+                                   matInput
+                                   placeholder="MovieDB">
+                            <mat-icon
+                                (click)="movieService.openMovieExternal('movieDb', movieDbId.value, selectedMovie.type)"
+                                *ngIf="movieDbId.value"
+                                matSuffix
+                                svgIcon="movieDb">link
+                            </mat-icon>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <app-movie-detail-basic-info (onYearChange)="movieForm.patchValue({year: $event}, {emitEvent: false})"
+                                             [movieForm]="movieForm"
+                                             style="flex-grow: 3;flex-basis: 200px;">
+                </app-movie-detail-basic-info>
+                <mat-card style="flex-grow: 3">
+                    <mat-card-content *ngIf="!disabled" class="full-width">
+                        <mat-form-field class="full-width">
+                            <mat-label>Obsah</mat-label>
+                            <textarea cdkAutosizeMaxRows="10"
+                                      cdkAutosizeMinRows="3"
+                                      cdkTextareaAutosize
+                                      formControlName="content"
+                                      matInput></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                    <ng-container *ngIf="disabled">
+                        <mat-card-subtitle>Obsah</mat-card-subtitle>
+                        <mat-card-content [innerHTML]="movieForm.value.content"></mat-card-content>
+                    </ng-container>
+                </mat-card>
+            </div>
+            <mat-card style="flex-grow: 1; overflow-y: auto">
+                <mat-list class="full-width">
+                    <h3 mat-subheader>Directors</h3>
+                    <mat-list-item *ngFor="let maker of selectedMovie.directors">
+                        <img *ngIf="maker.avatars && maker.avatars.length"
+                             [src]="maker.avatars"
+                             alt="..."
+                             matListAvatar>
+                        <h4 mat-line>{{maker.name}}</h4>
+                        <button (click)="movieService.openMakerExternal('csfd', maker.csfdId)"
+                                *ngIf="maker.csfdId"
+                                mat-icon-button>
+                            <mat-icon svgIcon="csfd"></mat-icon>
+                        </button>
+                        <button (click)="movieService.openMakerExternal('imdb', maker.imdbId)"
+                                *ngIf="maker.imdbId"
+                                mat-icon-button>
+                            <mat-icon svgIcon="imdb"></mat-icon>
+                        </button>
+                        <p *ngIf="maker.birthday" mat-line> {{maker.birthday}} </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <h3 mat-subheader>Makers</h3>
+                    <mat-list-item *ngFor="let maker of selectedMovie.makers">
+                        <img *ngIf="maker.avatars && maker.avatars.length"
+                             [src]="maker.avatars"
+                             alt="..."
+                             matListAvatar>
+                        <h4 mat-line>{{maker.name}}</h4>
+                        <button (click)="movieService.openMakerExternal('csfd', maker.csfdId)"
+                                *ngIf="maker.csfdId"
+                                mat-icon-button>
+                            <mat-icon svgIcon="csfd"></mat-icon>
+                        </button>
+                        <button (click)="movieService.openMakerExternal('imdb', maker.imdbId)"
+                                *ngIf="maker.imdbId"
+                                mat-icon-button>
+                            <mat-icon svgIcon="imdb"></mat-icon>
+                        </button>
+                        <p *ngIf="maker.birthday" mat-line> {{maker.birthday}} </p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button (click)="save()"
+                    *ngIf="!disabled"
+                    [disabled]="movieForm.invalid"
+                    color="primary"
+                    mat-raised-button>Uložiť
+            </button>
+            <button (click)="back()"
+                    *ngIf="!disabled" mat-raised-button>Naspäť
+            </button>
+            <button (click)="edit()" *ngIf="disabled" color="primary" mat-raised-button>Upraviť</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+

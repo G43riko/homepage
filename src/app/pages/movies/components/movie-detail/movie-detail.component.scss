@@ -1,0 +1,24 @@
+mat-checkbox {
+    margin: 0 10px;
+}
+
+.mat-icon[matsuffix] {
+    cursor: pointer;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.root-card {
+    display: flex;
+    height: calc(100vh - 64px);
+    flex-direction: column;
+
+    & > mat-card-content {
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+}

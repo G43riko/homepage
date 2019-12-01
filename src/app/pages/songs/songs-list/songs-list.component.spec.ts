@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { TestingModule } from "../../../tests/testing.module";
-import { SongsNavBarComponent } from "../components/nav-bar.component";
-import { SongControllerComponent } from "../components/song-controller/song-controller.component";
-import { SongsListComponent } from "./songs-list.component";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../tests/testing.module";
+import {SongsNavBarComponent} from "../components/nav-bar.component";
+import {SongControllerComponent} from "../components/song-controller/song-controller.component";
+import {SongsService} from "../songs.service";
+import {SongsListComponent} from "./songs-list.component";
 
 describe("SongsListComponent", () => {
     let component: SongsListComponent;
@@ -10,8 +11,11 @@ describe("SongsListComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports     : [
+            imports: [
                 TestingModule,
+            ],
+            providers: [
+                SongsService,
             ],
             declarations: [
                 SongControllerComponent,

@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Maker } from "../models/maker.model";
+import {Component, Input, OnInit} from "@angular/core";
+import {Maker} from "../../models/maker.model";
 
 declare const $: any;
 
 @Component({
     selector: "app-movie-makers",
-    templateUrl: "./movie-makers.component.html",
-    styleUrls: ["./movie-makers.component.scss"],
+    templateUrl: "./makers-list.component.html",
+    styleUrls: ["./makers-list.component.scss"],
 })
 
-export class MovieMakersComponent implements OnInit {
+export class MakersListComponent implements OnInit {
     @Input() public makers: Maker[] = [];
-    @Input() public disabled        = true;
+    @Input() public disabled = true;
     public activeMaker: Maker;
 
     public constructor() {

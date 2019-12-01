@@ -1,10 +1,12 @@
-import { MediaMatcher } from "@angular/cdk/layout";
-import { ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
+import {MediaMatcher} from "@angular/cdk/layout";
+import {ChangeDetectorRef, Component} from "@angular/core";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer} from "@angular/platform-browser";
 import {NavigationEnd, Router} from "@angular/router";
-import { AppConfig } from "./app.config";
-import { MenuItemModel } from "./shared/components/menu-item.model";
+import {AppConfig} from "./app.config";
+import {MenuItemModel} from "./shared/components/menu-item.model";
 import {AnalyticsService} from "./shared/services/analytics.service";
-import { AuthService } from "./shared/services/auth.service";
+import {AuthService} from "./shared/services/auth.service";
 
 @Component({
     selector: "app-root",
@@ -14,19 +16,25 @@ import { AuthService } from "./shared/services/auth.service";
 export class AppComponent {
     public mobileQuery: MediaQueryList;
     public menuItems: MenuItemModel[] = AppConfig.MENU_ITEMS;
-    public readonly title             = "Homepage-FE";
+    public readonly title = "Homepage-FE";
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,
                        private readonly media: MediaMatcher,
                        private readonly analyticsService: AnalyticsService,
                        private readonly router: Router,
-                       public readonly authService: AuthService) {
+                       public readonly authService: AuthService,
+                       matIconRegistry: MatIconRegistry,
+                       domSanitizer: DomSanitizer) {
         this.mobileQuery = media.matchMedia("(max-width: 600px)");
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 analyticsService.visitPage(event.urlAfterRedirects);
             }
         });
+
+        matIconRegistry.addSvgIcon("imdb", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_imdb.svg"));
+        matIconRegistry.addSvgIcon("csfd", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_csfd.svg"));
+        matIconRegistry.addSvgIcon("movieDb", domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/icon_movieDb.svg"));
 
     }
 

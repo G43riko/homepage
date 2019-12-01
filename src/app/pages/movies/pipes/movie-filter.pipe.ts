@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { StringUtils } from "gtools";
-import { Movie } from "../models/movie.model";
+import {Pipe, PipeTransform} from "@angular/core";
+import {StringUtils} from "gtools";
+import {Movie} from "../models/movie.model";
 
 @Pipe({
     name: "movieFilter",
@@ -12,8 +12,8 @@ export class MovieFilterPipe implements PipeTransform {
         }
         const transformedPattern = StringUtils.transformToBasicFormat(pattern);
         return movies.filter((movie) => {
-            return StringUtils.contains(StringUtils.transformToBasicFormat(movie.title), transformedPattern) ||
-                StringUtils.contains(StringUtils.transformToBasicFormat(movie.title_sk), transformedPattern);
+            return StringUtils.contains(StringUtils.transformToBasicFormat(movie.title || ""), transformedPattern) ||
+                StringUtils.contains(StringUtils.transformToBasicFormat(movie.titleSk || ""), transformedPattern);
         });
     }
 }

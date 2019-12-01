@@ -1,8 +1,8 @@
 export class Maker {
     public name: string;
-    public birthday: string;
-    public csfd: number;
-    public imdb: string;
-    public avatar: string;
+    public birthday: number;
+    public csfdId: number;
+    public imdbId: string;
+    public avatars: string[];
     public movieDb: string;
 }

@@ -1,85 +1,21 @@
-import { AppConfig } from "../../app.config";
+import {AppConfig} from "../../app.config";
+import {AbstractPaginator} from "./AbstractPaginator";
 
-export class Paginator<T = any> {
-    private static readonly _itemsPerPage = AppConfig.ITEMS_PER_PAGE;
-    private _actList: T[];
-    private readonly _lastPage: number;
-
-    public constructor(private readonly allItems: T[]) {
-        this._lastPage = allItems ? Math.floor(allItems.length / Paginator._itemsPerPage) : 0;
-        this._actList  = this._reCalcList();
+export class Paginator<T = any> extends AbstractPaginator<T> {
+    public constructor(private readonly allItems: T[],
+                       _itemsPerPage = AppConfig.ITEMS_PER_PAGE) {
+        super(_itemsPerPage);
+        this._lastPage = allItems ? Math.floor(allItems.length / this._itemsPerPage) : 0;
+        this._reCalcList();
     }
 
-    private _actualPage = 0;
-
-    public get actualPage(): number {
-        return this._actualPage + 1;
-    }
-
-    public get pages(): number {
-        return this._lastPage + 1;
-    }
-
-    public get pagesAround(): number[] {
-        if (this._actualPage < 2) {
-            return [1, 2, 3, 4, 5];
-        }
-        if (this._actualPage > this._lastPage - 3) {
-            return [this._lastPage - 3, this._lastPage - 2, this._lastPage - 1, this._lastPage, this._lastPage + 1];
-        }
-        return [this._actualPage - 1, this._actualPage, this._actualPage + 1, this._actualPage + 2, this._actualPage + 3];
-    }
-
-    public get length(): number {
-        return this.allItems.length;
-    }
-
-    public getList(): T[] {
-        return this._actList;
-    }
-
-    public nextPage(): T[] {
-        if (this._actualPage < this._lastPage) {
-            this._actualPage++;
-            return this._reCalcList();
-        }
-        return this.getList();
-    }
-
-    public setPage(page: number): T[] {
-        if (page >= 0 && page <= this._lastPage) {
-            this._actualPage = page;
-            return this._reCalcList();
-        }
-        return this.getList();
-    }
-
-    public previousPage(): T[] {
-        if (this._actualPage > 0) {
-            this._actualPage--;
-            return this._reCalcList();
-        }
-        return this.getList();
-    }
-
-    public firstPage(): T[] {
-        this._actualPage = 0;
+    public remove(index: number): void {
+        this.allItems.splice(index + this._actualPage * this._itemsPerPage, 1);
         return this._reCalcList();
     }
 
-    public lastPage(): T[] {
-        this._actualPage = this._lastPage;
-        return this._reCalcList();
-    }
-
-    private _reCalcList(): T[] {
-        const start = this._actualPage * Paginator._itemsPerPage;
-        this._actList = this.allItems ? this.allItems.slice(start, start + Paginator._itemsPerPage) : [];
-        return this._actList;
-    }
-
-    public remove(index: number): T[] {
-        this.allItems.splice(index + this._actualPage * Paginator._itemsPerPage, 1);
-        return this._reCalcList();
+    protected _reCalcList(): void {
+        const start = this._actualPage * this._itemsPerPage;
+        this.list.next(this.allItems ? this.allItems.slice(start, start + this._itemsPerPage) : []);
     }
 }
