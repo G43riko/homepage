@@ -20,6 +20,6 @@
     ],
     "theme_color": "#b92b27",
     "background_color": "#ffffff",
-    "start_url": "/#/",
+    "start_url": "/foods/",
     "display": "standalone"
 }
