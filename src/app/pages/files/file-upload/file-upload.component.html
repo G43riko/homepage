@@ -7,7 +7,7 @@
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="mapper">
                 <mat-option *ngFor="let account of accounts | async" [disabled]="user.uid === account.uid"
                             [value]="account">
-                    <img [src]="account.photoURL" aria-hidden class="example-option-img">
+                    <img [src]="account.photoURL" alt="account photo" aria-hidden class="example-option-img">
                     <span>{{account.displayName}}</span>
                     &nbsp; &nbsp
                     <small>{{account.email}}</small>

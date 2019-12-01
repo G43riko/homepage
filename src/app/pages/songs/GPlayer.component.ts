@@ -1,4 +1,4 @@
-import { MathUtils } from "gtools";
+import {MathUtils} from "gtools";
 
 declare let YT: any;
 declare let $: any;
@@ -141,7 +141,7 @@ export class GPlayer {
         this._player && this._player.pauseVideo();
     }
 
-    public play() {
+    public play(): void {
         this._player && this._player.playVideo();
     }
 

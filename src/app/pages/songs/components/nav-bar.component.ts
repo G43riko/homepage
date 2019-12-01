@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { TimeUtils } from "gtools";
-import { AudioPlayerModel } from "../models/audio-player.model";
-import { PlayerInterface } from "../models/player.interface";
-import { YoutubePlayerModel } from "../models/youtube-player.model";
+import {Component, OnInit} from "@angular/core";
+import {TimeUtils} from "gtools";
+import {AudioPlayerModel} from "../models/audio-player.model";
+import {PlayerInterface} from "../models/player.interface";
+import {YoutubePlayerModel} from "../models/youtube-player.model";
 
 @Component({
     selector: "songs-nav-bar",
@@ -11,8 +11,8 @@ import { YoutubePlayerModel } from "../models/youtube-player.model";
 })
 export class SongsNavBarComponent implements OnInit {
     public player: PlayerInterface;
-    public isPlaying                                   = false;
-    public isPaused                                    = false;
+    public isPlaying = false;
+    public isPaused = false;
     public duration                                    = "00:00";
     public numberDuration                              = 0;
     public elapsedValue                                = 0;
@@ -34,10 +34,10 @@ export class SongsNavBarComponent implements OnInit {
         });
     }
 
-    public playFrom(time: number): void {
-        this.player.setCurrentTime(time);
+    public playFrom(time: string): void {
+        this.player.setCurrentTime(Number(time));
         this.elapsedValue = this.player.getCurrentTime();
-        this.actDuration  = TimeUtils.getStringFromSeconds(parseInt(this.elapsedValue.toString(), 10));
+        this.actDuration = TimeUtils.getStringFromSeconds(parseInt(this.elapsedValue.toString(), 10));
         this.player.play();
     }
 

@@ -1,6 +1,6 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="example-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
+        <button (click)="snav.toggle()" mat-icon-button title="Toggle sidenav">
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="example-app-name">Welcome to Homepage-FE!</h1>

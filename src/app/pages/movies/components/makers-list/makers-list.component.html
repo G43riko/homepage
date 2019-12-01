@@ -23,7 +23,10 @@
                 <i class="icon remove"></i>
             </button>
         </div>
-        <img *ngIf="maker.avatars && maker.avatars.length" [src]="maker.avatars[0]" class="ui avatar image">
+        <img *ngIf="maker.avatars && maker.avatars.length"
+             [src]="maker.avatars[0]"
+             alt="maker avatar"
+             class="ui avatar image">
         <div class="content">
             <a (click)="showMakerDetail(maker)" class="header">{{maker.name}}</a>
             <div class="description">{{maker.birthday}}</div>

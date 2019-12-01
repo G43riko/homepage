@@ -10,17 +10,16 @@
             {{item}}
             <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
         </mat-chip>
-        <input
-            #itemInput
-            (focus)="onTouch(itemInput.value)"
-            (matChipInputTokenEnd)="add($event)"
-            [disabled]="disabled"
-            [formControl]="itemCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputAddOnBlur]="addOnBlur"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [placeholder]="placeholder">
+        <input #itemInput
+               (focus)="onTouch(itemInput.value)"
+               (matChipInputTokenEnd)="add($event)"
+               [disabled]="disabled"
+               [formControl]="itemCtrl"
+               [matAutocomplete]="auto"
+               [matChipInputAddOnBlur]="addOnBlur"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [placeholder]="placeholder">
     </mat-chip-list>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let item of filteredItems | async" [value]="item">

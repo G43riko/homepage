@@ -1,23 +1,23 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { SongsListComponent } from "./songs-list/songs-list.component";
-import { SongsComponent } from "./songs.component";
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {SongsListComponent} from "./songs-list/songs-list.component";
+import {SongsComponent} from "./songs.component";
 
 const routes: Routes = [
     {
-        path    : "",
+        path: "",
         children: [
             {
-                path     : "",
+                path: "",
                 pathMatch: "full",
                 component: SongsListComponent,
             },
             {
-                path     : ":id",
+                path: ":id",
                 component: SongsComponent,
             },
         ],
-    }
+    },
 ];
 
 @NgModule({

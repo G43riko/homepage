@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { NotificationService } from "../../shared/services/notification.service";
-import { SongsService } from "./songs.service";
-import { GPlayer } from "./GPlayer.component";
+import {Component, OnInit} from "@angular/core";
+import {NotificationService} from "../../shared/services/notification.service";
+import {GPlayer} from "./GPlayer.component";
+import {SongsService} from "./songs.service";
 
 declare let $: any;
 declare let window: any;

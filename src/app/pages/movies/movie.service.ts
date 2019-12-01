@@ -26,7 +26,7 @@ export class MovieService {
         this.router.navigateByUrl("/movies/" + movie_id);
     }
 
-    public openMakerExternal(source: MovieSource, id: number): Window | null {
+    public openMakerExternal(source: MovieSource, id: number | string): Window | null {
         switch (source) {
             case "csfd":
                 return window.open("https://www.csfd.cz/tvurce/" + id, "_blank");

@@ -4,12 +4,12 @@ import {MatDialog} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
-import {AbstractDetailComponent} from "../../../shared/components/abstract-detail.component";
-import {MapDialogComponent} from "../../../shared/components/map-dialog/map-dialog.component";
-import {Person} from "../../../shared/models/person/person.model";
-import {MapsService} from "../../../shared/services/maps.service";
-import {PersonService} from "../person.service";
-import {UtilsService} from "../../../shared/services/utils.service";
+import {AbstractDetailComponent} from "../../../../shared/components/abstract-detail.component";
+import {MapDialogComponent} from "../../../../shared/components/map-dialog/map-dialog.component";
+import {Person} from "../../../../shared/models/person/person.model";
+import {MapsService} from "../../../../shared/services/maps.service";
+import {UtilsService} from "../../../../shared/services/utils.service";
+import {PersonService} from "../../person.service";
 
 @Component({
     selector: "app-person-detail",

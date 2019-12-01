@@ -1,10 +1,10 @@
-import { HttpClientModule } from "@angular/common/http";
-import { async, TestBed } from "@angular/core/testing";
-import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule } from "@angular/router";
-import { forkJoin } from "rxjs";
-import { last } from "rxjs/operators";
-import { ScriptService, ScriptStore, StylesStore } from "./script.service";
+import {HttpClientModule} from "@angular/common/http";
+import {async, TestBed} from "@angular/core/testing";
+import {BrowserModule} from "@angular/platform-browser";
+import {RouterModule} from "@angular/router";
+import {forkJoin} from "rxjs";
+import {last} from "rxjs/operators";
+import {ScriptService, ScriptStore, StylesStore} from "./script.service";
 
 xdescribe("ScriptService", () => {
     let scriptService: ScriptService;
@@ -79,7 +79,7 @@ xdescribe("ScriptService", () => {
         ).pipe(last())
          .subscribe(() => {
              const cssLinks = window.document.querySelectorAll(
-                 `script[src="${ScriptStore.semantic}"][rel="stylesheet"][type="text/css"][media="all"]`
+                 `script[src="${ScriptStore.semantic}"][rel="stylesheet"][type="text/css"][media="all"]`,
              );
 
              expect(cssLinks.length).toEqual(1);

@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { SharedModule } from "../../../../shared/shared.module";
-import { AccountComponent } from "./account.component";
-import { CoreModule } from "../../../../shared/core.module";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {CoreModule} from "../../../../shared/core.module";
+import {SharedModule} from "../../../../shared/shared.module";
+import {AccountComponent} from "./account.component";
 
 describe("AccountComponent", () => {
     let component: AccountComponent;

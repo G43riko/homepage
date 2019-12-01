@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { MixesListComponent } from "./mixes-list.component";
+import {MixesListComponent} from "./mixes-list.component";
 
 describe("MixesListComponent", () => {
     let component: MixesListComponent;
@@ -8,7 +8,7 @@ describe("MixesListComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MixesListComponent]
+            declarations: [MixesListComponent],
         })
                .compileComponents();
     }));

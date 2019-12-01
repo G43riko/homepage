@@ -1,8 +1,8 @@
-import { TestBed } from "@angular/core/testing";
+import {TestBed} from "@angular/core/testing";
 
-import { AuthService } from "./auth.service";
-import { TestingModule } from "../../tests/testing.module";
-import { FirebaseModule } from "../modules/firebase.module";
+import {TestingModule} from "../../tests/testing.module";
+import {FirebaseModule} from "../modules/firebase.module";
+import {AuthService} from "./auth.service";
 
 describe("AuthService", () => {
     beforeEach(() => TestBed.configureTestingModule({

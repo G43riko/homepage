@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from "rxjs";
-import { fromPromise } from "rxjs/internal-compatibility";
-import { AuthService } from "../../../shared/services/auth.service";
-import { User } from "../../../shared/models/auth.model";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {AngularFireStorage} from "@angular/fire/storage";
+import {Observable} from "rxjs";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {User} from "../../../shared/models/auth.model";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
     selector: "app-my-files",

@@ -4,14 +4,15 @@
         <div style="display: flex">
             <div style="flex-grow: 1">
                 <mat-form-field class="full-width">
-                    <input formControlName="title" matInput placeholder="Názov">
+                    <input formControlName="title" label="Movie title" matInput placeholder="Názov">
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                    <input formControlName="titleSk" matInput placeholder="Slovenský názov">
+                    <input formControlName="titleSk" label="Movie titleSk" matInput placeholder="Slovenský názov">
                 </mat-form-field>
                 <mat-form-field class="full-width">
                     <input [matDatepicker]="picker"
+                           label="Movie year"
                            formControlName="year"
                            matInput
                            placeholder="Rok výroby">
@@ -27,7 +28,7 @@
             </div>
         </div>
         <mat-form-field class="full-width">
-            <input formControlName="duration" matInput placeholder="Trvanie" type="number">
+            <input formControlName="duration" label="Movie duration" matInput placeholder="Trvanie" type="number">
             <span matSuffix>min</span>
         </mat-form-field>
         <app-auto-chips [allItems]="countries" [placeholder]="'Krajna pôvodu'"

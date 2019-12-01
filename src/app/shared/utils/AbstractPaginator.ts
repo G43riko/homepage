@@ -6,7 +6,7 @@ export abstract class AbstractPaginator<T = any> {
     protected _lastPage = 0;
     protected _count = 0;
 
-    public constructor(protected readonly _itemsPerPage = AppConfig.ITEMS_PER_PAGE) {
+    protected constructor(protected readonly _itemsPerPage = AppConfig.ITEMS_PER_PAGE) {
     }
 
     protected _actualPage = 0;

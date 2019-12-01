@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { SongsService } from "../songs.service";
-import { SongsNavBarComponent } from "../components/nav-bar.component";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {SongsNavBarComponent} from "../components/nav-bar.component";
+import {SongsService} from "../songs.service";
 
 @Component({
     selector: "app-songs",
@@ -9,7 +9,7 @@ import { SongsNavBarComponent } from "../components/nav-bar.component";
 })
 export class SongsListComponent implements OnInit {
     public readonly titles = ["#", "Autory", "Názov", "Dĺžka (ms)", "Popularita", "Ukážka", "Video"];
-    public songs: any[]    = [];
+    public songs: any[] = [];
     @ViewChild(SongsNavBarComponent, {static: false}) private readonly _navComponent: SongsNavBarComponent;
 
     public constructor(private readonly songsService: SongsService) {

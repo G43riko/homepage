@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { SongsComponent } from "./songs.component";
-import { SongsModule } from "./songs.module";
-import { CoreModule } from "../../shared/core.module";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {CoreModule} from "../../shared/core.module";
+import {SongsComponent} from "./songs.component";
+import {SongsModule} from "./songs.module";
 
 describe("SongsComponent", () => {
     let component: SongsComponent;

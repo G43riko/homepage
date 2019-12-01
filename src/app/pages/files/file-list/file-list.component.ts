@@ -1,8 +1,8 @@
-import { Component, OnInit, QueryList, ViewChildren } from "@angular/core";
-import { AuthService } from "../../../shared/services/auth.service";
-import { Roles } from "../../../shared/enums/roles.enum";
-import { MyFilesComponent } from "../my-files/my-files.component";
-import { User } from "../../../shared/models/auth.model";
+import {Component, OnInit, QueryList, ViewChildren} from "@angular/core";
+import {Roles} from "../../../shared/enums/roles.enum";
+import {User} from "../../../shared/models/auth.model";
+import {AuthService} from "../../../shared/services/auth.service";
+import {MyFilesComponent} from "../my-files/my-files.component";
 
 @Component({
     selector: "app-file-list",

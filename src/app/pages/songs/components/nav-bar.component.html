@@ -10,7 +10,12 @@
     </div>
     <div id="button">
         <span id="slider">
-            <input #d (change)="playFrom(d.value)" max="{{numberDuration}}" step="0.1" type="range"
+            <input #d
+                   (change)="playFrom(d.value)"
+                   label="Song slider"
+                   max="{{numberDuration}}"
+                   step="0.1"
+                   type="range"
                    value="{{elapsedValue}}">
         </span>
         <div id="timeHolder">

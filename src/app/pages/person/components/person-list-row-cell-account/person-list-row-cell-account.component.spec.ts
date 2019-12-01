@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { PersonListRowCellAccountComponent } from "./person-list-row-cell-account.component";
+import {PersonListRowCellAccountComponent} from "./person-list-row-cell-account.component";
 
 describe("PersonListRowCellAccountComponent", () => {
   let component: PersonListRowCellAccountComponent;

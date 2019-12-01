@@ -126,7 +126,9 @@
             </div>
             <div class="four wide column middle aligned content" style="display: table-cell; text-align: center">
                 <div class="ui  segment">
-                    <img [src]="selectedMovie.avatar" style="width: 100%;">
+                    <img [src]="selectedMovie.avatar"
+                         alt="movie avatar"
+                         style="width: 100%;">
                 </div>
             </div>
         </div>
@@ -166,6 +168,7 @@
                         <mat-form-field *ngIf="movieForm.value.csfdId || !disabled"
                                         class="full-width">
                             <input #csfdId
+                                   label="Movie csfdId"
                                    formControlName="csfdId"
                                    matInput
                                    placeholder="CSFD">
@@ -179,6 +182,7 @@
                         <mat-form-field *ngIf="movieForm.value.imdbId || !disabled"
                                         class="full-width">
                             <input #imdbId
+                                   label="Movie imdbId"
                                    formControlName="imdbId"
                                    matInput
                                    placeholder="IMDB">
@@ -192,6 +196,7 @@
                         <mat-form-field *ngIf="movieForm.value.movieDbId || !disabled"
                                         class="full-width">
                             <input #movieDbId
+                                   label="Movie movieDbId"
                                    formControlName="movieDbId"
                                    matInput
                                    placeholder="MovieDB">
@@ -213,6 +218,7 @@
                         <mat-form-field class="full-width">
                             <mat-label>Obsah</mat-label>
                             <textarea cdkAutosizeMaxRows="10"
+                                      label="Movie content"
                                       cdkAutosizeMinRows="3"
                                       cdkTextareaAutosize
                                       formControlName="content"

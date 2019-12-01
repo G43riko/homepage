@@ -1,13 +1,13 @@
 <div class="ui container segment">
     <h2 class="ui header">About</h2>
     <div class="ui action input">
-        <input disabled type="email" value="{{email}}">
+        <input disabled label="Email" type="email" value="{{email}}">
         <a class="ui icon button" href="mailto:{{email}}">
             <i class="mail icon"></i>
         </a>
     </div>
     <div class="ui action input">
-        <input disabled type="tel" value="{{telNumber}}">
+        <input disabled label="Tel. number" type="tel" value="{{telNumber}}">
         <a class="ui icon button" href="tel:{{telNumber}}">
             <i class="call icon"></i>
         </a>
@@ -21,7 +21,7 @@
         </div>
     </a>
     <hr>
-    <select class="ui fluid dropdown" multiple="" name="skills">
+    <select class="ui fluid dropdown" label="Person skills" multiple="" name="skills">
         <option value="">Skills</option>
         <option value="angular">Angular</option>
         <option value="css">CSS</option>
@@ -49,7 +49,7 @@
         <div class="menu">
             <div class="ui icon search input">
                 <i class="search icon"></i>
-                <input placeholder="Search tags..." type="text">
+                <input labe="Search tags" placeholder="Search tags..." type="text">
             </div>
             <div class="divider"></div>
             <div class="header">

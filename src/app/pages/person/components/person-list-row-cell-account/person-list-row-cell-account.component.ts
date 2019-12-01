@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Account} from "../../../shared/models/person/account.model";
-import {Person} from "../../../shared/models/person/person.model";
+import {Account} from "../../../../shared/models/person/account.model";
+import {Person} from "../../../../shared/models/person/person.model";
 
 @Component({
     selector: "app-person-list-row-cell-account",

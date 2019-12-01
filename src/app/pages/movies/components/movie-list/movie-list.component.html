@@ -4,7 +4,11 @@
     <div class="ui icon input">
         <i class="search icon"></i>
         <!--        <input [(ngModel)]="searchPattern" placeholder="Search..." type="text">-->
-        <input #searchPatter (input)="paginator.search(searchPatter.value)" placeholder="Search..." type="text">
+        <input #searchPatter
+               (input)="paginator.search(searchPatter.value)"
+               label="Search key"
+               placeholder="Search..."
+               type="text">
     </div>
     <div class="ui mini buttons">
         <button (click)="setPreviewType('grid')" class="ui button">Grid</button>
@@ -17,7 +21,11 @@
     <tr>
         <th width="75px">
             <div class="ui checkbox">
-                <input type="checkbox" #selecteAllInput [(ngModel)]="selectedAll" (click)="selectAll(selecteAllInput)">
+                <input #selecteAllInput
+                       (click)="selectAll(selecteAllInput)"
+                       [(ngModel)]="selectedAll"
+                       label="Select all"
+                       type="checkbox">
                 <label></label>
             </div>
             <div class="ui compact icon button left pointing dropdown link item">
@@ -62,7 +70,10 @@
         <th></th>
         <td>
             <h4 class="ui image header">
-                <img *ngIf="movie.avatar" [src]="movie.avatar" class="ui tiny rounded image">
+                <img *ngIf="movie.avatar"
+                     [src]="movie.avatar"
+                     alt="movie avatar"
+                     class="ui tiny rounded image">
                 <div class="content">
                     {{movie.titleSk || movie.title}}
                     <div *ngIf="movie.titleSk" class="sub header">{{movie.title}}</div>

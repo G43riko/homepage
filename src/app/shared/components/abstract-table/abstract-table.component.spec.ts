@@ -1,5 +1,4 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {TestingModule} from "../../../tests/testing.module";
 import {MaterialModule} from "../../modules/material.module";
 
 import {AbstractTableComponent} from "./abstract-table.component";

@@ -1,11 +1,11 @@
 import {CommonModule} from "@angular/common";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {MaterialModule} from "../../../shared/modules/material.module";
 import {SharedPipesModule} from "../../../shared/pipes/shared-pipes.module";
 import {TestingModule} from "../../../tests/testing.module";
-import {PersonListRowCellSelectComponent} from "../../person/person-list-row-cell-select/person-list-row-cell-select.component";
+import {PersonListRowCellSelectComponent} from "../../person/components/person-list-row-cell-select/person-list-row-cell-select.component";
 
-import { FileUploadComponent } from "./file-upload.component";
+import {FileUploadComponent} from "./file-upload.component";
 
 describe("FileUploadComponent", () => {
     let component: FileUploadComponent;

@@ -1,14 +1,14 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { AuthService } from "../auth.service";
-import { NotificationService } from "./notification.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable, of} from "rxjs";
+import {AuthService} from "../auth.service";
+import {NotificationService} from "./notification.service";
 
 @Injectable()
 export abstract class AbstractHttpService {
-    constructor(protected readonly http: HttpClient,
-                private readonly _authService: AuthService,
-                private readonly _notificationService: NotificationService) {
+    protected constructor(protected readonly http: HttpClient,
+                          private readonly _authService: AuthService,
+                          private readonly _notificationService: NotificationService) {
     }
 
     protected handleError<T>(operation = "operation", result?: T): (error: any) => Observable<T> {

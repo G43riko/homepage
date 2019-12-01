@@ -9,6 +9,7 @@
             <mat-icon *ngIf="!disabled" matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input (matChipInputTokenEnd)="add($event)"
+               label="Email"
                [matChipInputAddOnBlur]="addOnBlur"
                [matChipInputFor]="chipList"
                [formControl]="values"

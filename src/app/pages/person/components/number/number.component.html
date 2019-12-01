@@ -7,7 +7,8 @@
             {{number.number}}
             <mat-icon matChipRemove *ngIf="!disabled">cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Tel čísla:"
+        <input label="Tel. number"
+               placeholder="Tel čísla:"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="addOnBlur"

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Paginator } from "../../utils/Paginator";
+import {Component, Input, OnInit} from "@angular/core";
+import {AbstractPaginator} from "../../utils/AbstractPaginator";
 
 @Component({
     selector: "app-paginator",
@@ -8,7 +8,7 @@ import { Paginator } from "../../utils/Paginator";
 })
 
 export class PaginatorComponent implements OnInit {
-    @Input() public paginator: Paginator;
+    @Input() public paginator: AbstractPaginator;
 
     public ngOnInit(): void {
     }
