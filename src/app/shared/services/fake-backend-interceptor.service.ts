@@ -2,12 +2,15 @@ import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {delay, dematerialize, materialize, mergeMap} from "rxjs/operators";
-import {MovieDetailMock, MovieListMock, SongListMock, UserDetailMock, UserListMock} from "../../tests/mock.data";
+import {SongListMock, UserDetailMock, UserListMock} from "../../tests/mock.data";
+import {MoviesFixture} from "../../tests/movies.fixture";
+import {SimpleMemoryDatabaseService} from "../../tests/simple-memory-database.service";
 
 const data: any[]  = [...UserDetailMock];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
+    private readonly moviesDatabase = new SimpleMemoryDatabaseService(new MoviesFixture());
     public constructor() {
     }
 
@@ -48,12 +51,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (request.url.match(/\/movies\/list/g) && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: MovieListMock,
+                    status: 200, body: this.moviesDatabase.getList(),
                 }));
             }
-            if (request.url.endsWith("/movies/TestMovieId") && request.method === "GET") {
+            if (request.url.match(/\/\d+$/) && request.method === "GET") {
+                const splitUrl = request.url.split("/");
+                const id = splitUrl[splitUrl.length - 1];
                 return of(new HttpResponse({
-                    status: 200, body: MovieDetailMock,
+                    status: 200, body: this.moviesDatabase.getDetail(id),
                 }));
             }
 
