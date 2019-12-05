@@ -20,6 +20,7 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
     public selectedPerson: Person;
     public personForm: FormGroup;
     public timer: any;
+    public loading = false;
     public readonly countries: string[] = [];
     public filteredCountries: Observable<string[]>;
 
@@ -43,6 +44,8 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
                 map((value) => this._filter(value)),
             );
         });
+
+        this.loading = true;
 
         this.route.params.subscribe((data) => {
             const actId = data["id"];
@@ -112,6 +115,7 @@ export class PersonDetailComponent extends AbstractDetailComponent implements On
 
     private processChangedData(data: Person, options?: { disabled?: boolean }): void {
         this.selectedPerson = data;
+        this.loading = false;
         this.personForm.setValue(this.selectedPerson.toModel(), {onlySelf: true});
         this.disabled = options && typeof options.disabled === "boolean" ? options.disabled : true;
 

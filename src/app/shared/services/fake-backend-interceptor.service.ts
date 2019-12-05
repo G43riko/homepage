@@ -1,22 +1,36 @@
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
+import {
+    HTTP_INTERCEPTORS,
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+    HttpResponse
+} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
-import {delay, dematerialize, materialize, mergeMap} from "rxjs/operators";
+import {delay, dematerialize, materialize, mergeMap, tap} from "rxjs/operators";
+import {AbstractRestApiHandler} from "../../tests/abstract-rest-api.handler";
 import {SongListMock, UserDetailMock, UserListMock} from "../../tests/mock.data";
 import {MoviesFixture} from "../../tests/movies.fixture";
 import {SimpleMemoryDatabaseService} from "../../tests/simple-memory-database.service";
+import {MakersFixture} from "../../tests/maker.fixture";
 
 const data: any[]  = [...UserDetailMock];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-    private readonly moviesDatabase = new SimpleMemoryDatabaseService(new MoviesFixture());
+    private readonly movieRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MoviesFixture()), "movies");
+    private readonly makerRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MakersFixture()), "movies/maker");
     public constructor() {
     }
 
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+            if (request.url.indexOf("assets/") >= 0 && request.method === "GET") {
+                return next.handle(request);
+            }
+
             if (request.url.endsWith("/persons/list") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock, ...UserListMock],
@@ -48,21 +62,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     status: 200, body: data[newId],
                 }));
             }
-
-            if (request.url.match(/\/movies\/list/g) && request.method === "GET") {
-                return of(new HttpResponse({
-                    status: 200, body: this.moviesDatabase.getList(),
-                }));
+            const makersResult = this.makerRestApi.use(request);
+            if (makersResult) {
+                return makersResult.pipe(tap((e) => console.log(request.url, e)));
             }
-            if (request.url.match(/\/\d+$/) && request.method === "GET") {
-                const splitUrl = request.url.split("/");
-                const id = splitUrl[splitUrl.length - 1];
-                return of(new HttpResponse({
-                    status: 200, body: this.moviesDatabase.getDetail(id),
-                }));
+            const moviesResult = this.movieRestApi.use(request);
+            if (moviesResult) {
+                return moviesResult.pipe(tap((e) => console.log(request.url, e)));
             }
 
-            if (request.url.endsWith("/utils/countries/list") && request.method === "GET") {
+            if (request.url.endsWith("/utils/countries") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [
                         "SK", "HU", "USA",
@@ -70,7 +79,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }));
             }
 
-            if (request.url.endsWith("/movies/genres/list") && request.method === "GET") {
+            if (request.url.endsWith("/movies/genres") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [
                         "akcny", "komedie", "krimy", "thriller",
@@ -83,11 +92,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     status: 200, body: SongListMock,
                 }));
             }
-
-            if (request.url.match(/.*/g)) {
-                console.log("vola sa to", request.url, request.method);
-                return of(new HttpResponse({status: 200, body: {}}));
-            }
+            console.log("vola sa to", request.url, request.method);
+            // if (request.url.match(/.*/g)) {
+            //     console.log("vola sa to", request.url, request.method);
+            //     return of(new HttpResponse({status: 200, body: {}}));
+            // }
 
             // pass through any requests not handled above
             return next.handle(request);

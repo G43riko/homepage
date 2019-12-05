@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
-import { AnnotatedPaginateModel } from "./models/annotated-paginate.model";
+import {PaginateModel} from "../shared/models/paginate.model";
 
 export abstract class AbstractDatabaseService<T> {
     public abstract create(object: T): Observable<T>;
 
-    public abstract getList(paginate?: AnnotatedPaginateModel): Observable<T[]>;
+    public abstract getList(paginate?: PaginateModel): Observable<T[]>;
 
-    public abstract search(key: string, paginate?: AnnotatedPaginateModel): Observable<T[]>;
+    public abstract search(key: string, paginate?: PaginateModel): Observable<T[]>;
 
     public abstract getCount(): Observable<number>;
 

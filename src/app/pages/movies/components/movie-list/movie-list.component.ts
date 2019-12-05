@@ -1,5 +1,9 @@
 import {Component, OnInit} from "@angular/core";
+import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
+import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {ApiPaginator} from "../../../../shared/utils/ApiPaginator";
 import {Movie} from "../../models/movie.model";
@@ -19,15 +23,75 @@ export class MovieListComponent implements OnInit {
     public readonly paginator: ApiPaginator<Movie>;
     public searchPattern: string;
 
+    public movieData: Observable<Movie[]>;
+    public readonly movieConfig: TableConfig = {
+        selection: "multi",
+        paginateOptions: [5, 10, 20, 50, 100],
+        pageSize: 10,
+        stickyEnd: 7,
+        paginator: false,
+        columns: [
+            {
+                name: "title",
+                label: "Názov",
+            },
+            {
+                name: "directors",
+                label: "Režisér",
+                customContent: (row: Movie) => row.directors.map((director) => director.name).join(", "),
+            },
+            {
+                name: "year",
+                label: "Rok",
+            },
+            {
+                name: "rating",
+                label: "Hodnotenie",
+                customContent: (row: Movie) => row.rating + " %",
+            },
+            {
+                name: "duration",
+                label: "Dĺžka",
+                customContent: (row: Movie) => row.duration + " min",
+            },
+            {
+                name: "genres",
+                label: "Žánre",
+                customContent: (row: Movie) => row.genres.join(", "),
+            },
+            {
+                name: "countries",
+                label: "Krajny",
+                customContent: (row: Movie) => row.countries.join(", "),
+            },
+            {
+                name: "external",
+                label: "",
+            },
+            {
+                name: "detail",
+                label: "",
+            },
+        ],
+    };
+
     public constructor(movieHttpService: MovieHttpService,
+                       private readonly dialog: MatDialog,
                        private readonly router: Router,
                        public readonly movieService: MovieService,
                        private readonly notificationService: NotificationService) {
         this.paginator = new ApiPaginator(movieHttpService, {pageSize: 10});
+        this.movieData = movieHttpService.getMovies();
 
     }
 
     public ngOnInit(): void {
+    }
+
+    public openImageDetail(url: string): void {
+        this.dialog.open(ImageDialogComponent, {
+            data: url,
+        });
     }
 
     public setPreviewType(previewType: "table" | "grid"): void {
@@ -54,10 +118,6 @@ export class MovieListComponent implements OnInit {
         for (let i = 0; i < elements.length; i++) {
             elements[i].checked = !this.selectedAll;
         }
-    }
-
-    public showDetail(movie_id: number | string): void {
-        this.router.navigateByUrl("/movies/" + movie_id);
     }
 
     public createNew(): void {

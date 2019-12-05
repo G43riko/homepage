@@ -1,0 +1,24 @@
+<app-abstract-table [data]="makersData"
+                    [templates]="{name: cellName, external: cellExternal, detail: cellDetail, birthday: cellBirthday}"
+                    [tableConfig]="makerConfig"></app-abstract-table>
+
+<ng-template #cellName let-row="row">
+    <div style="display: flex; flex-direction: row; align-items: center">
+        <img *ngIf="row.avatars[0]"
+             [src]="row.avatars[0]"
+             (click)="openImageDetail(row.avatars[0])"
+             alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
+        <strong>{{row.name}}</strong>
+    </div>
+</ng-template>
+<ng-template #cellExternal let-row="row">
+    <app-external-links type="movie" [holder]="row"></app-external-links>
+</ng-template>
+<ng-template #cellBirthday let-row="row">
+    {{row.birthday | date:"dd.MM.yyyy"}}
+</ng-template>
+<ng-template #cellDetail let-row="row">
+    <button (click)="movieService.showMakerDetail(row.id)" class="circular ui icon button hiddenable">
+        <i class="icon angle right"></i>
+    </button>
+</ng-template>

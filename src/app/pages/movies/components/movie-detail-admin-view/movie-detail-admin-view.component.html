@@ -105,7 +105,7 @@
             <td>{{value | date:"yyyy"}}</td>
         </ng-container>
         <ng-container *ngSwitchCase="'imageFirst'">
-            <td><img [src]="value[0]" alt="Image poster" style="height: 180px"></td>
+            <td><img [src]="value" alt="Image poster" style="height: 180px"></td>
         </ng-container>
         <ng-container *ngSwitchCase="'arrayLength'">
             <td>{{value?.length || 0}}</td>

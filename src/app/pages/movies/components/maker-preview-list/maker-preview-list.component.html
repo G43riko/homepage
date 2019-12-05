@@ -1,0 +1,13 @@
+<mat-list-item>
+    <img *ngIf="maker.avatars && maker.avatars.length"
+         [src]="maker.avatars[0]"
+         style="cursor: pointer"
+         alt="..."
+         (click)="openImageDetail(maker.avatars[0])"
+         matListAvatar>
+    <h4 mat-line
+        style="cursor: pointer"
+        (click)="movieService.showMakerDetail(maker.id)">{{maker.name}}</h4>
+    <app-external-links type="maker" [holder]="maker"></app-external-links>
+    <p *ngIf="maker.birthday" mat-line> {{maker.birthday | date:"dd.MM.yyyy"}} </p>
+</mat-list-item>

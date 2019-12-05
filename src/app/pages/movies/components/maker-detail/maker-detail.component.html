@@ -1,29 +1,9 @@
 <div *ngIf="selectedMaker">
-    <!--
-    <div class="ui medium image">
-        <img [src]="selectedMaker.avatar">
-    </div>
-    -->
+    <img [src]="selectedMaker.avatars[0]">
     <h1>{{selectedMaker.name}}</h1>
     <h3>{{selectedMaker.birthday}}</h3>
     <div class="description">
-        <div>
-            <button *ngIf="selectedMaker.csfdId"
-                    [appExternalMaker]="{type: 'csfd', id: selectedMaker.csfdId}"
-                    class="ui blue basic button">
-                CSFD
-            </button>
-            <button *ngIf="selectedMaker.imdbId"
-                    [appExternalMaker]="{type: 'imdb', id: selectedMaker.imdbId}"
-                    class="ui blue basic button">
-                IMDB
-            </button>
-            <button *ngIf="selectedMaker.movieDb"
-                    [appExternalMaker]="{type: 'movieDb', id: selectedMaker.movieDb}"
-                    class="ui blue basic button">
-                MovieDB
-            </button>
-        </div>
+        <app-external-links type="maker" [holder]="selectedMaker"></app-external-links>
         <div class="ui header">We've auto-chosen a profile image for you.</div>
         <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a>
             image

@@ -14,7 +14,6 @@ import {MovieHttpService} from "../../movie-http.service";
 export class MakerDetailComponent extends AbstractDetailComponent implements OnInit {
     @Input() public selectedMaker: Maker;
     public isDisabled = true;
-    public selectedMovie: Maker;
     public isNew: boolean;
     public readonly makerForm = this.formBuilder.group({});
 
@@ -29,11 +28,12 @@ export class MakerDetailComponent extends AbstractDetailComponent implements OnI
         this.route.params.subscribe((data: any) => {
             const actId = data["id"];
             if (actId === "new") {
-                this.selectedMovie = new Maker();
+                this.selectedMaker = new Maker();
                 this.isNew = true;
             } else {
                 this.movieHttpService.getMakerDetail(actId).subscribe((maker: Maker) => {
-                    this.selectedMovie = maker;
+                    console.log("selected maker: ", maker);
+                    this.selectedMaker = maker;
                     this.makerForm.patchValue({
                         ...maker,
                         year: new Date(maker.birthday),

@@ -1,0 +1,47 @@
+<ng-container *ngIf="type === 'maker'">
+    <button (click)="movieService.openMakerExternal('csfd', holder.csfdId)"
+            *ngIf="holder.csfdId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="csfd"></mat-icon>
+    </button>
+    <button (click)="movieService.openMakerExternal('imdb', holder.imdbId)"
+            *ngIf="holder.imdbId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="imdb"></mat-icon>
+    </button>
+    <button (click)="movieService.openMakerExternal('movieDb', holder.movieDbId)"
+            *ngIf="holder.movieDbId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="movieDb"></mat-icon>
+    </button>
+</ng-container>
+<ng-container *ngIf="type === 'movie'">
+    <button (click)="movieService.openMovieExternal('csfd', holder.csfdId)"
+            *ngIf="holder.csfdId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="csfd"></mat-icon>
+    </button>
+    <button (click)="movieService.openMovieExternal('imdb', holder.imdbId)"
+            *ngIf="holder.imdbId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="imdb"></mat-icon>
+    </button>
+    <button (click)="movieService.openMovieExternal('movieDb', holder.movieDbId, holder.type)"
+            *ngIf="holder.movieDbId"
+            aria-label="Example icon-button with a heart icon"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="movieDb"></mat-icon>
+    </button>
+
+</ng-container>

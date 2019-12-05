@@ -16,11 +16,10 @@ export class UtilsService extends AbstractHttpService {
     }
 
     public getCountries(): Observable<string[]> {
-        return this.http.get<string[]>(AppConfig.BASE_URL + "/utils/countries/list", {
+        return this.http.get<string[]>(AppConfig.BASE_URL + "/utils/countries", {
             headers: this.getHeaders(),
         }).pipe(
             catchError(this.handleError<string[]>("getCountries")),
         );
     }
-
 }

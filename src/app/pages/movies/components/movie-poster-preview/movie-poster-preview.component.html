@@ -12,27 +12,7 @@
     </div>
     <div [innerHTML]="movie.content" class="content"></div>
     <div class="footer">
-        <button (click)="movieService.openMovieExternal('csfd', movie.csfdId)"
-                *ngIf="movie.csfdId"
-                aria-label="Example icon-button with a heart icon"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="csfd"></mat-icon>
-        </button>
-        <button (click)="movieService.openMovieExternal('imdb', movie.imdbId)"
-                *ngIf="movie.imdbId"
-                aria-label="Example icon-button with a heart icon"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="imdb"></mat-icon>
-        </button>
-        <button (click)="movieService.openMovieExternal('movieDb', movie.movieDbId, movie.type)"
-                *ngIf="movie.movieDbId"
-                aria-label="Example icon-button with a heart icon"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="movieDb"></mat-icon>
-        </button>
+        <app-external-links type="movie" [holder]="movie"></app-external-links>
         <button (click)="movieService.showMovieDetail(movie.id)"
                 aria-label="Example icon-button with a heart icon"
                 class="detail"

@@ -35,6 +35,7 @@ export class PersonListComponent implements OnInit {
         // }, (error) => this.notificationService.openErrorNotification(error));
 
         this.personConfig = {
+            stickyEnd: 3,
             columns: [
                 {
                     name: "contacts",

@@ -23,7 +23,7 @@ export class MovieHttpService extends AbstractHttpService implements PaginatorSe
 
     public getMovies(): Observable<Movie[]> {
         return this.http.get<Movie[]>(URL + "/?limit=1000").pipe(
-            catchError(this.handleError<Movie[]>("getPMovies")),
+            catchError(this.handleError<Movie[]>("getMovies")),
         );
     }
 
@@ -45,14 +45,6 @@ export class MovieHttpService extends AbstractHttpService implements PaginatorSe
         );
     }
 
-    public getCountries(): Observable<string[]> {
-        return this.http.get<string[]>(AppConfig.BASE_URL + "/utils/countries", {
-            headers: this.getHeaders(),
-        }).pipe(
-            catchError(this.handleError<string[]>("getCountries")),
-        );
-    }
-
     public getGenres(): Observable<string[]> {
         return this.http.get<string[]>(URL + "/genres", {
             headers: this.getHeaders(),
@@ -68,7 +60,7 @@ export class MovieHttpService extends AbstractHttpService implements PaginatorSe
             );
         }
         return this.http.get<Movie[]>(`${URL}/list?count=${count}&offset=${offset}`).pipe(
-            catchError(this.handleError<Movie[]>("getPMovies")),
+            catchError(this.handleError<Movie[]>("getList")),
         );
     }
 

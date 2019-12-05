@@ -1,8 +1,10 @@
 import {NgModule} from "@angular/core";
 import {CoreModule} from "../../shared/core.module";
 import {SharedModule} from "../../shared/shared.module";
+import {ExternalLinksComponent} from "./components/external-links/external-links.component";
 import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
-import {MakersListComponent} from "./components/makers-list/makers-list.component";
+import {MakerListComponent} from "./components/maker-list/maker-list.component";
+import {MakerPreviewListComponent} from "./components/maker-preview-list/maker-preview-list.component";
 import {MovieDetailAdminViewComponent} from "./components/movie-detail-admin-view/movie-detail-admin-view.component";
 import {MovieDetailBasicInfoComponent} from "./components/movie-detail-basic-info/movie-detail-basic-info.component";
 import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
@@ -28,9 +30,11 @@ import {MovieFilterPipe} from "./pipes/movie-filter.pipe";
         MovieListComponent,
         MovieSearchComponent,
         MovieDetailAdminViewComponent,
-        MakersListComponent,
+        MakerPreviewListComponent,
+        MakerListComponent,
         MovieFilterPipe,
         MoviePosterPreviewComponent,
+        ExternalLinksComponent,
         MovieDetailBasicInfoComponent,
         MakerDetailComponent,
         MovieDetailComponent,

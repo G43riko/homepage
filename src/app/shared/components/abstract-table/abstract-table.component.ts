@@ -1,8 +1,17 @@
 import {SelectionModel} from "@angular/cdk/collections";
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild} from "@angular/core";
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewChild
+} from "@angular/core";
 import {MatPaginator, MatSort, Sort} from "@angular/material";
 import {merge, Observable, of} from "rxjs";
-import {catchError, delay, map, startWith, switchMap} from "rxjs/operators";
+import {catchError, delay, finalize, map, startWith, switchMap, tap} from "rxjs/operators";
 import {ColumnConfig} from "./column-config";
 import {TableConfig} from "./table-config";
 
@@ -23,7 +32,7 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     public resultsLength = 0;
     public isLoadingResults = true;
 
-    public constructor() {
+    public constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
     }
 
     public get pageSize(): number {
@@ -60,7 +69,11 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     }
 
     private transformData(data: any[]): any[] {
-        return this.paginateData(this.sortData([...data], this.sort), this.paginator);
+        const result = this.sortData([...data], this.sort);
+        if (this.tableConfig.paginator) {
+            return this.paginateData(result, this.paginator);
+        }
+        return result;
     }
 
     public ngAfterViewInit(): void {
@@ -92,16 +105,17 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
                         totalLength: this.data.length,
                     }).pipe(delay(100));
                 }
-                return this.data.pipe(map((data) => ({
-                        data: this.transformData(data),
-                        totalLength: data.length,
-                    }
-                )));
+                return this.data.pipe(
+                    map((data) => ({
+                            data: this.transformData(data),
+                            totalLength: data.length,
+                        }),
+                        tap(() => this.changeDetectorRef.detectChanges()),
+                    ));
             }),
             map((data: { data: T[], totalLength: number }) => {
-                this.isLoadingResults = false;
                 this.resultsLength = data.totalLength;
-
+                this.isLoadingResults = false;
                 return data.data;
             }),
             catchError(() => {

@@ -1,4 +1,5 @@
 import {Movie} from "../pages/movies/models/movie.model";
+import {ImageUtils} from "../shared/utils/image.utils";
 import {AbstractFixture} from "./abstract.fixture";
 
 export class MoviesFixture extends AbstractFixture<Movie> {
@@ -16,20 +17,22 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                 countries: ["SK", "HU"],
                 makers: [
                     {
+                        id: 1,
                         name: "Test movie maker1",
                         birthday: "1995-05-23",
-                        csfdId: 44444,
+                        csfdId: 21,
                         imdbId: "TestMovieMaker1ImdbId",
-                        movieDb: "TestMovieMaker1MoviedbId",
-                        avatars: ["TestMovieMaker1Avatar.jpg"],
+                        movieDbId: 31,
+                        avatars: [ImageUtils.getTemplate("avatar")],
                     },
                     {
+                        id: 2,
                         name: "Test movie maker2",
                         birthday: "1995-05-23",
-                        csfdId: 5555,
+                        csfdId: 22,
                         imdbId: "TestMovieMaker2ImdbId",
-                        movieDb: "TestMovieMaker2MoviedbId",
-                        avatars: ["TestMovieMaker2Avatar.jpg"],
+                        movieDbId: 32,
+                        avatars: [ImageUtils.getTemplate("avatar")],
                     },
                 ],
                 year: 1999,
@@ -38,8 +41,18 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                 tags: [],
                 saw: false,
                 want_see: true,
-                avatar: "somAvatar",
-                directors: [],
+                avatar: ImageUtils.getTemplate("avatar"),
+                directors: [
+                    {
+                        id: 3,
+                        name: "Test movie director",
+                        birthday: "1995-05-23",
+                        csfdId: 23,
+                        imdbId: "TestMovieDirector1ImdbId",
+                        movieDbId: 33,
+                        avatars: [ImageUtils.getTemplate("avatar")],
+                    },
+                ],
                 type: "movie",
                 duration: 213,
             },

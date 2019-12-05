@@ -9,8 +9,6 @@ import {Movie} from "../../models/movie.model";
 import {MovieHttpService} from "../../movie-http.service";
 import {MovieService} from "../../movie.service";
 
-declare const $: any;
-
 @Component({
     selector: "app-movie-detail",
     templateUrl: "./movie-detail.component.html",
@@ -67,8 +65,6 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
     public setDisabled(value: boolean): void {
         this.disabled = value;
         value ? this.movieForm.disable() : this.movieForm.enable();
-        const elements = $(".ui.dropdown.search");
-        value ? elements.addClass("disabled") : elements.removeClass("disabled");
     }
 
     public setMovie(movie: Movie): void {
@@ -81,8 +77,6 @@ export class MovieDetailComponent extends AbstractDetailComponent implements OnI
 
     public save(): void {
         console.log(this.movieForm.value);
-        const genres = $(".ui.dropdown.search.genres").dropdown("get values");
-        const countries = $(".ui.dropdown.search.countries").dropdown("get values");
         this.disabled = true;
     }
 

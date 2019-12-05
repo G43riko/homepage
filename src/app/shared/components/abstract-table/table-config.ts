@@ -6,6 +6,8 @@ export interface TableConfig {
     paginateOptions?: number[];
     paginator?: boolean;
     stickyHeader?: boolean;
+    stickyStart?: number;
+    stickyEnd?: number;
     selection?: "" | "single" | "multi";
     selectOptions?: {
         icon?: string;

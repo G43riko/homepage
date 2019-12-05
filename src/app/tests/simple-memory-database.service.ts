@@ -23,6 +23,10 @@ export class SimpleMemoryDatabaseService<T extends { id: any }> extends Abstract
         return of([]);
     }
 
+    public getCount(): Observable<number> {
+        return of(this.data.length);
+    }
+
     public getList(paginate?: PaginateModel): Observable<T[]> {
         const validPaginator = PaginateModel.validate(paginate);
         return of(
@@ -30,10 +34,6 @@ export class SimpleMemoryDatabaseService<T extends { id: any }> extends Abstract
                 .filter((e, i) => i >= validPaginator.offset)
                 .filter((e, i) => i < validPaginator.limit),
         );
-    }
-
-    public getCount(): Observable<number> {
-        return of(this.data.length);
     }
 
     public clear(): Observable<any> {

@@ -4,6 +4,7 @@ import {MatDatepicker} from "@angular/material/datepicker";
 import {forkJoin} from "rxjs";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {MovieHttpService} from "../../movie-http.service";
+import {UtilsService} from "../../../../shared/services/utils.service";
 
 @Component({
     selector: "app-movie-detail-basic-info",
@@ -17,6 +18,7 @@ export class MovieDetailBasicInfoComponent implements OnInit {
     public countries: string[] = [];
 
     public constructor(private readonly notificationService: NotificationService,
+                       private readonly utilsService: UtilsService,
                        private readonly movieHttpService: MovieHttpService,
     ) {
     }
@@ -27,7 +29,7 @@ export class MovieDetailBasicInfoComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        const countries$ = this.movieHttpService.getCountries();
+        const countries$ = this.utilsService.getCountries();
         const genres$ = this.movieHttpService.getGenres();
         forkJoin([countries$, genres$]).subscribe(([countries, genres]) => {
             this.countries = countries;

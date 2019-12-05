@@ -19,111 +19,32 @@
         <input [(ngModel)]="showExternalServices" id="idShowExternalServices" name="example" type="checkbox">
         <label for="idShowExternalServices">Zobraziť externé služby</label>
     </div>
-    <table class="ui celled striped selectable table hoverable">
-        <thead>
-        <tr>
-            <th width="75px">
-                <div class="ui checkbox">
-                    <input #selecteAllInput
-                           (click)="selectAll(selecteAllInput)"
-                           [(ngModel)]="selectedAll"
-                           label="Select all"
-                           type="checkbox">
-                    <label></label>
-                </div>
-                <div class="ui compact icon button left pointing dropdown link item">
-                    <i class="ellipsis vertical icon"></i>
-                    <div class="menu">
-                        <div class="header">Označené:</div>
-                        <div class="item">Zmazať</div>
-                        <div class="divider"></div>
-                        <div class="item">Pridať tag</div>
-                    </div>
-                </div>
-            </th>
-            <th>Názov</th>
-            <th>Režisér</th>
-            <th>Rok</th>
-            <th>Hodnotenie</th>
-            <th>Dĺžka</th>
-            <th>Žánre</th>
-            <!--<th width="110px"></th>-->
-            <th *ngIf="showExternalServices">CSFD</th>
-            <th *ngIf="showExternalServices">IMDB</th>
-            <th *ngIf="showExternalServices">MOVIE DB</th>
-        </tr>
-        </thead>
-        <!--
-        <tr>
-            <th></th>
-            <td>Temný rytier</td>
-            <td>Christopher Nolan</td>
-            <td>2009</td>
-            <td>136 min</td>
-            <td>Akčný / Thriller</td>
-            <td>
-                <button>CSFD</button>
-                <button>IMDB</button>
-                <button>MOVIE DB</button>
-            </td>
-        </tr>
-        -->
-        <tbody *ngIf="paginator">
-        <tr (click)="showDetail(movie.id)" *ngFor="let movie of paginator.list | async | movieFilter: searchPattern">
-            <th></th>
-            <td>
-                <h4 class="ui image header">
-                    <img *ngIf="movie.avatar"
-                         [src]="movie.avatar"
-                         alt="movie avatar"
-                         class="ui tiny rounded image">
-                    <div class="content">
-                        {{movie.titleSk || movie.title}}
-                        <div *ngIf="movie.titleSk" class="sub header">{{movie.title}}</div>
-                    </div>
-                </h4>
-            </td>
-            <td>DIRECTOR</td>
-            <td>{{movie.year}}</td>
-            <td>{{movie.rating}}</td>
-            <td>{{movie.duration}} min</td>
-            <td>{{movie.genres.join(" / ")}}</td>
-            <td *ngIf="showExternalServices">
-                <i (click)="movieService.openMovieExternal('csfd', movie.csfdId)"
-                   *ngIf="movie.csfdId"
-                   class="large green checkmark icon"></i>
-                <i *ngIf="!movie.csfdId" class="large red close icon"></i>
-            </td>
-            <td *ngIf="showExternalServices">
-                <i (click)="movieService.openMovieExternal('imdb', movie.imdbId)"
-                   *ngIf="movie.imdbId"
-                   class="large green checkmark icon"></i>
-                <i *ngIf="!movie.imdbId" class="large red close icon"></i>
-            </td>
-            <td *ngIf="showExternalServices">
-                <i (click)="movieService.openMovieExternal('movieDb', movie.movieDbId, movie.type)"
-                   *ngIf="movie.movieDbId"
-                   class="large green checkmark icon"></i>
-                <i *ngIf="!movie.movieDbId" class="large red close icon"></i>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot class="full-width">
-        <tr>
-            <th>
-                <app-paginator [paginator]="paginator"></app-paginator>
-            </th>
-            <th colspan="100">
-                <div (click)="createNew()" class="ui right floated small primary labeled icon button">
-                    <i class="user icon"></i> Pridať film
-                </div>
-                <div class="ui small  button">
-                    Zoznam hercov
-                </div>
-            </th>
-        </tr>
-        </tfoot>
-    </table>
+    <ng-template #cellDirectors let-row="row">
+        <button *ngFor="let director of row.directors" (click)="movieService.showMakerDetail(director.id)" mat-button>{{director.name}}</button>
+    </ng-template>
+    <ng-template #cellTitle let-row="row">
+       <div style="display: flex; flex-direction: row">
+           <img *ngIf="row.avatar"
+                [src]="row.avatar"
+                (click)="openImageDetail(row.avatar)"
+                alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
+           <div style="display: flex; flex-direction: column; justify-content: space-between;">
+               <strong>{{row.titleSk || row.title}}</strong>
+               <div *ngIf="row.titleSk" class="sub header">{{row.title}}</div>
+           </div>
+       </div>
+    </ng-template>
+    <ng-template #cellExternal let-row="row">
+        <app-external-links type="movie" [holder]="row"></app-external-links>
+    </ng-template>
+    <ng-template #cellDetail let-row="row">
+        <button (click)="movieService.showMovieDetail(row.id)" class="circular ui icon button hiddenable">
+            <i class="icon angle right"></i>
+        </button>
+    </ng-template>
+    <app-abstract-table [tableConfig]="movieConfig"
+                        [templates]="{title: cellTitle, external: cellExternal, detail: cellDetail, directors: cellDirectors}"
+                        [data]="movieData"></app-abstract-table>
 </ng-container>
 
 

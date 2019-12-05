@@ -26,6 +26,10 @@ export class MovieService {
         this.router.navigateByUrl("/movies/" + movie_id);
     }
 
+    public showMakerDetail(movie_id: number | string): void {
+        this.router.navigateByUrl("/movies/makers/" + movie_id);
+    }
+
     public openMakerExternal(source: MovieSource, id: number | string): Window | null {
         switch (source) {
             case "csfd":
