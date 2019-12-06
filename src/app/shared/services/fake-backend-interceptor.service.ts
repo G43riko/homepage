@@ -4,16 +4,15 @@ import {
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
-    HttpResponse
+    HttpResponse,
 } from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {AbstractRestApiHandler, SimpleMemoryDatabaseService} from "@g43/common";
 import {Observable, of} from "rxjs";
 import {delay, dematerialize, materialize, mergeMap, tap} from "rxjs/operators";
-import {AbstractRestApiHandler} from "../../tests/abstract-rest-api.handler";
+import {MakersFixture} from "../../tests/maker.fixture";
 import {SongListMock, UserDetailMock, UserListMock} from "../../tests/mock.data";
 import {MoviesFixture} from "../../tests/movies.fixture";
-import {SimpleMemoryDatabaseService} from "../../tests/simple-memory-database.service";
-import {MakersFixture} from "../../tests/maker.fixture";
 
 const data: any[]  = [...UserDetailMock];
 

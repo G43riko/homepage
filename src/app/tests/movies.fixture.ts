@@ -1,6 +1,6 @@
+import {AbstractFixture} from "gtools";
 import {Movie} from "../pages/movies/models/movie.model";
 import {ImageUtils} from "../shared/utils/image.utils";
-import {AbstractFixture} from "./abstract.fixture";
 
 export class MoviesFixture extends AbstractFixture<Movie> {
     public constructor() {
