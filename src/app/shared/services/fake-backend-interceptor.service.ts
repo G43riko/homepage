@@ -1,4 +1,4 @@
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse,} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {AbstractRestApiHandler, SimpleMemoryDatabaseService} from "@g43/common";
 import {Observable, of} from "rxjs";

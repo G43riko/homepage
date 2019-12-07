@@ -7,8 +7,8 @@ import {ImageDialogComponent} from "../../../../shared/components/image-dialog/i
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {ApiPaginator} from "../../../../shared/utils/ApiPaginator";
 import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../movie-http.service";
-import {MovieService} from "../../movie.service";
+import {MovieHttpService} from "../../services/movie-http.service";
+import {MovieService} from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-list",

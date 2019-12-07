@@ -5,7 +5,7 @@ import {MiscUtils} from "gtools";
 import {MovieSource} from "../../models/movie-source.type";
 import {MovieType} from "../../models/movie-type.type";
 import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../movie-http.service";
+import {MovieHttpService} from "../../services/movie-http.service";
 
 @Component({
     selector: "app-movie-detail-admin-view",

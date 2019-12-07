@@ -3,7 +3,7 @@ import {FirebaseModule} from "../../../../shared/modules/firebase.module";
 import {MaterialModule} from "../../../../shared/modules/material.module";
 import {TestingModule} from "../../../../tests/testing.module";
 import {MyFilesComponent} from "../../../files/my-files/my-files.component";
-import {PersonHttpService} from "../../person-http.service";
+import {PersonHttpService} from "../../services/person-http.service";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
 
 import {PersonListRowComponent} from "./person-list-row.component";

@@ -6,7 +6,7 @@ import {Roles} from "../../../../shared/enums/roles.enum";
 import {Person} from "../../../../shared/models/person/person.model";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {NotificationService} from "../../../../shared/services/notification.service";
-import {PersonHttpService} from "../../person-http.service";
+import {PersonHttpService} from "../../services/person-http.service";
 
 @Component({
     selector: "app-person-list",

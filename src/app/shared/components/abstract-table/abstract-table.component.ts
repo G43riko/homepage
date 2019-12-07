@@ -1,17 +1,8 @@
 import {SelectionModel} from "@angular/cdk/collections";
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    TemplateRef,
-    ViewChild
-} from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild,} from "@angular/core";
 import {MatPaginator, MatSort, Sort} from "@angular/material";
 import {merge, Observable, of} from "rxjs";
-import {catchError, delay, finalize, map, startWith, switchMap, tap} from "rxjs/operators";
+import {catchError, delay, map, startWith, switchMap, tap} from "rxjs/operators";
 import {ColumnConfig} from "./column-config";
 import {TableConfig} from "./table-config";
 

@@ -2,11 +2,11 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {catchError, map} from "rxjs/operators";
-import {AppConfig} from "../../app.config";
-import {AuthService} from "../../shared/auth.service";
-import {Person} from "../../shared/models/person/person.model";
-import {AbstractHttpService} from "../../shared/services/abstract-http.service";
-import {NotificationService} from "../../shared/services/notification.service";
+import {AppConfig} from "../../../app.config";
+import {AuthService} from "../../../shared/auth.service";
+import {Person} from "../../../shared/models/person/person.model";
+import {AbstractHttpService} from "../../../shared/services/abstract-http.service";
+import {NotificationService} from "../../../shared/services/notification.service";
 
 const URL = AppConfig.BASE_URL + "/persons";
 

@@ -1,5 +1,6 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {TestingModule} from "../../../../tests/testing.module";
+import {MovieService} from "../../services/movie.service";
 
 import {MakerPreviewListComponent} from "./maker-preview-list.component";
 
@@ -11,6 +12,9 @@ describe("MakerPreviewRowComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
+            ],
+            providers: [
+                MovieService,
             ],
             declarations: [
                 MakerPreviewListComponent,

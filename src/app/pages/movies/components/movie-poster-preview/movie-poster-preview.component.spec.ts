@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {TestingModule} from "../../../../tests/testing.module";
 import {Movie} from "../../models/movie.model";
+import {MovieService} from "../../services/movie.service";
 import {ExternalLinksComponent} from "../external-links/external-links.component";
 
 import {MoviePosterPreviewComponent} from "./movie-poster-preview.component";
@@ -14,6 +15,9 @@ describe("MoviePosterPreviewComponent", () => {
             declarations: [
                 MoviePosterPreviewComponent,
                 ExternalLinksComponent,
+            ],
+            providers: [
+                MovieService,
             ],
             imports: [
                 TestingModule,

@@ -1,4 +1,4 @@
-import { MoviesModule } from "./movies.module";
+import {MoviesModule} from "./movies.module";
 
 describe("MovieModule", () => {
     let personsModule: MoviesModule;

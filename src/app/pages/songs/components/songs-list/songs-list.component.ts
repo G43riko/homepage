@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {TableConfig} from "../../../shared/components/abstract-table/table-config";
-import {SongsService} from "../songs.service";
+import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
+import {SongsHttpService} from "../../services/songs-http.service";
 
 export interface Song {
     preview: string;
@@ -48,7 +48,7 @@ export class SongsListComponent implements OnInit {
         paginator: true,
     };
 
-    public constructor(public readonly songsService: SongsService) {
+    public constructor(public readonly songsService: SongsHttpService) {
     }
 
     public ngOnInit(): void {

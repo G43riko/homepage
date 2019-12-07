@@ -190,6 +190,6 @@ export const SongListMock = [
         spotifi_link: "TestSongSpotifyLink2",
         duration: 13516168,
         popularity: "TestSongPopularity2",
-        preview: "http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'All%20Dead,%20All%20Dead'.mp3"
+        preview: "http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'All%20Dead,%20All%20Dead'.mp3",
     },
 ];

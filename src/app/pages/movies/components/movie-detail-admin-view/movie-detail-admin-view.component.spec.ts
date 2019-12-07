@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {FormGroup} from "@angular/forms";
 import {TestingModule} from "../../../../tests/testing.module";
-import {MovieHttpService} from "../../movie-http.service";
+import {MovieHttpService} from "../../services/movie-http.service";
 
 import {MovieDetailAdminViewComponent} from "./movie-detail-admin-view.component";
 
@@ -25,6 +26,7 @@ describe("MovieDetailAdminViewComponent", () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MovieDetailAdminViewComponent);
         component = fixture.componentInstance;
+        component.movieForm = new FormGroup({});
         fixture.detectChanges();
     });
 

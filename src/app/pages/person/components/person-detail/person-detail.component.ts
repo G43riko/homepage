@@ -10,7 +10,7 @@ import {Person} from "../../../../shared/models/person/person.model";
 import {MapsService} from "../../../../shared/services/maps.service";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {UtilsService} from "../../../../shared/services/utils.service";
-import {PersonHttpService} from "../../person-http.service";
+import {PersonHttpService} from "../../services/person-http.service";
 
 @Component({
     selector: "app-person-detail",

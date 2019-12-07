@@ -4,7 +4,7 @@ import {of} from "rxjs";
 import {AutoChipsComponent} from "../../../../shared/components/auto-chips/auto-chips.component";
 import {TestingModule} from "../../../../tests/testing.module";
 import {Maker} from "../../models/maker.model";
-import {MovieHttpService} from "../../movie-http.service";
+import {MovieHttpService} from "../../services/movie-http.service";
 
 import {MovieDetailBasicInfoComponent} from "./movie-detail-basic-info.component";
 

@@ -4,10 +4,10 @@ import {SharedModule} from "../../shared/shared.module";
 import {DurationPipe} from "./components/duration.pipe";
 import {SongsNavBarComponent} from "./components/nav-bar.component";
 import {SongControllerComponent} from "./components/song-controller/song-controller.component";
-import {SongsListComponent} from "./songs-list/songs-list.component";
+import {SongsListComponent} from "./components/songs-list/songs-list.component";
+import {SongsComponent} from "./components/songs.component";
+import {SongsHttpService} from "./services/songs-http.service";
 import {SongsRoutingModule} from "./songs-routes.module";
-import {SongsComponent} from "./songs.component";
-import {SongsService} from "./songs.service";
 
 @NgModule({
     declarations: [
@@ -18,7 +18,7 @@ import {SongsService} from "./songs.service";
         SongControllerComponent,
     ],
     providers: [
-        SongsService,
+        SongsHttpService,
     ],
     imports: [
         CoreModule,

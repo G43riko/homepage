@@ -4,8 +4,8 @@ import {Observable} from "rxjs";
 import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
 import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
 import {Maker} from "../../models/maker.model";
-import {MovieService} from "../../movie.service";
 import {MakerHttpService} from "../../services/maker-http.service";
+import {MovieService} from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-makers",

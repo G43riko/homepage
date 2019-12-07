@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
 import {Maker} from "../../models/maker.model";
-import {MovieService} from "../../movie.service";
+import {MovieService} from "../../services/movie.service";
 
 @Component({
     selector: "app-maker-preview-row",

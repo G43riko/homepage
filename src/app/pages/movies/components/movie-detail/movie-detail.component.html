@@ -5,7 +5,7 @@
         <mat-card-title>Movie detail</mat-card-title>
 
         <mat-card-content class="flex-row">
-            <app-movie-search (movieSearched)="setMovie($event)" *ngIf="isNew" class="full-width"></app-movie-search>
+            <app-movie-search (movieSearched)="setDetail($event)" *ngIf="isNew" class="full-width"></app-movie-search>
             <mat-accordion *ngIf="authService.checkAuthorization(user, Roles.ROLE_ADMIN_MOVIES)"
                            class="full-width">
                 <mat-expansion-panel class="mat-elevation-z2">

@@ -8,6 +8,9 @@ describe("MakerHttpService", () => {
         imports: [
             TestingModule,
         ],
+        providers: [
+            MakerHttpService,
+        ],
     }));
 
     it("should be created", () => {

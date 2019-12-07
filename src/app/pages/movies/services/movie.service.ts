@@ -1,11 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {MovieSource} from "./models/movie-source.type";
-import {MovieType} from "./models/movie-type.type";
+import {MovieSource} from "../models/movie-source.type";
+import {MovieType} from "../models/movie-type.type";
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable()
 export class MovieService {
     public constructor(private readonly router: Router) {
     }

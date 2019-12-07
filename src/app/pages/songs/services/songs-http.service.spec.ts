@@ -1,6 +1,6 @@
 import {HttpClientModule} from "@angular/common/http";
 import {TestBed} from "@angular/core/testing";
-import {SongsService} from "./songs.service";
+import {SongsHttpService} from "./songs-http.service";
 
 describe("SongsService", () => {
     beforeEach(() => TestBed.configureTestingModule({
@@ -8,12 +8,12 @@ describe("SongsService", () => {
             HttpClientModule,
         ],
         providers: [
-            SongsService,
+            SongsHttpService,
         ],
     }));
 
     it("should be created", () => {
-        const service: SongsService = TestBed.get(SongsService);
+        const service: SongsHttpService = TestBed.get(SongsHttpService);
         expect(service).toBeTruthy();
     });
 });

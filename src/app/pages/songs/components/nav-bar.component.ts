@@ -3,7 +3,7 @@ import {interval, Subscription} from "rxjs";
 import {AudioPlayerModel} from "../models/audio-player.model";
 import {PlayerInterface} from "../models/player.interface";
 import {YoutubePlayerModel} from "../models/youtube-player.model";
-import {Song} from "../songs-list/songs-list.component";
+import {Song} from "./songs-list/songs-list.component";
 
 @Component({
     selector: "songs-nav-bar",

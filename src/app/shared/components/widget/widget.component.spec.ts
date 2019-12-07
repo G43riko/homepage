@@ -13,11 +13,11 @@ describe("WidgetComponent", () => {
             .compileComponents();
     }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(WidgetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(WidgetComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
     it("should create", () => {
         expect(component).toBeTruthy();

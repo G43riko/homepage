@@ -1,10 +1,10 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {AbstractTableComponent} from "../../../shared/components/abstract-table/abstract-table.component";
-import {TestingModule} from "../../../tests/testing.module";
-import {DurationPipe} from "../components/duration.pipe";
-import {SongsNavBarComponent} from "../components/nav-bar.component";
-import {SongControllerComponent} from "../components/song-controller/song-controller.component";
-import {SongsService} from "../songs.service";
+import {AbstractTableComponent} from "../../../../shared/components/abstract-table/abstract-table.component";
+import {TestingModule} from "../../../../tests/testing.module";
+import {SongsHttpService} from "../../services/songs-http.service";
+import {DurationPipe} from "../duration.pipe";
+import {SongsNavBarComponent} from "../nav-bar.component";
+import {SongControllerComponent} from "../song-controller/song-controller.component";
 import {SongsListComponent} from "./songs-list.component";
 
 describe("SongsListComponent", () => {
@@ -17,7 +17,7 @@ describe("SongsListComponent", () => {
                 TestingModule,
             ],
             providers: [
-                SongsService,
+                SongsHttpService,
             ],
             declarations: [
                 SongControllerComponent,

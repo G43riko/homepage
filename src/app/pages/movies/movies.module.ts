@@ -13,9 +13,11 @@ import {MoviePosterPreviewComponent} from "./components/movie-poster-preview/mov
 import {MovieSearchComponent} from "./components/movie-search/movie-search.component";
 import {ExternalMakerDirective} from "./directives/external-maker.directive";
 import {ExternalMovieDirective} from "./directives/external-movie.directive";
-import {MovieHttpService} from "./movie-http.service";
 import {MoviesRoutingModule} from "./movies-routes.module";
 import {MovieFilterPipe} from "./pipes/movie-filter.pipe";
+import {MakerHttpService} from "./services/maker-http.service";
+import {MovieHttpService} from "./services/movie-http.service";
+import {MovieService} from "./services/movie.service";
 
 @NgModule({
     imports: [
@@ -25,6 +27,8 @@ import {MovieFilterPipe} from "./pipes/movie-filter.pipe";
     ],
     providers: [
         MovieHttpService,
+        MovieService,
+        MakerHttpService,
     ],
     declarations: [
         MovieListComponent,

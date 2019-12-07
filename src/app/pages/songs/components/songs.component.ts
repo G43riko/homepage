@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {NotificationService} from "../../shared/services/notification.service";
-import {GPlayer} from "./GPlayer.component";
-import {SongsService} from "./songs.service";
+import {NotificationService} from "../../../shared/services/notification.service";
+import {GPlayer} from "../GPlayer.component";
+import {SongsHttpService} from "../services/songs-http.service";
 
 declare let $: any;
 declare let window: any;
@@ -17,7 +17,7 @@ export class SongsComponent implements OnInit {
     public gplayer: GPlayer;
     private _playing: HTMLAudioElement | null = null;
 
-    public constructor(private readonly songService: SongsService, private readonly notificationService: NotificationService) {
+    public constructor(private readonly songService: SongsHttpService, private readonly notificationService: NotificationService) {
     }
 
     public clickOnModal(e: MouseEvent): void {

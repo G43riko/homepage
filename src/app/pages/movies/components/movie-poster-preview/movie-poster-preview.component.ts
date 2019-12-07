@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, Input, OnInit} from "@angular/core";
 import {Movie} from "../../models/movie.model";
-import {MovieService} from "../../movie.service";
+import {MovieService} from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-poster-preview",
