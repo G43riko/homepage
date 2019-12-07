@@ -14,7 +14,7 @@ export class SongsNavBarComponent implements OnDestroy {
     public player: PlayerInterface;
     public duration = 0;
     public elapsedValue = 0;
-    private selectedSong: Song | null;
+    public selectedSong: Song | null;
     private state: "play" | "pause" | "stop" = "stop";
     private readonly previewPlayer: AudioPlayerModel = new AudioPlayerModel();
     private readonly youtubePlayer: YoutubePlayerModel = new YoutubePlayerModel();
