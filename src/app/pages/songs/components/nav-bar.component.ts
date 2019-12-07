@@ -1,97 +1,91 @@
-import {Component, OnInit} from "@angular/core";
-import {TimeUtils} from "gtools";
+import {Component, OnDestroy} from "@angular/core";
+import {interval, Subscription} from "rxjs";
 import {AudioPlayerModel} from "../models/audio-player.model";
 import {PlayerInterface} from "../models/player.interface";
 import {YoutubePlayerModel} from "../models/youtube-player.model";
+import {Song} from "../songs-list/songs-list.component";
 
 @Component({
     selector: "songs-nav-bar",
     templateUrl: "./nav-bar.component.html",
     styleUrls: ["./nav-bar.component.scss"],
 })
-export class SongsNavBarComponent implements OnInit {
+export class SongsNavBarComponent implements OnDestroy {
     public player: PlayerInterface;
-    public isPlaying = false;
-    public isPaused = false;
-    public duration                                    = "00:00";
-    public numberDuration                              = 0;
-    public elapsedValue                                = 0;
-    public actDuration                                 = "00:00";
-    private readonly previewPlayer: AudioPlayerModel   = new AudioPlayerModel();
+    public duration = 0;
+    public elapsedValue = 0;
+    private selectedSong: Song | null;
+    private state: "play" | "pause" | "stop" = "stop";
+    private readonly previewPlayer: AudioPlayerModel = new AudioPlayerModel();
     private readonly youtubePlayer: YoutubePlayerModel = new YoutubePlayerModel();
-    private _interval: any;
+    private subscription: Subscription;
 
     public ngOnInit(): void {
 
     }
 
-    public playPreview(preview: string): void {
-        this.player = this.previewPlayer as any;
-        this.youtubePlayer.stop();
-        this.previewPlayer.play(preview).then(() => {
-            this.duration = TimeUtils.getStringFromSeconds(parseInt(this.previewPlayer.getDuration().toString(), 10));
-            this._startPlaying();
-        });
-    }
-
     public playFrom(time: string): void {
         this.player.setCurrentTime(Number(time));
         this.elapsedValue = this.player.getCurrentTime();
-        this.actDuration = TimeUtils.getStringFromSeconds(parseInt(this.elapsedValue.toString(), 10));
         this.player.play();
     }
 
-    public pausePreview(): void {
-        this.previewPlayer.pause();
-        this._changeState("pause");
-    }
-
-    public play(): void {
+    public play(song?: Song): void {
+        if (song) {
+            this.selectedSong = song;
+            this.player = this.previewPlayer as any;
+            this.youtubePlayer.stop();
+            this.previewPlayer.play(song.preview).then(() => {
+                this.duration = this.previewPlayer.getDuration();
+                this._startPlaying();
+            });
+            return;
+        }
         this.player.play().then(() => this._startPlaying());
     }
 
     public pause(): void {
-        const playingClass = "playing";
-        const lastPlayed   = document.getElementsByClassName(playingClass)[0] as HTMLButtonElement;
-        if (lastPlayed) {
-            lastPlayed.classList.remove(playingClass);
-            lastPlayed.innerText = "Play";
-        }
         this.player.pause();
-        this._changeState("pause");
+        this.state = "pause";
     }
 
     public stop(): void {
+        this.selectedSong = null;
+        this.duration = 0;
+        this.elapsedValue = 0;
         this.player.stop();
-        this._changeState("stop");
+        this.state = "stop";
+    }
+
+    public isPlaying(song?: Song): boolean {
+        if (song) {
+            return this.selectedSong === song && this.isPlaying();
+        }
+        return this.state === "play";
+    }
+
+    public isPaused(song?: Song): boolean {
+        if (song) {
+            return this.selectedSong === song && this.isPaused();
+        }
+        return this.state === "pause";
+    }
+
+    public ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     private _startPlaying(): void {
-        this._changeState("play");
-        this.actDuration    = "00:00";
-        this.numberDuration = this.player.getDuration();
-        this._interval      = setInterval(() => {
-            this.elapsedValue = this.player.getCurrentTime();
-            this.actDuration  = TimeUtils.getStringFromSeconds(parseInt(this.elapsedValue.toString(), 10));
-            // console.log(this.elapsedValue, "(",this.actDuration,") === ", this.numberDuration);
-        }, 1000);
-    }
+        this.state = "play";
+        this.duration = this.player.getDuration();
 
-    private _changeState(state: "play" | "pause" | "stop"): void {
-        switch (state) {
-            case "play":
-                this.isPaused  = false;
-                this.isPlaying = true;
-                break;
-            case "pause":
-                this.isPaused  = true;
-                this.isPlaying = false;
-                break;
-            case "stop":
-                this.isPaused  = false;
-                this.isPlaying = false;
-                break;
-
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
+        this.subscription = interval(100).subscribe(() => {
+            this.elapsedValue = this.player.getCurrentTime();
+        });
     }
 }

@@ -6,7 +6,7 @@ import {Roles} from "../../../../shared/enums/roles.enum";
 import {Person} from "../../../../shared/models/person/person.model";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {NotificationService} from "../../../../shared/services/notification.service";
-import {PersonService} from "../../person.service";
+import {PersonHttpService} from "../../person-http.service";
 
 @Component({
     selector: "app-person-list",
@@ -24,12 +24,12 @@ export class PersonListComponent implements OnInit {
     public constructor(private readonly route: ActivatedRoute,
                        private readonly router: Router,
                        public readonly authService: AuthService,
-                       private readonly personService: PersonService,
+                       private readonly personHttpService: PersonHttpService,
                        private readonly notificationService: NotificationService) {
     }
 
     public ngOnInit(): void {
-        this.personData = this.personService.getPersons();
+        this.personData = this.personHttpService.getPersons();
         // this.personService.getPersons().subscribe((data: Person[]) => {
         //     this.data = data;
         // }, (error) => this.notificationService.openErrorNotification(error));
@@ -80,7 +80,7 @@ export class PersonListComponent implements OnInit {
     }
 
     public remove(persons: Person[]): void {
-        const deleteRequests = persons.map((person) => this.personService.delete(person.person_id));
+        const deleteRequests = persons.map((person) => this.personHttpService.delete(person.id));
         forkJoin(deleteRequests).subscribe(() => {
             this.notificationService.openSuccessNotification("Person successfully removed");
         }, (error) => this.notificationService.openErrorNotification(error));

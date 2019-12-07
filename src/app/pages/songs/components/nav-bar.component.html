@@ -1,27 +1,74 @@
-<div [ngClass]="{'isPlaying': isPlaying || isPaused}" id="footer">
-    <div id="controls">
-        <i (click)="player.previous()" class="fa fa-step-backward" id="back"></i>
-        <i (click)="pause()" [hidden]="!isPlaying" class="fa fa-pause" id="pause"></i>
-        <i (click)="play()" [hidden]="isPlaying" class="fa fa-play" id="play"></i>
-        <i (click)="stop()" class="fa fa-stop" id="stop"></i>
-        <i (click)="player.next()" class="fa fa-step-forward" id="next"></i>
-        <i (click)="player.minimalize()" class="fa fa-window-minimize" id="minimalize"></i>
-        <i (click)="player.fullscreen()" class="fa fa-arrows-alt" id="fullscreen"></i>
+<div [class.is-playing]="isPlaying || isPaused" class="footer">
+    <div class="controls">
+        <button (click)="player.previous()"
+                [disabled]="!selectedSong"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>skip_previous</mat-icon>
+        </button>
+        <button (click)="play()"
+                *ngIf="!isPlaying()"
+                [disabled]="!selectedSong"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button (click)="pause()"
+                *ngIf="isPlaying()"
+                [disabled]="!selectedSong"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>pause</mat-icon>
+        </button>
+        <button (click)="stop()"
+                [disabled]="!selectedSong"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>stop</mat-icon>
+        </button>
+        <button (click)="player.next()"
+                [disabled]="!selectedSong"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>skip_next</mat-icon>
+        </button>
+        <button (click)="player.minimalize()"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>minimize</mat-icon>
+        </button>
+        <button (click)="player.fullscreen()"
+                aria-label="Example icon-button with a heart icon"
+                color="primary"
+                mat-icon-button>
+            <mat-icon>fullscreen</mat-icon>
+        </button>
     </div>
-    <div id="button">
-        <span id="slider">
+
+    <div class="slider-container">
+        <span class="slider">
             <input #d
                    (change)="playFrom(d.value)"
                    label="Song slider"
-                   max="{{numberDuration}}"
+                   max="{{duration}}"
                    step="0.1"
                    type="range"
                    value="{{elapsedValue}}">
         </span>
-        <div id="timeHolder">
-            <span id="actTime">{{actDuration}}</span>/
-            <span id="duration">{{duration}}</span>
+        <div class="time-holder">
+            <span class="actTime">{{elapsedValue | duration}}</span>
+            /
+            <span class="duration">{{duration | duration}}</span>
         </div>
     </div>
-    <!--<div id="fileName">{{fileName}}</div>-->
+
+    <div *ngIf="selectedSong" class="title">
+        {{selectedSong.artists}} - {{selectedSong.title }}
+    </div>
 </div>

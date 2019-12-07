@@ -24,12 +24,12 @@ export class Address {
         return result;
     }
 
-    public toModel(): any {
+    public static toModel(address: Address): any {
         return {
-            country: this.country || "",
-            city: this.city || "",
-            street: this.street || "",
-            streetNumber: this.streetNumber || "",
+            country: address.country || "",
+            city: address.city || "",
+            street: address.street || "",
+            streetNumber: address.streetNumber || "",
         };
     }
 

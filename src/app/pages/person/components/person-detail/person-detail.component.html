@@ -4,14 +4,14 @@
     <div style="display: flex; justify-content: center;">
         <mat-spinner *ngIf="loading"></mat-spinner>
     </div>
-    <form *ngIf="selectedPerson" [formGroup]="personForm" class="full-width" style="align-content: center">
+    <form *ngIf="selectedDetail" [formGroup]="detailForm" class="full-width" style="align-content: center">
         <div class="flex-row">
             <div>
                 <mat-form-field class="full-width">
                     <input matInput
                            formControlName="name"
                            placeholder="Meno">
-                    <mat-error *ngIf="personForm.get('name').hasError('required')">
+                    <mat-error *ngIf="detailForm.get('name').hasError('required')">
                         Name is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
@@ -21,7 +21,7 @@
                     <input matInput
                            formControlName="surName"
                            placeholder="Priezvisko">
-                    <mat-error *ngIf="personForm.get('surName').hasError('required')">
+                    <mat-error *ngIf="detailForm.get('surName').hasError('required')">
                         Surname is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
@@ -94,14 +94,18 @@
                 </button>
             </div>
         </div>
-        <app-numbers [disabled]="personForm.disabled"
-                     [numberList]="selectedPerson.numbers"
+        <app-numbers [disabled]="detailForm.disabled"
+                     [numberList]="selectedDetail.numbers"
                      [isNew]="isNew"></app-numbers>
-        <app-email [disabled]="personForm.disabled"
-                   [emailList]="selectedPerson.emails"
+        <app-email [disabled]="detailForm.disabled"
+                   [emailList]="selectedDetail.emails"
                    [isNew]="isNew"></app-email>
     </form>
-    <button *ngIf="!disabled" [disabled]="personForm.invalid" color="primary" (click)="save()" mat-raised-button>Uložiť</button>
-    <button *ngIf="disabled" [disabled]="personForm.invalid" color="primary" (click)="edit()" mat-raised-button>Upraviť</button>
+    <button (click)="save()" *ngIf="!disabled" [disabled]="detailForm.invalid" color="primary" mat-raised-button>
+        Uložiť
+    </button>
+    <button (click)="edit()" *ngIf="disabled" [disabled]="detailForm.invalid" color="primary" mat-raised-button>
+        Upraviť
+    </button>
     <button (click)="back()" mat-raised-button>Naspäť</button>
 </mat-card>

@@ -1,35 +1,21 @@
 <!--<app-song-controller [url]="'http://www.rockyvotolato.com/mp3/01_Red_River.mp3'"></app-song-controller>-->
 
 <div id="sideBar"></div>
-<table boder="1" id="songList" class="ui selectable celled table compact striped">
-    <thead>
-    <tr>
-        <th *ngFor="let title of titles">{{title}}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let song of songs; let idx=index">
-        <td>{{idx + 1}}</td>
-        <!--<td>{{song.artists.map(a => a.name).join(" And ")}}</td>-->
-        <td>{{song.artists}}</td>
-        <td><a href="{{song.spotifi_link}}">{{song.title}}</a></td>
-        <td>{{song.duration}}</td>
-        <td>{{song.popularity}}</td>
-        <td>
-            <button #b [disabled]="!song.preview" (click)="play(song.preview, b)" class="ui green mini button">
-                Play
-            </button>
-        <td>
-            <button #b [disabled]="!song.preview" (click)="playByIndex(idx)" class="ui green mini button">
-                Youtube
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<div id="modal" style="display: none;" (click)="clickOnModal($event)">
-    <div id="modalContent">
-        <div id="player"></div>
-    </div>
-</div>
-<songs-nav-bar></songs-nav-bar>
+
+<app-abstract-table [data]="songsService.getSongs()"
+                    [tableConfig]="songsConfig"
+                    [templates]="{preview: columnPreview, video: columnVideo}"></app-abstract-table>
+
+<ng-template #columnPreview let-row="row">
+    <button (click)="navBar.isPlaying(row)  ? navBar.pause() : navBar.play(row)"
+            [disabled]="!row.preview"
+            color="primary"
+            mat-raised-button>{{navBar.isPlaying(row) && "Pause" || "Play"}}</button>
+</ng-template>
+<ng-template #columnVideo let-row="row">
+    <button [disabled]="!row.preview"
+            color="primary"
+            mat-raised-button>Youtube
+    </button>
+</ng-template>
+<songs-nav-bar #navBar></songs-nav-bar>

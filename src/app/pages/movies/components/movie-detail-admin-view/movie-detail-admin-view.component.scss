@@ -46,3 +46,25 @@ tr.example-element-row:not(.example-expanded-row):active {
     height: 400px;
     overflow: auto;
 }
+
+.maker-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    ul {
+        flex-grow: 1;
+        list-style: none;
+        padding: 0;
+
+        li {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                background: rgba(0, 0, 0, .04);
+            }
+        }
+    }
+}

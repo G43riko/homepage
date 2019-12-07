@@ -16,9 +16,9 @@ const URL = AppConfig.BASE_URL + "/movies";
 const URL_EXTERNAL = AppConfig.BASE_URL + "/external-movies";
 
 @Injectable()
-export class MovieHttpService extends AbstractHttpService implements PaginatorService<Movie> {
+export class MovieHttpService extends AbstractHttpService<Movie> implements PaginatorService<Movie> {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
-        super(http, authService, notificationService);
+        super(http, authService, notificationService, URL);
     }
 
     public getMovies(): Observable<Movie[]> {
@@ -33,34 +33,11 @@ export class MovieHttpService extends AbstractHttpService implements PaginatorSe
         );
     }
 
-    public getMakerDetail(makerId: string): Observable<Maker> {
-        return this.http.get<Maker>(URL + "/maker/" + makerId).pipe(
-            catchError(this.handleError<Maker>("getMakerDetail")),
-        );
-    }
-
-    public getDetail(id: number): Observable<Movie> {
-        return this.http.get<Movie>(URL + "/" + id).pipe(
-            catchError(this.handleError<Movie>("getDetail")),
-        );
-    }
-
     public getGenres(): Observable<string[]> {
         return this.http.get<string[]>(URL + "/genres", {
             headers: this.getHeaders(),
         }).pipe(
             catchError(this.handleError<string[]>("getGenres")),
-        );
-    }
-
-    public getList(count: number, offset = 0, key?: string): Observable<Movie[]> {
-        if (key) {
-            return this.http.get<Movie[]>(`${URL}/quick-search/${key}?count=${count}&offset=${offset}`).pipe(
-                catchError(this.handleError<Movie[]>("searchMovies")),
-            );
-        }
-        return this.http.get<Movie[]>(`${URL}/list?count=${count}&offset=${offset}`).pipe(
-            catchError(this.handleError<Movie[]>("getList")),
         );
     }
 

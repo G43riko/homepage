@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {AppConfig} from "../../app.config";
 import {AuthService} from "../../shared/auth.service";
 import {Person} from "../../shared/models/person/person.model";
@@ -11,13 +11,13 @@ import {NotificationService} from "../../shared/services/notification.service";
 const URL = AppConfig.BASE_URL + "/persons";
 
 @Injectable()
-export class PersonService extends AbstractHttpService {
+export class PersonHttpService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);
     }
 
     public getPersons(): Observable<Person[]> {
-        return this.http.get<Person[]>(URL + "/list").pipe(
+        return this.http.get<Person[]>(URL).pipe(
             catchError(this.handleError<Person[]>("getPersons")),
         );
     }
@@ -30,11 +30,11 @@ export class PersonService extends AbstractHttpService {
     }
 
     public update(person: Person): Observable<Person> {
-        return this.http.put<Person>(URL + "/" + person.person_id, person, {
+        return this.http.put<Person>(URL + "/" + person.id, person, {
             headers: this.getHeaders(),
         }).pipe(
             map(Person.parse),
-            catchError(this.handleError<Person>("update person with id" + person.person_id)),
+            catchError(this.handleError<Person>("update person with id" + person.id)),
         );
     }
 

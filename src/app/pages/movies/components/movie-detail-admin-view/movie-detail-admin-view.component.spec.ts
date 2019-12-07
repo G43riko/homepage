@@ -1,4 +1,6 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../../tests/testing.module";
+import {MovieHttpService} from "../../movie-http.service";
 
 import {MovieDetailAdminViewComponent} from "./movie-detail-admin-view.component";
 
@@ -8,9 +10,16 @@ describe("MovieDetailAdminViewComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MovieDetailAdminViewComponent]
-        })
-            .compileComponents();
+            imports: [
+                TestingModule,
+            ],
+            declarations: [
+                MovieDetailAdminViewComponent,
+            ],
+            providers: [
+                MovieHttpService,
+            ],
+        }).compileComponents();
     }));
 
     beforeEach(() => {

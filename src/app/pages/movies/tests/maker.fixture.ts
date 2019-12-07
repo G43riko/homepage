@@ -1,6 +1,6 @@
-import {AbstractFixture} from "gtools";
-import {Maker} from "../pages/movies/models/maker.model";
-import {ImageUtils} from "../shared/utils/image.utils"; // TODO: fix path
+import {AbstractFixture} from "gtools/out/tests/abstract.fixture";
+import {ImageUtils} from "../../../shared/utils/image.utils"; // TODO: fix path
+import {Maker} from "../models/maker.model";
 
 export class MakersFixture extends AbstractFixture<Maker> {
     public constructor() {

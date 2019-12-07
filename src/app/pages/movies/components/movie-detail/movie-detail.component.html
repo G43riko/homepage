@@ -1,7 +1,7 @@
-<form [formGroup]="movieForm">
+<form [formGroup]="detailForm">
 
 
-    <mat-card *ngIf="selectedMovie && authService.user$ | async as user; else loading"  class="root-card">
+    <mat-card *ngIf="selectedDetail && authService.user$ | async as user; else loading" class="root-card">
         <mat-card-title>Movie detail</mat-card-title>
 
         <mat-card-content class="flex-row">
@@ -15,7 +15,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <app-movie-detail-admin-view [movieForm]="movieForm">
+                    <app-movie-detail-admin-view [movieForm]="detailForm">
                     </app-movie-detail-admin-view>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -27,7 +27,7 @@
                         <br>
                         <mat-checkbox formControlName="wantSee">Chcem vidieť</mat-checkbox>
                         <br>
-                        <mat-form-field *ngIf="movieForm.value.csfdId || !disabled"
+                        <mat-form-field *ngIf="detailForm.value.csfdId || !disabled"
                                         class="full-width">
                             <input #csfdId
                                    label="Movie csfdId"
@@ -41,7 +41,7 @@
                             </mat-icon>
                         </mat-form-field>
                         <br>
-                        <mat-form-field *ngIf="movieForm.value.imdbId || !disabled"
+                        <mat-form-field *ngIf="detailForm.value.imdbId || !disabled"
                                         class="full-width">
                             <input #imdbId
                                    label="Movie imdbId"
@@ -55,7 +55,7 @@
                             </mat-icon>
                         </mat-form-field>
                         <br>
-                        <mat-form-field *ngIf="movieForm.value.movieDbId || !disabled"
+                        <mat-form-field *ngIf="detailForm.value.movieDbId || !disabled"
                                         class="full-width">
                             <input #movieDbId
                                    label="Movie movieDbId"
@@ -63,7 +63,7 @@
                                    matInput
                                    placeholder="MovieDB">
                             <mat-icon
-                                (click)="movieService.openMovieExternal('movieDb', movieDbId.value, selectedMovie.type)"
+                                (click)="movieService.openMovieExternal('movieDb', movieDbId.value, selectedDetail.type)"
                                 *ngIf="movieDbId.value"
                                 matSuffix
                                 svgIcon="movieDb">link
@@ -71,8 +71,8 @@
                         </mat-form-field>
                     </mat-card-content>
                 </mat-card>
-                <app-movie-detail-basic-info (onYearChange)="movieForm.patchValue({year: $event}, {emitEvent: false})"
-                                             [movieForm]="movieForm"
+                <app-movie-detail-basic-info (onYearChange)="detailForm.patchValue({year: $event}, {emitEvent: false})"
+                                             [movieForm]="detailForm"
                                              style="flex-grow: 3;flex-basis: 200px; max-width: 100%;display: flex">
                 </app-movie-detail-basic-info>
                 <mat-card style="flex-grow: 3">
@@ -89,17 +89,19 @@
                     </mat-card-content>
                     <ng-container *ngIf="disabled">
                         <mat-card-subtitle>Obsah</mat-card-subtitle>
-                        <mat-card-content [innerHTML]="movieForm.value.content"></mat-card-content>
+                        <mat-card-content [innerHTML]="detailForm.value.content"></mat-card-content>
                     </ng-container>
                 </mat-card>
             </div>
             <mat-card style="flex-grow: 1; overflow-y: auto">
                 <mat-list class="full-width">
                     <h3 mat-subheader>Directors</h3>
-                    <app-maker-preview-row *ngFor="let maker of selectedMovie.directors" [maker]="maker"></app-maker-preview-row>
+                    <app-maker-preview-row *ngFor="let maker of selectedDetail.directors"
+                                           [maker]="maker"></app-maker-preview-row>
                     <mat-divider></mat-divider>
                     <h3 mat-subheader>Makers</h3>
-                    <app-maker-preview-row *ngFor="let maker of selectedMovie.makers" [maker]="maker"></app-maker-preview-row>
+                    <app-maker-preview-row *ngFor="let maker of selectedDetail.makers"
+                                           [maker]="maker"></app-maker-preview-row>
                 </mat-list>
             </mat-card>
         </mat-card-content>
@@ -107,7 +109,7 @@
         <mat-card-actions>
             <button (click)="save()"
                     *ngIf="!disabled"
-                    [disabled]="movieForm.invalid"
+                    [disabled]="detailForm.invalid"
                     color="primary"
                     mat-raised-button>Uložiť
             </button>

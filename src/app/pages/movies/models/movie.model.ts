@@ -21,5 +21,5 @@ export class Movie {
     public countries: string[] = [];
     public makers: Maker[] = [];
     public directors: Maker[] = [];
-    public avatar: string;
+    public avatar: string[];
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {MovieService} from "../../movie.service";
 import {MovieType} from "../../models/movie-type.type";
+import {MovieService} from "../../movie.service";
 
 @Component({
     selector: "app-external-links",

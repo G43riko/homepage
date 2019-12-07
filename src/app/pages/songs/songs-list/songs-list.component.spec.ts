@@ -1,5 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {AbstractTableComponent} from "../../../shared/components/abstract-table/abstract-table.component";
 import {TestingModule} from "../../../tests/testing.module";
+import {DurationPipe} from "../components/duration.pipe";
 import {SongsNavBarComponent} from "../components/nav-bar.component";
 import {SongControllerComponent} from "../components/song-controller/song-controller.component";
 import {SongsService} from "../songs.service";
@@ -19,6 +21,8 @@ describe("SongsListComponent", () => {
             ],
             declarations: [
                 SongControllerComponent,
+                DurationPipe,
+                AbstractTableComponent,
                 SongsListComponent,
                 SongsNavBarComponent,
             ],

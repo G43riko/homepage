@@ -1,6 +1,6 @@
-import { environment } from "../environments/environment";
-import { MenuItemModel } from "./shared/components/menu-item.model";
-import { Roles } from "./shared/enums/roles.enum";
+import {environment} from "../environments/environment";
+import {MenuItemModel} from "./shared/components/menu-item.model";
+import {Roles} from "./shared/enums/roles.enum";
 
 export class AppConfig {
     public static readonly TITLE = "DemoPage";
@@ -43,8 +43,8 @@ export class AppConfig {
     public static readonly PATH_SONGS        = "songs";
     public static readonly PATH_FILES = "files";
     public static readonly PATH_TODO         = "todo";
-    public static readonly PATH_BROWSER      = "browser";
-    public static readonly PATH_FOODS        = "food";
+    public static readonly PATH_BROWSER = "browser";
+    public static readonly PATH_FOODS = "foods";
     public static readonly PATH_IMAGE_DETAIL = "detail";
 
     public static readonly AUTH_COOKIE_KEY = "__auth_key__";

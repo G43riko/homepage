@@ -4,7 +4,7 @@ import {PaginatorComponent} from "../../../../shared/components/paginator/pagina
 import {FirebaseModule} from "../../../../shared/modules/firebase.module";
 import {MaterialModule} from "../../../../shared/modules/material.module";
 import {TestingModule} from "../../../../tests/testing.module";
-import {PersonService} from "../../person.service";
+import {PersonHttpService} from "../../person-http.service";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
 import {PersonListRowComponent} from "../person-list-row/person-list-row.component";
 import {PersonListComponent} from "./person-list.component";
@@ -23,7 +23,7 @@ describe("PersonListComponent", () => {
                 AbstractTableComponent,
             ],
             providers: [
-                PersonService,
+                PersonHttpService,
             ],
             imports: [
                 FirebaseModule,

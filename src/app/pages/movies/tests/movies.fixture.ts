@@ -1,6 +1,6 @@
-import {AbstractFixture} from "gtools";
-import {Movie} from "../pages/movies/models/movie.model";
-import {ImageUtils} from "../shared/utils/image.utils";
+import {AbstractFixture} from "gtools/out/tests/abstract.fixture";
+import {ImageUtils} from "../../../shared/utils/image.utils";
+import {Movie} from "../models/movie.model";
 
 export class MoviesFixture extends AbstractFixture<Movie> {
     public constructor() {
@@ -41,7 +41,7 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                 tags: [],
                 saw: false,
                 want_see: true,
-                avatar: ImageUtils.getTemplate("avatar"),
+                avatar: [ImageUtils.getTemplate("avatar")],
                 directors: [
                     {
                         id: 3,

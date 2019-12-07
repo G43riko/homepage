@@ -9,8 +9,8 @@ import {PersonListRowCellAccountComponent} from "./components/person-list-row-ce
 import {PersonListRowCellSelectComponent} from "./components/person-list-row-cell-select/person-list-row-cell-select.component";
 import {PersonListRowComponent} from "./components/person-list-row/person-list-row.component";
 import {PersonListComponent} from "./components/person-list/person-list.component";
+import {PersonHttpService} from "./person-http.service";
 import {PersonRoutingModule} from "./person-routes.module";
-import {PersonService} from "./person.service";
 
 @NgModule({
     imports: [
@@ -19,7 +19,7 @@ import {PersonService} from "./person.service";
         SharedModule,
     ],
     providers: [
-        PersonService,
+        PersonHttpService,
     ],
     declarations: [
         PersonListComponent,

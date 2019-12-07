@@ -1,6 +1,12 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {SongsNavBarComponent} from "../components/nav-bar.component";
+import {Component, OnInit} from "@angular/core";
+import {TableConfig} from "../../../shared/components/abstract-table/table-config";
 import {SongsService} from "../songs.service";
+
+export interface Song {
+    preview: string;
+    artists: string;
+    title: string;
+}
 
 @Component({
     selector: "app-songs",
@@ -8,46 +14,43 @@ import {SongsService} from "../songs.service";
     styleUrls: ["./songs-list.component.scss"],
 })
 export class SongsListComponent implements OnInit {
-    public readonly titles = ["#", "Autory", "Názov", "Dĺžka (ms)", "Popularita", "Ukážka", "Video"];
-    public songs: any[] = [];
-    @ViewChild(SongsNavBarComponent, {static: false}) private readonly _navComponent: SongsNavBarComponent;
+    public readonly songsConfig: TableConfig = {
+        columns: [
+            {
+                name: "artists",
+                label: "Autory",
+            },
+            {
+                name: "title",
+                label: "Názov",
+            },
+            {
+                name: "duration",
+                label: "Dĺžka",
+            },
+            {
+                name: "popularity",
+                label: "Popularita",
+            },
+            {
+                name: "preview",
+                label: "Ukážka",
+            },
+            {
+                name: "video",
+                label: "Video",
+            },
+        ],
+        stickyHeader: true,
+        selection: "multi",
+        paginateOptions: [5, 10, 20, 50, 100],
+        pageSize: 10,
+        paginator: true,
+    };
 
-    public constructor(private readonly songsService: SongsService) {
-
+    public constructor(public readonly songsService: SongsService) {
     }
 
     public ngOnInit(): void {
-        this.songsService.getSongs().subscribe((data) => {
-            this.songs = data;
-        });
-    }
-
-    public play(url: string, button: HTMLButtonElement): void {
-        const playingClass = "playing";
-        if (button.classList.contains(playingClass)) {
-            this._navComponent.pausePreview();
-            button.classList.remove(playingClass);
-            button.innerText = "Play";
-        } else {
-            const lastPlayed = document.getElementsByClassName(playingClass)[0] as HTMLButtonElement;
-            if (lastPlayed) {
-                lastPlayed.classList.remove(playingClass);
-                lastPlayed.innerText = "Play";
-            }
-            button.classList.add(playingClass);
-            this._navComponent.playPreview(url);
-            button.innerText = "Pause";
-        }
-    }
-
-    public clickOnModal(e: MouseEvent): void {
-        const target = e.target as HTMLElement;
-        if (!target.matches("#modalContent")) {
-            target.classList.add("hidden");
-        }
-    }
-
-    public playByIndex(index: number): void {
-
     }
 }

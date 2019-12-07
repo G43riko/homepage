@@ -1,4 +1,4 @@
-<mat-list-item>
+<mat-list-item *ngIf="maker">
     <img *ngIf="maker.avatars && maker.avatars.length"
          [src]="maker.avatars[0]"
          style="cursor: pointer"

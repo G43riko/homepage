@@ -1,65 +1,41 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {FormBuilder} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractDetailComponent} from "../../../../shared/components/abstract-detail.component";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {Maker} from "../../models/maker.model";
-import {MovieHttpService} from "../../movie-http.service";
+import {MakerHttpService} from "../../services/maker-http.service";
 
 @Component({
     selector: "app-maker-detail",
     templateUrl: "./maker-detail.component.html",
     styleUrls: ["./maker-detail.component.scss"],
 })
-export class MakerDetailComponent extends AbstractDetailComponent implements OnInit {
-    @Input() public selectedMaker: Maker;
-    public isDisabled = true;
-    public isNew: boolean;
-    public readonly makerForm = this.formBuilder.group({});
+export class MakerDetailComponent extends AbstractDetailComponent<Maker, MakerHttpService> implements OnInit {
+    @Input() public selectedDetail: Maker;
 
-    public constructor(private readonly route: ActivatedRoute,
-                       private readonly formBuilder: FormBuilder,
-                       private readonly notificationService: NotificationService,
-                       private readonly movieHttpService: MovieHttpService) {
-        super();
+    public constructor(route: ActivatedRoute,
+                       router: Router,
+                       formBuilder: FormBuilder,
+                       notificationService: NotificationService,
+                       httpService: MakerHttpService) {
+        super(formBuilder, route, router, httpService, notificationService, "movies/maker");
     }
 
     public ngOnInit(): void {
-        this.route.params.subscribe((data: any) => {
-            const actId = data["id"];
-            if (actId === "new") {
-                this.selectedMaker = new Maker();
-                this.isNew = true;
-            } else {
-                this.movieHttpService.getMakerDetail(actId).subscribe((maker: Maker) => {
-                    console.log("selected maker: ", maker);
-                    this.selectedMaker = maker;
-                    this.makerForm.patchValue({
-                        ...maker,
-                        year: new Date(maker.birthday),
-                    });
-                }, (error) => this.notificationService.openErrorNotification(error));
-            }
-        }, (error) => this.notificationService.openErrorNotification(error));
+        this.initialization();
     }
 
-    public setDisabled(value: boolean = this.disabled): void {
-        value ? this.makerForm.disable() : this.makerForm.enable();
+    public setDetail(detail: Maker): void {
+        this.selectedDetail = detail;
+        this.detailForm.patchValue({
+            ...detail,
+            year: new Date(detail.birthday),
+        });
     }
 
-    public back(): void {
-        this.disabled = true;
-        this.setDisabled();
-    }
-
-    public edit(): void {
-        this.disabled = false;
-        this.setDisabled();
-    }
-
-    public save(): void {
-        console.log(this.makerForm.value);
-        this.disabled = true;
+    protected createForm(): FormGroup {
+        return this.formBuilder.group({});
     }
 
 }

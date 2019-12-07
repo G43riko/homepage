@@ -4,8 +4,8 @@ import {Observable} from "rxjs";
 import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
 import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
 import {Maker} from "../../models/maker.model";
-import {MovieHttpService} from "../../movie-http.service";
 import {MovieService} from "../../movie.service";
+import {MakerHttpService} from "../../services/maker-http.service";
 
 @Component({
     selector: "app-movie-makers",
@@ -44,10 +44,10 @@ export class MakerListComponent implements OnInit {
         ],
     };
 
-    public constructor(private readonly movieHttpService: MovieHttpService,
+    public constructor(private readonly httpService: MakerHttpService,
                        private readonly dialog: MatDialog,
                        public readonly movieService: MovieService) {
-        this.makersData = movieHttpService.getMakers();
+        this.makersData = httpService.getList(10);
     }
 
     public openImageDetail(url: string): void {

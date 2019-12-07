@@ -3,7 +3,7 @@
         <app-person-list-row-cell-select [person]="row"></app-person-list-row-cell-select>
     </ng-template>
     <ng-template #cellOptions let-row="row">
-        <button (click)="showDetail(row.person_id)" class="circular ui icon button hiddenable">
+        <button (click)="showDetail(row.id)" class="circular ui icon button hiddenable">
             <i class="icon angle right"></i>
         </button>
         <button (click)="remove([row])"

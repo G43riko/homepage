@@ -1,9 +1,9 @@
-<div *ngIf="selectedMaker">
-    <img [src]="selectedMaker.avatars[0]">
-    <h1>{{selectedMaker.name}}</h1>
-    <h3>{{selectedMaker.birthday}}</h3>
+<div *ngIf="selectedDetail">
+    <img *ngIf="selectedDetail.avatars" [src]="selectedDetail.avatars[0]">
+    <h1>{{selectedDetail.name}}</h1>
+    <h3>{{selectedDetail.birthday}}</h3>
     <div class="description">
-        <app-external-links type="maker" [holder]="selectedMaker"></app-external-links>
+        <app-external-links [holder]="selectedDetail" type="maker"></app-external-links>
         <div class="ui header">We've auto-chosen a profile image for you.</div>
         <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a>
             image

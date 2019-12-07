@@ -1,4 +1,4 @@
-import { PlayerInterface } from "./player.interface";
+import {PlayerInterface} from "./player.interface";
 
 export class AudioPlayerModel implements PlayerInterface {
     private _actualPreview: HTMLAudioElement | null;
@@ -25,8 +25,7 @@ export class AudioPlayerModel implements PlayerInterface {
         if (preview && this._actualPreview.currentSrc !== preview) {
             this._actualPreview.src = preview;
         }
-        this._actualPreview.play();
-        return Promise.resolve(null);
+        return this._actualPreview.play();
     }
 
     public pause(): void {

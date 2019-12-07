@@ -27,7 +27,7 @@
 
             <mat-list>
                 <mat-list-item *ngFor="let result of movieResults">
-                    <img [src]="result.avatar" alt="Avatar" matListAvatar>
+                    <img [src]="result.avatar[0]" alt="Avatar" matListAvatar>
                     <h4 mat-line>{{result.title}}</h4>
                     <p mat-line> {{result.year}} - {{result.genres.join("/")}} </p>
                     <p mat-line> {{result.countries.join("/")}} </p>

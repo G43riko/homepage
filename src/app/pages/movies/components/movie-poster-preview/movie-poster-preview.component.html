@@ -1,6 +1,8 @@
-<div class="avatar-wrapper"><img [src]="movie.avatar" alt="" class="avatar"></div>
-<div class="info-wrapper top">
-    <div [title]="movie.titleSk || movie.title" class="title">
+<div class="avatar-wrapper"><img *ngIf="movie.avatar" [src]="movie.avatar[0]" alt="" class="avatar"></div>
+<div class="info-wrapper top" style="cursor: pointer">
+    <div (click)="movieService.showMovieDetail(movie.id)"
+         [title]="movie.titleSk || movie.title"
+         class="title">
         <span>{{movie.titleSk || movie.title}}</span>
     </div>
 </div>
@@ -13,13 +15,5 @@
     <div [innerHTML]="movie.content" class="content"></div>
     <div class="footer">
         <app-external-links type="movie" [holder]="movie"></app-external-links>
-        <button (click)="movieService.showMovieDetail(movie.id)"
-                aria-label="Example icon-button with a heart icon"
-                class="detail"
-                color="primary"
-                mat-icon-button>
-            <mat-icon>info</mat-icon>
-        </button>
-        <span></span>
     </div>
 </div>

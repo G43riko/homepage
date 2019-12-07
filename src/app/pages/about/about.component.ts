@@ -1,6 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-
-declare let $: any;
+import {Component, OnInit} from "@angular/core";
 
 export interface Info {
     key: string;
@@ -16,21 +14,23 @@ export interface Info {
 export class AboutComponent implements OnInit {
     public readonly telNumber = "0905123456";
     public readonly email = "gcsollei@hotmail.com";
-    public readonly infos: Info[] = [{
-        key: "Name",
-        value: "Gabriel Csollei",
-    }, {
-        key: "Email",
-        value: "gcsollei@hotmail.com",
-        flag: "mail",
-    }, {
-        key: "Phone",
-        value: "0905 123 456",
-        flag: "phone",
-    }, {
-        key: "Birthday",
-        value: "12.11.1993",
-    }];
+    public readonly infos: Info[] = [
+        {
+            key: "Name",
+            value: "Gabriel Csollei",
+        }, {
+            key: "Email",
+            value: "gcsollei@hotmail.com",
+            flag: "mail",
+        }, {
+            key: "Phone",
+            value: "0905 123 456",
+            flag: "phone",
+        }, {
+            key: "Birthday",
+            value: "12.11.1993",
+        },
+    ];
 
     public readonly technologies = [
         {
@@ -96,11 +96,6 @@ export class AboutComponent implements OnInit {
     ];
 
     public ngOnInit(): void {
-
-        $(".ui.dropdown")
-            .dropdown({
-                maxSelections: 3,
-            });
     }
 
 }

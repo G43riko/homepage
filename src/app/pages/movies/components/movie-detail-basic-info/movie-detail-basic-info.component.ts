@@ -3,8 +3,8 @@ import {FormGroup} from "@angular/forms";
 import {MatDatepicker} from "@angular/material/datepicker";
 import {forkJoin} from "rxjs";
 import {NotificationService} from "../../../../shared/services/notification.service";
-import {MovieHttpService} from "../../movie-http.service";
 import {UtilsService} from "../../../../shared/services/utils.service";
+import {MovieHttpService} from "../../movie-http.service";
 
 @Component({
     selector: "app-movie-detail-basic-info",

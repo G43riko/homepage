@@ -7,7 +7,7 @@ import {Account} from "../../../../shared/models/person/account.model";
 import {Person} from "../../../../shared/models/person/person.model";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {NotificationService} from "../../../../shared/services/notification.service";
-import {PersonService} from "../../person.service";
+import {PersonHttpService} from "../../person-http.service";
 import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
 
 @Component({
@@ -26,7 +26,7 @@ export class PersonListRowComponent implements OnInit {
     @ViewChild(PersonListRowCellSelectComponent, {static: false}) public personListCellSelect: PersonListRowCellSelectComponent;
 
     public constructor(private readonly router: Router,
-                       private readonly personService: PersonService,
+                       private readonly personService: PersonHttpService,
                        private readonly notificationService: NotificationService,
                        public readonly authService: AuthService) {
 
@@ -52,7 +52,7 @@ export class PersonListRowComponent implements OnInit {
     }
 
     public remove(): void {
-        this.personService.delete(this.person.person_id).subscribe(() => {
+        this.personService.delete(this.person.id).subscribe(() => {
             this.onRemove.emit(this.index);
             this.notificationService.openSuccessNotification("Person successfully removed");
         }, (error) => this.notificationService.openErrorNotification(error));

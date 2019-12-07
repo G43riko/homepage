@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { TestingModule } from "../../../tests/testing.module";
-import { SongsNavBarComponent } from "./nav-bar.component";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TestingModule} from "../../../tests/testing.module";
+import {DurationPipe} from "./duration.pipe";
+import {SongsNavBarComponent} from "./nav-bar.component";
 
 describe("SongsNavBarComponent", () => {
     let component: SongsNavBarComponent;
@@ -8,10 +9,11 @@ describe("SongsNavBarComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports     : [
+            imports: [
                 TestingModule,
             ],
             declarations: [
+                DurationPipe,
                 SongsNavBarComponent,
             ],
         }).compileComponents();
