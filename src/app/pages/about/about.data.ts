@@ -44,7 +44,8 @@ interface Technology {
 
 interface Account {
     label: string;
-    icon: string;
+    externalIcon?: string;
+    materialIcon?: string;
     link: string;
 }
 
@@ -84,63 +85,68 @@ export class AboutData {
 
     public static readonly accounts: Account[] = [
         {
+            label: "Gist",
+            materialIcon: "bookmarks",
+            link: "https://gist.github.com/G43riko",
+        },
+        {
             label: "Github",
-            icon: "github",
+            externalIcon: "github",
             link: "https://github.com/G43riko",
         },
         {
             label: "Mixcloud",
-            icon: "mixcloud",
+            externalIcon: "mixcloud",
             link: "https://github.com/G43riko",
         },
         {
             label: "Youtube",
-            icon: "youtube",
+            externalIcon: "youtube",
             link: "https://github.com/G43riko",
         },
         {
             label: "Linkedin",
-            icon: "linkedin",
+            externalIcon: "linkedin",
             link: "https://github.com/G43riko",
         },
         {
             label: "Twitter",
-            icon: "twitter",
+            externalIcon: "twitter",
             link: "https://github.com/G43riko",
         },
         {
             label: "Instagram",
-            icon: "instagram",
+            externalIcon: "instagram",
             link: "https://github.com/G43riko",
         },
         {
             label: "Facebook",
-            icon: "facebook",
+            externalIcon: "facebook",
             link: "https://github.com/G43riko",
         },
         {
             label: "Codepen",
-            icon: "codepen",
+            externalIcon: "codepen",
             link: "https://codepen.io/g43riko",
         },
         {
             label: "Gitlab",
-            icon: "gitlab",
+            externalIcon: "gitlab",
             link: "https://gitlab.com/G43riko",
         },
         {
             label: "NPM",
-            icon: "npm",
+            externalIcon: "npm",
             link: "https://www.npmjs.com/~g43riko",
         },
         {
             label: "HackerRank",
-            icon: "hackerrank",
+            externalIcon: "hackerrank",
             link: "https://www.hackerrank.com/gcsollei",
         },
         {
             label: "CSFD",
-            icon: "csfd",
+            externalIcon: "csfd",
             link: "https://www.csfd.cz/uzivatel/163189",
         },
     ];

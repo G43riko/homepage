@@ -16,7 +16,6 @@ import {MovieService} from "../../services/movie.service";
     styleUrls: ["./movie-list.component.scss"],
 })
 export class MovieListComponent implements OnInit {
-    public showExternalServices = true;
     public previewType: "table" | "grid" = "table";
     public selectedAll = false;
     // public paginator: Paginator<Movie>;

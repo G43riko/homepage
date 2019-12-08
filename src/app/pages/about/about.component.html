@@ -5,7 +5,8 @@
            [matTooltip]="account.label"
            mat-icon-button
            target="_blank">
-            <mat-icon svgIcon="{{account.icon}}"></mat-icon>
+            <mat-icon *ngIf="account.externalIcon" svgIcon="{{account.externalIcon}}"></mat-icon>
+            <mat-icon *ngIf="account.materialIcon">{{account.materialIcon}}</mat-icon>
         </a>
     </div>
     <div class="row wrap">
@@ -86,26 +87,29 @@
     <div class="row">
         <div class="col">
             <h3>Projects</h3>
-            <table>
-                <tr class="red">
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Technologies</th>
-                    <th>Demo</th>
-                    <th>Documentation</th>
-                    <th>Sources</th>
-                </tr>
-                <tr *ngFor="let project of projects">
-                    <td>{{project.name}}</td>
-                    <td>{{project.team}}</td>
-                    <td>{{project.technologies.join(", ")}}</td>
-                    <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
-                    <td><a [href]="project.documentation"
-                           style="text-decoration: none; color: black">{{project.documentation}}</a></td>
-                    <td><a [href]="project.sources" style="text-decoration: none; color: black">{{project.sources}}</a>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr class="red">
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Technologies</th>
+                        <th>Demo</th>
+                        <th>Documentation</th>
+                        <th>Sources</th>
+                    </tr>
+                    <tr *ngFor="let project of projects">
+                        <td>{{project.name}}</td>
+                        <td>{{project.team}}</td>
+                        <td>{{project.technologies.join(", ")}}</td>
+                        <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
+                        <td><a [href]="project.documentation"
+                               style="text-decoration: none; color: black">{{project.documentation}}</a></td>
+                        <td><a [href]="project.sources"
+                               style="text-decoration: none; color: black">{{project.sources}}</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

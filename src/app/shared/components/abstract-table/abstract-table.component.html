@@ -8,14 +8,16 @@
         <!--First column with checkboxes-->
         <ng-container *ngIf="tableConfig.selection"
                       matColumnDef="select">
-            <th *matHeaderCellDef mat-header-cell>
-                <div *ngIf="tableConfig.selection === 'multi'" style="display: flex;justify-content: center;align-items: center;">
+            <th *matHeaderCellDef mat-header-cell style="padding-left: 0">
+                <div *ngIf="tableConfig.selection === 'multi'"
+                     style="display: flex;justify-content: center;align-items: center;">
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                                   [checked]="selection.hasValue() && isAllSelected()"
                                   [indeterminate]="selection.hasValue() && !isAllSelected()"
                                   [aria-label]="checkboxLabel()">
                     </mat-checkbox>
-                    <button [disabled]="selection.isEmpty()"
+                    <button *ngIf="tableConfig.selectOptions && tableConfig.selectOptions.length"
+                            [disabled]="selection.isEmpty()"
                             [matMenuTriggerFor]="menu"
                             aria-label="Example icon-button with a menu"
                             mat-icon-button>

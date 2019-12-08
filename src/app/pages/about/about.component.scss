@@ -20,10 +20,9 @@
     }
 
     .col {
-        //flex: 1 1 0;
-        //min-width: 50%;
         flex-grow: 1;
         padding: 16px;
+        max-width: 100%;
     }
 
     .works, .education, .basic-info, .languages, .technologies {
@@ -54,6 +53,10 @@
         white-space: nowrap;
         overflow: hidden;
     }
+}
+
+.table-wrapper {
+    overflow: auto;
 }
 
 table {

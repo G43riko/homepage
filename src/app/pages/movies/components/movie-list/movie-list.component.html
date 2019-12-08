@@ -1,5 +1,10 @@
 <div class="top-controls">
-    <mat-form-field>
+
+    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Font Style" name="fontStyle">
+        <mat-button-toggle value="table">Table</mat-button-toggle>
+        <mat-button-toggle value="grid">Grid</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field style="flex-grow: 1">
         <input #searchPatter
                matInput
                (input)="paginator.search(searchPatter.value)"
@@ -7,17 +12,8 @@
                type="search">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-
-    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Font Style" name="fontStyle">
-        <mat-button-toggle value="table">Table</mat-button-toggle>
-        <mat-button-toggle value="grid">Grid</mat-button-toggle>
-    </mat-button-toggle-group>
 </div>
 <ng-container *ngIf="previewType === 'table'">
-    <div style="padding: 1em">
-        <input [(ngModel)]="showExternalServices" id="idShowExternalServices" name="example" type="checkbox">
-        <label for="idShowExternalServices">Zobraziť externé služby</label>
-    </div>
     <ng-template #cellDirectors let-row="row">
         <button (click)="movieService.showMakerDetail(director.id)" *ngFor="let director of row.directors"
                 mat-button>{{director.name}}</button>

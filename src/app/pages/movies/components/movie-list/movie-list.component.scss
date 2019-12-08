@@ -2,8 +2,15 @@
     cursor: pointer;
 }
 
-.top-controls > * {
-    margin-left: 2em;
+.top-controls {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1em;
+    flex-wrap: wrap;
+
+    & > * {
+        margin: 0 1em;
+    }
 }
 
 .grid-movies {
