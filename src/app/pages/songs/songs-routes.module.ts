@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {SongsListComponent} from "./components/songs-list/songs-list.component";
-import {SongsComponent} from "./components/songs.component";
 
 const routes: Routes = [
     {
@@ -11,10 +10,6 @@ const routes: Routes = [
                 path: "",
                 pathMatch: "full",
                 component: SongsListComponent,
-            },
-            {
-                path: ":id",
-                component: SongsComponent,
             },
         ],
     },

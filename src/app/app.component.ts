@@ -34,7 +34,19 @@ export class AppComponent {
 
         matIconRegistry.addSvgIcon("imdb", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_imdb.svg"));
         matIconRegistry.addSvgIcon("csfd", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_csfd.svg"));
+        matIconRegistry.addSvgIcon("facebook", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_facebook.svg"));
+        matIconRegistry.addSvgIcon("github", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_github.svg"));
+        matIconRegistry.addSvgIcon("instagram", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_instagram.svg"));
+        matIconRegistry.addSvgIcon("linkedin", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_linkedin.svg"));
+        matIconRegistry.addSvgIcon("mixcloud", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_mixcloud.svg"));
+        matIconRegistry.addSvgIcon("twitter", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_twitter.svg"));
+        matIconRegistry.addSvgIcon("youtube", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_youtube.svg"));
         matIconRegistry.addSvgIcon("movieDb", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_movieDb.svg"));
+        matIconRegistry.addSvgIcon("codepen", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_codepen.svg"));
+        matIconRegistry.addSvgIcon("gitlab", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_gitlab.svg"));
+        matIconRegistry.addSvgIcon("npm", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_npm.svg"));
+        matIconRegistry.addSvgIcon("hackerrank", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_hackerrank.svg"));
+        matIconRegistry.addSvgIcon("skype", domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_skype.svg"));
 
     }
 

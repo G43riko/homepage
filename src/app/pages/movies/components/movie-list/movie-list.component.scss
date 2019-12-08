@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+.top-controls > * {
+    margin-left: 2em;
+}
+
 .grid-movies {
     $title-height: 53px;
     $radius: 5px;

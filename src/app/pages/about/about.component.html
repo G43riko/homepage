@@ -1,88 +1,111 @@
-<div class="ui container segment">
-    <h2 class="ui header">About</h2>
-    <div class="ui action input">
-        <input disabled label="Email" type="email" value="{{email}}">
-        <a class="ui icon button" href="mailto:{{email}}">
-            <i class="mail icon"></i>
-        </a>
-    </div>
-    <div class="ui action input">
-        <input disabled label="Tel. number" type="tel" value="{{telNumber}}">
-        <a class="ui icon button" href="tel:{{telNumber}}">
-            <i class="call icon"></i>
-        </a>
-    </div>
-    <a *ngFor="let item of items" href="{{item.link}}">
-        <div class="ui vertical {{item.icon}} animated button">
-            <div class="hidden content">{{item.label}}</div>
-            <div class="visible content">
-                <i class="{{item.icon}} icon"></i>
-            </div>
-        </div>
-    </a>
-    <hr>
-    <!--
-    <select class="ui fluid dropdown" label="Person skills" multiple="" name="skills">
-        <option value="">Skills</option>
-        <option value="angular">Angular</option>
-        <option value="css">CSS</option>
-        <option value="design">Graphic Design</option>
-        <option value="ember">Ember</option>
-        <option value="html">HTML</option>
-        <option value="ia">Information Architecture</option>
-        <option value="javascript">Javascript</option>
-        <option value="mech">Mechanical Engineering</option>
-        <option value="meteor">Meteor</option>
-        <option value="node">NodeJS</option>
-        <option value="plumbing">Plumbing</option>
-        <option value="python">Python</option>
-        <option value="rails">Rails</option>
-        <option value="react">React</option>
-        <option value="repair">Kitchen Repair</option>
-        <option value="ruby">Ruby</option>
-        <option value="ui">UI Design</option>
-        <option value="ux">User Experience</option>
-    </select>
-    -->
-</div>
 <div class="container">
-    <div class="row">
+    <div class="row wrap">
+        <a *ngFor="let account of items"
+           [href]="account.link"
+           [matTooltip]="account.label"
+           mat-icon-button
+           target="_blank">
+            <mat-icon svgIcon="{{account.icon}}"></mat-icon>
+        </a>
+    </div>
+    <div class="row wrap">
         <div class="col basic-info">
             <h3>Basic info</h3>
-            <div *ngFor="let info of infos" [ngSwitch]="info.flag" class="info-row">
-                <span class="key">{{info.key}}</span>
-                <a *ngSwitchCase="'mail'" [href]="'mailto:' + info.value" class="value">{{info.value}}</a>
-                <a *ngSwitchCase="'phone'" [href]="'tel:' + info.value" class="value">{{info.value}}</a>
-                <span *ngSwitchDefault class="value">{{info.value}}</span>
+            <div *ngFor="let info of infos"
+                 class="info-wrapper row space-between">
+                <strong class="key">{{info.key}}</strong>
+                <ng-container [ngSwitch]="info.flag">
+                    <a *ngSwitchCase="'mail'" [href]="'mailto:' + info.value" class="value">{{info.value}}</a>
+                    <a *ngSwitchCase="'phone'" [href]="'tel:' + info.value" class="value">{{info.value}}</a>
+                    <span *ngSwitchDefault class="value">{{info.value}}</span>
+                </ng-container>
             </div>
         </div>
-        <div class="col">
+        <div class="col education">
             <h3>Education</h3>
+            <div *ngFor="let school of schools" class="row space-between">
+                <strong>
+                    <a [href]="school.homepage"
+                       style="color: black; text-decoration: none"
+                       target="_blank">
+                        {{school.name}}
+                    </a>
+                    <ng-container *ngIf="school.fieldOfStudy"> - {{school.fieldOfStudy}}</ng-container>
+
+                </strong>
+                <span style="flex-basis: 100px">{{school.from}} - {{school.to}}</span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
+        <div class="col works">
             <h3>Work</h3>
-        </div>
-        <div class="col technologies">
-            <h3>Technology</h3>
-            <div *ngFor="let technology of technologies" class="technology-row">
-                <div [ngStyle]="{width: technology.skill + '%', background: 'rgb(' + (255 - technology.skill * 2.5) + ', ' + (technology.skill * 2.5) + ', 0)'}"
-                     class="slider"></div>
-                <span class="name">{{technology.name}}</span>
-                <span class="skill">{{technology.skill}}%</span>
+            <div *ngFor="let work of works"
+                 class="row space-between">
+                <a [href]="work.homepage"
+                   style="color: black; text-decoration: none"
+                   target="_blank">
+                    <strong>{{work.name}}</strong>
+                </a>
+                <span style="float: left; flex-basis: 100px">{{work.from}} - {{work.to}}</span>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
+    <div class="row wrap">
+        <div class="col languages">
             <h3>Languages</h3>
-            <div class="language-row">
-                <div class="language"></div>
-                <div>
-                    <!--                    <span *ngFor="let " class="star">&#9733;</span>-->
+            <div *ngFor="let language of languages" class="language-row">
+                <div
+                    [ngStyle]="{width: language.skill + '%', background: 'rgb(' + (255 - language.skill * 2.5) + ', ' + (language.skill * 2.5) + ', 0)'}"
+                    class="slider">
+                </div>
+
+                <div class="row space-between">
+                    <span class="name">{{language.name}}</span>
+                    <span class="skill">{{language.skill}}%</span>
                 </div>
             </div>
+        </div>
+        <div class="col technologies">
+            <h3>Technologies</h3>
+            <div *ngFor="let technology of technologies" class="technology-row">
+                <div
+                    [ngStyle]="{width: technology.skill + '%', background: 'rgb(' + (255 - technology.skill * 2.5) + ', ' + (technology.skill * 2.5) + ', 0)'}"
+                    class="slider"></div>
+                <div class="row space-between">
+                    <span class="name">
+                        <a [href]="technology.homepage"
+                           style="text-decoration: none; color:black" target="_blank">
+                            <strong>{{technology.name}}</strong>
+                        </a> -
+                        <span [title]="technology.type">{{technology.type}}</span></span>
+                    <span class="skill">{{technology.skill}}%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Projects</h3>
+            <table>
+                <tr class="red">
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Technologies</th>
+                    <th>Demo</th>
+                    <th>Documentation</th>
+                    <th>Sources</th>
+                </tr>
+                <tr *ngFor="let project of projects">
+                    <td>{{project.name}}</td>
+                    <td>{{project.team}}</td>
+                    <td>{{project.technologies.join(", ")}}</td>
+                    <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
+                    <td><a [href]="project.documentation"
+                           style="text-decoration: none; color: black">{{project.documentation}}</a></td>
+                    <td><a [href]="project.sources" style="text-decoration: none; color: black">{{project.sources}}</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

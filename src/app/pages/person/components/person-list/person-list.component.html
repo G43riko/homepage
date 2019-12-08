@@ -3,14 +3,25 @@
         <app-person-list-row-cell-select [person]="row"></app-person-list-row-cell-select>
     </ng-template>
     <ng-template #cellOptions let-row="row">
-        <button (click)="showDetail(row.id)" class="circular ui icon button hiddenable">
-            <i class="icon angle right"></i>
+
+        <button (click)="showDetail(row.id)"
+                color="primary"
+                mat-mini-fab>
+            <mat-icon>chevron_right</mat-icon>
         </button>
-        <button (click)="remove([row])"
-                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"
-                class="circular ui icon button hiddenable">
-            <i class="icon remove"></i>
+        <button (click)="remove(row)"
+                color="primary"
+                mat-mini-fab>
+            <mat-icon>delete</mat-icon>
         </button>
+        <!--        <button (click)="showDetail(row.id)" class="circular ui icon button hiddenable">-->
+        <!--            <i class="icon angle right"></i>-->
+        <!--        </button>-->
+        <!--        <button (click)="remove([row])"-->
+        <!--                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"-->
+        <!--                class="circular ui icon button hiddenable">-->
+        <!--            <i class="icon remove"></i>-->
+        <!--        </button>-->
     </ng-template>
 
     <ng-template #cellBirthday let-row="row">

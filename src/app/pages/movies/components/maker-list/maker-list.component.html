@@ -18,7 +18,9 @@
     {{row.birthday | date:"dd.MM.yyyy"}}
 </ng-template>
 <ng-template #cellDetail let-row="row">
-    <button (click)="movieService.showMakerDetail(row.id)" class="circular ui icon button hiddenable">
-        <i class="icon angle right"></i>
+    <button (click)="movieService.showMakerDetail(row.id)"
+            color="primary"
+            mat-mini-fab>
+        <mat-icon>chevron_right</mat-icon>
     </button>
 </ng-template>

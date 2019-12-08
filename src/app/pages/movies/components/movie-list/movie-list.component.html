@@ -1,18 +1,17 @@
-<div class="ui checkbox" style="margin: 20px 0 10px 10px">
-    <div class="ui icon input">
-        <i class="search icon"></i>
-        <!--        <input [(ngModel)]="searchPattern" placeholder="Search..." type="text">-->
+<div class="top-controls">
+    <mat-form-field>
         <input #searchPatter
+               matInput
                (input)="paginator.search(searchPatter.value)"
-               label="Search key"
-               placeholder="Search..."
-               type="text">
-    </div>
-    <div class="ui mini buttons">
-        <button (click)="setPreviewType('grid')" class="ui button">Grid</button>
-        <div class="or"></div>
-        <button (click)="setPreviewType('table')" class="ui button">Table</button>
-    </div>
+               placeholder="Search"
+               type="search">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Font Style" name="fontStyle">
+        <mat-button-toggle value="table">Table</mat-button-toggle>
+        <mat-button-toggle value="grid">Grid</mat-button-toggle>
+    </mat-button-toggle-group>
 </div>
 <ng-container *ngIf="previewType === 'table'">
     <div style="padding: 1em">
@@ -20,26 +19,29 @@
         <label for="idShowExternalServices">Zobraziť externé služby</label>
     </div>
     <ng-template #cellDirectors let-row="row">
-        <button *ngFor="let director of row.directors" (click)="movieService.showMakerDetail(director.id)" mat-button>{{director.name}}</button>
+        <button (click)="movieService.showMakerDetail(director.id)" *ngFor="let director of row.directors"
+                mat-button>{{director.name}}</button>
     </ng-template>
     <ng-template #cellTitle let-row="row">
-       <div style="display: flex; flex-direction: row">
-           <img *ngIf="row.avatar"
-                [src]="row.avatar"
-                (click)="openImageDetail(row.avatar)"
-                alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
-           <div style="display: flex; flex-direction: column; justify-content: space-between;">
-               <strong>{{row.titleSk || row.title}}</strong>
-               <div *ngIf="row.titleSk" class="sub header">{{row.title}}</div>
-           </div>
-       </div>
+        <div style="display: flex; flex-direction: row">
+            <img (click)="openImageDetail(row.avatar)"
+                 *ngIf="row.avatar"
+                 [src]="row.avatar"
+                 alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <strong>{{row.titleSk || row.title}}</strong>
+                <div *ngIf="row.titleSk" class="sub header">{{row.title}}</div>
+            </div>
+        </div>
     </ng-template>
     <ng-template #cellExternal let-row="row">
         <app-external-links type="movie" [holder]="row"></app-external-links>
     </ng-template>
     <ng-template #cellDetail let-row="row">
-        <button (click)="movieService.showMovieDetail(row.id)" class="circular ui icon button hiddenable">
-            <i class="icon angle right"></i>
+        <button (click)="movieService.showMovieDetail(row.id)"
+                color="primary"
+                mat-mini-fab>
+            <mat-icon>chevron_right</mat-icon>
         </button>
     </ng-template>
     <app-abstract-table [tableConfig]="movieConfig"

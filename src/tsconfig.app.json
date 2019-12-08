@@ -5,7 +5,11 @@
         "types": []
     },
     "exclude": [
-        "src/test.ts",
+        "test.ts",
+        "environments/*",
+        "app/shared/**/*",
+        "app/tests/**/*",
+        "**/deprecated/**/*",
         "**/*.spec.ts"
     ]
 }

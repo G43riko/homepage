@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {TestingModule} from "../../../tests/testing.module";
-import {DurationPipe} from "./duration.pipe";
+import {TestingModule} from "../../../../tests/testing.module";
+import {DurationPipe} from "../../pipes/duration.pipe";
 import {SongsNavBarComponent} from "./nav-bar.component";
 
 describe("SongsNavBarComponent", () => {
