@@ -9,7 +9,7 @@ export class AngularFirestoreMockService {
     public constructor() {
     }
 
-    public collection(name: string):  {valueChanges: () => Subject<any>} {
+    public collection(name: string): { valueChanges: () => Subject<any> } {
         return {
             valueChanges: () => new Subject<any>(),
         };

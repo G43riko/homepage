@@ -1,0 +1,12 @@
+<div class="restaurant-selector-wrapper">
+    <mat-selection-list #restaurants (selectionChange)="changed = true">
+        <mat-list-option *ngFor="let restaurant of allRestaurants" [selected]="isSelected(restaurant)">
+            {{restaurant.name}}
+        </mat-list-option>
+    </mat-selection-list>
+    <button (click)="save()"
+            [disabled]="!changed"
+            color="primary"
+            mat-raised-button>Save
+    </button>
+</div>

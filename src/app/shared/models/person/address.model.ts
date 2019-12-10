@@ -1,10 +1,12 @@
 export class Address {
-    public country: string;
-    public city: string;
-    public street: string;
-    public streetNumber: string;
+    public country?: string;
+    public city?: string;
+    public street?: string;
+    public streetNumber?: string;
+    public latitude?: number;
+    public longitude?: number;
 
-    public constructor(country: string = "SK", city: string = "", street: string = "", streetNumber: string = "") {
+    public constructor(country = "SK", city = "", street = "", streetNumber = "") {
         this.streetNumber = streetNumber;
         this.country = country;
         this.street = street;

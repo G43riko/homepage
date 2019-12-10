@@ -12,9 +12,9 @@ describe("PersonListRowCellSelectComponent", () => {
             imports: [
             MaterialModule,
         ],
-      declarations: [
-          PersonListRowCellSelectComponent,
-      ],
+            declarations: [
+                PersonListRowCellSelectComponent,
+            ],
     }).compileComponents();
   }));
 

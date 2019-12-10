@@ -3,8 +3,8 @@ export class Email {
     public active: boolean;
     public email_id: string;
 
-    public constructor(email: string = "@", active = true) {
-        this.email  = email;
+    public constructor(email = "@", active = true) {
+        this.email = email;
         this.active = active;
     }
 

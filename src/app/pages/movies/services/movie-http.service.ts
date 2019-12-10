@@ -41,6 +41,18 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
         );
     }
 
+    public getList(count: number, offset = 0, key?: string): Observable<Movie[]> {
+        if (key) {
+            return this.http.get<Movie[]>(`${URL}/quick-search/${key}?count=${count}&offset=${offset}`).pipe(
+                catchError(this.handleError<Movie[]>("searchMovies")),
+            );
+        }
+
+        return this.http.get<Movie[]>(`${URL}?count=${count}&offset=${offset}`).pipe(
+            catchError(this.handleError<Movie[]>("getList")),
+        );
+    }
+
     public getCount(): Observable<number> {
         return this.http.get<number>(URL + "/count").pipe(
             catchError(this.handleError<number>("getCount")),

@@ -3,7 +3,7 @@ export class Phone {
     public active: boolean;
     public number_id: string;
 
-    public constructor(number: string = "", active = true) {
+    public constructor(number = "", active = true) {
         this.number = number;
         this.active = active;
     }

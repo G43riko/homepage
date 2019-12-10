@@ -27,6 +27,7 @@ import {MovieService} from "./services/movie.service";
     ],
     providers: [
         MovieHttpService,
+
         MovieService,
         MakerHttpService,
     ],

@@ -47,9 +47,9 @@ export class SongsComponent implements OnInit {
         const firstScriptTag = document.getElementsByTagName("script")[0];
         if (firstScriptTag && firstScriptTag.parentNode) {
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            window["onYouTubeIframeAPIReady"] = () => {
-                this.gplayer      = new GPlayer("player");
-                window["gplayer"] = this.gplayer;
+            window.onYouTubeIframeAPIReady = () => {
+                this.gplayer = new GPlayer("player");
+                window.gplayer = this.gplayer;
             };
         }
     }

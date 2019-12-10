@@ -37,11 +37,19 @@ export const AppRoutes: Routes = [
         },
     },
     {
-        path            : AppConfig.PATH_SONGS,
-        loadChildren    : () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
+        path: AppConfig.PATH_SONGS,
+        loadChildren: () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_SONGS],
+        },
+    },
+    {
+        path: AppConfig.PATH_FOODS,
+        loadChildren: () => import("./pages/foods/foods.module").then((mod) => mod.FoodsModule),
+        canActivateChild: [AuthGuard],
+        data: {
+            allowedFor: [Roles.ROLE_VISIT_FOODS],
         },
     },
     {

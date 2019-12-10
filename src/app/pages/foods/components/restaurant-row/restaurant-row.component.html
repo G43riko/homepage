@@ -1,0 +1,6 @@
+<h2 mat-subheader>{{dailyMenu.restaurant}}</h2>
+<mat-list-item *ngFor="let dish of dailyMenu.dishes">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <h4 mat-line>{{dish.name}}</h4>
+    <p mat-line> {{dish.price | currency}} {{dish.weight}}</p>
+</mat-list-item>

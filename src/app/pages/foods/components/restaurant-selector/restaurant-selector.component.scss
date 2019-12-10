@@ -1,0 +1,9 @@
+.restaurant-selector-wrapper {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    mat-selection-list {
+        overflow: auto;
+    }
+}

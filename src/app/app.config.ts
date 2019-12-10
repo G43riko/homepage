@@ -17,32 +17,32 @@ export class AppConfig {
 
     public static readonly GOOGLE_MAPS_API_EMBED_URL = "https://www.google.com/maps/embed/v1/place";
 
-    public static readonly FIREBASE_AUTH     = {
-        apiKey           : "AIzaSyCooxFtIu4-NHFUyWXU3ANppefKsaRdyss",
-        authDomain       : "foods-5d312.firebaseapp.com",
-        databaseURL      : "https://foods-5d312.firebaseio.com",
-        projectId        : "foods-5d312",
-        storageBucket    : "foods-5d312.appspot.com",
+    public static readonly FIREBASE_AUTH = {
+        apiKey: "AIzaSyCooxFtIu4-NHFUyWXU3ANppefKsaRdyss",
+        authDomain: "foods-5d312.firebaseapp.com",
+        databaseURL: "https://foods-5d312.firebaseio.com",
+        projectId: "foods-5d312",
+        storageBucket: "foods-5d312.appspot.com",
         messagingSenderId: "265768844504",
     };
 
     public static readonly DEFAULT_ALERT_DURATION = 2000;
 
-    public static readonly PATH_ABOUT        = "about";
-    public static readonly PATH_ACCOUNTS     = "accounts";
-    public static readonly PATH_LOCATION     = "location";
-    public static readonly PATH_DEMOS        = "demos";
-    public static readonly PATH_HOME         = "home";
-    public static readonly PATH_PROFILE      = "profile";
+    public static readonly PATH_ABOUT = "about";
+    public static readonly PATH_ACCOUNTS = "accounts";
+    public static readonly PATH_LOCATION = "location";
+    public static readonly PATH_DEMOS = "demos";
+    public static readonly PATH_HOME = "home";
+    public static readonly PATH_PROFILE = "profile";
     public static readonly PATH_MIXES = "mixes";
-    public static readonly PATH_IMAGES       = "images";
-    public static readonly PATH_PERSONS      = "persons";
-    public static readonly PATH_MOVIES       = "movies";
+    public static readonly PATH_IMAGES = "images";
+    public static readonly PATH_PERSONS = "persons";
+    public static readonly PATH_MOVIES = "movies";
     public static readonly PATH_IMAGE_UPLOAD = "upload";
-    public static readonly PATH_YOUTUBE      = "youtube";
-    public static readonly PATH_SONGS        = "songs";
+    public static readonly PATH_YOUTUBE = "youtube";
+    public static readonly PATH_SONGS = "songs";
     public static readonly PATH_FILES = "files";
-    public static readonly PATH_TODO         = "todo";
+    public static readonly PATH_TODO = "todo";
     public static readonly PATH_BROWSER = "browser";
     public static readonly PATH_FOODS = "foods";
     public static readonly PATH_IMAGE_DETAIL = "detail";
@@ -51,16 +51,16 @@ export class AppConfig {
 
     public static readonly MENU_ITEMS: MenuItemModel[] = [
         {
-            icon  : "home",
-            link  : AppConfig.PATH_HOME,
+            icon: "home",
+            link: AppConfig.PATH_HOME,
             access: "",
-            label : "home",
+            label: "home",
         },
         {
-            icon  : "account",
-            link  : AppConfig.PATH_PROFILE,
+            icon: "account",
+            link: AppConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
-            label : "profile",
+            label: "profile",
         },
         {
             icon: "account",
@@ -93,15 +93,16 @@ export class AppConfig {
         },
         */
         {
-            icon  : "address book",
-            link  : AppConfig.PATH_PERSONS,
+            icon: "address book",
+            link: AppConfig.PATH_PERSONS,
             access: [Roles.ROLE_VISIT_PERSONS],
-            label : "persons",
-        }, {
-            icon  : "address book",
-            link  : AppConfig.PATH_MOVIES,
+            label: "persons",
+        },
+        {
+            icon: "address book",
+            link: AppConfig.PATH_MOVIES,
             access: [Roles.ROLE_VISIT_MOVIES],
-            label : "movies",
+            label: "movies",
         },
         /*
         {
@@ -111,10 +112,16 @@ export class AppConfig {
         },
         */
         {
-            icon  : "music",
-            link  : AppConfig.PATH_SONGS,
+            icon: "music",
+            link: AppConfig.PATH_SONGS,
             access: [Roles.ROLE_VISIT_SONGS],
-            label : "songs",
+            label: "songs",
+        },
+        {
+            icon: "fodds",
+            link: AppConfig.PATH_FOODS,
+            access: [Roles.ROLE_VISIT_FOODS],
+            label: "foods",
         },
         /*
         {
@@ -134,10 +141,10 @@ export class AppConfig {
         },
         */
         {
-            icon  : "info circle",
-            link  : AppConfig.PATH_ABOUT,
+            icon: "info circle",
+            link: AppConfig.PATH_ABOUT,
             access: "",
-            label : "about",
+            label: "about",
         },
         /*
         {

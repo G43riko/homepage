@@ -77,9 +77,9 @@ export class Account {
     public userName: string;
     public link: string;
 
-    public constructor(type: AccountType, userName: string, link: string = "") {
-        this.type     = type;
-        this.link     = link;
+    public constructor(type: AccountType, userName: string, link = "") {
+        this.type = type;
+        this.link = link;
         this.userName = userName;
     }
 
