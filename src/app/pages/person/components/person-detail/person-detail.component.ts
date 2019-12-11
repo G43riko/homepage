@@ -23,8 +23,8 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
     public filteredCountries: Observable<string[]>;
 
     public constructor(route: ActivatedRoute,
-                       private readonly mapService: MapsService,
                        router: Router,
+                       private readonly mapService: MapsService,
                        private readonly dialog: MatDialog,
                        private readonly utilService: UtilsService,
                        notificationService: NotificationService,
@@ -52,14 +52,10 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
     }
 
     public showMap(): void {
-        let address = this.detailForm.value.address.city + " ";
-        address += this.detailForm.value.address.street + " ";
-        address += this.detailForm.value.address.streetNumber;
-
         this.dialog.open(MapDialogComponent, {
             width: "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrl(encodeURI(address)),
+            data: this.mapService.getLocationEmbedUrlFromAddress(this.detailForm.value.address),
         });
     }
 

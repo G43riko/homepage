@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
-import { auth } from "firebase/app";
-import { Observable, of } from "rxjs";
-import { fromPromise } from "rxjs/internal-compatibility";
-import { switchMap } from "rxjs/operators";
-import { Roles } from "../enums/roles.enum";
-import { User } from "../models/auth.model";
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
+import {Router} from "@angular/router";
+import {auth} from "firebase/app";
+import {Observable, of} from "rxjs";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {switchMap} from "rxjs/operators";
+import {Roles} from "../enums/roles.enum";
+import {User} from "../models/auth.model";
 import {AnalyticsService} from "./analytics.service";
 
 @Injectable({
@@ -15,7 +15,7 @@ import {AnalyticsService} from "./analytics.service";
 })
 export class AuthService {
     public readonly user$: Observable<User | undefined>;
-    private _user: User;
+    private localUser: User;
 
     public constructor(private readonly router: Router,
                        private readonly afAuth: AngularFireAuth,
@@ -26,6 +26,7 @@ export class AuthService {
                 if (user) {
                     return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
                 }
+
                 return of(undefined);
             }),
         );
@@ -36,12 +37,14 @@ export class AuthService {
 
         const credentials = await this.afAuth.auth.signInWithPopup(provider);
         this.analyticsService.login("google");
+
         return this.updateUserData(credentials.user);
     }
 
     public async signOut(): Promise<boolean> {
         await this.afAuth.auth.signOut();
         this.analyticsService.signOut();
+
         return this.router.navigate(["/"]);
     }
 
@@ -64,6 +67,7 @@ export class AuthService {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -80,10 +84,31 @@ export class AuthService {
         }, {merge: true}));
     }
 
+    public updateFavouriteRestaurant(user: any, restaurantKey: string, operation: "add" | "remove"): Observable<void> {
+        const ref = this.afs.doc<User>(`users/${user.uid}`);
+
+        return ref.get().pipe(
+            switchMap((data) => {
+                const userData = data.data() as User;
+                if (userData) {
+                    if (operation === "add") {
+                        userData.favoriteRestaurants = Array.from(new Set([...(userData.favoriteRestaurants || []), restaurantKey]));
+                    } else if (operation === "remove" && Array.isArray(userData.favoriteRestaurants)) {
+                        userData.favoriteRestaurants.splice(userData.favoriteRestaurants.indexOf(restaurantKey), 1);
+                    } else {
+                        userData.favoriteRestaurants = Array.isArray(userData.favoriteRestaurants) ? userData.favoriteRestaurants : [];
+                    }
+                }
+
+                return fromPromise(ref.set(userData, {merge: true}));
+            })
+        );
+    }
+
     private updateUserData(user: any): Promise<void> {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
         const providerData = user.providerData && user.providerData[0] || {};
-        this._user = {
+        this.localUser = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName || providerData.displayName || null,
@@ -103,6 +128,6 @@ export class AuthService {
         // userRef.update({
         //     access: firestore.FieldValue.arrayUnion(AppConfig.PATH_PROFILE) as any,
         // });
-        return userRef.set(this._user, {merge: true});
+        return userRef.set(this.localUser, {merge: true});
     }
 }

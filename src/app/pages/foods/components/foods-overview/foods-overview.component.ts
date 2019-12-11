@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {AuthService} from "../../../../shared/services/auth.service";
 import {DailyMenu} from "../../../movies/models/daily-menu.model";
 import {DailyMenuHttpService} from "../../services/daily-menu-http.service";
 
@@ -9,13 +10,21 @@ import {DailyMenuHttpService} from "../../services/daily-menu-http.service";
 })
 export class FoodsOverviewComponent implements OnInit {
     public dailyMenus: DailyMenu[];
+    public selectedRestaurants: string[];
 
-    public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService) {
+    public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
+                       private readonly authService: AuthService) {
     }
 
     public ngOnInit(): void {
         this.dailyMenuHttpService.getAllDailyMenus().subscribe((dailyMenus) => {
             this.dailyMenus = dailyMenus;
+        });
+
+        this.authService.user$.subscribe((user) => {
+            if (user) {
+                this.selectedRestaurants = user.favoriteRestaurants || [];
+            }
         });
     }
 

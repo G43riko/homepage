@@ -1,3 +1,4 @@
+
 <div class="wrapper">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
@@ -10,22 +11,20 @@
                 <mat-icon>menu</mat-icon>
             </button>
         </mat-toolbar-row>
-
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container">
         <mat-sidenav #snav
-                     (closed)="restaurantSelectorComponent.reset()"
                      [mode]="'side'"
                      fixedTopGap="56"
                      position="end">
-            <app-restaurant-selector #restaurantSelectorComponent></app-restaurant-selector>
+            <app-restaurant-selector></app-restaurant-selector>
         </mat-sidenav>
 
-        <mat-sidenav-content>
+        <mat-sidenav-content style="min-height: calc(100vh - 128px);">
             <mat-list>
-                <ng-container *ngFor="let dailyMenu of dailyMenus; let i=index">
+                <ng-container *ngFor="let selectedRestaurant of selectedRestaurants; let i=index">
                     <mat-divider *ngIf="i > 0"></mat-divider>
-                    <app-restaurant-row [dailyMenu]="dailyMenu"></app-restaurant-row>
+                    <app-restaurant-row [restaurantKey]="selectedRestaurant"></app-restaurant-row>
                 </ng-container>
             </mat-list>
         </mat-sidenav-content>

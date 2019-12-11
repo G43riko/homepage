@@ -1,12 +1,21 @@
-<div class="restaurant-selector-wrapper">
-    <mat-selection-list #restaurants (selectionChange)="changed = true">
-        <mat-list-option *ngFor="let restaurant of allRestaurants" [selected]="isSelected(restaurant)">
+<div *ngIf="authService.user$ | async as user; else: onlyRestaurantList"
+     class="restaurant-selector-wrapper">
+    <div *ngIf="loading" class="loader-wrapper">
+        <mat-spinner></mat-spinner>
+    </div>
+    <mat-selection-list (selectionChange)="change($event, user)">
+        <mat-list-option *ngFor="let restaurant of allRestaurants" [selected]="isSelected(restaurant, user)"
+                         [value]="restaurant.key">
             {{restaurant.name}}
         </mat-list-option>
     </mat-selection-list>
-    <button (click)="save()"
-            [disabled]="!changed"
-            color="primary"
-            mat-raised-button>Save
-    </button>
 </div>
+<ng-template #onlyRestaurantList>
+    <div class="restaurant-selector-wrapper">
+        <mat-selection-list [disabled]="true">
+            <mat-list-option *ngFor="let restaurant of allRestaurants">
+                {{restaurant.name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+</ng-template>

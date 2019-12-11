@@ -47,10 +47,6 @@ export const AppRoutes: Routes = [
     {
         path: AppConfig.PATH_FOODS,
         loadChildren: () => import("./pages/foods/foods.module").then((mod) => mod.FoodsModule),
-        canActivateChild: [AuthGuard],
-        data: {
-            allowedFor: [Roles.ROLE_VISIT_FOODS],
-        },
     },
     {
         path: AppConfig.PATH_FILES,

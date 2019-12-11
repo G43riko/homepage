@@ -120,7 +120,7 @@ export class AppConfig {
         {
             icon: "fodds",
             link: AppConfig.PATH_FOODS,
-            access: [Roles.ROLE_VISIT_FOODS],
+            access: "",
             label: "foods",
         },
         /*
