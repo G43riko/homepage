@@ -5,7 +5,9 @@ import {MaterialModule} from "../modules/material.module";
 import {SharedPipesModule} from "../pipes/shared-pipes.module";
 import {AbstractTableComponent} from "./abstract-table/abstract-table.component";
 import {AutoChipsComponent} from "./auto-chips/auto-chips.component";
-import { ImageDialogComponent } from "./image-dialog/image-dialog.component";
+import {FeedbackDialogComponent} from "./feedback-dialog/feedback-dialog.component";
+import {IconListComponent} from "./icon-list/icon-list.component";
+import {ImageDialogComponent} from "./image-dialog/image-dialog.component";
 import {LoginScreenComponent} from "./login-screen/login-screen.component";
 import {MapDialogComponent} from "./map-dialog/map-dialog.component";
 import {PaginatorComponent} from "./paginator/paginator.component";
@@ -27,6 +29,8 @@ import {WidgetComponent} from "./widget/widget.component";
         WidgetComponent,
         AutoChipsComponent,
         ImageDialogComponent,
+        FeedbackDialogComponent,
+        IconListComponent,
     ],
     entryComponents: [
         MapDialogComponent,
@@ -39,6 +43,8 @@ import {WidgetComponent} from "./widget/widget.component";
         MapDialogComponent,
         AutoChipsComponent,
         ImageDialogComponent,
+        FeedbackDialogComponent,
+        IconListComponent,
     ],
 })
 export class SharedComponentsModule {

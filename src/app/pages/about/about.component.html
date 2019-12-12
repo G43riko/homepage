@@ -60,7 +60,8 @@
                 </div>
 
                 <div class="row space-between">
-                    <span class="name">{{language.name}}</span>
+                    <span class="name"><app-icon-list [keys]="[language.name]" type="technology"></app-icon-list>
+                        {{language.name}}</span>
                     <span class="skill">{{language.skill}}%</span>
                 </div>
             </div>
@@ -75,7 +76,8 @@
                     <span class="name">
                         <a [href]="technology.homepage"
                            style="text-decoration: none; color:black" target="_blank">
-                            <strong>{{technology.name}}</strong>
+                            <strong><app-icon-list [keys]="[technology.name]" type="technology"></app-icon-list>
+                                {{technology.name}}</strong>
                         </a> -
                         <span [title]="technology.type">{{technology.type}}</span></span>
                     <span class="skill">{{technology.skill}}%</span>
@@ -100,7 +102,9 @@
                     <tr *ngFor="let project of projects">
                         <td>{{project.name}}</td>
                         <td>{{project.team}}</td>
-                        <td>{{project.technologies.join(", ")}}</td>
+                        <td>
+                            <app-icon-list [keys]="project.technologies" type="technology"></app-icon-list>
+                            {{project.technologies.join(", ")}}</td>
                         <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
                         <td><a [href]="project.documentation"
                                style="text-decoration: none; color: black">{{project.documentation}}</a></td>

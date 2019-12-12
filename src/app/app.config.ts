@@ -47,6 +47,52 @@ export class AppConfig {
     public static readonly PATH_FOODS = "foods";
     public static readonly PATH_IMAGE_DETAIL = "detail";
 
+    public static readonly FA_FOOD_ICONS = ["fish", "hamburger", "pepper", "salad"];
+    public static readonly FA_MOVIE_ICONS = ["imdb", "csfd"];
+    public static readonly FA_TECHNOLOGY_ICONS = [
+        "angular",
+        "bitbucket",
+        "bootstrap",
+        "codepen",
+        "docker",
+        "css3",
+        "facebook",
+        "github",
+        "gitlab",
+        "git",
+        "grunt",
+        "hackerrank",
+        "gulp",
+        "firebase",
+        "html5",
+        "postgres",
+        "sass",
+        "jira",
+        "instagram",
+        "linkedin",
+        "node-js",
+        "mixcloud",
+        "npm",
+        "php",
+        "java",
+        "socketio",
+        "js",
+        "python",
+        "twitter",
+        "youtube",
+        "movieDb",
+        "skype",
+        "redis",
+        "mongodb",
+        "ts",
+    ];
+
+    public static readonly FA_ICONS = [
+        ...AppConfig.FA_FOOD_ICONS,
+        ...AppConfig.FA_MOVIE_ICONS,
+        ...AppConfig.FA_TECHNOLOGY_ICONS,
+    ];
+
     public static readonly AUTH_COOKIE_KEY = "__auth_key__";
 
     public static readonly MENU_ITEMS: MenuItemModel[] = [
