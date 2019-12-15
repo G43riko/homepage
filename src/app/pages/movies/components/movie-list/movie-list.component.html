@@ -1,9 +1,15 @@
 <div class="top-controls">
 
-    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Font Style" name="fontStyle">
-        <mat-button-toggle value="table">Table</mat-button-toggle>
-        <mat-button-toggle value="grid">Grid</mat-button-toggle>
-    </mat-button-toggle-group>
+    <!--    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Preview type" name="preview typye">-->
+    <!--        <mat-button-toggle value="table">Table</mat-button-toggle>-->
+    <!--        <mat-button-toggle value="grid">Grid</mat-button-toggle>-->
+    <!--    </mat-button-toggle-group>-->
+    <section class="preview-type">
+        <mat-radio-group (change)="setPreviewType($event.value)" aria-label="Preview type" name="preview typye">
+            <mat-radio-button [checked]="previewType === 'table'" value="table">Table</mat-radio-button>
+            <mat-radio-button [checked]="previewType === 'grid'" value="grid">Grid</mat-radio-button>
+        </mat-radio-group>
+    </section>
     <mat-form-field style="flex-grow: 1">
         <input #searchPatter
                matInput

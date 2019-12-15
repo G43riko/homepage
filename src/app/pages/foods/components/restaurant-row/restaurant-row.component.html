@@ -1,25 +1,27 @@
-<ng-container *ngIf="dailyMenu">
-    <h2 *ngIf="restaurant" mat-subheader
-        style="position: sticky;top: 0;background: #fafafa;z-index:1">
-        {{restaurant.name}}
-        <small> - {{restaurantHttpService.getDistance(restaurant.address)}} od vás</small>
-        <mat-icon (click)="showMap(restaurant)"
-                  *ngIf="restaurant.address"
-                  title="showMap">map
-        </mat-icon>
+<h2 *ngIf="restaurant" mat-subheader
+    style="position: sticky;top: 0;background: #fafafa;z-index:1">
+    {{restaurant.name}}
+    <small> - {{restaurantHttpService.getDistance(restaurant.address)}} od vás</small>
+    <mat-icon (click)="showMap(restaurant)"
+              *ngIf="restaurant.address"
+              title="showMap">map
+    </mat-icon>
 
-        <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
-                  *ngIf="restaurant.homepage"
-                  title="showHomepage">
-            home
-        </mat-icon>
-    </h2>
+    <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
+              *ngIf="restaurant.homepage"
+              title="showHomepage">home
+    </mat-icon>
+</h2>
+<ng-container *ngIf="dailyMenu">
     <mat-list-item *ngIf="!dailyMenu.dishes.length">
-        <h4 mat-line>Reštaurácia nemá zverejnené menu</h4>
+        <small mat-line>Reštaurácia nemá zverejnené menu</small>
     </mat-list-item>
     <mat-list-item *ngFor="let dish of dailyMenu.dishes" [class.hoverable]="dish.type !== 'special'">
-        <mat-icon *ngIf="dish.type === 'food'"
-                  mat-list-icon>{{getIconByType(dish.type)}}</mat-icon>
+        <app-icon-list *ngIf="dish.type !== 'special'"
+                       [keys]="[dish.type]"
+                       defaultIcon="restaurant"
+                       mat-list-icon
+                       type="food"></app-icon-list>
         <mat-icon (click)="restaurantHttpService.openFoodImages(dish.name)"
                   *ngIf="dish.type !== 'special'"
                   mat-list-icon
@@ -31,7 +33,11 @@
         <ng-template #showTitle>
             <h4 mat-line><strong>{{dish.name}}</strong></h4>
         </ng-template>
-        <span *ngIf="dish.price" style="order: 1; white-space: nowrap; margin: 0 1em;">{{dish.price}}</span>
-        <span *ngIf="dish.weight" style="order: 1; white-space: nowrap; margin: 0 1em;">{{dish.weight}}</span>
+        <span *ngIf="dish.price" class="additional-info">{{dish.price}}€</span>
+        <span *ngIf="dish.weight" class="additional-info">{{dish.weight}}</span>
     </mat-list-item>
 </ng-container>
+
+<mat-list-item *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</mat-list-item>

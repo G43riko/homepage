@@ -11,3 +11,12 @@
 .hoverable:hover {
     background: rgba(0, 0, 0, .04);
 }
+
+.additional-info {
+    order: 1;
+    white-space: nowrap;
+    margin: 0 1em;
+    @media only screen and (max-width: 767px) {
+        margin: 0 .1em;
+    }
+}

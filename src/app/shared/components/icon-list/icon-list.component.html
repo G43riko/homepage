@@ -1,9 +1,10 @@
 <ng-container *ngFor="let key of keys">
-    <ng-container *ngIf="getIconFor(key) as icon; else defaultIcon">
+    <ng-container *ngIf="getIconFor(key) as icon; else useDefault">
         <mat-icon *ngIf="icon.type === 'font-awesome'" [matTooltip]="icon.icon" [svgIcon]="icon.icon"></mat-icon>
         <mat-icon *ngIf="icon.type === 'material'" [matTooltip]="icon.icon">icon.icon</mat-icon>
     </ng-container>
-    <ng-template #defaultIcon>
-        ?
+    <ng-template #useDefault>
+        <mat-icon *ngIf="defaultIcon; else defaultChar" [matTooltip]="defaultIcon">{{defaultIcon}}</mat-icon>
+        <ng-template #defaultChar>{{defaultCharacter}}</ng-template>
     </ng-template>
 </ng-container>

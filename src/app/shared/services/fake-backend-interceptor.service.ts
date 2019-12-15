@@ -1,23 +1,22 @@
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {AbstractRestApiHandler, SimpleMemoryDatabaseService} from "@g43/common";
-import {Observable, of} from "rxjs";
-import {delay, dematerialize, materialize, mergeMap, tap} from "rxjs/operators";
-import {MakersFixture} from "../../pages/movies/tests/maker.fixture";
-import {MoviesFixture} from "../../pages/movies/tests/movies.fixture";
-import {PersonsFixture} from "../../pages/person/tests/personsFixture";
-import {SongListMock, UserDetailMock} from "../../tests/mock.data";
-
-const data: any[] = [...UserDetailMock];
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { AbstractRestApiHandler, SimpleMemoryDatabaseService } from "@g43/common";
+import { Observable, of } from "rxjs";
+import { delay, dematerialize, map, materialize, mergeMap, tap } from "rxjs/operators";
+import { DailyMenuFixture } from "../../pages/foods/tests/daily-menu.fixture";
+import { RestaurantFixture } from "../../pages/foods/tests/restaurant.fixture";
+import { MakersFixture } from "../../pages/movies/tests/maker.fixture";
+import { MoviesFixture } from "../../pages/movies/tests/movies.fixture";
+import { PersonsFixture } from "../../pages/person/tests/personsFixture";
+import { SongListMock } from "../../tests/mock.data";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-    private readonly movieRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MoviesFixture()), "movies");
-    private readonly makerRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MakersFixture()), "movies/maker");
-    private readonly personRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new PersonsFixture()), "persons");
-
-    public constructor() {
-    }
+    private readonly dailyMenuDatabase = new SimpleMemoryDatabaseService(new DailyMenuFixture());
+    private readonly movieRestApi      = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MoviesFixture()), "movies");
+    private readonly makerRestApi      = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new MakersFixture()), "movies/maker");
+    private readonly personRestApi     = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new PersonsFixture()), "persons");
+    private readonly restaurantRestApi = new AbstractRestApiHandler(new SimpleMemoryDatabaseService(new RestaurantFixture()), "persons");
 
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // wrap in delayed observable to simulate server api call
@@ -38,7 +37,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (moviesResult) {
                 return moviesResult.pipe(tap((e) => console.log("movies: ", request.url, e)));
             }
+            const restaurantResult = this.restaurantRestApi.use(request);
+            if (restaurantResult) {
+                return restaurantResult.pipe(tap((e) => console.log("restaurants: ", request.url, e)));
+            }
 
+            if (request.method === "GET") {
+                const dailyMenuMath = request.url.match(/\/menus\/restaurant\/(\w+)/);
+                if (dailyMenuMath) {
+                    return this.dailyMenuDatabase.getDetail(dailyMenuMath[1]).pipe(
+                        map((body) => new HttpResponse({body, status: 200}))
+                    );
+                }
+            }
             if (request.url.endsWith("/utils/countries") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [
@@ -71,7 +82,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
-    provide: HTTP_INTERCEPTORS,
+    provide : HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
-    multi: true,
+    multi   : true,
 };

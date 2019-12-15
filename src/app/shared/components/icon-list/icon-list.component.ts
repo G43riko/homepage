@@ -1,15 +1,17 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {IconService} from "../../services/icon.service";
+import { Component, Input, OnInit } from "@angular/core";
+import { IconService } from "../../services/icon.service";
 
 @Component({
-    selector: "app-icon-list",
+    selector   : "app-icon-list",
     templateUrl: "./icon-list.component.html",
-    styleUrls: ["./icon-list.component.scss"]
+    styleUrls  : ["./icon-list.component.scss"]
 })
 export class IconListComponent implements OnInit {
     @Input() public readonly keys: string[];
     @Input() public readonly type: "technology" | "food";
-    @Input() public readonly showAlsoKeys = false;
+    @Input() public readonly showAlsoKeys     = false;
+    @Input() public readonly defaultCharacter = "?";
+    @Input() public readonly defaultIcon: string;
 
     public constructor(private readonly iconService: IconService) {
     }
@@ -18,6 +20,9 @@ export class IconListComponent implements OnInit {
     }
 
     public getIconFor(key: string): { icon: string, type: "font-awesome" | "material" } | null {
+        if (!key) {
+            return null;
+        }
         switch (this.type) {
             case "food":
                 return this.getFoodIcon(key);
@@ -65,8 +70,14 @@ export class IconListComponent implements OnInit {
         if (key.match(/(fish|ryba)/i)) {
             return {icon: "fish", type: "font-awesome"};
         }
-        if (key.match(/(burger)/i)) {
+        if (key.match(/burger/i)) {
             return {icon: "hamburger", type: "font-awesome"};
+        }
+        if (key.match(/(polievka|soup)/i)) {
+            return {icon: "soup", type: "font-awesome"};
+        }
+        if (key.match(/(steak)/i)) {
+            return {icon: "steak", type: "font-awesome"};
         }
 
         return {icon: "food", type: "material"};

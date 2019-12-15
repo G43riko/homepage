@@ -1,23 +1,23 @@
-import {MediaMatcher} from "@angular/cdk/layout";
-import {ChangeDetectorRef, Component} from "@angular/core";
-import {MatIconRegistry} from "@angular/material/icon";
-import {DomSanitizer} from "@angular/platform-browser";
-import {NavigationEnd, Router} from "@angular/router";
-import {AppConfig} from "./app.config";
-import {MenuItemModel} from "./shared/components/menu-item.model";
-import {AnalyticsService} from "./shared/services/analytics.service";
-import {AuthService} from "./shared/services/auth.service";
-import {IconService} from "./shared/services/icon.service";
+import { MediaMatcher } from "@angular/cdk/layout";
+import { ChangeDetectorRef, Component } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
+import { NavigationEnd, Router } from "@angular/router";
+import { AppConfig } from "./app.config";
+import { MenuItemModel } from "./shared/components/menu-item.model";
+import { AnalyticsService } from "./shared/services/analytics.service";
+import { AuthService } from "./shared/services/auth.service";
+import { IconService } from "./shared/services/icon.service";
 
 @Component({
-    selector: "app-root",
+    selector   : "app-root",
     templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"],
+    styleUrls  : ["./app.component.scss"],
 })
 export class AppComponent {
     public mobileQuery: MediaQueryList;
     public menuItems: MenuItemModel[] = AppConfig.MENU_ITEMS;
-    public readonly title = "Homepage-FE";
+    public readonly title             = "Homepage-FE";
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,
                        private readonly media: MediaMatcher,
@@ -34,7 +34,13 @@ export class AppComponent {
             }
         });
 
-        AppConfig.FA_ICONS.forEach((icon) => {
+        AppConfig.FA_FOOD_ICONS.forEach((icon) => {
+            matIconRegistry.addSvgIcon(icon, domSanitizer.bypassSecurityTrustResourceUrl("assets/images/foods/" + icon + ".svg"));
+        });
+        AppConfig.FA_TECHNOLOGY_ICONS.forEach((icon) => {
+            matIconRegistry.addSvgIcon(icon, domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_" + icon + ".svg"));
+        });
+        AppConfig.FA_MOVIE_ICONS.forEach((icon) => {
             matIconRegistry.addSvgIcon(icon, domSanitizer.bypassSecurityTrustResourceUrl("assets/images/icon_" + icon + ".svg"));
         });
     }

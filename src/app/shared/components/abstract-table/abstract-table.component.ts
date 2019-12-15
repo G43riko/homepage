@@ -1,15 +1,15 @@
-import {SelectionModel} from "@angular/cdk/collections";
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild,} from "@angular/core";
-import {MatPaginator, MatSort, Sort} from "@angular/material";
-import {merge, Observable, of} from "rxjs";
-import {catchError, delay, map, startWith, switchMap, tap} from "rxjs/operators";
-import {ColumnConfig} from "./column-config";
-import {TableConfig} from "./table-config";
+import { SelectionModel } from "@angular/cdk/collections";
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild, } from "@angular/core";
+import { MatPaginator, MatSort, Sort } from "@angular/material";
+import { merge, Observable, of } from "rxjs";
+import { catchError, delay, map, startWith, switchMap, tap } from "rxjs/operators";
+import { ColumnConfig } from "./column-config";
+import { TableConfig } from "./table-config";
 
 @Component({
-    selector: "app-abstract-table",
+    selector   : "app-abstract-table",
     templateUrl: "./abstract-table.component.html",
-    styleUrls: ["./abstract-table.component.scss"],
+    styleUrls  : ["./abstract-table.component.scss"],
 })
 export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     public readonly selection = new SelectionModel<T>(true, []);
@@ -19,9 +19,9 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     @Input() public tableConfig: TableConfig;
     @Input() public data: Observable<T[]> | T[];
     @Input() public templates: { [key: string]: TemplateRef<any> } = {};
-    public realData: T[] = [];
-    public resultsLength = 0;
-    public isLoadingResults = true;
+    public realData: T[]                                           = [];
+    public resultsLength                                           = 0;
+    public isLoadingResults                                        = true;
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
     }
@@ -34,6 +34,7 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         if (!this.tableConfig || !this.tableConfig.paginateOptions) {
             return [5, 10, 20];
         }
+
         return this.tableConfig.paginateOptions;
     }
 
@@ -41,6 +42,7 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         if (!this.tableConfig) {
             return [];
         }
+
         return this.tableConfig.columns.filter((column) => column.visible !== false);
     }
 
@@ -48,23 +50,16 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         return data.splice(paginator.pageSize * paginator.pageIndex, paginator.pageSize);
     }
 
-    private sortData(data: any[], sort: Sort): any[] {
-        if (!sort.active || !sort.direction) {
-            return data;
+    public get displayedColumns(): string[] {
+        if (!this.tableConfig) {
+            return [];
+        }
+        const columnsNames = this.visibleColumns.map((column) => column.name);
+        if (this.tableConfig.selection) {
+            return ["select", ...columnsNames];
         }
 
-        if (sort.direction === "desc") {
-            return data.sort((b, a) => String(b[sort.active]).localeCompare(String(a[sort.active])));
-        }
-        return data.sort((a, b) => String(b[sort.active]).localeCompare(String(a[sort.active])));
-    }
-
-    private transformData(data: any[]): any[] {
-        const result = this.sortData([...data], this.sort);
-        if (this.tableConfig.paginator) {
-            return this.paginateData(result, this.paginator);
-        }
-        return result;
+        return columnsNames;
     }
 
     public ngAfterViewInit(): void {
@@ -92,50 +87,57 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
                 }
                 if (Array.isArray(this.data)) {
                     return of({
-                        data: this.transformData(this.data),
+                        data       : this.transformData(this.data),
                         totalLength: this.data.length,
                     }).pipe(delay(100));
                 }
+
                 return this.data.pipe(
                     map((data) => ({
-                            data: this.transformData(data),
+                            data       : this.transformData(data),
                             totalLength: data.length,
                         }),
                         tap(() => this.changeDetectorRef.detectChanges()),
                     ));
             }),
             map((data: { data: T[], totalLength: number }) => {
-                this.resultsLength = data.totalLength;
+                this.resultsLength    = data.totalLength;
                 this.isLoadingResults = false;
+
                 return data.data;
             }),
             catchError(() => {
                 this.isLoadingResults = false;
+
                 return of([]);
             }),
         ).subscribe((data) => this.realData = data);
     }
 
-    public ngOnInit(): void {
-    }
-
-    public get displayedColumns(): string[] {
-        if (!this.tableConfig) {
-            return [];
-        }
-        const columnsNames = this.visibleColumns.map((column) => column.name);
-        if (this.tableConfig.selection) {
-            return ["select", ...columnsNames];
-        }
-        return columnsNames;
-    }
-
     public getLabel(columnConfig: ColumnConfig, row: T): string {
         if (typeof columnConfig.customLabel === "function") {
             throw new Error("'customLabel' is no implemented");
-            // return columnConfig.customLabel(row);
         }
+
         return columnConfig.label || "";
+    }
+
+    public ngOnInit(): void {
+    }
+
+    public isAllSelected(): boolean {
+        const numSelected = this.selection.selected.length;
+        const numRows     = this.realData.length;
+
+        return numSelected === numRows;
+    }
+
+    public checkboxLabel(row?: T): string {
+        if (!row) {
+            return `${this.isAllSelected() ? "select" : "deselect"} all`;
+        }
+
+        return `${this.selection.isSelected(row) ? "deselect" : "select"} row`;
     }
 
     public getContent(columnConfig: ColumnConfig, row: any): string {
@@ -146,10 +148,16 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         return row[columnConfig.name];
     }
 
-    public isAllSelected(): boolean {
-        const numSelected = this.selection.selected.length;
-        const numRows = this.realData.length;
-        return numSelected === numRows;
+    private sortData(data: any[], sort: Sort): any[] {
+        if (!sort.active || !sort.direction) {
+            return data;
+        }
+
+        if (sort.direction === "desc") {
+            return data.sort((b, a) => String(b[sort.active]).localeCompare(String(a[sort.active])));
+        }
+
+        return data.sort((a, b) => String(b[sort.active]).localeCompare(String(a[sort.active])));
     }
 
     public masterToggle(): void {
@@ -158,10 +166,12 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
             this.selection.select(...this.realData);
     }
 
-    public checkboxLabel(row?: T): string {
-        if (!row) {
-            return `${this.isAllSelected() ? "select" : "deselect"} all`;
+    private transformData(data: any[]): any[] {
+        const result = this.sortData([...data], this.sort);
+        if (this.tableConfig.paginator) {
+            return this.paginateData(result, this.paginator);
         }
-        return `${this.selection.isSelected(row) ? "deselect" : "select"} row`;
+
+        return result;
     }
 }

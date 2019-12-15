@@ -1,7 +1,7 @@
-import {Address} from "../../../shared/models/person/address.model";
+import { Address } from "../../../shared/models/person/address.model";
 
 export class Restaurant {
-    public id?: string;
+    public id: number;
 
     public visible: boolean;
     public name: string;

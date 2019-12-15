@@ -1,21 +1,39 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MatDialog} from "@angular/material/dialog";
-import {MapDialogComponent} from "../../../../shared/components/map-dialog/map-dialog.component";
-import {MapsService} from "../../../../shared/services/maps.service";
-import {DailyMenu} from "../../../movies/models/daily-menu.model";
-import {Restaurant} from "../../models/restaurant.model";
-import {DailyMenuHttpService} from "../../services/daily-menu-http.service";
-import {RestaurantHttpService} from "../../services/restaurant-http.service";
+import { Component, Input, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
+import { MapsService } from "../../../../shared/services/maps.service";
+import { DailyMenu } from "../../../movies/models/daily-menu.model";
+import { Restaurant } from "../../models/restaurant.model";
+import { DailyMenuHttpService } from "../../services/daily-menu-http.service";
+import { RestaurantHttpService } from "../../services/restaurant-http.service";
+import { switchMap } from "rxjs/operators";
 
 @Component({
-    selector: "app-restaurant-row",
+    selector   : "app-restaurant-row",
     templateUrl: "./restaurant-row.component.html",
-    styleUrls: ["./restaurant-row.component.scss"]
+    styleUrls  : ["./restaurant-row.component.scss"]
 })
 export class RestaurantRowComponent implements OnInit {
     public dailyMenu: DailyMenu;
-    @Input() public restaurantKey: string;
     public restaurant?: Restaurant;
+    public loading = false;
+
+    @Input()
+    public set restaurantKey(key: string) {
+        if (!key) {
+            return;
+        }
+        this.loading = true;
+        this.restaurantHttpService.getRestaurantByKey(key).pipe(switchMap((data: Restaurant) => {
+            this.restaurant = data;
+
+            return this.dailyMenuHttpService.getDailyMenuFor(key);
+
+        })).subscribe((dailyMenu) => {
+            this.dailyMenu = dailyMenu;
+            this.loading   = false;
+        });
+    }
 
     public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
                        private readonly restaurantHttpService: RestaurantHttpService,
@@ -24,13 +42,6 @@ export class RestaurantRowComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        if (!this.restaurantKey) {
-            return;
-        }
-        this.restaurant = this.restaurantHttpService.getRestaurantByKey(this.restaurantKey);
-        this.dailyMenuHttpService.getDailyMenuFor(this.restaurantKey).subscribe((dailyMenu) => {
-            this.dailyMenu = dailyMenu;
-        });
     }
 
     public showMap(restaurant: Restaurant): void {
@@ -38,9 +49,9 @@ export class RestaurantRowComponent implements OnInit {
             return;
         }
         this.dialog.open(MapDialogComponent, {
-            width: "95%",
+            width : "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude)),
+            data  : this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude)),
         });
     }
 
@@ -48,6 +59,12 @@ export class RestaurantRowComponent implements OnInit {
         switch (type) {
             case "pizza":
                 return "local_pizza";
+            case "burger":
+                return "hamburger";
+            case "fish":
+                return "fish";
+            case "salad":
+                return "salad";
             default:
                 return "restaurant";
 

@@ -4,10 +4,11 @@ interface AnyInterface {
 
 export interface DailyMenu extends AnyInterface {
     restaurant: string;
+    id: number;
     dishes: {
         name: string;
-        weight: string;
+        weight?: string;
         type?: string | "pizza" | "soup" | "fish" | "steak" | "meat" | "food" | "special" | "empty";
-        price: number;
+        price?: number;
     }[];
 }

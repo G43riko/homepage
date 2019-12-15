@@ -1,11 +1,11 @@
-import {environment} from "../environments/environment";
-import {MenuItemModel} from "./shared/components/menu-item.model";
-import {Roles} from "./shared/enums/roles.enum";
+import { environment } from "../environments/environment";
+import { MenuItemModel } from "./shared/components/menu-item.model";
+import { Roles } from "./shared/enums/roles.enum";
 
 export class AppConfig {
-    public static readonly TITLE = "DemoPage";
-    public static readonly BASE_URL = environment.base_url;
-    public static readonly ITEMS_PER_PAGE = 10;
+    public static readonly TITLE           = "DemoPage";
+    public static readonly BASE_URL        = environment.base_url;
+    public static readonly ITEMS_PER_PAGE  = 10;
     public static readonly YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search";
     public static readonly YOUTUBE_API_KEY = "AIzaSyAh6T37m_p-3DQ6JELbqIIhnvqXBgOXf-E";
 
@@ -47,8 +47,8 @@ export class AppConfig {
     public static readonly PATH_FOODS = "foods";
     public static readonly PATH_IMAGE_DETAIL = "detail";
 
-    public static readonly FA_FOOD_ICONS = ["fish", "hamburger", "pepper", "salad"];
-    public static readonly FA_MOVIE_ICONS = ["imdb", "csfd"];
+    public static readonly FA_FOOD_ICONS       = ["fish", "hamburger", "pepper", "salad", "soup", "steak"];
+    public static readonly FA_MOVIE_ICONS      = ["imdb", "csfd"];
     public static readonly FA_TECHNOLOGY_ICONS = [
         "angular",
         "bitbucket",

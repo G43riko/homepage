@@ -1,74 +1,74 @@
-import {Component, OnInit} from "@angular/core";
-import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
-import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {ApiPaginator} from "../../../../shared/utils/ApiPaginator";
-import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../services/movie-http.service";
-import {MovieService} from "../../services/movie.service";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
+import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { ApiPaginator } from "../../../../shared/utils/ApiPaginator";
+import { Movie } from "../../models/movie.model";
+import { MovieHttpService } from "../../services/movie-http.service";
+import { MovieService } from "../../services/movie.service";
 
 @Component({
-    selector: "app-movie-list",
+    selector   : "app-movie-list",
     templateUrl: "./movie-list.component.html",
-    styleUrls: ["./movie-list.component.scss"],
+    styleUrls  : ["./movie-list.component.scss"],
 })
 export class MovieListComponent implements OnInit {
     public previewType: "table" | "grid" = "table";
-    public selectedAll = false;
+    public selectedAll                   = false;
     // public paginator: Paginator<Movie>;
     public readonly paginator: ApiPaginator<Movie>;
     public searchPattern: string;
 
     public movieData: Observable<Movie[]>;
     public readonly movieConfig: TableConfig = {
-        selection: "multi",
+        selection      : "multi",
         paginateOptions: [5, 10, 20, 50, 100],
-        pageSize: 10,
-        stickyEnd: 7,
-        paginator: false,
-        columns: [
+        pageSize       : 10,
+        stickyEnd      : 7,
+        paginator      : false,
+        columns        : [
             {
-                name: "title",
+                name : "title",
                 label: "Názov",
             },
             {
-                name: "directors",
-                label: "Režisér",
+                name         : "directors",
+                label        : "Režisér",
                 customContent: (row: Movie) => row.directors.map((director) => director.name).join(", "),
             },
             {
-                name: "year",
+                name : "year",
                 label: "Rok",
             },
             {
-                name: "rating",
-                label: "Hodnotenie",
+                name         : "rating",
+                label        : "Hodnotenie",
                 customContent: (row: Movie) => row.rating + " %",
             },
             {
-                name: "duration",
-                label: "Dĺžka",
+                name         : "duration",
+                label        : "Dĺžka",
                 customContent: (row: Movie) => row.duration + " min",
             },
             {
-                name: "genres",
-                label: "Žánre",
+                name         : "genres",
+                label        : "Žánre",
                 customContent: (row: Movie) => row.genres.join(", "),
             },
             {
-                name: "countries",
-                label: "Krajny",
+                name         : "countries",
+                label        : "Krajny",
                 customContent: (row: Movie) => row.countries.join(", "),
             },
             {
-                name: "external",
+                name : "external",
                 label: "",
             },
             {
-                name: "detail",
+                name : "detail",
                 label: "",
             },
         ],
@@ -96,19 +96,20 @@ export class MovieListComponent implements OnInit {
     public setPreviewType(previewType: "table" | "grid"): void {
         this.previewType = previewType;
         this.paginator.firstPage();
-        if (previewType === "grid") {
-            setTimeout(() => {
-                const io = new IntersectionObserver((entries, observer) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            this.paginator.loadNext(10);
-                            console.log("intersecting");
-                        }
-                    });
-                });
-                io.observe(document.querySelector(".next-loader") as Element);
-            }, 10);
+        if (previewType !== "grid") {
+            return;
         }
+        setTimeout(() => {
+            const io = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        this.paginator.loadNext(10);
+                        console.log("intersecting");
+                    }
+                });
+            });
+            io.observe(document.querySelector(".next-loader") as Element);
+        }, 10);
     }
 
     public selectAll(checkbox: HTMLInputElement): void {
