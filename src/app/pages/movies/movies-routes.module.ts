@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
+import {CsfdUserDetailComponent} from "./components/csfd-user-detail/csfd-user-detail.component";
 import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
 import {MakerListComponent} from "./components/maker-list/maker-list.component";
 import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: "makers",
                 component: MakerListComponent,
+            },
+            {
+                path: "users/csfd/:id",
+                component: CsfdUserDetailComponent,
             },
             {
                 path: ":id",

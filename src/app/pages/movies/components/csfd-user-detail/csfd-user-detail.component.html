@@ -1,0 +1,26 @@
+<pre>
+    {{userDetail | json}}
+</pre>
+<app-abstract-table [data]="userMovies"
+                    [tableConfig]="userMoviesConfig"
+                    [templates]="{link: cellLink, userRating: cellRating}"
+                    class="user-movies-wrapper"></app-abstract-table>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<button (click)="loadMore()" [disabled]="loading" color="primary" mat-raised-button>Načítať ďalšie</button>
+
+
+<ng-template #cellLink let-row="row">
+    <a href="https://www.csfd.cz{{row.link}}" target="_blank">
+        <button aria-label="Example icon-button with a heart icon"
+                class="detail"
+                mat-icon-button>
+            <mat-icon style="color: #B01" svgIcon="csfd"></mat-icon>
+        </button>
+    </a>
+</ng-template>
+<ng-template #cellRating let-row="row">
+    <mat-icon *ngFor="let rating of [0, 1, 2, 3, 4]; let idx=index "
+              [class.active]="idx < row.userRating"
+    >star
+    </mat-icon>
+</ng-template>

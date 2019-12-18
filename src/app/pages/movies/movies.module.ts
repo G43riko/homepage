@@ -1,6 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CoreModule} from "../../shared/core.module";
 import {SharedModule} from "../../shared/shared.module";
+import {CsfdUserDetailComponent} from "./components/csfd-user-detail/csfd-user-detail.component";
 import {ExternalLinksComponent} from "./components/external-links/external-links.component";
 import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
 import {MakerListComponent} from "./components/maker-list/maker-list.component";
@@ -32,6 +33,7 @@ import {MovieService} from "./services/movie.service";
         MakerHttpService,
     ],
     declarations: [
+        CsfdUserDetailComponent,
         MovieListComponent,
         MovieSearchComponent,
         MovieDetailAdminViewComponent,

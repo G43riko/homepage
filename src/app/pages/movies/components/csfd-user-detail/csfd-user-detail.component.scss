@@ -1,0 +1,11 @@
+mat-icon {
+    color: rgba(0, 0, 0, 0.2);
+
+    &.active {
+        color: black;
+    }
+}
+
+.user-movies-wrapper > div {
+    max-height: calc(100vh - 120px) !important;
+}
