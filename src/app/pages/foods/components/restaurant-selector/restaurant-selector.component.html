@@ -4,7 +4,8 @@
         <mat-spinner></mat-spinner>
     </div>
     <mat-selection-list (selectionChange)="change($event, user)">
-        <mat-list-option *ngFor="let restaurant of allRestaurants" [selected]="isSelected(restaurant, user)"
+        <mat-list-option *ngFor="let restaurant of allRestaurants"
+                         [selected]="isSelected(restaurant, user)"
                          [value]="restaurant.key">
             {{restaurant.name}}
         </mat-list-option>

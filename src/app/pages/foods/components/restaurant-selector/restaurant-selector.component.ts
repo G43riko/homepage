@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {MatSelectionList, MatSelectionListChange} from "@angular/material/list";
-import {User} from "../../../../shared/models/auth.model";
-import {AuthService} from "../../../../shared/services/auth.service";
-import {Restaurant} from "../../models/restaurant.model";
-import {RestaurantHttpService} from "../../services/restaurant-http.service";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatSelectionList, MatSelectionListChange } from "@angular/material/list";
+import { switchMap } from "rxjs/operators";
+import { User } from "../../../../shared/models/auth.model";
+import { AuthService } from "../../../../shared/services/auth.service";
+import { Restaurant } from "../../models/restaurant.model";
+import { RestaurantHttpService } from "../../services/restaurant-http.service";
 
 @Component({
     selector: "app-restaurant-selector",
@@ -20,16 +21,18 @@ export class RestaurantSelectorComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.restaurantHttpService.getRestaurants().subscribe((restaurants) => {
-            this.allRestaurants = restaurants;
-        });
-        this.authService.user$.subscribe((user) => {
-            this.selectionList.deselectAll();
-            if (user && Array.isArray(user.favoriteRestaurants)) {
-                const favoriteRestaurants = user.favoriteRestaurants as string[];
-                this.selectionList.selectedOptions.select(...this.selectionList.options.filter((e) => favoriteRestaurants.includes(e.value)));
-            }
-        });
+        this.restaurantHttpService.getRestaurants()
+            .pipe(switchMap((restaurants: Restaurant[]) => {
+                this.allRestaurants = restaurants;
+
+                return this.authService.user$;
+            })).subscribe((user) => {
+                this.selectionList.deselectAll();
+                if (user && Array.isArray(user.favoriteRestaurants)) {
+                    const favoriteRestaurants = user.favoriteRestaurants;
+                    this.selectionList.selectedOptions.select(...this.selectionList.options.filter((e) => favoriteRestaurants.includes(e.value)));
+                }
+            });
     }
 
     public isSelected(restaurant: Restaurant, user: User): boolean {
@@ -38,8 +41,9 @@ export class RestaurantSelectorComponent implements OnInit {
 
     public change(event: MatSelectionListChange, user: User): void {
         this.loading = true;
-        this.authService.updateFavouriteRestaurant(user, event.option.value, event.option.selected ? "add" : "remove").subscribe(() => {
-            this.loading = false;
-        });
+        this.authService.updateFavouriteRestaurant(user, event.option.value, event.option.selected ? "add" : "remove")
+            .subscribe(() => {
+                this.loading = false;
+            });
     }
 }

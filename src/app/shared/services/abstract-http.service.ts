@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {AuthService} from "../auth.service";
+import { AuthService } from "./auth.service";
 import {NotificationService} from "./notification.service";
 
 @Injectable()
@@ -39,6 +39,7 @@ export abstract class AbstractHttpService<S = any> {
                 catchError(this.handleError<S[]>("search")),
             );
         }
+
         return this.http.get<S[]>(`${this.URL}/?count=${count}&offset=${offset}`).pipe(
             catchError(this.handleError<S[]>("search")),
         );

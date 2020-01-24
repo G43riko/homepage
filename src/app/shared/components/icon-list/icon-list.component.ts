@@ -80,6 +80,6 @@ export class IconListComponent implements OnInit {
             return {icon: "steak", type: "font-awesome"};
         }
 
-        return {icon: "food", type: "material"};
+        return {icon: "restaurant", type: "material"};
     }
 }

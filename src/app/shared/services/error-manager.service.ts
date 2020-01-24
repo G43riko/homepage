@@ -8,13 +8,11 @@ export class ErrorManagerService {
         let message = defaultError;
         if (typeof error === "string") {
             message = error;
-        }
-        else if (error.status === 0) {
+        } else if (error.status === 0) {
             message = "Stránka je nedostupná";
 
         }
-        else {
-        }
+
         return message;
     }
 }

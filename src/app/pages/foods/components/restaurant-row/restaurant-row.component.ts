@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { switchMap } from "rxjs/operators";
 import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
 import { MapsService } from "../../../../shared/services/maps.service";
-import { DailyMenu } from "../../../movies/models/daily-menu.model";
+import { DailyMenu } from "../../models/daily-menu.model";
 import { Restaurant } from "../../models/restaurant.model";
 import { DailyMenuHttpService } from "../../services/daily-menu-http.service";
 import { RestaurantHttpService } from "../../services/restaurant-http.service";
-import { switchMap } from "rxjs/operators";
 
 @Component({
     selector   : "app-restaurant-row",
@@ -17,6 +17,7 @@ export class RestaurantRowComponent implements OnInit {
     public dailyMenu: DailyMenu;
     public restaurant?: Restaurant;
     public loading = false;
+    @Input() public searchedFood: string;
 
     @Input()
     public set restaurantKey(key: string) {

@@ -2,9 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { AuthService } from "../auth.service";
 import { IpInfo } from "../models/ip-info.model";
 import { AbstractHttpService } from "./abstract-http.service";
+import { AuthService } from "./auth.service";
 import { NotificationService } from "./notification.service";
 
 @Injectable()
@@ -16,7 +16,8 @@ export class LocationService extends AbstractHttpService {
     public getIp(): Promise<any> {
         return new Promise((callback, errorCallback) => {
             this._getIpFromGeoLocation((data) => callback(data), (error) => {
-                this._getIpFromWebPage().subscribe((data) => callback(data), (error2) => errorCallback(error2));
+                this._getIpFromWebPage()
+                    .subscribe((data) => callback(data), (error2) => errorCallback(error2));
             });
         });
     }
@@ -24,9 +25,10 @@ export class LocationService extends AbstractHttpService {
     private _getIpFromWebPage(): Observable<IpInfo> {
         const IP_API_URL = "http://ip-api.com/json";
 
-        return this.http.get<IpInfo>(IP_API_URL).pipe(
-            catchError(this.handleError<IpInfo>("_getIpFromWebPage")),
-        );
+        return this.http.get<IpInfo>(IP_API_URL)
+                   .pipe(
+                       catchError(this.handleError<IpInfo>("_getIpFromWebPage")),
+                   );
 
     }
 

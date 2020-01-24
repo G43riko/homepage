@@ -1,12 +1,12 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {AppConfig} from "../../app.config";
-import {AuthService} from "../auth.service";
-import {Address} from "../models/person/address.model";
-import {AbstractHttpService} from "./abstract-http.service";
-import {NotificationService} from "./notification.service";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { AppConfig } from "../../app.config";
+import { Address } from "../models/person/address.model";
+import { AbstractHttpService } from "./abstract-http.service";
+import { AuthService } from "./auth.service";
+import { NotificationService } from "./notification.service";
 
 type AllowedTypes = "restaurant";
 
@@ -38,7 +38,7 @@ export class MapsService extends AbstractHttpService {
     }
 
     public getLocationEmbedUrlFromLatAndLong(latitude: number, longitude: number, zoom = 18): string {
-        return this.getLocationEmbedUrl(`${latitude},${longitude}`, zoom);
+        return this.getLocationEmbedUrl(`${ latitude },${ longitude }`, zoom);
     }
 
     private getLocationEmbedUrl(searchQuery: string, zoom = 18): string {
@@ -56,8 +56,9 @@ export class MapsService extends AbstractHttpService {
         params.location = params.latitude + "," + params.longitude;
         params.key = params.key || AppConfig.GOOGLE_MAPS_API_KEY;
 
-        return this.http.post<any>("http://g43.clanweb.eu/API/maps.php", params).pipe(
-            catchError(this.handleError<any>("getPlacesAround")),
-        );
+        return this.http.post<any>("http://g43.clanweb.eu/API/maps.php", params)
+                   .pipe(
+                       catchError(this.handleError<any>("getPlacesAround")),
+                   );
     }
 }

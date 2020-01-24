@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "../../../app.config";
-import { AuthService } from "../../../shared/auth.service";
 import { Address } from "../../../shared/models/person/address.model";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
+import { AuthService } from "../../../shared/services/auth.service";
 import { GeoLocationService } from "../../../shared/services/geo-location.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Restaurant } from "../models/restaurant.model";
@@ -51,21 +51,24 @@ export class RestaurantHttpService extends AbstractHttpService {
     }
 
     private getGoogleImagesLinkFor(dailyMenu: string): string {
-        return `https://www.google.sk/search?q=${encodeURIComponent(dailyMenu)}&tbm=isch`;
+        return `https://www.google.sk/search?q=${ encodeURIComponent(dailyMenu) }&tbm=isch`;
     }
 
     private loadRestaurants(): any {
         const url = "https://g43riko.github.io/foods/assets/data/restaurantsData.json";
 
-        return this.http.get<Restaurant[]>(url).pipe(
-            catchError(this.handleError<Restaurant[]>("getRestaurants")),
-        ).pipe(map((data: Restaurant[]) => {
-            const result: any = {};
-            data.filter((restaurant: Restaurant) => restaurant.key).forEach((restaurant) => {
-                result[restaurant.key as string] = restaurant;
-            });
+        return this.http.get<Restaurant[]>(url)
+                   .pipe(
+                       catchError(this.handleError<Restaurant[]>("getRestaurants")),
+                   )
+                   .pipe(map((data: Restaurant[]) => {
+                       const result: any = {};
+                       data.filter((restaurant: Restaurant) => restaurant.key)
+                           .forEach((restaurant) => {
+                               result[restaurant.key as string] = restaurant;
+                           });
 
-            return result;
-        }));
+                       return result;
+                   }));
     }
 }

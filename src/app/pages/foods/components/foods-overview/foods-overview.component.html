@@ -1,9 +1,8 @@
-
 <div class="wrapper">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <mat-form-field style="height: 100%">
-                <input matInput placeholder="Search">
+                <input #searchFood matInput placeholder="Search">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
             <span class="divider"></span>
@@ -19,7 +18,8 @@
         <mat-sidenav #snav
                      [mode]="'side'"
                      fixedTopGap="56"
-                     position="end">
+                     position="end"
+        >
             <app-restaurant-selector></app-restaurant-selector>
         </mat-sidenav>
 
@@ -27,7 +27,9 @@
             <mat-list>
                 <ng-container *ngFor="let selectedRestaurant of selectedRestaurants; let i=index">
                     <mat-divider *ngIf="i > 0"></mat-divider>
-                    <app-restaurant-row [restaurantKey]="selectedRestaurant"></app-restaurant-row>
+                    <app-restaurant-row [searchedFood]="searchFood.value"
+                                        [restaurantKey]="selectedRestaurant"
+                    ></app-restaurant-row>
                 </ng-container>
             </mat-list>
         </mat-sidenav-content>

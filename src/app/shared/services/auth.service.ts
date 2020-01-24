@@ -41,6 +41,10 @@ export class AuthService {
         return this.updateUserData(credentials.user);
     }
 
+    public getToken(): string {
+        return "";
+    }
+
     public async signOut(): Promise<boolean> {
         await this.afAuth.auth.signOut();
         this.analyticsService.signOut();
