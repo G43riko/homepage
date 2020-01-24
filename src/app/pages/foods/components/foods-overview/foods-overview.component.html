@@ -2,21 +2,21 @@
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <mat-form-field style="height: 100%">
-                <input #searchFood matInput placeholder="Search">
+                <input #searchFood matInput placeholder="{{'common.search' | translate}}">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
 
             <span class="divider"></span>
 
             <span *ngIf="!(authService.user$ | async)" class="one-row-warning">
-                Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu  <mat-icon>account_circle</mat-icon>
+                {{"foods.forSpecificRestaurantsClickOn" | translate}}  <mat-icon>account_circle</mat-icon>
             </span>
 
             <span class="divider"></span>
-            <button (click)="snav.toggle()" mat-icon-button title="Restaurant selector">
+            <button (click)="snav.toggle()" mat-icon-button matTooltip="{{'foods.restaurantSelection' | translate}}">
                 <mat-icon>menu</mat-icon>
             </button>
-            <button (click)="openFeedback()" mat-icon-button title="Open feedback panel">
+            <button (click)="openFeedback()" mat-icon-button matTooltip="{{'shared.feedbackPanel' | translate}}">
                 <mat-icon>feedback</mat-icon>
             </button>
             <app-login-screen *ngIf="standAlone"></app-login-screen>
@@ -41,7 +41,7 @@
                 </ng-container>
             </mat-list>
             <span *ngIf="selectedRestaurants && selectedRestaurants.length === 0" class="one-row-warning">
-                Vyberte si reštaurácie klikuntím na ikonu <mat-icon>menu</mat-icon>
+                {{"foods.forRestaurantSelectionClickOn" | translate}} <mat-icon>menu</mat-icon>
             </span>
         </mat-sidenav-content>
     </mat-sidenav-container>

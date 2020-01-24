@@ -4,24 +4,30 @@
         <button (click)="snav.toggle()" mat-icon-button title="Toggle sidenav">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="example-app-name">Welcome to Homepage-FE!</h1>
         <span class="divider"></span>
         <app-login-screen></app-login-screen>
     </mat-toolbar>
 
     <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+    >
         <mat-sidenav #snav
                      [mode]="mobileQuery.matches ? 'over' : 'side'"
                      [fixedInViewport]="mobileQuery.matches"
-                     fixedTopGap="56">
+                     fixedTopGap="56"
+        >
             <mat-nav-list>
-                <div *ngFor="let menu of menuItems">
-                    <a *ngIf="!menu.access || authService.canShowMenuItem(authService.user$ | async, menu.access)"
-                       mat-list-item
-                       routerLink="/{{menu.link}}"
-                       routerLinkActive="'active'">{{menu.label}}</a>
-                </div>
+                <ng-container *ngFor="let menu of menuItems">
+                    <button *ngIf="!menu.access || authService.canShowMenuItem(authService.user$ | async, menu.access)"
+                            mat-menu-item
+                            routerLink="/{{menu.link}}"
+                            style="display: flex; justify-content: space-between; align-items: center; min-width: 150px"
+                            routerLinkActive="'active'"
+                    >
+                        <span>{{"menu." + menu.label | translate }}</span>
+                        <mat-icon style="margin-right: 0">{{menu.icon}}</mat-icon>
+                    </button>
+                </ng-container>
             </mat-nav-list>
         </mat-sidenav>
 

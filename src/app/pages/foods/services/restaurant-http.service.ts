@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "../../../app.config";
@@ -17,6 +18,7 @@ export class RestaurantHttpService extends AbstractHttpService {
     private restaurants: Observable<{ [key: string]: Restaurant }> = this.loadRestaurants();
 
     public constructor(private readonly geoLocationService: GeoLocationService,
+                       private readonly translateService: TranslateService,
                        http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService);
     }
@@ -28,7 +30,7 @@ export class RestaurantHttpService extends AbstractHttpService {
     public getDistance(coordinates: Address): string {
         const distance = this.geoLocationService.distanceFrom(coordinates);
         if (!distance) {
-            return "Vzialenosť";
+            return this.translateService.instant("shared.distance");
         }
 
         if (distance < 1) {

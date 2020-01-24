@@ -2,25 +2,25 @@
     style="position: sticky;top: 0;background: #fafafa;z-index:1"
 >
     <span style="font-size: 20px; color: black; font-weight: bolder">{{restaurant.name }}&nbsp;&nbsp;</span>
-    <small>- {{restaurantHttpService.getDistance(restaurant.address)}} od vás</small>
+    <small>- {{restaurantHttpService.getDistance(restaurant.address)}} {{'foods.fromYou' | translate}}</small>
     <mat-icon (click)="showMap(restaurant)"
               *ngIf="restaurant.address"
-              title="showMap"
+              matTooltip="{{'shared.showMap' | translate}}"
     >map
     </mat-icon>
 
     <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
               *ngIf="restaurant.homepage"
-              title="showHomepage"
+              matTooltip="{{'foods.showHomePage' | translate}}"
     >home
     </mat-icon>
 </h2>
 <mat-list-item *ngIf="dailyMenu === null">
-    <small mat-line>Nepodarili sa získať denné menu</small>
+    <small mat-line>{{'foods.cannotGetDailyMenu' | translate}}</small>
 </mat-list-item>
 <ng-container *ngIf="dailyMenu">
     <mat-list-item *ngIf="!dailyMenu.dishes.length">
-        <small mat-line>Reštaurácia nemá zverejnené menu</small>
+        <small mat-line>{{'foods.restaurantHasNoPublicMenu' | translate}}</small>
     </mat-list-item>
     <ng-container *ngFor="let dish of dailyMenu.dishes | searchFoodPipe: searchedFood">
         <mat-list-item *ngIf="dish; else: noFilterResults" [class.hoverable]="dish && dish.type !== 'special'">
@@ -48,7 +48,7 @@
         </mat-list-item>
         <ng-template #noFilterResults>
             <mat-list-item *ngIf="dailyMenu.dishes.length">
-                <h4 mat-line>Filtru nevyhovujú žiadne výsledky</h4>
+                <h4 mat-line>{{'shared.noFilterResults' | translate}}</h4>
             </mat-list-item>
         </ng-template>
     </ng-container>

@@ -95,4 +95,10 @@ export const AboutTechnologies = {
         type: "",
         homepage: "",
     },
+    webpack: {
+        name: "Webpack",
+        skill: 40,
+        type: "",
+        homepage: "",
+    },
 };

@@ -78,7 +78,12 @@ export class AboutData {
         },
         {
             team: "home",
-            name: "gtools",
+            name: "GTools",
+            technologies: ["Typescript"],
+        },
+        {
+            team: "home",
+            name: "Express annotator",
             technologies: ["Typescript"],
         },
     ];

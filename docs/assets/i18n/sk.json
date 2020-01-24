@@ -1,2 +1,51 @@
 {
+    "welcome": "Vitajte",
+    "availableServices": "Stránka zatial podporuje",
+    "contactToAuthor": "Kontakt na autora",
+    "dailyMenus": "Denné menu vybraných reštaurácií",
+    "inProgressProjects": "Rozpracované projekty",
+    "menu": {
+        "projects": "Projekty",
+        "foods": "Denné menu",
+        "about": "Kontakt",
+        "home": "Domov"
+    },
+    "common": {
+        "search": "Hladať"
+    },
+    "about": {
+        "basicInfo": "Základné informácie",
+        "education": "Vzelanie",
+        "work": "Pracovné skúsenosti",
+        "languages": "Jazyky",
+        "technologies": "Technológie"
+    },
+    "shared": {
+        "showMap": "Zobraziť mapu",
+        "noFilterResults": "Filtru nevyhovujú žiadne výsledky",
+        "feedbackPanel": "Spätná väzba",
+        "distance": "Vzialenosť"
+    },
+    "projects": {
+        "title": "Projekty",
+        "name": "Názov",
+        "team": "Tím",
+        "technologies": "Technológies",
+        "demo": "Ukážka",
+        "docs": "Dokumentácia",
+        "sources": "Zdrojové kódy",
+        "teams": {
+            "fiit": "FIIT",
+            "home": "Domáci projekt"
+        }
+    },
+    "foods": {
+        "forSpecificRestaurantsClickOn": "Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu",
+        "forRestaurantSelectionClickOn": "Vyberte si reštaurácie klikuntím na ikonu",
+        "showHomePage": "Zobraziť domovskú stránku",
+        "cannotGetDailyMenu": "Nepodarili sa získať denné menu",
+        "restaurantHasNoPublicMenu": "Reštaurácia nemá zverejnené menu",
+        "fromYou": "od vás",
+        "restaurantSelection": "Výber reštaurácií"
+    }
 }

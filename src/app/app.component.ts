@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { NavigationEnd, Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { AppConfig } from "./app.config";
 import { MenuItemModel } from "./shared/components/menu-item.model";
 import { AnalyticsService } from "./shared/services/analytics.service";
@@ -21,12 +22,14 @@ export class AppComponent {
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,
                        private readonly media: MediaMatcher,
+                       private readonly translateService: TranslateService,
                        private readonly analyticsService: AnalyticsService,
                        private readonly router: Router,
                        public readonly authService: AuthService,
                        iconService: IconService,
                        matIconRegistry: MatIconRegistry,
                        domSanitizer: DomSanitizer) {
+        this.translateService.use("sk");
         this.mobileQuery = media.matchMedia("(max-width: 600px)");
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {

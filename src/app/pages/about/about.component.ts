@@ -8,7 +8,6 @@ import {AboutData} from "./about.data";
 })
 export class AboutComponent implements OnInit {
     public readonly infos = AboutData.infos;
-    public readonly projects = AboutData.projects;
     public readonly languages = AboutData.languages;
     public readonly technologies = AboutData.technologies;
     public readonly items = AboutData.accounts;

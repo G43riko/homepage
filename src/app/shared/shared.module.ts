@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
 import {environment} from "../../environments/environment";
 import { AboutComponent } from "../pages/about/about.component";
+import { ProjectsComponent } from "../pages/about/projects/projects.component";
 import { HomeComponent } from "../pages/home/home.component";
 import { SharedComponentsModule } from "./components/shared-components.module";
 import { CoreModule } from "./core.module";
@@ -21,11 +23,13 @@ if (environment.interceptor) {
     declarations: [
         HomeComponent,
         AboutComponent,
+        ProjectsComponent,
     ],
     providers: [
         ...interceptor,
     ],
     exports: [
+        TranslateModule,
         SharedDirectivesModule,
         SharedComponentsModule,
         SharedPipesModule,

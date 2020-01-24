@@ -4,7 +4,7 @@
         <mat-spinner></mat-spinner>
     </div>
     <mat-form-field style="padding: 0 0.5rem 0 0.5rem;box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);height: 60px;">
-        <input #searchRestaurant matInput placeholder="Search">
+        <input #searchRestaurant matInput placeholder="{{'common.search' | translate}}">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <mat-selection-list (selectionChange)="change($event, user)">

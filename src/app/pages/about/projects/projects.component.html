@@ -1,0 +1,26 @@
+<h3>{{'projects.title' | translate}}</h3>
+<div class="table-wrapper">
+    <table>
+        <tr>
+            <th>{{'projects.name' | translate}}</th>
+            <th>{{'projects.team' | translate}}</th>
+            <th>{{'projects.technologies' | translate}}</th>
+            <th>{{'projects.demo' | translate}}</th>
+            <th>{{'projects.docs' | translate}}</th>
+            <th>{{'projects.sources' | translate}}</th>
+        </tr>
+        <tr *ngFor="let project of projects">
+            <td>{{project.name}}</td>
+            <td>{{'projects.teams.' + project.team | translate}}</td>
+            <td>
+                <app-icon-list [keys]="project.technologies" type="technology"></app-icon-list>
+            </td>
+            <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
+            <td><a [href]="project.documentation"
+                   style="text-decoration: none; color: black">{{project.documentation}}</a></td>
+            <td><a [href]="project.sources"
+                   style="text-decoration: none; color: black">{{project.sources}}</a>
+            </td>
+        </tr>
+    </table>
+</div>

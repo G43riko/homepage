@@ -3,7 +3,7 @@ import { MenuItemModel } from "./shared/components/menu-item.model";
 import { Roles } from "./shared/enums/roles.enum";
 
 export class AppConfig {
-    public static readonly TITLE           = "DemoPage";
+    public static readonly TITLE           = "Homepage";
     public static readonly BASE_URL        = environment.base_url;
     public static readonly ITEMS_PER_PAGE  = 10;
     public static readonly YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search";
@@ -28,6 +28,7 @@ export class AppConfig {
 
     public static readonly DEFAULT_ALERT_DURATION = 2000;
 
+    public static readonly PATH_PROJECTS = "projects";
     public static readonly PATH_ABOUT = "about";
     public static readonly PATH_ACCOUNTS = "accounts";
     public static readonly PATH_LOCATION = "location";
@@ -121,6 +122,12 @@ export class AppConfig {
             label: "accounts",
         },
         {
+            icon: "new_releases",
+            link: AppConfig.PATH_PROJECTS,
+            access: "",
+            label: "projects",
+        },
+        {
             icon: "file",
             link: AppConfig.PATH_FILES,
             access: [Roles.ROLE_VISIT_FILES],
@@ -164,7 +171,7 @@ export class AppConfig {
             label: "songs",
         },
         {
-            icon: "fodds",
+            icon: "restaurant",
             link: AppConfig.PATH_FOODS,
             access: "",
             label: "foods",

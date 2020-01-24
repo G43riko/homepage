@@ -2,6 +2,7 @@ import {Routes} from "@angular/router";
 import {AppConfig} from "./app.config";
 import {AuthGuard} from "./auth.guard";
 import {AboutComponent} from "./pages/about/about.component";
+import { ProjectsComponent } from "./pages/about/projects/projects.component";
 import {AccountProfileComponent} from "./pages/account-profile/account-profile.component";
 import { FoodsOverviewComponent } from "./pages/foods/components/foods-overview/foods-overview.component";
 import {HomeComponent} from "./pages/home/home.component";
@@ -20,6 +21,10 @@ export const AppRoutes: Routes = [
     {
         path: AppConfig.PATH_HOME,
         component: HomeComponent,
+    },
+    {
+        path     : AppConfig.PATH_PROJECTS,
+        component: ProjectsComponent,
     },
     {
         path     : AppConfig.PATH_ABOUT,

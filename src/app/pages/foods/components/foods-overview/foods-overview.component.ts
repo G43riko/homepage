@@ -12,12 +12,12 @@ import { RestaurantHttpService } from "../../services/restaurant-http.service";
 })
 export class FoodsOverviewComponent implements OnInit {
     public selectedRestaurants: string[];
-    public readonly standAlone = false;
+    public readonly standAlone = true;
 
     public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
                        private readonly bottomSheet: MatBottomSheet,
                        public readonly restaurantHttpService: RestaurantHttpService,
-                       private readonly authService: AuthService) {
+                       public readonly authService: AuthService) {
     }
 
     public get minHeight(): string {

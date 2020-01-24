@@ -120,10 +120,10 @@ export class AuthService {
             roles: {
                 [Roles.ROLE_VISITOR]: true,
                 [Roles.ROLE_VISIT_ABOUT]: true,
-                [Roles.ROLE_VISIT_MOVIES]: true,
-                [Roles.ROLE_VISIT_SONGS]: true,
-                [Roles.ROLE_VISIT_ACCOUNTS]: true,
-                [Roles.ROLE_VISIT_PERSONS]: true,
+                [Roles.ROLE_VISIT_MOVIES]: false,
+                [Roles.ROLE_VISIT_SONGS]: false,
+                [Roles.ROLE_VISIT_ACCOUNTS]: false,
+                [Roles.ROLE_VISIT_PERSONS]: false,
             },
         };
         // userRef.get().subscribe((e) => {

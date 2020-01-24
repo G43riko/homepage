@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AppConfig } from "../../app.config";
 
 @Component({
@@ -9,7 +10,7 @@ import { AppConfig } from "../../app.config";
 export class HomeComponent implements OnInit {
     public title: string = AppConfig.TITLE;
 
-    public constructor() {
+    public constructor(public readonly router: Router) {
     }
 
     public ngOnInit(): void {
