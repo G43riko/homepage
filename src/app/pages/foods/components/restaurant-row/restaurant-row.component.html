@@ -15,6 +15,9 @@
     >home
     </mat-icon>
 </h2>
+<mat-list-item *ngIf="dailyMenu === null">
+    <small mat-line>Nepodarili sa získať denné menu</small>
+</mat-list-item>
 <ng-container *ngIf="dailyMenu">
     <mat-list-item *ngIf="!dailyMenu.dishes.length">
         <small mat-line>Reštaurácia nemá zverejnené menu</small>
@@ -40,11 +43,11 @@
             <ng-template #showTitle>
                 <h4 mat-line><strong>{{dish.name}}</strong></h4>
             </ng-template>
-            <span *ngIf="dish.price" class="additional-info">{{dish.price}}€</span>
+            <span *ngIf="dish.price" class="additional-info">{{dish.price}}</span>
             <span *ngIf="dish.weight" class="additional-info">{{dish.weight}}</span>
         </mat-list-item>
         <ng-template #noFilterResults>
-            <mat-list-item>
+            <mat-list-item *ngIf="dailyMenu.dishes.length">
                 <h4 mat-line>Filtru nevyhovujú žiadne výsledky</h4>
             </mat-list-item>
         </ng-template>

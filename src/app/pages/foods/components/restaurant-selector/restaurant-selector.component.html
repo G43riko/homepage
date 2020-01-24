@@ -3,8 +3,12 @@
     <div *ngIf="loading" class="loader-wrapper">
         <mat-spinner></mat-spinner>
     </div>
+    <mat-form-field style="padding: 0 0.5rem 0 0.5rem;box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);height: 60px;">
+        <input #searchRestaurant matInput placeholder="Search">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
     <mat-selection-list (selectionChange)="change($event, user)">
-        <mat-list-option *ngFor="let restaurant of allRestaurants"
+        <mat-list-option *ngFor="let restaurant of allRestaurants | searchRestaurant : searchRestaurant.value"
                          [selected]="isSelected(restaurant, user)"
                          [value]="restaurant.key">
             {{restaurant.name}}

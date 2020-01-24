@@ -3,10 +3,15 @@ import {AppConfig} from "./app.config";
 import {AuthGuard} from "./auth.guard";
 import {AboutComponent} from "./pages/about/about.component";
 import {AccountProfileComponent} from "./pages/account-profile/account-profile.component";
+import { FoodsOverviewComponent } from "./pages/foods/components/foods-overview/foods-overview.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {Roles} from "./shared/enums/roles.enum";
 
 export const AppRoutes: Routes = [
+    {
+        path: "**",
+        loadChildren: () => import("./pages/foods/foods.module").then((mod) => mod.FoodsModule),
+    },
     {
         path: "",
         redirectTo: "/" + AppConfig.PATH_HOME,

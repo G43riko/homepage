@@ -6,6 +6,7 @@ import { RestaurantRowComponent } from "./components/restaurant-row/restaurant-r
 import { RestaurantSelectorComponent } from "./components/restaurant-selector/restaurant-selector.component";
 import { FoodsRoutingModule } from "./foods-routes.module";
 import { SearchFoodPipe } from "./pipes/search-food.pipe";
+import { SearchRestaurantPipe } from "./pipes/search-restaurant.pipe";
 import { DailyMenuHttpService } from "./services/daily-menu-http.service";
 import { RestaurantHttpService } from "./services/restaurant-http.service";
 
@@ -15,6 +16,7 @@ import { RestaurantHttpService } from "./services/restaurant-http.service";
         RestaurantSelectorComponent,
         RestaurantRowComponent,
         SearchFoodPipe,
+        SearchRestaurantPipe,
     ],
     providers: [
         RestaurantHttpService,

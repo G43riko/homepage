@@ -5,6 +5,13 @@
                 <input #searchFood matInput placeholder="Search">
                 <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
+
+            <span class="divider"></span>
+
+            <span *ngIf="!(authService.user$ | async)" class="one-row-warning">
+                Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu  <mat-icon>account_circle</mat-icon>
+            </span>
+
             <span class="divider"></span>
             <button (click)="snav.toggle()" mat-icon-button title="Restaurant selector">
                 <mat-icon>menu</mat-icon>
@@ -12,6 +19,7 @@
             <button (click)="openFeedback()" mat-icon-button title="Open feedback panel">
                 <mat-icon>feedback</mat-icon>
             </button>
+            <app-login-screen *ngIf="standAlone"></app-login-screen>
         </mat-toolbar-row>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container">
@@ -23,7 +31,7 @@
             <app-restaurant-selector></app-restaurant-selector>
         </mat-sidenav>
 
-        <mat-sidenav-content style="min-height: calc(100vh - 128px);">
+        <mat-sidenav-content *ngIf="authService.user$" [style.min-height]="minHeight">
             <mat-list>
                 <ng-container *ngFor="let selectedRestaurant of selectedRestaurants; let i=index">
                     <mat-divider *ngIf="i > 0"></mat-divider>
@@ -32,7 +40,9 @@
                     ></app-restaurant-row>
                 </ng-container>
             </mat-list>
+            <span *ngIf="selectedRestaurants && selectedRestaurants.length === 0" class="one-row-warning">
+                Vyberte si reštaurácie klikuntím na ikonu <mat-icon>menu</mat-icon>
+            </span>
         </mat-sidenav-content>
     </mat-sidenav-container>
-
 </div>

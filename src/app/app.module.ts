@@ -1,18 +1,18 @@
-import {NgModule} from "@angular/core";
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material";
-import {BrowserModule} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ServiceWorkerModule} from "@angular/service-worker";
-import {G43_NOTIFICATION_TOKEN} from "@g43/common";
-import {environment} from "../environments/environment";
-import {AppRoutingModule} from "./app-routing.module";
-import {AppComponent} from "./app.component";
-import {AppConfig} from "./app.config";
-import {AccountProfileComponent} from "./pages/account-profile/account-profile.component";
-import {CoreModule} from "./shared/core.module";
-import {FirebaseModule} from "./shared/modules/firebase.module";
-import {NotificationService} from "./shared/services/notification.service";
-import {SharedModule} from "./shared/shared.module";
+import { NgModule } from "@angular/core";
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { G43_NOTIFICATION_TOKEN } from "@g43/common";
+import { environment } from "../environments/environment";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AppConfig } from "./app.config";
+import { AccountProfileComponent } from "./pages/account-profile/account-profile.component";
+import { CoreModule } from "./shared/core.module";
+import { FirebaseModule } from "./shared/modules/firebase.module";
+import { NotificationService } from "./shared/services/notification.service";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
     declarations: [

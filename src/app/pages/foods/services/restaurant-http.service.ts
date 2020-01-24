@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppConfig } from "../../../app.config";
 import { Address } from "../../../shared/models/person/address.model";
@@ -39,15 +39,20 @@ export class RestaurantHttpService extends AbstractHttpService {
     }
 
     public getRestaurants(): Observable<Restaurant[]> {
-        return this.restaurants.pipe(map((restaurants) => Object.values(restaurants)));
+        return this.restaurants.pipe(map((restaurants) => {
+            return Object.values(restaurants);
+        }));
     }
 
     public openHomepage(restaurant: Restaurant): void {
         window.open(restaurant.homepage, "__blank");
     }
 
-    public getRestaurantByKey(key: string): Observable<Restaurant> {
-        return this.restaurants.pipe(map((restaurants) => restaurants[key]));
+    public getRestaurantByKey(key: string): Observable<Restaurant | null> {
+        return this.restaurants.pipe(
+            map((restaurants) => restaurants[key]),
+            catchError(() => of(null)),
+            );
     }
 
     private getGoogleImagesLinkFor(dailyMenu: string): string {

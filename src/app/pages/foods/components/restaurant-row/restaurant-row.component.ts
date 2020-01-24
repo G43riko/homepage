@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
 import { MapsService } from "../../../../shared/services/maps.service";
@@ -9,12 +10,12 @@ import { DailyMenuHttpService } from "../../services/daily-menu-http.service";
 import { RestaurantHttpService } from "../../services/restaurant-http.service";
 
 @Component({
-    selector   : "app-restaurant-row",
+    selector: "app-restaurant-row",
     templateUrl: "./restaurant-row.component.html",
-    styleUrls  : ["./restaurant-row.component.scss"]
+    styleUrls: ["./restaurant-row.component.scss"]
 })
 export class RestaurantRowComponent implements OnInit {
-    public dailyMenu: DailyMenu;
+    public dailyMenu: DailyMenu | null;
     public restaurant?: Restaurant;
     public loading = false;
     @Input() public searchedFood: string;
@@ -25,15 +26,21 @@ export class RestaurantRowComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.restaurantHttpService.getRestaurantByKey(key).pipe(switchMap((data: Restaurant) => {
-            this.restaurant = data;
+        this.restaurantHttpService.getRestaurantByKey(key)
+            .pipe(switchMap((data: Restaurant | null) => {
+                if (data) {
+                    this.restaurant = data;
 
-            return this.dailyMenuHttpService.getDailyMenuFor(key);
+                    return this.dailyMenuHttpService.getDailyMenuFor(key);
+                }
 
-        })).subscribe((dailyMenu) => {
-            this.dailyMenu = dailyMenu;
-            this.loading   = false;
-        });
+                return of(null);
+
+            }))
+            .subscribe((dailyMenu: DailyMenu | null) => {
+                this.dailyMenu = dailyMenu;
+                this.loading = false;
+            });
     }
 
     public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
@@ -50,9 +57,9 @@ export class RestaurantRowComponent implements OnInit {
             return;
         }
         this.dialog.open(MapDialogComponent, {
-            width : "95%",
+            width: "95%",
             height: "95%",
-            data  : this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude)),
+            data: this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude)),
         });
     }
 
