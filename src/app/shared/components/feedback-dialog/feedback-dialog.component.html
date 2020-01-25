@@ -1,10 +1,10 @@
 <form [formGroup]="feedbackForm">
     <mat-form-field class="full-width">
-        <input formControlName="screen" matInput placeholder="Screen">
+        <input formControlName="screen" matInput placeholder="{{'shared.feedback.screen' | translate}}">
     </mat-form-field>
     <mat-form-field class="full-width">
-        <textarea formControlName="message" matInput placeholder="Message" rows="5"></textarea>
+        <textarea formControlName="message" matInput placeholder="{{'shared.feedback.message' | translate}}" rows="5"></textarea>
     </mat-form-field>
-    <button (click)="submit()" color="primary" mat-raised-button>Submit</button>
-    <button (click)="bottomSheetRef.dismiss()" mat-raised-button type="button">Cancel</button>
+    <button (click)="submit()" color="primary" mat-raised-button>{{"common.send" | translate}}</button>
+    <button (click)="bottomSheetRef.dismiss()" mat-raised-button type="button">{{"common.cancel" | translate}}</button>
 </form>

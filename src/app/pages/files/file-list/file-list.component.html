@@ -1,20 +1,20 @@
 <mat-card>
     <div *ngIf="authService.user$ | async as user" class="container">
         <mat-tab-group>
-            <mat-tab *ngIf="authService.checkAuthorization(user, Roles.ROLE_UPLOAD_FILES)" label="Nahrať obrázok">
+            <mat-tab *ngIf="authService.checkAuthorization(user, Roles.ROLE_UPLOAD_FILES)" label="{{'files.upload.image' | translate}}">
                 <ng-template matTabContent>
                     <app-file-upload (onFileUploaded)="uploadComplete($event)"></app-file-upload>
                 </ng-template>
             </mat-tab>
             <mat-tab label="Nahraté obrázky">
                 <ng-template mat-tab-label>
-                    <span matBadge="{{owned}}" matBadgeOverlap="false">Nahraté obrázky</span>
+                    <span matBadge="{{owned}}" matBadgeOverlap="false">{{'files.uploaded.images' | translate}}</span>
                 </ng-template>
                 <app-my-files (onNumberChange)="owned = $event" [type]="'owned'"></app-my-files>
             </mat-tab>
             <mat-tab label="Zdielané so mnou">
                 <ng-template mat-tab-label>
-                    <span matBadge="{{shared}}" matBadgeOverlap="false">Zdielané so mnou</span>
+                    <span matBadge="{{shared}}" matBadgeOverlap="false">{{'files.sharedWithMe' | translate}}</span>
                 </ng-template>
                 <app-my-files (onNumberChange)="shared = $event" [type]="'shared'"></app-my-files>
             </mat-tab>

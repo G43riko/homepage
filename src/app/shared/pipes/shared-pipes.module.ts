@@ -1,14 +1,18 @@
 import { NgModule } from "@angular/core";
-import {G43SharedPipesModule} from "@g43/common";
 import { ActivePipe } from "./active.pipe";
+import { LocalTitlePipe } from "./local-title.pipe";
+import { ParseUrlPipe } from './parse-url.pipe';
 
 @NgModule({
     declarations: [
-        ActivePipe
+        ActivePipe,
+        LocalTitlePipe,
+        ParseUrlPipe
     ],
     exports: [
         ActivePipe,
-        G43SharedPipesModule
+        LocalTitlePipe,
+        ParseUrlPipe,
     ]
 })
 export class SharedPipesModule {

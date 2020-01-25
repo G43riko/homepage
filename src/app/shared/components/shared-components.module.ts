@@ -1,6 +1,7 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { TranslateModule } from "@ngx-translate/core";
 import {MaterialModule} from "../modules/material.module";
 import {SharedPipesModule} from "../pipes/shared-pipes.module";
 import {AbstractTableComponent} from "./abstract-table/abstract-table.component";
@@ -19,7 +20,8 @@ import {WidgetComponent} from "./widget/widget.component";
         FormsModule,
         MaterialModule,
         SharedPipesModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateModule,
     ],
     declarations: [
         PaginatorComponent,
@@ -44,7 +46,7 @@ import {WidgetComponent} from "./widget/widget.component";
         AutoChipsComponent,
         ImageDialogComponent,
         FeedbackDialogComponent,
-        IconListComponent
+        IconListComponent,
     ]
 })
 export class SharedComponentsModule {

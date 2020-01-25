@@ -7,6 +7,7 @@ import { HomeComponent } from "../pages/home/home.component";
 import { SharedComponentsModule } from "./components/shared-components.module";
 import { CoreModule } from "./core.module";
 import { SharedDirectivesModule } from "./directives/shared-directives.module";
+import { MaterialModule } from "./modules/material.module";
 import { SharedPipesModule } from "./pipes/shared-pipes.module";
 import { fakeBackendProvider } from "./services/fake-backend-interceptor.service";
 
@@ -18,6 +19,7 @@ if (environment.interceptor) {
 @NgModule({
     imports: [
         CoreModule,
+        MaterialModule,
         SharedComponentsModule
     ],
     declarations: [

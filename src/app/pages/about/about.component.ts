@@ -1,5 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {AboutData} from "./about.data";
+import { Component, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { AboutData } from "./about.data";
+
 
 @Component({
     selector: "app-about",
@@ -14,6 +16,9 @@ export class AboutComponent implements OnInit {
     public readonly works = AboutData.works;
     public readonly schools = AboutData.schools;
 
+    public constructor(public readonly translateService: TranslateService) {
+
+    }
     public ngOnInit(): void {
     }
 

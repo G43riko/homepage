@@ -1,9 +1,9 @@
 {
     "welcome": "Vitajte",
-    "availableServices": "Stránka zatial podporuje",
+    "availableServices": "Stránka zatial obsahuje",
     "contactToAuthor": "Kontakt na autora",
     "dailyMenus": "Denné menu vybraných reštaurácií",
-    "inProgressProjects": "Rozpracované projekty",
+    "inProgressProjects": "Zoznam rozpracovaných projektov",
     "menu": {
         "projects": "Projekty",
         "foods": "Denné menu",
@@ -14,20 +14,48 @@
         "files": "Súbory"
     },
     "common": {
-        "search": "Hladať"
+        "search": "Hladať",
+        "hi": "Ahoj",
+        "share": "Zdielať",
+        "shareWith": "Zdielať s",
+        "send": "Odoslat",
+        "cancel": "Zrušiť"
     },
     "about": {
         "basicInfo": "Základné informácie",
-        "education": "Vzelanie",
+        "education": "Vzdelanie",
         "work": "Pracovné skúsenosti",
         "languages": "Jazyky",
         "technologies": "Technológie"
+    },
+    "files": {
+        "upload": {
+            "image": "Nahrať obrázok"
+        },
+        "uploaded": {
+            "images": "Nahraté obrázky"
+        },
+        "sharedWithMe": "Zdielané so mnou",
+        "chooseFile": "Vyberte súbor",
+        "orDragItHere": "alebo ho preneste sem"
     },
     "shared": {
         "showMap": "Zobraziť mapu",
         "noFilterResults": "Filtru nevyhovujú žiadne výsledky",
         "feedbackPanel": "Spätná väzba",
-        "distance": "Vzialenosť"
+        "distance": "Vzialenosť",
+        "login":{
+            "login": "Prihlásiť",
+            "logout": "Odhlásiť",
+            "with": {
+                "google": "Prihlásiť cez Google",
+                "facebook": "Prihlásiť cez Facebook"
+            }
+        },
+        "feedback": {
+            "screen": "Obrazovka",
+            "message": "Správa"
+        }
     },
     "projects": {
         "title": "Projekty",

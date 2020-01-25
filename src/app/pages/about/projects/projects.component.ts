@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { AboutData } from "../about.data";
 
 @Component({
@@ -9,10 +10,11 @@ import { AboutData } from "../about.data";
 export class ProjectsComponent implements OnInit {
     public readonly projects = AboutData.projects;
 
-    public constructor() {
+    public constructor(public readonly translateService: TranslateService) {
     }
 
     public ngOnInit(): void {
     }
+
 
 }

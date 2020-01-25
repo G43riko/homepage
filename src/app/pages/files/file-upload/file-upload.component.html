@@ -1,12 +1,14 @@
 <div *ngIf="authService.user$ | async as user">
     <div class="share-options-wrapper" style="margin-bottom: 1em;">
-        <mat-slide-toggle [(ngModel)]="shared"  class="share-enable">Zdielať</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="shared" class="share-enable">{{"common.share" | translate}}</mat-slide-toggle>
         <mat-form-field *ngIf="shared" class="full-width share-autocomplete">
             <input [formControl]="shareWith" [matAutocomplete]="auto" aria-label="State" matInput
-                   placeholder="Zdielať s">
+                   placeholder="{{'common.shareWith' | translate}}"
+            >
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="mapper">
                 <mat-option *ngFor="let account of accounts | async" [disabled]="user.uid === account.uid"
-                            [value]="account">
+                            [value]="account"
+                >
                     <img [src]="account.photoURL" alt="account photo" aria-hidden class="example-option-img">
                     <span>{{account.displayName}}</span>
                     &nbsp; &nbsp
@@ -19,7 +21,8 @@
          (hovered)="isHovering = $event"
          (click)="checkClick($event, file_input, upload_button)"
          [ngClass]="{'is-dragover': isHovering}"
-         appDropZone class="box_input">
+         appDropZone class="box_input"
+    >
         <svg class="box_icon" height="43" viewBox="0 0 50 43" width="50" xmlns="http://www.w3.org/2000/svg">
             <path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path>
         </svg>
@@ -30,19 +33,22 @@
                 <div *ngFor="let file of files">{{file.name}}</div>
             </ng-template>
             <ng-template #isEmpty>
-                <strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.
+                <strong>{{"files.chooseFile" | translate}}</strong><span class="box__dragndrop"> {{"files.orDragItHere" | translate}}</span>.
             </ng-template>
         </span>
         <button #upload_button
                 (click)="files.length && startUpload(files, user)"
                 [class.disabled]="files.length == 0"
                 [disabled]="files.length == 0"
-                class="box_button">Upload
+                class="box_button"
+        >Upload
         </button>
         <div *ngIf="snapshot | async as snap">
             <div *ngIf="(percentage | async) as pct" [ngStyle]="{display: isActive(snap) ? 'block' : 'none' }"
-                 class="progress-wrapper">
-                <span class="progress">{{ snap.bytesTransferred | g43fileSize }} of {{ snap.totalBytes | g43fileSize }}</span>
+                 class="progress-wrapper"
+            >
+                <span class="progress">{{ snap.bytesTransferred | g43fileSize }}
+                    of {{ snap.totalBytes | g43fileSize }}</span>
                 <mat-progress-bar [value]="pct" mode="determinate"></mat-progress-bar>
             </div>
         </div>

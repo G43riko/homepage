@@ -8,14 +8,14 @@
         </button>
         <mat-menu #accountMenu="matMenu">
             <button disabled mat-menu-item>
-                <span>Hi {{user.displayName}}</span>
+                <span>{{"common.hi" | translate}} {{user.displayName}}</span>
             </button>
             <button disabled mat-menu-item>
                 <span>{{user.email}}</span>
             </button>
             <button (click)="authService.signOut()" mat-menu-item>
                 <mat-icon>logout</mat-icon>
-                <span>Log out</span>
+                <span>{{"shared.login.logout" | translate}}</span>
             </button>
         </mat-menu>
     </div>
@@ -26,7 +26,7 @@
         <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #loginMenu="matMenu">
-        <button (click)="authService.googleSigning()" mat-menu-item>Log in with Google</button>
+        <button (click)="authService.googleSigning()" mat-menu-item>{{"shared.login.with.google" | translate}}</button>
         <!--<button mat-menu-item (click)="authService.signOut()">Sign up</button>-->
     </mat-menu>
 </ng-template>

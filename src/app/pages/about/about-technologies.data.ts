@@ -2,49 +2,70 @@ export const AboutTechnologies = {
     angular: {
         name: "Angular",
         skill: 95,
-        type: "Platform for building mobile and desktop web applications",
+        type: {
+            en: "Platform for building mobile and desktop web applications",
+            sk: "Platforma na tvorbu mobilných a webových aplikácií"
+        },
         homepage: "https://angular.io/"
     },
     postgres: {
         name: "Postgres",
         skill: 85,
-        type: "Relational open source database",
+        type: {
+            en: "Relational open source database",
+            sk: "Relačná opens-sourcová databáza"
+        },
         homepage: "https://www.postgresql.org/"
     },
     mongodb: {
         name: "MongoDB",
         skill: 80,
-        type: "Document NoSQL database",
+        type: {
+            en: "Document NoSQL database",
+            sk: "Dokumentová NoSQL databáza"
+        },
         homepage: "https://www.mongodb.com/"
     },
     grunt: {
         name: "Grunt",
         skill: 80,
-        type: "NodeJS task runner",
+        type: {
+            en: "NodeJS task runner",
+            sk: "NodeJS spúšťač úloh"
+        },
         homepage: "https://gruntjs.com/"
     },
     gulp: {
         name: "Gulp",
         skill: 80,
-        type: "NodeJS task runner",
+        type: {
+            en: "NodeJS task runner",
+            sk: "NodeJS spúšťač úloh"
+        },
         homepage: "https://gulpjs.com/"
     },
     firebase: {
         name: "Firebase",
         skill: 80,
-        type: "Backend-as-a-Service",
+        type: {
+            en: "Backend-as-a-Service",
+            sk: "Backend ako služba"
+        },
         homepage: "https://firebase.google.com/"
     },
     angularjs: {
         name: "AngularJS",
         skill: 30,
-        type: "structural framework for dynamic web apps",
+        type: "Structural framework for dynamic web apps",
         homepage: "https://angularjs.org/"
     },
     sass: {
         name: "SASS",
         skill: 80,
-        type: "CSS Preprocessor",
+        type: {
+            en: "CSS Preprocessor",
+            sk: "CSS Preprocesor"
+        },
         homepage: "https://sass-lang.com/"
     },
     bootstrap: {
@@ -56,25 +77,37 @@ export const AboutTechnologies = {
     nodejs: {
         name: "NodeJS",
         skill: 80,
-        type: "Open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser",
+        type: {
+            en: "Open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser",
+            sk: "Open-sourcové, multi platformové prostredie na spúšťanie javascriptové kódu mimo prehliadača"
+        },
         homepage: "https://nodejs.org/en/"
     },
     socketio: {
         name: "Socket.IO",
         skill: 80,
-        type: "JavaScript library for realtime web applications",
+        type: {
+            en: "JavaScript library for realtime web applications",
+            sk: "Javascriptová knižnica pre webová aplikácie v reálnom čase"
+        },
         homepage: "https://socket.io/"
     },
     rxjs: {
         name: "RxJS",
         skill: 80,
-        type: "Library that brings the concept of \"reactive programming\" to the web",
+        type: {
+            en: "Library that brings the concept of \"reactive programming\" to the web",
+            sk: "Knižnica ktorá prináša koncept \"reaktívneho programovanie\" na web"
+        },
         homepage: "https://rxjs-dev.firebaseapp.com/"
     },
     ngrx: {
         name: "NgRx",
         skill: 30,
-        type: "Framework for building reactive applications in Angular",
+        type: {
+            en: "Framework for building reactive applications in Angular",
+            sk: "Framework pre tvorbu reaktívnych aplikácií v angulary"
+        },
         homepage: "https://ngrx.io/"
     },
     git: {

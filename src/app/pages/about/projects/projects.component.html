@@ -10,16 +10,26 @@
             <th>{{'projects.sources' | translate}}</th>
         </tr>
         <tr *ngFor="let project of projects">
-            <td>{{project.name}}</td>
+            <td>{{project.name | localTitle : translateService.currentLang}}</td>
             <td>{{'projects.teams.' + project.team | translate}}</td>
             <td>
                 <app-icon-list [keys]="project.technologies" type="technology"></app-icon-list>
             </td>
-            <td><a [href]="project.web" style="text-decoration: none; color: black">{{project.web}}</a></td>
-            <td><a [href]="project.documentation"
-                   style="text-decoration: none; color: black">{{project.documentation}}</a></td>
-            <td><a [href]="project.sources"
-                   style="text-decoration: none; color: black">{{project.sources}}</a>
+            <td><a *ngIf="project.demo"
+                   [href]="project.demo"
+                   target="_blank"
+                   style="text-decoration: none; color: black">
+                {{project.demo | parseUrl:'host'}}</a></td>
+            <td><a *ngIf="project.documentation"
+                   [href]="project.documentation"
+                   target="_blank"
+                   style="text-decoration: none; color: black"
+            >{{project.documentation | parseUrl:'host'}}</a></td>
+            <td><a *ngIf="project.sources"
+                   [href]="project.sources"
+                   target="_blank"
+                   style="text-decoration: none; color: black"
+            >{{project.sources | parseUrl:'host'}}</a>
             </td>
         </tr>
     </table>

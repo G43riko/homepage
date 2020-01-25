@@ -4,7 +4,8 @@
            [href]="account.link"
            [matTooltip]="account.label"
            mat-icon-button
-           target="_blank">
+           target="_blank"
+        >
             <mat-icon *ngIf="account.externalIcon" svgIcon="{{account.externalIcon}}"></mat-icon>
             <mat-icon *ngIf="account.materialIcon">{{account.materialIcon}}</mat-icon>
         </a>
@@ -13,12 +14,13 @@
         <div class="col basic-info">
             <h3>{{'about.basicInfo' | translate}}</h3>
             <div *ngFor="let info of infos"
-                 class="info-wrapper row space-between">
-                <strong class="key">{{info.key}}</strong>
+                 class="info-wrapper row space-between"
+            >
+                <strong class="key">{{info.key | localTitle:translateService.currentLang}}</strong>
                 <ng-container [ngSwitch]="info.flag">
                     <a *ngSwitchCase="'mail'" [href]="'mailto:' + info.value" class="value">{{info.value}}</a>
                     <a *ngSwitchCase="'phone'" [href]="'tel:' + info.value" class="value">{{info.value}}</a>
-                    <span *ngSwitchDefault class="value">{{info.value}}</span>
+                    <span *ngSwitchDefault class="value">{{info.value | localTitle:translateService.currentLang}}</span>
                 </ng-container>
             </div>
         </div>
@@ -28,10 +30,14 @@
                 <strong>
                     <a [href]="school.homepage"
                        style="color: black; text-decoration: none"
-                       target="_blank">
-                        {{school.name}}
+                       title="{{school.fullName && (school.fullName | localTitle: translateService.currentLang)}}"
+                       target="_blank"
+                    >
+                        {{school.name | localTitle: translateService.currentLang}}
+
                     </a>
-                    <ng-container *ngIf="school.fieldOfStudy"> - {{school.fieldOfStudy}}</ng-container>
+                    <ng-container *ngIf="school.fieldOfStudy">
+                        - {{school.fieldOfStudy | localTitle: translateService.currentLang}}</ng-container>
 
                 </strong>
                 <span style="flex-basis: 100px">{{school.from}} - {{school.to}}</span>
@@ -40,10 +46,12 @@
         <div class="col works">
             <h3>{{'about.work' | translate}}</h3>
             <div *ngFor="let work of works"
-                 class="row space-between">
+                 class="row space-between"
+            >
                 <a [href]="work.homepage"
                    style="color: black; text-decoration: none"
-                   target="_blank">
+                   target="_blank"
+                >
                     <strong>{{work.name}}</strong>
                 </a>
                 <span style="float: left; flex-basis: 100px">{{work.from}} - {{work.to}}</span>
@@ -56,7 +64,8 @@
             <div *ngFor="let language of languages" class="language-row">
                 <div
                     [ngStyle]="{width: language.skill + '%', background: 'rgb(' + (255 - language.skill * 2.5) + ', ' + (language.skill * 2.5) + ', 0)'}"
-                    class="slider">
+                    class="slider"
+                >
                 </div>
 
                 <div class="row space-between">
@@ -71,15 +80,20 @@
             <div *ngFor="let technology of technologies" class="technology-row">
                 <div
                     [ngStyle]="{width: technology.skill + '%', background: 'rgb(' + (255 - technology.skill * 2.5) + ', ' + (technology.skill * 2.5) + ', 0)'}"
-                    class="slider"></div>
+                    class="slider"
+                ></div>
                 <div class="row space-between">
                     <span class="name">
                         <a [href]="technology.homepage"
-                           style="text-decoration: none; color:black" target="_blank">
+                           style="text-decoration: none; color:black" target="_blank"
+                        >
                             <strong><app-icon-list [keys]="[technology.name]" type="technology"></app-icon-list>
                                 {{technology.name}}</strong>
                         </a> -
-                        <span [title]="technology.type">{{technology.type}}</span></span>
+                        <span [title]="technology.type | localTitle: translateService.currentLang">
+                            {{technology.type | localTitle: translateService.currentLang}}
+                        </span>
+                    </span>
                     <span class="skill">{{technology.skill}}%</span>
                 </div>
             </div>
