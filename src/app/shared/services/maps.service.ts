@@ -21,7 +21,7 @@ export interface PlaceAroundParam {
 }
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class MapsService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
@@ -57,8 +57,8 @@ export class MapsService extends AbstractHttpService {
         params.key = params.key || AppConfig.GOOGLE_MAPS_API_KEY;
 
         return this.http.post<any>("http://g43.clanweb.eu/API/maps.php", params)
-                   .pipe(
-                       catchError(this.handleError<any>("getPlacesAround")),
-                   );
+            .pipe(
+                catchError(this.handleError<any>("getPlacesAround"))
+            );
     }
 }

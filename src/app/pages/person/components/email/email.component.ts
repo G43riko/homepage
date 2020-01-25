@@ -7,7 +7,7 @@ import {Email} from "../../../../shared/models/person/email.model";
 @Component({
     selector: "app-email",
     templateUrl: "./email.component.html",
-    styleUrls: ["./email.component.scss"],
+    styleUrls: ["./email.component.scss"]
 })
 export class EmailComponent implements OnInit {
     @Input() public disabled = true;

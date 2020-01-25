@@ -11,17 +11,17 @@ describe("ImageDialogComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                ImageDialogComponent,
+                ImageDialogComponent
             ],
             providers: [
                 {
                     provide: MatDialogRef,
-                    useValue: {},
-                },
+                    useValue: {}
+                }
             ],
             imports: [
-                TestingModule,
-            ],
+                TestingModule
+            ]
         })
             .compileComponents();
     }));

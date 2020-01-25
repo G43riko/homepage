@@ -16,11 +16,11 @@ describe("NumberComponent", () => {
                 TestingModule,
                 MaterialModule,
                 CoreModule,
-                SharedModule,
+                SharedModule
             ],
             declarations: [
-                NumberComponent,
-            ],
+                NumberComponent
+            ]
         }).compileComponents();
     }));
 

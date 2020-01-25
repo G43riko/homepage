@@ -19,7 +19,7 @@ import {WidgetComponent} from "./widget/widget.component";
         FormsModule,
         MaterialModule,
         SharedPipesModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         PaginatorComponent,
@@ -30,10 +30,10 @@ import {WidgetComponent} from "./widget/widget.component";
         AutoChipsComponent,
         ImageDialogComponent,
         FeedbackDialogComponent,
-        IconListComponent,
+        IconListComponent
     ],
     entryComponents: [
-        MapDialogComponent,
+        MapDialogComponent
     ],
     exports: [
         PaginatorComponent,
@@ -44,8 +44,8 @@ import {WidgetComponent} from "./widget/widget.component";
         AutoChipsComponent,
         ImageDialogComponent,
         FeedbackDialogComponent,
-        IconListComponent,
-    ],
+        IconListComponent
+    ]
 })
 export class SharedComponentsModule {
 }

@@ -13,8 +13,8 @@ import { MaterialModule } from "./modules/material.module";
         MaterialModule,
         HttpClientModule,
         CommonModule,
-        HttpClientJsonpModule,
-    ],
+        HttpClientJsonpModule
+    ]
 })
 export class CoreModule {
 }

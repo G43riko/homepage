@@ -7,8 +7,8 @@ import { MixesRoutingModule } from "./mixes-routes.module";
     declarations: [MixesListComponent],
     imports: [
         CommonModule,
-        MixesRoutingModule,
-    ],
+        MixesRoutingModule
+    ]
 })
 export class MixesModule {
 }

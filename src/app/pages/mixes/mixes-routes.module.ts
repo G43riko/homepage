@@ -9,15 +9,15 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: MixesListComponent,
-            },
-        ],
-    },
+                component: MixesListComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class MixesRoutingModule {
 }

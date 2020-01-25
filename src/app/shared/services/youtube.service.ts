@@ -19,12 +19,12 @@ export class YoutubeService extends AbstractHttpService {
         const url = AppConfig.YOUTUBE_API_URL + "search" + MiscUtils.objectToQueryParams({
             q: key,
             part: "snippet",
-            key: AppConfig.YOUTUBE_API_KEY,
+            key: AppConfig.YOUTUBE_API_KEY
         });
 
         return this.http.get<any>(url)
-                   .pipe(
-                       catchError(this.handleError<Person[]>("getPersons")),
-                   );
+            .pipe(
+                catchError(this.handleError<Person[]>("getPersons"))
+            );
     }
 }

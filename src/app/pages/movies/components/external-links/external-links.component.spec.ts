@@ -10,14 +10,14 @@ describe("ExternalLinksComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             providers: [
-                MovieService,
+                MovieService
             ],
             declarations: [
-                ExternalLinksComponent,
-            ],
+                ExternalLinksComponent
+            ]
         }).compileComponents();
     }));
 

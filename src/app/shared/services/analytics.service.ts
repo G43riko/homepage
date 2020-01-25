@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 declare const gtag: any;
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class AnalyticsService {
     public eventUploadFile(fileName: string): void {

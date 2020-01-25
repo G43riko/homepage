@@ -24,13 +24,13 @@ import {MovieService} from "./services/movie.service";
     imports: [
         CoreModule,
         SharedModule,
-        MoviesRoutingModule,
+        MoviesRoutingModule
     ],
     providers: [
         MovieHttpService,
 
         MovieService,
-        MakerHttpService,
+        MakerHttpService
     ],
     declarations: [
         CsfdUserDetailComponent,
@@ -46,8 +46,8 @@ import {MovieService} from "./services/movie.service";
         MakerDetailComponent,
         MovieDetailComponent,
         ExternalMakerDirective,
-        ExternalMovieDirective,
-    ],
+        ExternalMovieDirective
+    ]
 })
 export class MoviesModule {
 }

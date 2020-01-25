@@ -11,16 +11,16 @@ export class SearchRestaurantPipe implements PipeTransform {
             return value;
         }
         const searchedKey = key.toLowerCase()
-                               .trim();
+            .trim();
 
         return value.filter((restaurant) => {
             if (restaurant.key && restaurant.key.toLowerCase()
-                                            .indexOf(searchedKey) >= 0) {
+                .includes(searchedKey)) {
                 return true;
             }
 
             return restaurant.name && restaurant.name.toLowerCase()
-                                                .indexOf(searchedKey) >= 0;
+                .includes(searchedKey);
 
         });
     }

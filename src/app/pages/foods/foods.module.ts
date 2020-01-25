@@ -16,17 +16,17 @@ import { RestaurantHttpService } from "./services/restaurant-http.service";
         RestaurantSelectorComponent,
         RestaurantRowComponent,
         SearchFoodPipe,
-        SearchRestaurantPipe,
+        SearchRestaurantPipe
     ],
     providers: [
         RestaurantHttpService,
-        DailyMenuHttpService,
+        DailyMenuHttpService
     ],
     imports: [
         SharedModule,
         FoodsRoutingModule,
-        CoreModule,
-    ],
+        CoreModule
+    ]
 })
 export class FoodsModule {
 }

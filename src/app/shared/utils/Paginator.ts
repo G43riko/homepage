@@ -11,6 +11,7 @@ export class Paginator<T = any> extends AbstractPaginator<T> {
 
     public remove(index: number): void {
         this.allItems.splice(index + this._actualPage * this._itemsPerPage, 1);
+
         return this._reCalcList();
     }
 

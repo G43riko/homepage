@@ -12,7 +12,7 @@ export class ApiPaginator<T = any> extends AbstractPaginator<T> {
     public constructor(private readonly service: PaginatorService<T>,
                        {
                            pageSize = AppConfig.ITEMS_PER_PAGE,
-                           debounce = 300,
+                           debounce = 300
                        }) {
         super(pageSize);
         service.getCount().pipe(take(1)).subscribe((count) => {

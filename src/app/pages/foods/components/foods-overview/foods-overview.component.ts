@@ -8,11 +8,11 @@ import { RestaurantHttpService } from "../../services/restaurant-http.service";
 @Component({
     selector: "app-overview",
     templateUrl: "./foods-overview.component.html",
-    styleUrls: ["./foods-overview.component.scss"],
+    styleUrls: ["./foods-overview.component.scss"]
 })
 export class FoodsOverviewComponent implements OnInit {
     public selectedRestaurants: string[];
-    public readonly standAlone = true;
+    public readonly standAlone = false;
 
     public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
                        private readonly bottomSheet: MatBottomSheet,

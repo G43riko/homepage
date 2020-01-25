@@ -23,59 +23,59 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
 
     public getMovies(): Observable<Movie[]> {
         return this.http.get<Movie[]>(URL + "/?limit=1000")
-                   .pipe(
-                       catchError(this.handleError<Movie[]>("getMovies")),
-                   );
+            .pipe(
+                catchError(this.handleError<Movie[]>("getMovies"))
+            );
     }
 
     public getMakers(): Observable<Maker[]> {
         return this.http.get<Maker[]>(URL + "/makers/?limit=1000")
-                   .pipe(
-                       catchError(this.handleError<Maker[]>("getMakers")),
-                   );
+            .pipe(
+                catchError(this.handleError<Maker[]>("getMakers"))
+            );
     }
 
     public getGenres(): Observable<string[]> {
         return this.http.get<string[]>(URL + "/genres", {
-            headers: this.getHeaders(),
+            headers: this.getHeaders()
         })
-                   .pipe(
-                       catchError(this.handleError<string[]>("getGenres")),
-                   );
+            .pipe(
+                catchError(this.handleError<string[]>("getGenres"))
+            );
     }
 
     public getList(count: number, offset = 0, key?: string): Observable<Movie[]> {
         if (key) {
             return this.http.get<Movie[]>(`${ URL }/quick-search/${ key }?count=${ count }&offset=${ offset }`)
-                       .pipe(
-                           catchError(this.handleError<Movie[]>("searchMovies")),
-                       );
+                .pipe(
+                    catchError(this.handleError<Movie[]>("searchMovies"))
+                );
         }
 
         return this.http.get<Movie[]>(`${ URL }?count=${ count }&offset=${ offset }`)
-                   .pipe(
-                       catchError(this.handleError<Movie[]>("getList")),
-                   );
+            .pipe(
+                catchError(this.handleError<Movie[]>("getList"))
+            );
     }
 
     public getCount(): Observable<number> {
         return this.http.get<number>(URL + "/count")
-                   .pipe(
-                       catchError(this.handleError<number>("getCount")),
-                   );
+            .pipe(
+                catchError(this.handleError<number>("getCount"))
+            );
     }
 
     public getMoviesFromExternalSource(type: MovieSource, key: string): Observable<Movie[]> {
         return this.http.get<Movie[]>(URL_EXTERNAL + "/search/" + type + "/" + key + "?transform=true")
-                   .pipe(
-                       catchError(this.handleError<Movie[]>("getMoviesFromExternalSource")),
-                   );
+            .pipe(
+                catchError(this.handleError<Movie[]>("getMoviesFromExternalSource"))
+            );
     }
 
     public getMovieDetailFromExternalSource(source: MovieSource, id: string, type: MovieType = "movie"): Observable<Movie> {
         return this.http.get<Movie>(URL_EXTERNAL + "/detail/" + source + "/" + id + "?transform=true&type=" + type)
-                   .pipe(
-                       catchError(this.handleError<Movie>("getMovieDetailFromExternalSource")),
-                   );
+            .pipe(
+                catchError(this.handleError<Movie>("getMovieDetailFromExternalSource"))
+            );
     }
 }

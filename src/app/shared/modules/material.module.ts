@@ -35,12 +35,12 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
+    MatTreeModule
 } from "@angular/material";
 
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule
     ],
     exports: [
         MatAutocompleteModule,
@@ -77,9 +77,9 @@ import {
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        MatTreeModule,
+        MatTreeModule
     ],
-    declarations: [],
+    declarations: []
 })
 export class MaterialModule {
 }

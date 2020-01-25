@@ -22,7 +22,7 @@ export class DailyMenuFixture extends AbstractFixture<DailyMenu> {
                         name  : "Hovädzí hamburger",
                         price : 3.45,
                         weight: "120g",
-                        type  : "burger",
+                        type  : "burger"
                     }
                 ]
             },
@@ -34,7 +34,7 @@ export class DailyMenuFixture extends AbstractFixture<DailyMenu> {
                         name  : "Bravčový rezeň",
                         price : 3.45,
                         weight: "120g",
-                        type  : "steak",
+                        type  : "steak"
                     },
                     {
                         name  : "Hovedzý steak",
@@ -45,7 +45,7 @@ export class DailyMenuFixture extends AbstractFixture<DailyMenu> {
                         name  : "Pečený sumček",
                         price : 5.45,
                         weight: "120g",
-                        type  : "fish",
+                        type  : "fish"
                     }
                 ]
             },
@@ -60,14 +60,14 @@ export class DailyMenuFixture extends AbstractFixture<DailyMenu> {
                     {
                         type  : "soup",
                         name  : "Slepačí vývar",
-                        weight: "120ml",
+                        weight: "120ml"
                     }
-                ],
+                ]
             },
             {
                 id        : "lanogi" as any,
                 restaurant: "Lanogi",
-                dishes    : [],
+                dishes    : []
             },
             {
                 id        : "journal" as any,
@@ -77,15 +77,15 @@ export class DailyMenuFixture extends AbstractFixture<DailyMenu> {
                         type  : "soup",
                         name  : "Slepačí vývar",
                         weight: "120ml",
-                        price : 0.4,
+                        price : 0.4
                     },
                     {
                         name  : "Sviečková na smotane",
                         weight: "240g",
-                        price : 2,
+                        price : 2
                     }
-                ],
-            },
+                ]
+            }
         ]);
 
     }

@@ -9,11 +9,11 @@ describe("AuthGuard", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
-                FirebaseModule,
+                FirebaseModule
             ],
             providers: [
-                AuthGuard,
-            ],
+                AuthGuard
+            ]
         });
     });
 

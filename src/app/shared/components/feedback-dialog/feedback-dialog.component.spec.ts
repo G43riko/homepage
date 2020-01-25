@@ -10,7 +10,7 @@ describe("FeedbackDialogComponent", () => {
         TestBed.configureTestingModule({
             declarations: [FeedbackDialogComponent]
         })
-               .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {

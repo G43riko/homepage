@@ -13,7 +13,7 @@ import { IconService } from "./shared/services/icon.service";
 @Component({
     selector   : "app-root",
     templateUrl: "./app.component.html",
-    styleUrls  : ["./app.component.scss"],
+    styleUrls  : ["./app.component.scss"]
 })
 export class AppComponent {
     public mobileQuery: MediaQueryList;

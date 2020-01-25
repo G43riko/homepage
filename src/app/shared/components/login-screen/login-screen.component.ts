@@ -4,7 +4,7 @@ import { AuthService } from "../../services/auth.service";
 @Component({
     selector: "app-login-screen",
     templateUrl: "./login-screen.component.html",
-    styleUrls: ["./login-screen.component.scss"],
+    styleUrls: ["./login-screen.component.scss"]
 })
 export class LoginScreenComponent implements OnInit {
 

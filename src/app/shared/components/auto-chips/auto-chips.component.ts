@@ -12,8 +12,8 @@ import {map} from "rxjs/operators";
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: AutoChipsComponent,
-        multi: true,
-    }],
+        multi: true
+    }]
 })
 export class AutoChipsComponent implements ControlValueAccessor {
     @Input() public allItems: string[] = [];
@@ -97,7 +97,7 @@ export class AutoChipsComponent implements ControlValueAccessor {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
 
-        return this.allItems.filter((item) => item.toLowerCase().indexOf(filterValue) === 0);
+        return this.allItems.filter((item) => item.toLowerCase().startsWith(filterValue));
     }
 
 }

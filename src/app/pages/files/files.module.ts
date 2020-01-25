@@ -18,8 +18,8 @@ import {MyFilesComponent} from "./my-files/my-files.component";
         FilesRoutingModule,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule,
-    ],
+        ReactiveFormsModule
+    ]
 })
 export class FilesModule {
 }

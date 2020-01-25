@@ -10,7 +10,7 @@ describe("IconListComponent", () => {
         TestBed.configureTestingModule({
             declarations: [IconListComponent]
         })
-               .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {

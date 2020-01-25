@@ -5,11 +5,11 @@ import {SongsHttpService} from "./songs-http.service";
 describe("SongsService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
+            HttpClientModule
         ],
         providers: [
-            SongsHttpService,
-        ],
+            SongsHttpService
+        ]
     }));
 
     it("should be created", () => {

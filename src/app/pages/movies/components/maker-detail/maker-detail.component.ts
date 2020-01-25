@@ -9,7 +9,7 @@ import {MakerHttpService} from "../../services/maker-http.service";
 @Component({
     selector: "app-maker-detail",
     templateUrl: "./maker-detail.component.html",
-    styleUrls: ["./maker-detail.component.scss"],
+    styleUrls: ["./maker-detail.component.scss"]
 })
 export class MakerDetailComponent extends AbstractDetailComponent<Maker, MakerHttpService> implements OnInit {
     @Input() public selectedDetail: Maker;
@@ -30,7 +30,7 @@ export class MakerDetailComponent extends AbstractDetailComponent<Maker, MakerHt
         this.selectedDetail = detail;
         this.detailForm.patchValue({
             ...detail,
-            year: new Date(detail.birthday),
+            year: new Date(detail.birthday)
         });
     }
 

@@ -8,7 +8,7 @@ import {Song} from "../songs-list/songs-list.component";
 @Component({
     selector: "songs-nav-bar",
     templateUrl: "./nav-bar.component.html",
-    styleUrls: ["./nav-bar.component.scss"],
+    styleUrls: ["./nav-bar.component.scss"]
 })
 export class SongsNavBarComponent implements OnDestroy {
     public player: PlayerInterface;
@@ -39,6 +39,7 @@ export class SongsNavBarComponent implements OnDestroy {
                 this.duration = this.previewPlayer.getDuration();
                 this._startPlaying();
             });
+
             return;
         }
         this.player.play().then(() => this._startPlaying());
@@ -61,6 +62,7 @@ export class SongsNavBarComponent implements OnDestroy {
         if (song) {
             return this.selectedSong === song && this.isPlaying();
         }
+
         return this.state === "play";
     }
 
@@ -68,6 +70,7 @@ export class SongsNavBarComponent implements OnDestroy {
         if (song) {
             return this.selectedSong === song && this.isPaused();
         }
+
         return this.state === "pause";
     }
 

@@ -29,19 +29,19 @@ export abstract class AbstractHttpService<S = any> {
 
     public getDetail(id: number): Observable<S> {
         return this.http.get<S>(this.URL + "/" + id).pipe(
-            catchError(this.handleError<S>("getDetail")),
+            catchError(this.handleError<S>("getDetail"))
         );
     }
 
     public getList(count: number, offset = 0, key?: string): Observable<S[]> {
         if (key) {
             return this.http.get<S[]>(`${this.URL}/quick-search/${key}?count=${count}&offset=${offset}`).pipe(
-                catchError(this.handleError<S[]>("search")),
+                catchError(this.handleError<S[]>("search"))
             );
         }
 
         return this.http.get<S[]>(`${this.URL}/?count=${count}&offset=${offset}`).pipe(
-            catchError(this.handleError<S[]>("search")),
+            catchError(this.handleError<S[]>("search"))
         );
     }
 
@@ -50,6 +50,7 @@ export abstract class AbstractHttpService<S = any> {
         headers = headers.append("Content-type", "application/json");
         headers = headers.append("x-access-token", this._authService.getToken());
         headers = headers.append("__auth_token__", "3KJNUIHZobnkN3ZIa66ddsnsmvslDDD88d");
+
         // headers.append("cache-control", "no-cache");
         return headers;
     }

@@ -10,12 +10,12 @@ describe("SongsNavBarComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             declarations: [
                 DurationPipe,
-                SongsNavBarComponent,
-            ],
+                SongsNavBarComponent
+            ]
         }).compileComponents();
     }));
 

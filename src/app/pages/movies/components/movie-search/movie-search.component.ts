@@ -10,7 +10,7 @@ import {MovieService} from "../../services/movie.service";
 @Component({
     selector: "app-movie-search",
     templateUrl: "./movie-search.component.html",
-    styleUrls: ["./movie-search.component.scss"],
+    styleUrls: ["./movie-search.component.scss"]
 })
 export class MovieSearchComponent implements OnInit {
     @Output() public readonly movieSearched: EventEmitter<Movie> = new EventEmitter();
@@ -19,9 +19,9 @@ export class MovieSearchComponent implements OnInit {
     public readonly movieSearchForm = this.formBuilder.group({
         title: "",
         id: "",
-        type: ["csfd", Validators.required],
+        type: ["csfd", Validators.required]
     }, {
-        validators: [this.validateForm],
+        validators: [this.validateForm]
     });
     private searchedType: MovieSource;
 
@@ -52,7 +52,7 @@ export class MovieSearchComponent implements OnInit {
 
     private validateForm(c: FormControl): null | { formValidationError: any } {
         return (c.value.title || c.value.id) ? null : {
-            formValidationError: "Title or ID is required",
+            formValidationError: "Title or ID is required"
         };
     }
 

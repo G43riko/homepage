@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
 
 @Component({
     selector: "app-map-dialog",
     templateUrl: "./map-dialog.component.html",
-    styleUrls: ["./map-dialog.component.scss"],
+    styleUrls: ["./map-dialog.component.scss"]
 })
 export class MapDialogComponent implements OnInit {
     public mapUrl: string;

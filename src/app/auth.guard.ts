@@ -5,7 +5,7 @@ import { map, take, tap } from "rxjs/operators";
 import { AuthService } from "./shared/services/auth.service";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                     console.log("Access denied");
                     this.router.navigate(["/"]);
                 }
-            }),
+            })
         );
     }
 }

@@ -11,9 +11,9 @@ describe("PersonDetailComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
-                PersonModule,
+                PersonModule
             ],
-            declarations: [],
+            declarations: []
         }).compileComponents();
     }));
 

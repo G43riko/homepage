@@ -17,16 +17,16 @@ describe("PersonListRowComponent", () => {
             imports: [
                 TestingModule,
                 MaterialModule,
-                FirebaseModule,
+                FirebaseModule
             ],
             providers: [
-                PersonHttpService,
+                PersonHttpService
             ],
             declarations: [
                 MyFilesComponent,
                 PersonListRowCellSelectComponent,
-                PersonListRowComponent,
-            ],
+                PersonListRowComponent
+            ]
         }).compileComponents();
     }));
 

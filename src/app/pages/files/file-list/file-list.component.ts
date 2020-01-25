@@ -7,7 +7,7 @@ import {MyFilesComponent} from "../my-files/my-files.component";
 @Component({
     selector: "app-file-list",
     templateUrl: "./file-list.component.html",
-    styleUrls: ["./file-list.component.scss"],
+    styleUrls: ["./file-list.component.scss"]
 })
 export class FileListComponent implements OnInit {
     public owned = 0;

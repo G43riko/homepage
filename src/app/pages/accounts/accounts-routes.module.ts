@@ -9,15 +9,15 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: AccountListComponent,
-            },
-        ],
-    },
+                component: AccountListComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class AccountsRoutingModule {
 }

@@ -17,7 +17,7 @@ export class SongsHttpService extends AbstractHttpService {
 
     public getSongs(): Observable<any[]> {
         return this.http.get<any[]>(URL + "/list").pipe(
-            catchError(this.handleError<any[]>("getSongs")),
+            catchError(this.handleError<any[]>("getSongs"))
         );
     }
 }

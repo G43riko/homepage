@@ -5,7 +5,7 @@ import {Person} from "../../../../shared/models/person/person.model";
 @Component({
     selector: "app-person-list-row-cell-account",
     templateUrl: "./person-list-row-cell-account.component.html",
-    styleUrls: ["./person-list-row-cell-account.component.scss"],
+    styleUrls: ["./person-list-row-cell-account.component.scss"]
 })
 export class PersonListRowCellAccountComponent implements OnInit {
 

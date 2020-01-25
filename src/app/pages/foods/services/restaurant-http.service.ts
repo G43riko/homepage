@@ -53,8 +53,8 @@ export class RestaurantHttpService extends AbstractHttpService {
     public getRestaurantByKey(key: string): Observable<Restaurant | null> {
         return this.restaurants.pipe(
             map((restaurants) => restaurants[key]),
-            catchError(() => of(null)),
-            );
+            catchError(() => of(null))
+        );
     }
 
     private getGoogleImagesLinkFor(dailyMenu: string): string {
@@ -65,17 +65,17 @@ export class RestaurantHttpService extends AbstractHttpService {
         const url = "https://g43riko.github.io/foods/assets/data/restaurantsData.json";
 
         return this.http.get<Restaurant[]>(url)
-                   .pipe(
-                       catchError(this.handleError<Restaurant[]>("getRestaurants")),
-                   )
-                   .pipe(map((data: Restaurant[]) => {
-                       const result: any = {};
-                       data.filter((restaurant: Restaurant) => restaurant.key)
-                           .forEach((restaurant) => {
-                               result[restaurant.key as string] = restaurant;
-                           });
+            .pipe(
+                catchError(this.handleError<Restaurant[]>("getRestaurants"))
+            )
+            .pipe(map((data: Restaurant[]) => {
+                const result: any = {};
+                data.filter((restaurant: Restaurant) => restaurant.key)
+                    .forEach((restaurant) => {
+                        result[restaurant.key as string] = restaurant;
+                    });
 
-                       return result;
-                   }));
+                return result;
+            }));
     }
 }

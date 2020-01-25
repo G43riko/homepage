@@ -13,7 +13,7 @@ import { MovieService } from "../../services/movie.service";
 @Component({
     selector   : "app-movie-list",
     templateUrl: "./movie-list.component.html",
-    styleUrls  : ["./movie-list.component.scss"],
+    styleUrls  : ["./movie-list.component.scss"]
 })
 export class MovieListComponent implements OnInit {
     public previewType: "table" | "grid" = "table";
@@ -32,46 +32,46 @@ export class MovieListComponent implements OnInit {
         columns        : [
             {
                 name : "title",
-                label: "Názov",
+                label: "Názov"
             },
             {
                 name         : "directors",
                 label        : "Režisér",
-                customContent: (row: Movie) => row.directors.map((director) => director.name).join(", "),
+                customContent: (row: Movie) => row.directors.map((director) => director.name).join(", ")
             },
             {
                 name : "year",
-                label: "Rok",
+                label: "Rok"
             },
             {
                 name         : "rating",
                 label        : "Hodnotenie",
-                customContent: (row: Movie) => row.rating + " %",
+                customContent: (row: Movie) => row.rating + " %"
             },
             {
                 name         : "duration",
                 label        : "Dĺžka",
-                customContent: (row: Movie) => row.duration + " min",
+                customContent: (row: Movie) => row.duration + " min"
             },
             {
                 name         : "genres",
                 label        : "Žánre",
-                customContent: (row: Movie) => row.genres.join(", "),
+                customContent: (row: Movie) => row.genres.join(", ")
             },
             {
                 name         : "countries",
                 label        : "Krajny",
-                customContent: (row: Movie) => row.countries.join(", "),
+                customContent: (row: Movie) => row.countries.join(", ")
             },
             {
                 name : "external",
-                label: "",
+                label: ""
             },
             {
                 name : "detail",
-                label: "",
-            },
-        ],
+                label: ""
+            }
+        ]
     };
 
     public constructor(movieHttpService: MovieHttpService,
@@ -89,7 +89,7 @@ export class MovieListComponent implements OnInit {
 
     public openImageDetail(url: string): void {
         this.dialog.open(ImageDialogComponent, {
-            data: url,
+            data: url
         });
     }
 

@@ -17,12 +17,12 @@ describe("FileUploadComponent", () => {
                 TestingModule,
                 MaterialModule,
                 SharedPipesModule,
-                CommonModule,
+                CommonModule
             ],
             declarations: [
                 PersonListRowCellSelectComponent,
-                FileUploadComponent,
-            ],
+                FileUploadComponent
+            ]
         }).compileComponents();
     }));
 

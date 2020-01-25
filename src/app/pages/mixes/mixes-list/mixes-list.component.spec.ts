@@ -8,9 +8,9 @@ describe("MixesListComponent", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MixesListComponent],
+            declarations: [MixesListComponent]
         })
-               .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {

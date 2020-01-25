@@ -4,7 +4,7 @@ import { Account } from "../../../../shared/models/person/account.model";
 @Component({
     selector: "app-account",
     templateUrl: "./account.component.html",
-    styleUrls: ["./account.component.scss"],
+    styleUrls: ["./account.component.scss"]
 })
 
 export class AccountComponent implements OnInit {

@@ -12,7 +12,7 @@ export class MakersFixture extends AbstractFixture<Maker> {
                 csfdId: 21,
                 imdbId: "TestMovieMaker1ImdbId",
                 movieDbId: 31,
-                avatars: [ImageUtils.getTemplate("avatar")],
+                avatars: [ImageUtils.getTemplate("avatar")]
             },
             {
                 id: 2,
@@ -21,7 +21,7 @@ export class MakersFixture extends AbstractFixture<Maker> {
                 csfdId: 22,
                 imdbId: "TestMovieMaker2ImdbId",
                 movieDbId: 32,
-                avatars: [ImageUtils.getTemplate("avatar")],
+                avatars: [ImageUtils.getTemplate("avatar")]
             },
             {
                 id: 3,
@@ -30,8 +30,8 @@ export class MakersFixture extends AbstractFixture<Maker> {
                 csfdId: 23,
                 imdbId: "TestMovieDirector1ImdbId",
                 movieDbId: 33,
-                avatars: [ImageUtils.getTemplate("avatar")],
-            },
+                avatars: [ImageUtils.getTemplate("avatar")]
+            }
         ]);
 
     }

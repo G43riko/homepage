@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
 
 @Component({
     selector: "app-feedback-dialog",
@@ -23,9 +23,9 @@ export class FeedbackDialogComponent {
         return this.formBuilder.group({
             screen: [{
                 value: this.data.screen,
-                disabled: true,
+                disabled: true
             }],
-            message: ["", Validators.required],
+            message: ["", Validators.required]
         });
     }
 }

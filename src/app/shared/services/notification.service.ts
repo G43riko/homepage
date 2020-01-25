@@ -4,7 +4,7 @@ import {NotificationInterface} from "../interfaces/notification.interface";
 import {ErrorManagerService} from "./error-manager.service";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class NotificationService implements G43Notification {
     private readonly _defaultError = "Undefined error";
@@ -17,7 +17,7 @@ export class NotificationService implements G43Notification {
         },
         showWarn(title: string, text: string): void {
             console.warn(title + ": " + text);
-        },
+        }
     };
 
     public constructor(private readonly _errorManager: ErrorManagerService) {

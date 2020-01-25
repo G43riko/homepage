@@ -4,7 +4,7 @@ import {map} from "rxjs/operators";
 import {Address} from "../models/person/address.model";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class GeoLocationService {
     public readonly coordinates: BehaviorSubject<Address> = new BehaviorSubject<Address>({});
@@ -19,7 +19,7 @@ export class GeoLocationService {
         navigator.geolocation.getCurrentPosition((position: Position) => {
             this.coordinates.next({
                 latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
+                longitude: position.coords.longitude
             });
         }, (error: PositionError) => this.coordinates.error(error));
     }

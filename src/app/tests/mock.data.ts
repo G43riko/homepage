@@ -1,7 +1,7 @@
 export const UserDetailMock: any = [
     {
         person_id: "EmptyPersonId",
-        name: "EmptyPersonName",
+        name: "EmptyPersonName"
     },
     {
         person_id: "TestPersonId",
@@ -13,25 +13,25 @@ export const UserDetailMock: any = [
             {
                 number: "0905123456",
                 active: true,
-                number_id: "TestPersonNumber1Id",
+                number_id: "TestPersonNumber1Id"
             },
             {
                 number: "0905654321",
                 active: false,
-                number_id: "TestPersonNumber2Id",
-            },
+                number_id: "TestPersonNumber2Id"
+            }
         ],
         emails: [
             {
                 email: "abc@gmail.com",
                 active: true,
-                email_id: "TestPersonEmail1Id",
+                email_id: "TestPersonEmail1Id"
             },
             {
                 email: "gmail@abc.com",
                 active: false,
-                email_id: "TestPersonEmail2Id",
-            },
+                email_id: "TestPersonEmail2Id"
+            }
         ],
         accounts: [
             {
@@ -39,22 +39,22 @@ export const UserDetailMock: any = [
                 userName: "TestPersonAccountFbUserName",
                 active: true,
                 link: "TestPersonAccountFbLink",
-                account_id: "TestPersonAccountFbId",
+                account_id: "TestPersonAccountFbId"
             }, {
                 type: "LINKEDIN",
                 userName: "TestPersonAccountLIUserName",
                 active: true,
                 link: "TestPersonAccountLILink",
-                account_id: "TestPersonAccountLIId",
-            },
+                account_id: "TestPersonAccountLIId"
+            }
         ],
         gender: "FEMALE",
         address: {
             country: "SK",
             city: "TestPersonAddressCity",
             street: "TestPersonAddressStreet",
-            streetNumber: "TestPersonAddressStreetNumber",
-        },
+            streetNumber: "TestPersonAddressStreetNumber"
+        }
     },
     {
         person_id: "1",
@@ -66,25 +66,25 @@ export const UserDetailMock: any = [
             {
                 number: "0905123456",
                 active: true,
-                number_id: "1",
+                number_id: "1"
             },
             {
                 number: "0905654321",
                 active: true,
-                number_id: "2",
-            },
+                number_id: "2"
+            }
         ],
         emails: [
             {
                 email: "gcsollei@hotmail.com",
                 active: true,
-                email_id: "1",
+                email_id: "1"
             },
             {
                 email: "gcsollei@gmail.com",
                 active: true,
-                email_id: "2",
-            },
+                email_id: "2"
+            }
         ],
         accounts: [
             {
@@ -92,23 +92,23 @@ export const UserDetailMock: any = [
                 userName: "Gabriel",
                 active: true,
                 link: "TestPersonAccountFbLink",
-                account_id: "TestPersonAccountFbId",
+                account_id: "TestPersonAccountFbId"
             }, {
                 type: "LINKEDIN",
                 userName: "TestPersonAccountLIUserName",
                 active: true,
                 link: "TestPersonAccountLILink",
-                account_id: "TestPersonAccountLIId",
-            },
+                account_id: "TestPersonAccountLIId"
+            }
         ],
         gender: "MALE",
         address: {
             country: "SK",
             city: "Slovakia",
             street: "Mierová",
-            streetNumber: "23",
-        },
-    },
+            streetNumber: "23"
+        }
+    }
 ];
 
 export const UserListMock = UserDetailMock.map((personDetail: any) => ({
@@ -124,8 +124,8 @@ export const UserListMock = UserDetailMock.map((personDetail: any) => ({
         country: personDetail.address.country,
         city: personDetail.address.city,
         street: personDetail.address.street,
-        streetNumber: personDetail.address.streetNumber,
-    },
+        streetNumber: personDetail.address.streetNumber
+    }
 }));
 
 export const MovieDetailMock = [{
@@ -145,7 +145,7 @@ export const MovieDetailMock = [{
             csfd: "TestMovieMaker1CsfdId",
             imdb: "TestMovieMaker1ImdbId",
             movieDb: "TestMovieMaker1MoviedbId",
-            avatar: "TestMovieMaker1Avatar.jpg",
+            avatar: "TestMovieMaker1Avatar.jpg"
         },
         {
             name: "Test movie maker2",
@@ -153,13 +153,13 @@ export const MovieDetailMock = [{
             csfd: "TestMovieMaker2CsfdId",
             imdb: "TestMovieMaker2ImdbId",
             movieDb: "TestMovieMaker2MoviedbId",
-            avatar: "TestMovieMaker2Avatar.jpg",
-        },
+            avatar: "TestMovieMaker2Avatar.jpg"
+        }
     ],
     year: "1999",
     genres: ["akcny", "komedie"],
     rating: "96%",
-    duration: 213,
+    duration: 213
 }];
 export const MovieListMock = MovieDetailMock.map((movieDetail) => ({
     id: movieDetail.id,
@@ -171,7 +171,7 @@ export const MovieListMock = MovieDetailMock.map((movieDetail) => ({
     year: movieDetail.year,
     genres: movieDetail.genres,
     rating: movieDetail.rating,
-    classification: movieDetail.classification,
+    classification: movieDetail.classification
 }));
 
 export const SongListMock = [
@@ -181,7 +181,7 @@ export const SongListMock = [
         spotifi_link: "TestSongSpotifyLink",
         duration: 3511361,
         popularity: "TestSongPopularity",
-        preview: "https://www.w3schools.com/html/horse.ogg",
+        preview: "https://www.w3schools.com/html/horse.ogg"
     },
 
     {
@@ -190,6 +190,6 @@ export const SongListMock = [
         spotifi_link: "TestSongSpotifyLink2",
         duration: 13516168,
         popularity: "TestSongPopularity2",
-        preview: "http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'All%20Dead,%20All%20Dead'.mp3",
-    },
+        preview: "http://hcmaslov.d-real.sci-nnov.ru/public/mp3/Queen/Queen%20'All%20Dead,%20All%20Dead'.mp3"
+    }
 ];

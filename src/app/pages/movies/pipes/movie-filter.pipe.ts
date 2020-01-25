@@ -3,7 +3,7 @@ import {StringUtils} from "gtools";
 import {Movie} from "../models/movie.model";
 
 @Pipe({
-    name: "movieFilter",
+    name: "movieFilter"
 })
 export class MovieFilterPipe implements PipeTransform {
     public transform(movies: Movie[], pattern: string): Movie[] {
@@ -11,6 +11,7 @@ export class MovieFilterPipe implements PipeTransform {
             return movies;
         }
         const transformedPattern = StringUtils.transformToBasicFormat(pattern);
+
         return movies.filter((movie) => {
             return StringUtils.contains(StringUtils.transformToBasicFormat(movie.title || ""), transformedPattern) ||
                 StringUtils.contains(StringUtils.transformToBasicFormat(movie.titleSk || ""), transformedPattern);

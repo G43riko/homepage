@@ -11,7 +11,7 @@ declare let window: any;
 @Component({
     selector: "app-songs",
     templateUrl: "./songs.component.html",
-    styleUrls: ["./songs.component.scss"],
+    styleUrls: ["./songs.component.scss"]
 })
 export class SongsComponent implements OnInit {
     public gplayer: GPlayer;
@@ -83,6 +83,7 @@ export class SongsComponent implements OnInit {
         if (oldUrl === url) {
             button.classList.remove("playing");
             button.innerText = "play";
+
             return;
         }
 

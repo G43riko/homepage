@@ -8,8 +8,8 @@ describe("AuthService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
             TestingModule,
-            FirebaseModule,
-        ],
+            FirebaseModule
+        ]
     }));
 
     it("should be created", () => {

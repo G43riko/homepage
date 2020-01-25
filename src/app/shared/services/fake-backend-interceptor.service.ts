@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AbstractRestApiHandler, SimpleMemoryDatabaseService } from "@g43/common";
 import { Observable, of } from "rxjs";
@@ -21,7 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
-            if (request.url.indexOf("assets/") >= 0 && request.method === "GET") {
+            if (request.url.includes("assets/") && request.method === "GET") {
                 return next.handle(request);
             }
 
@@ -53,22 +53,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith("/utils/countries") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [
-                        "SK", "HU", "USA",
-                    ],
+                        "SK", "HU", "USA"
+                    ]
                 }));
             }
 
             if (request.url.endsWith("/movies/genres") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [
-                        "akcny", "komedie", "krimy", "thriller",
-                    ],
+                        "akcny", "komedie", "krimy", "thriller"
+                    ]
                 }));
             }
 
             if (request.url.endsWith("/songs/list") && request.method === "GET") {
                 return of(new HttpResponse({
-                    status: 200, body: SongListMock,
+                    status: 200, body: SongListMock
                 }));
             }
             console.log("vola sa to", request.url, request.method);
@@ -80,9 +80,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 }
 
-export let fakeBackendProvider = {
+export const fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
     provide : HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
-    multi   : true,
+    multi   : true
 };

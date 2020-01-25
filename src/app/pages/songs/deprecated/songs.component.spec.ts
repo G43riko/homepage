@@ -11,8 +11,8 @@ describe("SongsComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 SongsModule,
-                CoreModule,
-            ],
+                CoreModule
+            ]
         }).compileComponents();
     }));
 

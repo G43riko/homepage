@@ -10,13 +10,13 @@ describe("PersonListRowCellSelectComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-            MaterialModule,
-        ],
-            declarations: [
-                PersonListRowCellSelectComponent,
+                MaterialModule
             ],
-    }).compileComponents();
-  }));
+            declarations: [
+                PersonListRowCellSelectComponent
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PersonListRowCellSelectComponent);

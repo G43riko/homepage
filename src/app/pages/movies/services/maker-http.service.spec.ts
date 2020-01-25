@@ -6,11 +6,11 @@ import {MakerHttpService} from "./maker-http.service";
 describe("MakerHttpService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            TestingModule,
+            TestingModule
         ],
         providers: [
-            MakerHttpService,
-        ],
+            MakerHttpService
+        ]
     }));
 
     it("should be created", () => {

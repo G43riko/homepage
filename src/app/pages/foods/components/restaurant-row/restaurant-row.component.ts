@@ -59,22 +59,22 @@ export class RestaurantRowComponent implements OnInit {
         this.dialog.open(MapDialogComponent, {
             width: "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude)),
+            data: this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude))
         });
     }
 
     public getIconByType(type: string): string {
         switch (type) {
-            case "pizza":
-                return "local_pizza";
-            case "burger":
-                return "hamburger";
-            case "fish":
-                return "fish";
-            case "salad":
-                return "salad";
-            default:
-                return "restaurant";
+        case "pizza":
+            return "local_pizza";
+        case "burger":
+            return "hamburger";
+        case "fish":
+            return "fish";
+        case "salad":
+            return "salad";
+        default:
+            return "restaurant";
 
         }
     }

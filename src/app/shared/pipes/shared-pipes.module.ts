@@ -4,12 +4,12 @@ import { ActivePipe } from "./active.pipe";
 
 @NgModule({
     declarations: [
-        ActivePipe,
+        ActivePipe
     ],
     exports: [
         ActivePipe,
-        G43SharedPipesModule,
-    ],
+        G43SharedPipesModule
+    ]
 })
 export class SharedPipesModule {
 }

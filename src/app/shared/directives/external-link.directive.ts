@@ -1,7 +1,7 @@
 import { Directive, HostListener, Input } from "@angular/core";
 
 @Directive({
-    selector: "[externalLink]",
+    selector: "[externalLink]"
 })
 export class ExternalLinkDirective {
     @Input() public externalLink: string;

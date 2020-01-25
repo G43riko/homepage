@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class AngularFirestoreMockService {
 
@@ -11,7 +11,7 @@ export class AngularFirestoreMockService {
 
     public collection(name: string): { valueChanges: () => Subject<any> } {
         return {
-            valueChanges: () => new Subject<any>(),
+            valueChanges: () => new Subject<any>()
         };
     }
 }

@@ -1,5 +1,5 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild, } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatPaginator, MatSort, Sort } from "@angular/material";
 import { merge, Observable, of } from "rxjs";
 import { catchError, delay, map, startWith, switchMap, tap } from "rxjs/operators";
@@ -9,7 +9,7 @@ import { TableConfig } from "./table-config";
 @Component({
     selector   : "app-abstract-table",
     templateUrl: "./abstract-table.component.html",
-    styleUrls  : ["./abstract-table.component.scss"],
+    styleUrls  : ["./abstract-table.component.scss"]
 })
 export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
     public readonly selection = new SelectionModel<T>(true, []);
@@ -88,19 +88,19 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
                 if (Array.isArray(this.data)) {
                     return of({
                         data       : this.transformData(this.data),
-                        totalLength: this.data.length,
+                        totalLength: this.data.length
                     }).pipe(delay(100));
                 }
 
                 return this.data.pipe(
                     map((data) => ({
-                            data       : this.transformData(data),
-                            totalLength: data.length,
-                        }),
-                        tap(() => this.changeDetectorRef.detectChanges()),
+                        data       : this.transformData(data),
+                        totalLength: data.length
+                    }),
+                    tap(() => this.changeDetectorRef.detectChanges())
                     ));
             }),
-            map((data: { data: T[], totalLength: number }) => {
+            map((data: { data: T[]; totalLength: number }) => {
                 this.resultsLength    = data.totalLength;
                 this.isLoadingResults = false;
 
@@ -110,7 +110,7 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
                 this.isLoadingResults = false;
 
                 return of([]);
-            }),
+            })
         ).subscribe((data) => this.realData = data);
     }
 

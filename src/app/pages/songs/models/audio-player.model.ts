@@ -25,6 +25,7 @@ export class AudioPlayerModel implements PlayerInterface {
         if (preview && this._actualPreview.currentSrc !== preview) {
             this._actualPreview.src = preview;
         }
+
         return this._actualPreview.play();
     }
 

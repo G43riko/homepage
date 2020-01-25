@@ -8,7 +8,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 @Component({
     selector: "app-my-files",
     templateUrl: "./my-files.component.html",
-    styleUrls: ["./my-files.component.scss"],
+    styleUrls: ["./my-files.component.scss"]
 })
 export class MyFilesComponent implements OnInit {
     public files: Observable<string>[];

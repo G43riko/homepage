@@ -11,15 +11,15 @@ describe("MakerDetailComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             providers: [
-                MakerHttpService,
+                MakerHttpService
             ],
             declarations: [
                 MakerDetailComponent,
-                ExternalMakerDirective,
-            ],
+                ExternalMakerDirective
+            ]
         }).compileComponents();
     }));
 

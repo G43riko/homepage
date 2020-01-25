@@ -19,21 +19,21 @@ export class IconListComponent implements OnInit {
     public ngOnInit(): void {
     }
 
-    public getIconFor(key: string): { icon: string, type: "font-awesome" | "material" } | null {
+    public getIconFor(key: string): { icon: string; type: "font-awesome" | "material" } | null {
         if (!key) {
             return null;
         }
         switch (this.type) {
-            case "food":
-                return this.getFoodIcon(key);
-            case "technology":
-                return this.getTechnologyIcon(key);
-            default:
-                return null;
+        case "food":
+            return this.getFoodIcon(key);
+        case "technology":
+            return this.getTechnologyIcon(key);
+        default:
+            return null;
         }
     }
 
-    private getTechnologyIcon(key: string): { icon: string, type: "font-awesome" | "material" } | null {
+    private getTechnologyIcon(key: string): { icon: string; type: "font-awesome" | "material" } | null {
         const technologyKes = ["angular", "bitbucket", "bootstrap", "sass", "codepen", "postgres", "jira", "firebase", "docker", "gulp", "facebook", "github", "gitlab", "git", "grunt", "hackerrank", "instagram", "linkedin", "mixcloud", "npm", "php", "python", "redis", "mongodb"];
 
         const result = technologyKes.find((title) => !!key.match(new RegExp(title, "i")));
@@ -66,7 +66,7 @@ export class IconListComponent implements OnInit {
         return null;
     }
 
-    private getFoodIcon(key: string): { icon: string, type: "font-awesome" | "material" } {
+    private getFoodIcon(key: string): { icon: string; type: "font-awesome" | "material" } {
         if (key.match(/(fish|ryba)/i)) {
             return {icon: "fish", type: "font-awesome"};
         }

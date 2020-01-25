@@ -7,8 +7,8 @@ import {MovieService} from "../../services/movie.service";
     templateUrl: "./movie-poster-preview.component.html",
     styleUrls: ["./movie-poster-preview.component.scss"],
     host: {
-        class: "movie-wrapper",
-    },
+        class: "movie-wrapper"
+    }
 })
 export class MoviePosterPreviewComponent implements OnInit {
     @Input() public movie: Movie;

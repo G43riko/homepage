@@ -7,7 +7,7 @@ import { Phone } from "../../../../shared/models/person/phone.model";
 @Component({
     selector: "app-numbers",
     templateUrl: "./number.component.html",
-    styleUrls: ["./number.component.scss"],
+    styleUrls: ["./number.component.scss"]
 })
 export class NumberComponent implements OnInit {
     @Input() public disabled            = true;

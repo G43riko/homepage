@@ -13,7 +13,7 @@ import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/p
 @Component({
     selector: "app-person-list-row",
     templateUrl: "./person-list-row.component.html",
-    styleUrls: ["./person-list-row.component.scss"],
+    styleUrls: ["./person-list-row.component.scss"]
 })
 export class PersonListRowComponent implements OnInit {
     @Input() public person: Person;

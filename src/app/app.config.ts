@@ -23,7 +23,7 @@ export class AppConfig {
         databaseURL: "https://foods-5d312.firebaseio.com",
         projectId: "foods-5d312",
         storageBucket: "foods-5d312.appspot.com",
-        messagingSenderId: "265768844504",
+        messagingSenderId: "265768844504"
     };
 
     public static readonly DEFAULT_ALERT_DURATION = 2000;
@@ -85,13 +85,13 @@ export class AppConfig {
         "skype",
         "redis",
         "mongodb",
-        "ts",
+        "ts"
     ];
 
     public static readonly FA_ICONS = [
         ...AppConfig.FA_FOOD_ICONS,
         ...AppConfig.FA_MOVIE_ICONS,
-        ...AppConfig.FA_TECHNOLOGY_ICONS,
+        ...AppConfig.FA_TECHNOLOGY_ICONS
     ];
 
     public static readonly AUTH_COOKIE_KEY = "__auth_key__";
@@ -101,37 +101,37 @@ export class AppConfig {
             icon: "home",
             link: AppConfig.PATH_HOME,
             access: "",
-            label: "home",
+            label: "home"
         },
         {
             icon: "account",
             link: AppConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
-            label: "profile",
+            label: "profile"
         },
         {
             icon: "account",
             link: AppConfig.PATH_MIXES,
             access: [Roles.ROLE_VISIT_MIXES],
-            label: "mixes",
+            label: "mixes"
         },
         {
             icon: "account",
             link: AppConfig.PATH_ACCOUNTS,
             access: [Roles.ROLE_VISIT_ACCOUNTS],
-            label: "accounts",
+            label: "accounts"
         },
         {
             icon: "new_releases",
             link: AppConfig.PATH_PROJECTS,
             access: "",
-            label: "projects",
+            label: "projects"
         },
         {
             icon: "file",
             link: AppConfig.PATH_FILES,
             access: [Roles.ROLE_VISIT_FILES],
-            label: "files",
+            label: "files"
         },
         /*
         {
@@ -149,13 +149,13 @@ export class AppConfig {
             icon: "address book",
             link: AppConfig.PATH_PERSONS,
             access: [Roles.ROLE_VISIT_PERSONS],
-            label: "persons",
+            label: "persons"
         },
         {
             icon: "address book",
             link: AppConfig.PATH_MOVIES,
             access: [Roles.ROLE_VISIT_MOVIES],
-            label: "movies",
+            label: "movies"
         },
         /*
         {
@@ -168,13 +168,13 @@ export class AppConfig {
             icon: "music",
             link: AppConfig.PATH_SONGS,
             access: [Roles.ROLE_VISIT_SONGS],
-            label: "songs",
+            label: "songs"
         },
         {
             icon: "restaurant",
             link: AppConfig.PATH_FOODS,
             access: "",
-            label: "foods",
+            label: "foods"
         },
         /*
         {
@@ -197,8 +197,8 @@ export class AppConfig {
             icon: "info circle",
             link: AppConfig.PATH_ABOUT,
             access: "",
-            label: "about",
-        },
+            label: "about"
+        }
         /*
         {
             icon: "",

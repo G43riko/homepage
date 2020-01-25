@@ -18,22 +18,22 @@ if (environment.interceptor) {
 @NgModule({
     imports: [
         CoreModule,
-        SharedComponentsModule,
+        SharedComponentsModule
     ],
     declarations: [
         HomeComponent,
         AboutComponent,
-        ProjectsComponent,
+        ProjectsComponent
     ],
     providers: [
-        ...interceptor,
+        ...interceptor
     ],
     exports: [
         TranslateModule,
         SharedDirectivesModule,
         SharedComponentsModule,
-        SharedPipesModule,
-    ],
+        SharedPipesModule
+    ]
 })
 export class SharedModule {
 }

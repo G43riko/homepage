@@ -11,7 +11,7 @@ import {User} from "../models/auth.model";
 import {AnalyticsService} from "./analytics.service";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class AuthService {
     public readonly user$: Observable<User | undefined>;
@@ -28,7 +28,7 @@ export class AuthService {
                 }
 
                 return of(undefined);
-            }),
+            })
         );
     }
 
@@ -83,8 +83,8 @@ export class AuthService {
     public updateRole(role: any, user: any, checked: boolean): Observable<void> {
         return fromPromise(this.afs.doc(`users/${user.uid}`).set({
             roles: {
-                [role]: checked,
-            },
+                [role]: checked
+            }
         }, {merge: true}));
     }
 
@@ -123,9 +123,10 @@ export class AuthService {
                 [Roles.ROLE_VISIT_MOVIES]: false,
                 [Roles.ROLE_VISIT_SONGS]: false,
                 [Roles.ROLE_VISIT_ACCOUNTS]: false,
-                [Roles.ROLE_VISIT_PERSONS]: false,
-            },
+                [Roles.ROLE_VISIT_PERSONS]: false
+            }
         };
+
         // userRef.get().subscribe((e) => {
         //     console.log("Data: ", e);
         // });

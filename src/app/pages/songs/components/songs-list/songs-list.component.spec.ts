@@ -14,18 +14,18 @@ describe("SongsListComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             providers: [
-                SongsHttpService,
+                SongsHttpService
             ],
             declarations: [
                 SongControllerComponent,
                 DurationPipe,
                 AbstractTableComponent,
                 SongsListComponent,
-                SongsNavBarComponent,
-            ],
+                SongsNavBarComponent
+            ]
         }).compileComponents();
     }));
 

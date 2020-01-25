@@ -2,73 +2,74 @@ type AccountType = "" | "FACEBOOK" | "GOOGLEPLUS" | "SKYPE" | "LINKEDIN" | "TWIT
 
 function getLink(account: AccountType): string {
     switch (account) {
-        case "FACEBOOK":
-            return "https://www.facebook.com/";
-        case "LINKEDIN":
-            return "https://www.linkedin.com/in/";
-        case "TWITTER":
-            return "https://twitter.com/";
-        case "INSTAGRAM":
-            return "https://www.instagram.com/";
-        case "GITHUB":
-            return "https://github.com/";
-        case "YOUTUBE":
-            return "https://www.youtube.com/channel/";
-        case "GOOGLEPLUS":
-            return "https://plus.google.com/u/0/";
-        case "SKYPE":
-            return "";
+    case "FACEBOOK":
+        return "https://www.facebook.com/";
+    case "LINKEDIN":
+        return "https://www.linkedin.com/in/";
+    case "TWITTER":
+        return "https://twitter.com/";
+    case "INSTAGRAM":
+        return "https://www.instagram.com/";
+    case "GITHUB":
+        return "https://github.com/";
+    case "YOUTUBE":
+        return "https://www.youtube.com/channel/";
+    case "GOOGLEPLUS":
+        return "https://plus.google.com/u/0/";
+    case "SKYPE":
+        return "";
     }
+
     return "";
 }
 
 export class Account {
-    public static types: { label: string, value: string, icon: string }[] = [
+    public static types: { label: string; value: string; icon: string }[] = [
         {
             label: "Facebook",
             value: "FACEBOOK",
-            icon: "facebook",
+            icon: "facebook"
         },
         {
             label: "Google+",
             value: "GOOGLEPLUS",
-            icon: "google plus",
+            icon: "google plus"
         },
         {
             label: "Github",
             value: "GITHUB",
-            icon: "github",
+            icon: "github"
         },
         {
             label: "Instagram",
             value: "INSTAGRAM",
-            icon: "instagram",
+            icon: "instagram"
         },
         {
             label: "LinkedIn",
             value: "LINKEDIN",
-            icon: "linkedin square",
+            icon: "linkedin square"
         },
         {
             label: "Skype",
             value: "SKYPE",
-            icon: "skype",
+            icon: "skype"
         },
         {
             label: "Twitter",
             value: "TWITTER",
-            icon: "twitter",
+            icon: "twitter"
         },
         {
             label: "Youtube",
             value: "YOUTUBE",
-            icon: "youtube",
+            icon: "youtube"
         },
         {
             label: "Bitbucket",
             value: "BITBUCKET",
-            icon: "bitbucket",
-        },
+            icon: "bitbucket"
+        }
     ];
 
     public account_id: number;
@@ -90,6 +91,7 @@ export class Account {
     public static getIcon(account: Account): string {
         // @ts-ignore
         const type: any = Account.types.find((e) => e.value === account.type);
+
         return type ? type.icon : "";
     }
 

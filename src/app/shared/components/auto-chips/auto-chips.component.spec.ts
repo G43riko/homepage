@@ -10,11 +10,11 @@ describe("AutoChipsComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             declarations: [
-                AutoChipsComponent,
-            ],
+                AutoChipsComponent
+            ]
         })
             .compileComponents();
     }));

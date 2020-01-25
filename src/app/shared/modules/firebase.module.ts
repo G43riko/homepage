@@ -10,14 +10,14 @@ import { AppConfig } from "../../app.config";
     declarations: [],
     imports: [
         CommonModule,
-        AngularFireModule.initializeApp(AppConfig.FIREBASE_AUTH),
+        AngularFireModule.initializeApp(AppConfig.FIREBASE_AUTH)
     ],
     exports: [
         AngularFireModule,
         AngularFirestoreModule,
         AngularFireAuthModule,
-        AngularFireStorageModule,
-    ],
+        AngularFireStorageModule
+    ]
 })
 export class FirebaseModule {
 }

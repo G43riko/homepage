@@ -10,12 +10,12 @@ describe("AccountComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AccountComponent,
+                AccountComponent
             ],
             imports: [
                 CoreModule,
-                SharedModule,
-            ],
+                SharedModule
+            ]
         }).compileComponents();
     }));
 

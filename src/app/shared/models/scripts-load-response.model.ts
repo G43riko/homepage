@@ -3,7 +3,7 @@ export class ScriptsLoadResponse {
     public loaded = true;
     public status: string;
 
-    public constructor({name, loaded, status}: { name?: string, loaded?: boolean, status?: string }) {
+    public constructor({name, loaded, status}: { name?: string; loaded?: boolean; status?: string }) {
         if (name) {
             this.script = name;
         }

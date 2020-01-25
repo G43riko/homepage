@@ -16,10 +16,10 @@ import {PersonHttpService} from "./services/person-http.service";
     imports: [
         CoreModule,
         PersonRoutingModule,
-        SharedModule,
+        SharedModule
     ],
     providers: [
-        PersonHttpService,
+        PersonHttpService
     ],
     declarations: [
         PersonListComponent,
@@ -29,8 +29,8 @@ import {PersonHttpService} from "./services/person-http.service";
         EmailComponent,
         PersonListRowComponent,
         PersonListRowCellSelectComponent,
-        PersonListRowCellAccountComponent,
-    ],
+        PersonListRowCellAccountComponent
+    ]
 })
 export class PersonModule {
 }

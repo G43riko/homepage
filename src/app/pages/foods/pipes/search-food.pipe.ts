@@ -2,12 +2,12 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { StringUtils } from "gtools/out/utils/StringUtils";
 import { DailyMenu } from "../models/daily-menu.model";
 
-const tagStart = `<span class="searched">`;
-const tagEnd = `</span>`;
+const tagStart = "<span class=\"searched\">";
+const tagEnd = "</span>";
 const regex = new RegExp(`(${ tagStart }|${ tagEnd })`, "g");
 
 @Pipe({
-    name: "searchFoodPipe",
+    name: "searchFoodPipe"
 })
 export class SearchFoodPipe implements PipeTransform {
     public transform(value: DailyMenu["dishes"], key: string): DailyMenu["dishes"] | [null] {
@@ -22,7 +22,7 @@ export class SearchFoodPipe implements PipeTransform {
 
         const result = value.filter((menu) => {
             const index = StringUtils.removeAccentedCharacters(menu.name.toLowerCase())
-                                     .indexOf(query);
+                .indexOf(query);
             if (index >= 0) {
                 menu.name = menu.name.substr(0, index) +
                     tagStart +

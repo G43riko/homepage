@@ -5,8 +5,8 @@ import { UtilsService } from "./utils.service";
 describe("UtilsService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
-        ],
+            HttpClientModule
+        ]
     }));
 
     it("should be created", () => {

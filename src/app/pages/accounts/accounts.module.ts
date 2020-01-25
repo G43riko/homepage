@@ -9,8 +9,8 @@ import {AccountsRoutingModule} from "./accounts-routes.module";
     imports: [
         MaterialModule,
         AccountsRoutingModule,
-        CommonModule,
-    ],
+        CommonModule
+    ]
 })
 export class AccountsModule {
 }

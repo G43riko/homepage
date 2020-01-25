@@ -5,11 +5,11 @@ import { YoutubeService } from "./youtube.service";
 describe("YoutubeService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
+            HttpClientModule
         ],
         providers: [
-            YoutubeService,
-        ],
+            YoutubeService
+        ]
     }));
 
     it("should be created", () => {

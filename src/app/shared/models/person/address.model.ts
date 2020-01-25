@@ -31,7 +31,7 @@ export class Address {
             country: address.country || "",
             city: address.city || "",
             street: address.street || "",
-            streetNumber: address.streetNumber || "",
+            streetNumber: address.streetNumber || ""
         };
     }
 

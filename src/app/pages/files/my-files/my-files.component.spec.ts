@@ -10,11 +10,11 @@ describe("MyFilesComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             declarations: [
-                MyFilesComponent,
-            ],
+                MyFilesComponent
+            ]
         }).compileComponents();
     }));
 

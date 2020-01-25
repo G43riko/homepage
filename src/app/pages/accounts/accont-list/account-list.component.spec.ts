@@ -12,11 +12,11 @@ describe("AccountListComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
-                MaterialModule,
+                MaterialModule
             ],
             declarations: [
-                AccountListComponent,
-            ],
+                AccountListComponent
+            ]
         }).compileComponents();
     }));
 

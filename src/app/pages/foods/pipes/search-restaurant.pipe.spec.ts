@@ -1,8 +1,8 @@
-import { SearchRestaurantPipe } from './search-restaurant.pipe';
+import { SearchRestaurantPipe } from "./search-restaurant.pipe";
 
-describe('SearchRestaurantPipe', () => {
-  it('create an instance', () => {
-    const pipe = new SearchRestaurantPipe();
-    expect(pipe).toBeTruthy();
-  });
+describe("SearchRestaurantPipe", () => {
+    it("create an instance", () => {
+        const pipe = new SearchRestaurantPipe();
+        expect(pipe).toBeTruthy();
+    });
 });

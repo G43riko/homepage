@@ -7,7 +7,7 @@ interface ArgumentType {
 }
 
 @Directive({
-    selector: "[appExternalMaker]",
+    selector: "[appExternalMaker]"
 })
 export class ExternalMakerDirective {
     @Input() public appExternalMaker: ArgumentType;
@@ -21,14 +21,14 @@ export class ExternalMakerDirective {
 
     private _getLink(): string {
         switch (this.appExternalMaker.type) {
-            case "csfd":
-                return MovieUtils.getMakerCsfdLink(this.appExternalMaker.id);
-            case "imdb":
-                return MovieUtils.getMakerImdbLink(this.appExternalMaker.id);
-            case "movieDb":
-                return MovieUtils.getMakerMovieDbLink(this.appExternalMaker.id);
-            default:
-                throw new Error("Neznámy typ externej služby: " + this.appExternalMaker.type);
+        case "csfd":
+            return MovieUtils.getMakerCsfdLink(this.appExternalMaker.id);
+        case "imdb":
+            return MovieUtils.getMakerImdbLink(this.appExternalMaker.id);
+        case "movieDb":
+            return MovieUtils.getMakerMovieDbLink(this.appExternalMaker.id);
+        default:
+            throw new Error("Neznámy typ externej služby: " + this.appExternalMaker.type);
         }
     }
 

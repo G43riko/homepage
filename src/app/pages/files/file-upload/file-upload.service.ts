@@ -19,7 +19,7 @@ interface CustomMetadata {
 }
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class FileUploadService {
 
@@ -40,7 +40,7 @@ export class FileUploadService {
             sharedWith,
             app: AppConfig.TITLE,
             uploadedBy: user.uid,
-            active: "true",
+            active: "true"
         };
     }
 
@@ -60,6 +60,7 @@ export class FileUploadService {
             const pathShared = `${IMAGES_FOLDER}/${IMAGES_SHARED_PREFIX}/${sharedWith}/${fileName}`;
             sharedImageTask = this.storage.upload(pathShared, file, {customMetadata});
         }
+
         return new FileUploadWrapper(this.storage.ref(pathOwned), this.storage.upload(pathOwned, file, {customMetadata}), sharedImageTask);
     }
 }

@@ -5,11 +5,11 @@ import {PersonHttpService} from "./person-http.service";
 describe("PersonService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
+            HttpClientModule
         ],
         providers: [
-            PersonHttpService,
-        ],
+            PersonHttpService
+        ]
     }));
 
     it("should be created", () => {

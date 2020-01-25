@@ -43,7 +43,7 @@ export class Person {
             nick: person.nick || "",
             gender: person.gender || "",
             birthday: person.birthday || "",
-            address: person.address ? Address.toModel(person.address) : undefined,
+            address: person.address ? Address.toModel(person.address) : undefined
         };
     }
 }

@@ -15,12 +15,12 @@ describe("MapDialogComponent", () => {
             imports: [
                 TestingModule,
                 MaterialModule,
-                SharedPipesModule,
+                SharedPipesModule
             ],
             declarations: [
                 G43SafePipe,
-                MapDialogComponent,
-            ],
+                MapDialogComponent
+            ]
         }).compileComponents();
     }));
 

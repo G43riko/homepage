@@ -16,13 +16,13 @@ describe("FileListComponent", () => {
             imports: [
                 MaterialModule,
                 TestingModule,
-                SharedPipesModule,
+                SharedPipesModule
             ],
             declarations: [
                 FileUploadComponent,
                 FileListComponent,
-                MyFilesComponent,
-            ],
+                MyFilesComponent
+            ]
         }).compileComponents();
     }));
 

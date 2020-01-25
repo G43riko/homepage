@@ -5,16 +5,16 @@ import {ExternalLinkDirective} from "./external-link.directive";
 
 @NgModule({
     imports: [
-        CommonModule,
+        CommonModule
     ],
     declarations: [
         ExternalLinkDirective,
-        DropZoneDirective,
+        DropZoneDirective
     ],
     exports: [
         ExternalLinkDirective,
-        DropZoneDirective,
-    ],
+        DropZoneDirective
+    ]
 })
 export class SharedDirectivesModule {
 }

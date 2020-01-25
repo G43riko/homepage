@@ -11,41 +11,41 @@ export interface Song {
 @Component({
     selector: "app-songs",
     templateUrl: "./songs-list.component.html",
-    styleUrls: ["./songs-list.component.scss"],
+    styleUrls: ["./songs-list.component.scss"]
 })
 export class SongsListComponent implements OnInit {
     public readonly songsConfig: TableConfig = {
         columns: [
             {
                 name: "artists",
-                label: "Autory",
+                label: "Autory"
             },
             {
                 name: "title",
-                label: "Názov",
+                label: "Názov"
             },
             {
                 name: "duration",
-                label: "Dĺžka",
+                label: "Dĺžka"
             },
             {
                 name: "popularity",
-                label: "Popularita",
+                label: "Popularita"
             },
             {
                 name: "preview",
-                label: "Ukážka",
+                label: "Ukážka"
             },
             {
                 name: "video",
-                label: "Video",
-            },
+                label: "Video"
+            }
         ],
         stickyHeader: true,
         selection: "multi",
         paginateOptions: [5, 10, 20, 50, 100],
         pageSize: 10,
-        paginator: true,
+        paginator: true
     };
 
     public constructor(public readonly songsService: SongsHttpService) {

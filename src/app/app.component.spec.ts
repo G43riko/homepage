@@ -10,8 +10,8 @@ describe("AppComponent", () => {
             imports: [
                 TestingModule,
                 AppModule,
-                CoreModule,
-            ],
+                CoreModule
+            ]
         }).compileComponents();
     }));
     it("should create the app", async(() => {
@@ -19,7 +19,7 @@ describe("AppComponent", () => {
         const app     = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
     }));
-    it(`should have as title 'Homepage-FE'`, async(() => {
+    it("should have as title 'Homepage-FE'", async(() => {
         const fixture = TestBed.createComponent(AppComponent);
         const app     = fixture.debugElement.componentInstance;
         expect(app.title).toEqual("Homepage-FE");

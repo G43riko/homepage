@@ -21,11 +21,11 @@ describe("EmailComponent", () => {
                 MaterialModule,
                 FirebaseModule,
                 CoreModule,
-                SharedModule,
+                SharedModule
             ],
             declarations: [
-                EmailComponent,
-            ],
+                EmailComponent
+            ]
         }).compileComponents();
     }));
 

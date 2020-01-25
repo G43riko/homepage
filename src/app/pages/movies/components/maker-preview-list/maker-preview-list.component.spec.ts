@@ -11,14 +11,14 @@ describe("MakerPreviewRowComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             providers: [
-                MovieService,
+                MovieService
             ],
             declarations: [
-                MakerPreviewListComponent,
-            ],
+                MakerPreviewListComponent
+            ]
         }).compileComponents();
     }));
 

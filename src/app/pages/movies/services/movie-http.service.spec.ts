@@ -5,11 +5,11 @@ import {MovieHttpService} from "./movie-http.service";
 describe("MoviesService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
+            HttpClientModule
         ],
         providers: [
-            MovieHttpService,
-        ],
+            MovieHttpService
+        ]
     }));
 
     it("should be created", () => {

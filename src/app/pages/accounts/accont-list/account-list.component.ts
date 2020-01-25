@@ -8,7 +8,7 @@ import { NotificationService } from "../../../shared/services/notification.servi
 @Component({
     selector: "app-account-list",
     templateUrl: "./account-list.component.html",
-    styleUrls: ["./account-list.component.scss"],
+    styleUrls: ["./account-list.component.scss"]
 })
 export class AccountListComponent implements OnInit {
     public readonly Roles = Roles;

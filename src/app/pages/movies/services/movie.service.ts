@@ -10,13 +10,14 @@ export class MovieService {
 
     public openMovieExternal(source: MovieSource, id: string | number, type: MovieType = "movie"): Window | null {
         switch (source) {
-            case "csfd":
-                return window.open("https://www.csfd.cz/film/" + id, "_blank");
-            case "imdb":
-                return window.open("https://www.imdb.com/title/" + id, "_blank");
-            case "movieDb":
-                const path = type === "movie" ? "movie" : "tv";
-                return window.open("https://www.themoviedb.org/" + path + "/" + id, "_blank");
+        case "csfd":
+            return window.open("https://www.csfd.cz/film/" + id, "_blank");
+        case "imdb":
+            return window.open("https://www.imdb.com/title/" + id, "_blank");
+        case "movieDb":
+            const path = type === "movie" ? "movie" : "tv";
+
+            return window.open("https://www.themoviedb.org/" + path + "/" + id, "_blank");
         }
     }
 
@@ -30,12 +31,12 @@ export class MovieService {
 
     public openMakerExternal(source: MovieSource, id: number | string): Window | null {
         switch (source) {
-            case "csfd":
-                return window.open("https://www.csfd.cz/tvurce/" + id, "_blank");
-            case "movieDb":
-                return window.open("https://www.themoviedb.org/person/" + id, "_blank");
-            case "imdb":
-                return window.open("https://www.imdb.com/name/" + id, "_blank");
+        case "csfd":
+            return window.open("https://www.csfd.cz/tvurce/" + id, "_blank");
+        case "movieDb":
+            return window.open("https://www.themoviedb.org/person/" + id, "_blank");
+        case "imdb":
+            return window.open("https://www.imdb.com/name/" + id, "_blank");
         }
     }
 }

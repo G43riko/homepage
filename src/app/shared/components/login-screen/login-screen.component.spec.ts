@@ -12,11 +12,11 @@ describe("LoginScreenComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 MaterialModule,
-                TestingModule,
+                TestingModule
             ],
             declarations: [
-                LoginScreenComponent,
-            ],
+                LoginScreenComponent
+            ]
         }).compileComponents();
     }));
 

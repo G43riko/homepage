@@ -10,7 +10,7 @@ describe("CsfdUserDetailComponent", () => {
         TestBed.configureTestingModule({
             declarations: [CsfdUserDetailComponent]
         })
-               .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {

@@ -11,7 +11,7 @@ export class PersonsFixture extends AbstractFixture<Person> {
                 accounts: [],
                 numbers: [],
                 emails: [],
-                gender: Gender.parse(""),
+                gender: Gender.parse("")
             },
             {
                 id: 112,
@@ -23,25 +23,25 @@ export class PersonsFixture extends AbstractFixture<Person> {
                     {
                         number: "0905123456",
                         active: true,
-                        number_id: "TestPersonNumber1Id",
+                        number_id: "TestPersonNumber1Id"
                     },
                     {
                         number: "0905654321",
                         active: false,
-                        number_id: "TestPersonNumber2Id",
-                    },
+                        number_id: "TestPersonNumber2Id"
+                    }
                 ],
                 emails: [
                     {
                         email: "abc@gmail.com",
                         active: true,
-                        email_id: "TestPersonEmail1Id",
+                        email_id: "TestPersonEmail1Id"
                     },
                     {
                         email: "gmail@abc.com",
                         active: false,
-                        email_id: "TestPersonEmail2Id",
-                    },
+                        email_id: "TestPersonEmail2Id"
+                    }
                 ],
                 accounts: [
                     {
@@ -49,22 +49,22 @@ export class PersonsFixture extends AbstractFixture<Person> {
                         userName: "TestPersonAccountFbUserName",
                         active: true,
                         link: "TestPersonAccountFbLink",
-                        account_id: 221,
+                        account_id: 221
                     }, {
                         type: "LINKEDIN",
                         userName: "TestPersonAccountLIUserName",
                         active: true,
                         link: "TestPersonAccountLILink",
-                        account_id: 222,
-                    },
+                        account_id: 222
+                    }
                 ],
                 gender: Gender.parse("MAN"),
                 address: {
                     country: "SK",
                     city: "TestPersonAddressCity",
                     street: "TestPersonAddressStreet",
-                    streetNumber: "TestPersonAddressStreetNumber",
-                },
+                    streetNumber: "TestPersonAddressStreetNumber"
+                }
             },
             {
                 id: 113,
@@ -76,25 +76,25 @@ export class PersonsFixture extends AbstractFixture<Person> {
                     {
                         number: "0905123456",
                         active: true,
-                        number_id: "1",
+                        number_id: "1"
                     },
                     {
                         number: "0905654321",
                         active: true,
-                        number_id: "2",
-                    },
+                        number_id: "2"
+                    }
                 ],
                 emails: [
                     {
                         email: "gcsollei@hotmail.com",
                         active: true,
-                        email_id: "1",
+                        email_id: "1"
                     },
                     {
                         email: "gcsollei@gmail.com",
                         active: true,
-                        email_id: "2",
-                    },
+                        email_id: "2"
+                    }
                 ],
                 accounts: [
                     {
@@ -102,23 +102,23 @@ export class PersonsFixture extends AbstractFixture<Person> {
                         userName: "Gabriel",
                         active: true,
                         link: "TestPersonAccountFbLink",
-                        account_id: 223,
+                        account_id: 223
                     }, {
                         type: "LINKEDIN",
                         userName: "TestPersonAccountLIUserName",
                         active: true,
                         link: "TestPersonAccountLILink",
-                        account_id: 224,
-                    },
+                        account_id: 224
+                    }
                 ],
                 gender: Gender.parse("MALE"),
                 address: {
                     country: "SK",
                     city: "Slovakia",
                     street: "Mierová",
-                    streetNumber: "23",
-                },
-            },
+                    streetNumber: "23"
+                }
+            }
         ]);
     }
 }

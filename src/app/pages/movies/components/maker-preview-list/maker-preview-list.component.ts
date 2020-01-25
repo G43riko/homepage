@@ -7,7 +7,7 @@ import {MovieService} from "../../services/movie.service";
 @Component({
     selector: "app-maker-preview-row",
     templateUrl: "./maker-preview-list.component.html",
-    styleUrls: ["./maker-preview-list.component.scss"],
+    styleUrls: ["./maker-preview-list.component.scss"]
 })
 export class MakerPreviewListComponent implements OnInit {
     @Input() public maker: Maker;
@@ -21,7 +21,7 @@ export class MakerPreviewListComponent implements OnInit {
 
     public openImageDetail(url: string): void {
         this.dialog.open(ImageDialogComponent, {
-            data: url,
+            data: url
         });
     }
 }

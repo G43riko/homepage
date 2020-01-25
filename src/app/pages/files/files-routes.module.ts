@@ -9,15 +9,15 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: FileListComponent,
-            },
-        ],
-    },
+                component: FileListComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class FilesRoutingModule {
 }

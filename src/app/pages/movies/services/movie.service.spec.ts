@@ -6,11 +6,11 @@ import {MovieService} from "./movie.service";
 describe("MovieService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            TestingModule,
+            TestingModule
         ],
         providers: [
-            MovieService,
-        ],
+            MovieService
+        ]
     }));
 
     it("should be created", () => {

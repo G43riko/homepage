@@ -11,8 +11,8 @@ describe("HomeComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 HomeComponent,
-                WidgetComponent,
-            ],
+                WidgetComponent
+            ]
         }).compileComponents();
     }));
 

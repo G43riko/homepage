@@ -5,8 +5,8 @@ import { NotificationService } from "./notification.service";
 describe("NotificationService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
-        ],
+            HttpClientModule
+        ]
     }));
 
     it("should be created", () => {

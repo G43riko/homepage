@@ -7,7 +7,7 @@ interface ArgumentType {
 }
 
 @Directive({
-    selector: "[appExternalMovie]",
+    selector: "[appExternalMovie]"
 })
 export class ExternalMovieDirective {
     @Input() public appExternalMovie: ArgumentType;
@@ -21,14 +21,14 @@ export class ExternalMovieDirective {
 
     private _getLink(): string {
         switch (this.appExternalMovie.type) {
-            case "csfd":
-                return MovieUtils.getMovieCsfdLink(this.appExternalMovie.id);
-            case "imdb":
-                return MovieUtils.getMovieImdbLink(this.appExternalMovie.id);
-            case "movieDb":
-                return MovieUtils.getMovieMovieDbLink(this.appExternalMovie.id);
-            default:
-                throw new Error("Neznámy typ externej služby: " + this.appExternalMovie.type);
+        case "csfd":
+            return MovieUtils.getMovieCsfdLink(this.appExternalMovie.id);
+        case "imdb":
+            return MovieUtils.getMovieImdbLink(this.appExternalMovie.id);
+        case "movieDb":
+            return MovieUtils.getMovieMovieDbLink(this.appExternalMovie.id);
+        default:
+            throw new Error("Neznámy typ externej služby: " + this.appExternalMovie.type);
         }
     }
 

@@ -15,9 +15,9 @@ import {MovieHttpService} from "../../services/movie-http.service";
         trigger("detailExpand", [
             state("collapsed", style({height: "0px", minHeight: "0"})),
             state("expanded", style({height: "*"})),
-            transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")),
-        ]),
-    ],
+            transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)"))
+        ])
+    ]
 })
 export class MovieDetailAdminViewComponent implements OnInit {
     @Input() public movieForm: FormGroup;
@@ -37,24 +37,24 @@ export class MovieDetailAdminViewComponent implements OnInit {
 
     public load(source: MovieSource, type: MovieType = "movie"): void {
         switch (source) {
-            case "csfd":
-                this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.csfdId).subscribe((response) => {
-                    this.csfdMovie = response;
-                    this.setData();
-                });
-                break;
-            case "imdb":
-                this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.imdbId).subscribe((response) => {
-                    this.imdbMovie = response;
-                    this.setData();
-                });
-                break;
-            case "movieDb":
-                this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.movieDbId, type).subscribe((response) => {
-                    this.movieDbMovie = response;
-                    this.setData();
-                });
-                break;
+        case "csfd":
+            this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.csfdId).subscribe((response) => {
+                this.csfdMovie = response;
+                this.setData();
+            });
+            break;
+        case "imdb":
+            this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.imdbId).subscribe((response) => {
+                this.imdbMovie = response;
+                this.setData();
+            });
+            break;
+        case "movieDb":
+            this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.movieDbId, type).subscribe((response) => {
+                this.movieDbMovie = response;
+                this.setData();
+            });
+            break;
         }
     }
 
@@ -67,6 +67,7 @@ export class MovieDetailAdminViewComponent implements OnInit {
             if (!source) {
                 return undefined;
             }
+
             return source[attribute];
         };
 
@@ -85,7 +86,7 @@ export class MovieDetailAdminViewComponent implements OnInit {
             origin: transformItem<T>(this.movieForm.value, attribute),
             csfd: transformItem<Movie>(this.csfdMovie, attribute),
             imdb: transformItem<Movie>(this.imdbMovie, attribute),
-            movieDb: transformItem<Movie>(this.movieDbMovie, attribute),
+            movieDb: transformItem<Movie>(this.movieDbMovie, attribute)
         });
         this.dataSource = [
             addRow("year", "year"),
@@ -95,7 +96,7 @@ export class MovieDetailAdminViewComponent implements OnInit {
             addRow("countries", "join"),
             addRow("rating"),
             addRow("avatar", "imageFirst"),
-            addRow("content", "html"),
+            addRow("content", "html")
         ];
     }
 }

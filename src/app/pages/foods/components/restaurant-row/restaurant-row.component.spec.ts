@@ -10,7 +10,7 @@ describe("RestaurantRowComponent", () => {
         TestBed.configureTestingModule({
             declarations: [RestaurantRowComponent]
         })
-               .compileComponents();
+            .compileComponents();
     }));
 
     beforeEach(() => {

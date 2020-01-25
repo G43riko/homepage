@@ -12,14 +12,14 @@ describe("MovieDetailAdminViewComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                TestingModule,
+                TestingModule
             ],
             declarations: [
-                MovieDetailAdminViewComponent,
+                MovieDetailAdminViewComponent
             ],
             providers: [
-                MovieHttpService,
-            ],
+                MovieHttpService
+            ]
         }).compileComponents();
     }));
 

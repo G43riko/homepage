@@ -15,7 +15,7 @@ import {PersonHttpService} from "../../services/person-http.service";
 @Component({
     selector: "app-person-detail",
     templateUrl: "./person-detail.component.html",
-    styleUrls: ["./person-detail.component.scss"],
+    styleUrls: ["./person-detail.component.scss"]
 })
 export class PersonDetailComponent extends AbstractDetailComponent<Person, PersonHttpService> implements OnInit {
     public timer: any;
@@ -39,7 +39,7 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
             const formAddress = this.detailForm.controls.address as FormGroup;
             this.filteredCountries = formAddress.controls.country.valueChanges.pipe(
                 startWith(""),
-                map((value) => this._filter(value)),
+                map((value) => this._filter(value))
             );
         });
 
@@ -55,7 +55,7 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
         this.dialog.open(MapDialogComponent, {
             width: "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrlFromAddress(this.detailForm.value.address),
+            data: this.mapService.getLocationEmbedUrlFromAddress(this.detailForm.value.address)
         });
     }
 
@@ -83,8 +83,8 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
                 country: "",
                 city: "",
                 street: "",
-                streetNumber: "",
-            }),
+                streetNumber: ""
+            })
         });
     }
 

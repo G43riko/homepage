@@ -11,8 +11,8 @@ describe("MovieMakersComponent", () => {
         TestBed.configureTestingModule({
             imports: [
                 TestingModule,
-                MoviesModule,
-            ],
+                MoviesModule
+            ]
         }).compileComponents();
     }));
 

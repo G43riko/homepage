@@ -10,19 +10,19 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: PersonListComponent,
+                component: PersonListComponent
             },
             {
                 path: ":id",
-                component: PersonDetailComponent,
-            },
-        ],
-    },
+                component: PersonDetailComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class PersonRoutingModule {
 }

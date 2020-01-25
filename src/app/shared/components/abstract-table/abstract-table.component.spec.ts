@@ -10,11 +10,11 @@ describe("AbstractTableComponent", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MaterialModule,
+                MaterialModule
             ],
             declarations: [
-                AbstractTableComponent,
-            ],
+                AbstractTableComponent
+            ]
         }).compileComponents();
     }));
 

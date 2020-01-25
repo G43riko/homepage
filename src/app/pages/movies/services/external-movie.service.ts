@@ -20,8 +20,8 @@ export class ExternalMovieService extends AbstractHttpService {
 
     public getCsfdUserDetail(id: number, page = 1): Observable<any> {
         return this.http.get<Maker[]>(`${ URL }/user-movies/${ id }?page=${ page }`)
-                   .pipe(
-                       catchError(this.handleError<any>("getCsfdUserDetail")),
-                   );
+            .pipe(
+                catchError(this.handleError<any>("getCsfdUserDetail"))
+            );
     }
 }

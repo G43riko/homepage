@@ -16,10 +16,10 @@ describe("MovieDetailBasicInfoComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 MovieDetailBasicInfoComponent,
-                AutoChipsComponent,
+                AutoChipsComponent
             ],
             imports: [
-                TestingModule,
+                TestingModule
             ],
             providers: [
                 {
@@ -27,10 +27,10 @@ describe("MovieDetailBasicInfoComponent", () => {
                     useValue: {
                         getCountries: () => of([]),
                         getGenres: () => of([]),
-                        getMakerDetail: () => of(new Maker()),
-                    },
-                },
-            ],
+                        getMakerDetail: () => of(new Maker())
+                    }
+                }
+            ]
         }).compileComponents();
     }));
 
@@ -44,7 +44,7 @@ describe("MovieDetailBasicInfoComponent", () => {
             duration: new FormControl(0),
             year: new FormControl(1995),
             genres: new FormControl([]),
-            countries: new FormControl([]),
+            countries: new FormControl([])
         });
         fixture.detectChanges();
     });

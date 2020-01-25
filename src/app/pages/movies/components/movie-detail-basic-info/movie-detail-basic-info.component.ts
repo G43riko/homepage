@@ -9,7 +9,7 @@ import {MovieHttpService} from "../../services/movie-http.service";
 @Component({
     selector: "app-movie-detail-basic-info",
     templateUrl: "./movie-detail-basic-info.component.html",
-    styleUrls: ["./movie-detail-basic-info.component.scss"],
+    styleUrls: ["./movie-detail-basic-info.component.scss"]
 })
 export class MovieDetailBasicInfoComponent implements OnInit {
     @Input() public movieForm: FormGroup;
@@ -19,7 +19,7 @@ export class MovieDetailBasicInfoComponent implements OnInit {
 
     public constructor(private readonly notificationService: NotificationService,
                        private readonly utilsService: UtilsService,
-                       private readonly movieHttpService: MovieHttpService,
+                       private readonly movieHttpService: MovieHttpService
     ) {
     }
 

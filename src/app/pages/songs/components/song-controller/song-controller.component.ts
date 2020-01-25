@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 @Component({
     selector   : "app-song-controller",
     templateUrl: "./song-controller.component.html",
-    styleUrls  : ["./song-controller.component.scss"],
+    styleUrls  : ["./song-controller.component.scss"]
 })
 export class SongControllerComponent implements OnInit {
     public readonly audio = new Audio();

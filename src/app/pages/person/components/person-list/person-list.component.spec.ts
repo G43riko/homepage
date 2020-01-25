@@ -20,16 +20,16 @@ describe("PersonListComponent", () => {
                 PersonListRowComponent,
                 PersonListRowCellSelectComponent,
                 PaginatorComponent,
-                AbstractTableComponent,
+                AbstractTableComponent
             ],
             providers: [
-                PersonHttpService,
+                PersonHttpService
             ],
             imports: [
                 FirebaseModule,
                 TestingModule,
-                MaterialModule,
-            ],
+                MaterialModule
+            ]
         }).compileComponents();
     }));
 

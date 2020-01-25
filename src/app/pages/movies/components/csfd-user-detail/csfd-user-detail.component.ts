@@ -9,7 +9,7 @@ import {ExternalMovieService} from "../../services/external-movie.service";
     selector: "app-csfd-user-detail",
     templateUrl: "./csfd-user-detail.component.html",
     styleUrls: ["./csfd-user-detail.component.scss"],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class CsfdUserDetailComponent implements OnInit {
     public loading = false;
@@ -23,26 +23,26 @@ export class CsfdUserDetailComponent implements OnInit {
         columns: [
             {
                 name: "title",
-                label: "Názov",
+                label: "Názov"
             },
             {
                 name: "userRating",
-                label: "Hodnotenie",
+                label: "Hodnotenie"
             },
             {
                 name: "year",
                 label: "Rok",
-                customContent: (row) => row.year.replace(/[()]/g, ""),
+                customContent: (row) => row.year.replace(/[()]/g, "")
             },
             {
                 name: "added",
-                label: "Pridané",
+                label: "Pridané"
             },
             {
                 name: "link",
-                label: "Odkaz",
-            },
-        ],
+                label: "Odkaz"
+            }
+        ]
     };
     private actualPage = 1;
     private id: number;

@@ -13,20 +13,20 @@ import {SongsRoutingModule} from "./songs-routes.module";
         DurationPipe,
         SongsListComponent,
         SongsNavBarComponent,
-        SongControllerComponent,
+        SongControllerComponent
     ],
     providers: [
-        SongsHttpService,
+        SongsHttpService
     ],
     imports: [
         CoreModule,
         SharedModule,
-        SongsRoutingModule,
+        SongsRoutingModule
     ],
     exports: [
         SongsListComponent,
-        SongsNavBarComponent,
-    ],
+        SongsNavBarComponent
+    ]
 })
 export class SongsModule {
 }

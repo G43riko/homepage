@@ -12,7 +12,7 @@ import {PersonHttpService} from "../../services/person-http.service";
     selector: "app-person-list",
     templateUrl: "./person-list.component.html",
     // templateUrl: "./tmp-list.component.html",
-    styleUrls: ["./person-list.component.scss"],
+    styleUrls: ["./person-list.component.scss"]
 })
 
 export class PersonListComponent implements OnInit {
@@ -38,44 +38,44 @@ export class PersonListComponent implements OnInit {
             stickyEnd: 3,
             columns: [
                 {
-                    name: "contacts",
+                    name: "contacts"
                 },
                 {
                     name: "name",
-                    customContent: (person) => (person.name || "") + " " + (person.surName || ""),
+                    customContent: (person) => (person.name || "") + " " + (person.surName || "")
                 },
                 {
                     name: "nick",
                     label: "Nick",
-                    sort: true,
+                    sort: true
                 },
                 {
                     name: "birthday",
                     label: "Birthday",
-                    sort: true,
+                    sort: true
                 },
                 {
                     name: "account",
                     label: "Account",
-                    visible: false,
+                    visible: false
                 },
                 {
                     name: "options",
-                    width: "9em",
-                },
+                    width: "9em"
+                }
             ],
             selectOptions: [
                 {
                     action: console.log,
                     icon: "delete",
-                    label: "Delete",
-                },
+                    label: "Delete"
+                }
             ],
             stickyHeader: true,
             selection: "multi",
             paginateOptions: [5, 10, 20, 50, 100],
             pageSize: 10,
-            paginator: true,
+            paginator: true
         };
     }
 

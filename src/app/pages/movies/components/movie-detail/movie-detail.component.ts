@@ -12,7 +12,7 @@ import {MovieService} from "../../services/movie.service";
 @Component({
     selector: "app-movie-detail",
     templateUrl: "./movie-detail.component.html",
-    styleUrls: ["./movie-detail.component.scss"],
+    styleUrls: ["./movie-detail.component.scss"]
 })
 export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHttpService> implements OnInit {
     public readonly Roles = Roles;
@@ -35,7 +35,7 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
         this.selectedDetail = movie;
         this.detailForm.patchValue({
             ...movie,
-            year: new Date(movie.year, 0, 1),
+            year: new Date(movie.year, 0, 1)
         });
     }
 
@@ -56,7 +56,7 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
             genres: [[]],
             avatar: [[]],
             title: ["", [Validators.required, Validators.minLength(3)]],
-            titleSk: [""],
+            titleSk: [""]
         });
     }
 }

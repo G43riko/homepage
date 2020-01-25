@@ -13,31 +13,31 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: MovieListComponent,
+                component: MovieListComponent
             },
             {
                 path: "makers/:id",
-                component: MakerDetailComponent,
+                component: MakerDetailComponent
             },
             {
                 path: "makers",
-                component: MakerListComponent,
+                component: MakerListComponent
             },
             {
                 path: "users/csfd/:id",
-                component: CsfdUserDetailComponent,
+                component: CsfdUserDetailComponent
             },
             {
                 path: ":id",
-                component: MovieDetailComponent,
-            },
-        ],
-    },
+                component: MovieDetailComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class MoviesRoutingModule {
 }

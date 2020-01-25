@@ -5,8 +5,8 @@ import { ErrorManagerService } from "./error-manager.service";
 describe("ErrorManagerService", () => {
     beforeEach(() => TestBed.configureTestingModule({
         imports: [
-            HttpClientModule,
-        ],
+            HttpClientModule
+        ]
     }));
 
     it("should be created", () => {

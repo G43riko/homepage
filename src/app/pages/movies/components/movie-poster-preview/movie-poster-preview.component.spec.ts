@@ -14,14 +14,14 @@ describe("MoviePosterPreviewComponent", () => {
         TestBed.configureTestingModule({
             declarations: [
                 MoviePosterPreviewComponent,
-                ExternalLinksComponent,
+                ExternalLinksComponent
             ],
             providers: [
-                MovieService,
+                MovieService
             ],
             imports: [
-                TestingModule,
-            ],
+                TestingModule
+            ]
         }).compileComponents();
     }));
 

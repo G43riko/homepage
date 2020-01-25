@@ -57,7 +57,7 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
 
     protected initialization(): void {
         this.route.params.subscribe((data: any) => {
-            const actId = data["id"];
+            const actId = data.id;
             if (actId === "new") {
                 this.setDetail({} as T);
                 this.isNew = true;

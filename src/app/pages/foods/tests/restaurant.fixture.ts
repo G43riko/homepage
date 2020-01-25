@@ -35,13 +35,13 @@ export class RestaurantFixture extends AbstractFixture<Restaurant> {
             {
                 id     : 1,
                 name   : "Presto",
-                visible: true,
+                visible: true
             },
             {
                 id     : 2,
                 name   : "Journal",
-                visible: true,
-            },
+                visible: true
+            }
         ]);
 
     }

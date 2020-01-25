@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 @NgModule({
     declarations: [
         AppComponent,
-        AccountProfileComponent,
+        AccountProfileComponent
     ],
     imports: [
         BrowserAnimationsModule, // NoopAnimationsModule
@@ -37,24 +37,24 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
+                deps: [HttpClient]
+            }
         }),
-        ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production}),
+        ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production})
     ],
     providers: [
         {
-            provide: G43_NOTIFICATION_TOKEN, useClass: NotificationService,
+            provide: G43_NOTIFICATION_TOKEN, useClass: NotificationService
         },
         {
             provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
             useValue: {
-                duration: AppConfig.DEFAULT_ALERT_DURATION,
-            },
-        },
+                duration: AppConfig.DEFAULT_ALERT_DURATION
+            }
+        }
     ],
     bootstrap: [
-        AppComponent,
+        AppComponent
     ]
 })
 export class AppModule {

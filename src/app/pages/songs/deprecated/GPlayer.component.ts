@@ -31,14 +31,14 @@ export class GPlayer {
         this._initButtons();
         this._player = new YT.Player(id, {
             events: {
-                onStateChange: (event: any) => this.onStateChange(),
+                onStateChange: (event: any) => this.onStateChange()
             },
             playerVars: {
                 disablekb: 1, // disable keyboard
                 controls: 0, // hide controlls
                 fs: 0, // hide fullscreen button
-                showinfo: 0, // hide info
-            },
+                showinfo: 0 // hide info
+            }
         });
     }
 
@@ -79,23 +79,23 @@ export class GPlayer {
         const play  = document.getElementById("play");
         const pause = document.getElementById("pause");
         switch (this.getState()) {
-            case -1: // unstarted
-                break;
-            case 0: // ended
-                clearInterval(this._interval);
-                break;
-            case 1: // playing
-                play && play.classList.add("hidden");
-                pause && pause.classList.remove("hidden");
-                break;
-            case 2: // paused
-                pause && pause.classList.add("hidden");
-                play && play.classList.remove("hidden");
-                break;
-            case 3: // buffering
-                break;
-            case 5: // video cued
-                break;
+        case -1: // unstarted
+            break;
+        case 0: // ended
+            clearInterval(this._interval);
+            break;
+        case 1: // playing
+            play && play.classList.add("hidden");
+            pause && pause.classList.remove("hidden");
+            break;
+        case 2: // paused
+            pause && pause.classList.add("hidden");
+            play && play.classList.remove("hidden");
+            break;
+        case 3: // buffering
+            break;
+        case 5: // video cued
+            break;
         }
         console.log();
     }
@@ -191,6 +191,7 @@ export class GPlayer {
     public _getStringFromS(time: number): string {
         const minutes = parseInt((time / 60) + "", 10);
         const seconds = time % 60;
+
         return MathUtils.pad(minutes, 2) + ":" + MathUtils.pad(seconds, 2);
     }
 
@@ -200,6 +201,7 @@ export class GPlayer {
             return "";
         }
         const artists = selectedSong.artists.map((a: any) => a.name).join(" AND ");
+
         return artists + " - " + selectedSong.title;
     }
 

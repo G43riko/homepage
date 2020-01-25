@@ -26,9 +26,9 @@ export class LocationService extends AbstractHttpService {
         const IP_API_URL = "http://ip-api.com/json";
 
         return this.http.get<IpInfo>(IP_API_URL)
-                   .pipe(
-                       catchError(this.handleError<IpInfo>("_getIpFromWebPage")),
-                   );
+            .pipe(
+                catchError(this.handleError<IpInfo>("_getIpFromWebPage"))
+            );
 
     }
 
@@ -36,15 +36,15 @@ export class LocationService extends AbstractHttpService {
         // observer.
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition((position) => {
-                    navigator.geolocation.getCurrentPosition((data: Position) => {
-                        success(data);
-                    });
-                },
-                (error) => {
-                    if (error.code === error.PERMISSION_DENIED) {
-                        errorCallback("Zdielanie polohy nieje povolené");
-                    }
+                navigator.geolocation.getCurrentPosition((data: Position) => {
+                    success(data);
                 });
+            },
+            (error) => {
+                if (error.code === error.PERMISSION_DENIED) {
+                    errorCallback("Zdielanie polohy nieje povolené");
+                }
+            });
         } else {
             errorCallback("Geolokácia nieje v prehliadači podporovaná");
         }

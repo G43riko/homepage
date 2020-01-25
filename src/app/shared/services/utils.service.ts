@@ -8,7 +8,7 @@ import { AuthService } from "./auth.service";
 import { NotificationService } from "./notification.service";
 
 @Injectable({
-    providedIn: "root",
+    providedIn: "root"
 })
 export class UtilsService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
@@ -17,10 +17,10 @@ export class UtilsService extends AbstractHttpService {
 
     public getCountries(): Observable<string[]> {
         return this.http.get<string[]>(AppConfig.BASE_URL + "/utils/countries", {
-            headers: this.getHeaders(),
+            headers: this.getHeaders()
         })
-                   .pipe(
-                       catchError(this.handleError<string[]>("getCountries")),
-                   );
+            .pipe(
+                catchError(this.handleError<string[]>("getCountries"))
+            );
     }
 }

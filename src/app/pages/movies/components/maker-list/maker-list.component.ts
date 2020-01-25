@@ -10,7 +10,7 @@ import {MovieService} from "../../services/movie.service";
 @Component({
     selector: "app-movie-makers",
     templateUrl: "./maker-list.component.html",
-    styleUrls: ["./maker-list.component.scss"],
+    styleUrls: ["./maker-list.component.scss"]
 })
 
 export class MakerListComponent implements OnInit {
@@ -27,21 +27,21 @@ export class MakerListComponent implements OnInit {
         columns: [
             {
                 name: "name",
-                label: "Meno",
+                label: "Meno"
             },
             {
                 name: "birthday",
-                label: "Dátum narodenia",
+                label: "Dátum narodenia"
             },
             {
                 name: "external",
-                label: "",
+                label: ""
             },
             {
                 name: "detail",
-                label: "",
-            },
-        ],
+                label: ""
+            }
+        ]
     };
 
     public constructor(private readonly httpService: MakerHttpService,
@@ -52,7 +52,7 @@ export class MakerListComponent implements OnInit {
 
     public openImageDetail(url: string): void {
         this.dialog.open(ImageDialogComponent, {
-            data: url,
+            data: url
         });
     }
 
