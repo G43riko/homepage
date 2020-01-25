@@ -21,20 +21,22 @@ export class FoodsOverviewComponent implements OnInit {
     }
 
     public get minHeight(): string {
-        return `calc(100vh - ${this.standAlone ? 64 : 128}px)`;
+        return `calc(100vh - ${ this.standAlone ? 64 : 128 }px)`;
     }
 
     public ngOnInit(): void {
         this.authService.user$.subscribe((user) => {
             if (user) {
                 this.selectedRestaurants = user.favoriteRestaurants || [];
-            } else {
-                this.restaurantHttpService.getRestaurants()
-                    .subscribe((restaurants) => {
-                        this.selectedRestaurants = restaurants.map((restaurant) => restaurant.key + "");
-                    });
 
+                return;
             }
+
+            this.restaurantHttpService.getRestaurants()
+                .subscribe((restaurants) => {
+                    this.selectedRestaurants = restaurants.map((restaurant) => restaurant.key + "");
+                });
+
         });
     }
 

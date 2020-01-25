@@ -1,6 +1,6 @@
-import {AbstractFixture} from "gtools/out/tests/abstract.fixture";
-import {ImageUtils} from "../../../shared/utils/image.utils"; // TODO: fix path
-import {Maker} from "../models/maker.model";
+import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { getImageTemplate } from "../../../shared/utils/image.utils"; // TODO: fix path
+import { Maker } from "../models/maker.model";
 
 export class MakersFixture extends AbstractFixture<Maker> {
     public constructor() {
@@ -8,11 +8,11 @@ export class MakersFixture extends AbstractFixture<Maker> {
             {
                 id: 1,
                 name: "Test movie maker1",
-                birthday: "1995-05-23",
+                birthday: "1995-06-23",
                 csfdId: 21,
                 imdbId: "TestMovieMaker1ImdbId",
                 movieDbId: 31,
-                avatars: [ImageUtils.getTemplate("avatar")]
+                avatars: [getImageTemplate("avatar")]
             },
             {
                 id: 2,
@@ -21,7 +21,7 @@ export class MakersFixture extends AbstractFixture<Maker> {
                 csfdId: 22,
                 imdbId: "TestMovieMaker2ImdbId",
                 movieDbId: 32,
-                avatars: [ImageUtils.getTemplate("avatar")]
+                avatars: [getImageTemplate("avatar")]
             },
             {
                 id: 3,
@@ -30,7 +30,7 @@ export class MakersFixture extends AbstractFixture<Maker> {
                 csfdId: 23,
                 imdbId: "TestMovieDirector1ImdbId",
                 movieDbId: 33,
-                avatars: [ImageUtils.getTemplate("avatar")]
+                avatars: [getImageTemplate("avatar")]
             }
         ]);
 

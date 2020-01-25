@@ -21,17 +21,22 @@ export class RestaurantSelectorComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.restaurantHttpService.getRestaurants()
+        this.restaurantHttpService
+            .getRestaurants()
             .pipe(switchMap((restaurants: Restaurant[]) => {
                 this.allRestaurants = restaurants;
 
                 return this.authService.user$;
-            })).subscribe((user) => {
+            }))
+            .subscribe((user) => {
                 this.selectionList.deselectAll();
-                if (user && Array.isArray(user.favoriteRestaurants)) {
-                    const favoriteRestaurants = user.favoriteRestaurants;
-                    this.selectionList.selectedOptions.select(...this.selectionList.options.filter((e) => favoriteRestaurants.includes(e.value)));
+                if (!(user && Array.isArray(user.favoriteRestaurants))) {
+                    return;
                 }
+                const favoriteRestaurants = user.favoriteRestaurants;
+                this.selectionList.selectedOptions.select(...this.selectionList.options.filter((e) => {
+                    return favoriteRestaurants.includes(e.value);
+                }));
             });
     }
 

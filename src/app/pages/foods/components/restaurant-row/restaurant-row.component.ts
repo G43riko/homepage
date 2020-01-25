@@ -50,6 +50,7 @@ export class RestaurantRowComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        // empty
     }
 
     public showMap(restaurant: Restaurant): void {

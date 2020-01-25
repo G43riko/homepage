@@ -8,7 +8,10 @@
         "projects": "Projekty",
         "foods": "Denné menu",
         "about": "Kontakt",
-        "home": "Domov"
+        "home": "Domov",
+        "profile": "Profil",
+        "mixes": "Playlisty",
+        "files": "Súbory"
     },
     "common": {
         "search": "Hladať"

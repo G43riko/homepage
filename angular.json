@@ -54,11 +54,9 @@
                             "ngswConfigPath": "ngsw-config.json"
                         },
                         "localhost": {
-                            "fileReplacements": [
-                            ],
                             "optimization": false,
                             "outputHashing": "all",
-                            "sourceMap": false,
+                            "sourceMap": true,
                             "extractCss": true,
                             "namedChunks": false,
                             "aot": false,

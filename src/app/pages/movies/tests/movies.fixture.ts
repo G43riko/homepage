@@ -1,6 +1,6 @@
-import {AbstractFixture} from "gtools/out/tests/abstract.fixture";
-import {ImageUtils} from "../../../shared/utils/image.utils";
-import {Movie} from "../models/movie.model";
+import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { getImageTemplate } from "../../../shared/utils/image.utils";
+import { Movie } from "../models/movie.model";
 
 export class MoviesFixture extends AbstractFixture<Movie> {
     public constructor() {
@@ -23,7 +23,7 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                         csfdId: 21,
                         imdbId: "TestMovieMaker1ImdbId",
                         movieDbId: 31,
-                        avatars: [ImageUtils.getTemplate("avatar")]
+                        avatars: [getImageTemplate("avatar")]
                     },
                     {
                         id: 2,
@@ -32,7 +32,7 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                         csfdId: 22,
                         imdbId: "TestMovieMaker2ImdbId",
                         movieDbId: 32,
-                        avatars: [ImageUtils.getTemplate("avatar")]
+                        avatars: [getImageTemplate("avatar")]
                     }
                 ],
                 year: 1999,
@@ -41,7 +41,7 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                 tags: [],
                 saw: false,
                 want_see: true,
-                avatar: [ImageUtils.getTemplate("avatar")],
+                avatar: [getImageTemplate("avatar")],
                 directors: [
                     {
                         id: 3,
@@ -50,7 +50,7 @@ export class MoviesFixture extends AbstractFixture<Movie> {
                         csfdId: 23,
                         imdbId: "TestMovieDirector1ImdbId",
                         movieDbId: 33,
-                        avatars: [ImageUtils.getTemplate("avatar")]
+                        avatars: [getImageTemplate("avatar")]
                     }
                 ],
                 type: "movie",

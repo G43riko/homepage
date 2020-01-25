@@ -104,19 +104,19 @@ export class AppConfig {
             label: "home"
         },
         {
-            icon: "account",
+            icon: "account_circle",
             link: AppConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
             label: "profile"
         },
         {
-            icon: "account",
+            icon: "queue_music",
             link: AppConfig.PATH_MIXES,
             access: [Roles.ROLE_VISIT_MIXES],
             label: "mixes"
         },
         {
-            icon: "account",
+            icon: "supervisor_account",
             link: AppConfig.PATH_ACCOUNTS,
             access: [Roles.ROLE_VISIT_ACCOUNTS],
             label: "accounts"
@@ -128,7 +128,7 @@ export class AppConfig {
             label: "projects"
         },
         {
-            icon: "file",
+            icon: "file_copy",
             link: AppConfig.PATH_FILES,
             access: [Roles.ROLE_VISIT_FILES],
             label: "files"
@@ -146,13 +146,13 @@ export class AppConfig {
         },
         */
         {
-            icon: "address book",
+            icon: "contacts",
             link: AppConfig.PATH_PERSONS,
             access: [Roles.ROLE_VISIT_PERSONS],
             label: "persons"
         },
         {
-            icon: "address book",
+            icon: "movie",
             link: AppConfig.PATH_MOVIES,
             access: [Roles.ROLE_VISIT_MOVIES],
             label: "movies"
@@ -165,7 +165,7 @@ export class AppConfig {
         },
         */
         {
-            icon: "music",
+            icon: "library_music",
             link: AppConfig.PATH_SONGS,
             access: [Roles.ROLE_VISIT_SONGS],
             label: "songs"
@@ -194,7 +194,7 @@ export class AppConfig {
         },
         */
         {
-            icon: "info circle",
+            icon: "info",
             link: AppConfig.PATH_ABOUT,
             access: "",
             label: "about"
