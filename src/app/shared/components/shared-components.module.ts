@@ -1,18 +1,20 @@
-import {CommonModule} from "@angular/common";
-import {NgModule} from "@angular/core";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import {MaterialModule} from "../modules/material.module";
-import {SharedPipesModule} from "../pipes/shared-pipes.module";
-import {AbstractTableComponent} from "./abstract-table/abstract-table.component";
-import {AutoChipsComponent} from "./auto-chips/auto-chips.component";
-import {FeedbackDialogComponent} from "./feedback-dialog/feedback-dialog.component";
-import {IconListComponent} from "./icon-list/icon-list.component";
-import {ImageDialogComponent} from "./image-dialog/image-dialog.component";
-import {LoginScreenComponent} from "./login-screen/login-screen.component";
-import {MapDialogComponent} from "./map-dialog/map-dialog.component";
-import {PaginatorComponent} from "./paginator/paginator.component";
-import {WidgetComponent} from "./widget/widget.component";
+import { MaterialModule } from "../modules/material.module";
+import { SharedPipesModule } from "../pipes/shared-pipes.module";
+import { AbstractTableComponent } from "./abstract-table/abstract-table.component";
+import { AutoChipsComponent } from "./auto-chips/auto-chips.component";
+import { FeedbackDialogComponent } from "./feedback-dialog/feedback-dialog.component";
+import { IconListComponent } from "./icon-list/icon-list.component";
+import { ImageDialogComponent } from "./image-dialog/image-dialog.component";
+import { LoginScreenComponent } from "./login-screen/login-screen.component";
+import { MapDialogComponent } from "./map-dialog/map-dialog.component";
+import { PaginatorComponent } from "./paginator/paginator.component";
+import { SideMenuComponent } from "./side-menu/side-menu.component";
+import { WidgetComponent } from "./widget/widget.component";
 
 @NgModule({
     imports: [
@@ -20,6 +22,7 @@ import {WidgetComponent} from "./widget/widget.component";
         FormsModule,
         MaterialModule,
         SharedPipesModule,
+        RouterModule,
         ReactiveFormsModule,
         TranslateModule,
     ],
@@ -32,7 +35,8 @@ import {WidgetComponent} from "./widget/widget.component";
         AutoChipsComponent,
         ImageDialogComponent,
         FeedbackDialogComponent,
-        IconListComponent
+        IconListComponent,
+        SideMenuComponent,
     ],
     entryComponents: [
         MapDialogComponent
@@ -47,6 +51,7 @@ import {WidgetComponent} from "./widget/widget.component";
         ImageDialogComponent,
         FeedbackDialogComponent,
         IconListComponent,
+        SideMenuComponent,
     ]
 })
 export class SharedComponentsModule {

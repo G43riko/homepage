@@ -5,7 +5,6 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { NavigationEnd, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { AppConfig } from "./app.config";
-import { MenuItemModel } from "./shared/components/menu-item.model";
 import { AnalyticsService } from "./shared/services/analytics.service";
 import { AuthService } from "./shared/services/auth.service";
 import { IconService } from "./shared/services/icon.service";
@@ -17,7 +16,6 @@ import { IconService } from "./shared/services/icon.service";
 })
 export class AppComponent {
     public mobileQuery: MediaQueryList;
-    public menuItems: MenuItemModel[] = AppConfig.MENU_ITEMS;
     public readonly title             = "Homepage-FE";
 
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,

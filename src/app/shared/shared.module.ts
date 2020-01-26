@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import {environment} from "../../environments/environment";
 import { AboutComponent } from "../pages/about/about.component";
@@ -20,7 +21,10 @@ if (environment.interceptor) {
     imports: [
         CoreModule,
         MaterialModule,
-        SharedComponentsModule
+        TranslateModule,
+        SharedPipesModule,
+        SharedComponentsModule,
+        SharedDirectivesModule,
     ],
     declarations: [
         HomeComponent,

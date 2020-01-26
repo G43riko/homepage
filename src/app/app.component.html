@@ -16,19 +16,7 @@
                      [fixedInViewport]="mobileQuery.matches"
                      fixedTopGap="56"
         >
-            <mat-nav-list>
-                <ng-container *ngFor="let menu of menuItems">
-                    <button *ngIf="!menu.access || authService.canShowMenuItem(authService.user$ | async, menu.access)"
-                            mat-menu-item
-                            class="menu-item"
-                            routerLink="/{{menu.link}}"
-                            routerLinkActive="active"
-                    >
-                        <span>{{"menu." + menu.label | translate }}</span>
-                        <mat-icon style="margin-right: 0">{{menu.icon}}</mat-icon>
-                    </button>
-                </ng-container>
-            </mat-nav-list>
+            <app-side-menu></app-side-menu>
         </mat-sidenav>
 
         <mat-sidenav-content>
