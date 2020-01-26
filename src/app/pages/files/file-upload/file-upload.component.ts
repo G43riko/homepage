@@ -83,8 +83,8 @@ export class FileUploadComponent implements OnInit {
         return snapshot.state === "running" && snapshot.bytesTransferred < snapshot.totalBytes;
     }
 
-    public checkClick($event: MouseEvent, file_input: HTMLInputElement, upload_button: HTMLButtonElement): void {
-        if ($event.target === upload_button) {
+    public checkClick($event: MouseEvent, file_input: HTMLInputElement, uploadButton: HTMLButtonElement): void {
+        if ($event.target === uploadButton) {
             return;
         }
         file_input.click();
