@@ -23,6 +23,7 @@ if (environment.interceptor) {
         MaterialModule,
         TranslateModule,
         SharedPipesModule,
+        RouterModule,
         SharedComponentsModule,
         SharedDirectivesModule,
     ],

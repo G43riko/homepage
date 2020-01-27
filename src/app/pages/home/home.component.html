@@ -8,19 +8,17 @@
 
     <ul>
         <li>
-            <h2><a (click)="router.navigate(['about'])" href="/#/about">{{"contactToAuthor" | translate}}</a>
+            <h2><a routerLink="/about" >{{"contactToAuthor" | translate}}</a>
             </h2>
         </li>
         <li>
-            <h2><a (click)="router.navigate(['foods'])" href="/#/foods">{{ "dailyMenus"| translate}}</a></h2>
+            <h2><a routerLink="/foods" >{{ "dailyMenus"| translate}}</a></h2>
         </li>
         <li>
-            <h2><a (click)="router.navigate(['analyzer'])" href="/#/analyzer">{{ "fileAnalyzer"| translate}}</a></h2>
+            <h2><a routerLink="/analyzer" >{{ "fileAnalyzer"| translate}}</a></h2>
         </li>
         <li>
-            <h2><a (click)="router.navigate(['projects'])"
-                   href="/#/projects"
-            >{{ "inProgressProjects"| translate}}</a></h2>
+            <h2><a routerLink="/projects">{{ "inProgressProjects"| translate}}</a></h2>
         </li>
     </ul>
 </div>

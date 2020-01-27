@@ -137,7 +137,7 @@ export class AppConfig {
         {
             icon: "widgets",
             link: AppConfig.PATH_FILE_ANALYZER,
-            access: [Roles.ROLE_VISIT_FILES],
+            access: "",
             label: "analyzer"
         },
         /*
