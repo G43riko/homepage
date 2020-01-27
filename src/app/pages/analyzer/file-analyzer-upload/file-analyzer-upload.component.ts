@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { AppConfig } from "../../../app.config";
 
 interface RequestParams {
     method: "GET" | "POST";
@@ -89,7 +90,7 @@ export class FileAnalyzerUploadComponent implements OnInit {
         sendRequest({
             content: formData,
             method: "POST",
-            url: "http://localhost:3000/poc/analyze/file",
+            url: AppConfig.BASE_URL + "/poc/analyze/file",
             onProgress: (e) => {
                 const value = e.loaded / e.total;
                 this.progress = value * 100;
