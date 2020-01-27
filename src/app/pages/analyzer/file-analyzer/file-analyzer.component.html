@@ -1,8 +1,9 @@
 <main>
     <article [style.display]="uploaded ? 'none' : 'flex'" id="fileUpload">
-        <app-file-analyzer-upload (fileUploaded)="uploaded=true" (response)="processResponse($event)"></app-file-analyzer-upload>
+        <app-file-analyzer-upload (fileUploaded)="uploaded=true"
+                                  (response)="previw.processServerResponse($event.response, $event.file)"></app-file-analyzer-upload>
     </article>
-    <article *ngIf="uploaded" id="filePreview">
-        <app-file-analyzer-preview></app-file-analyzer-preview>
+    <article [style.display]="uploaded ? 'flex' : 'none'" id="filePreview">
+        <app-file-analyzer-preview #previw></app-file-analyzer-preview>
     </article>
 </main>

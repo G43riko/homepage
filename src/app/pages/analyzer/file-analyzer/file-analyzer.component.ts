@@ -7,15 +7,10 @@ import { FileAnalyzerPreviewComponent } from "../file-analyzer-preview/file-anal
     styleUrls: ["./file-analyzer.component.scss"]
 })
 export class FileAnalyzerComponent implements OnInit {
-    @ViewChild(FileAnalyzerPreviewComponent, {static: false}) private readonly fileAnalyzerPreview: FileAnalyzerPreviewComponent;
+    @ViewChild(FileAnalyzerPreviewComponent, {static: true}) private fileAnalyzerPreview: FileAnalyzerPreviewComponent;
     public uploaded = false;
 
     public ngOnInit(): void {
+        // EMPTY
     }
-
-    public processResponse(responseObject: {response: any, file: File}): void {
-        console.log("Receivujeme");
-        this.fileAnalyzerPreview.processResponse(responseObject.response, responseObject.file);
-    }
-
 }

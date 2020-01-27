@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { TextHighlightService } from "../text-highlight.service";
 
-interface Response {
+export interface Response {
     originalName: string;
     size: number;
     extensionByMimeType: string;
@@ -35,7 +35,7 @@ function getInfos(response: Response): { key: string, value: string }[] {
     styleUrls: ["./file-analyzer-preview.component.scss"]
 })
 export class FileAnalyzerPreviewComponent {
-    @ViewChild("previewBody", {static: false}) public readonly previewBody: ElementRef<HTMLElement>;
+    @ViewChild("previewBody", {static: true}) public readonly previewBody: ElementRef<HTMLElement>;
     private uploadedFile: File;
     public response: Response;
     public readonly infos: { key: string, value?: string | number, type?: "divider" }[] = [];
@@ -44,7 +44,7 @@ export class FileAnalyzerPreviewComponent {
 
     }
 
-    public processResponse(response: Response, uploadedFile: File): void {
+    public processServerResponse(response: Response, uploadedFile: File): void {
         this.response = response;
         this.uploadedFile = uploadedFile;
         this.infos.push(...getInfos(this.response));

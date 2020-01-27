@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { AppConfig } from "../../../app.config";
+import { Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
 interface RequestParams {
     method: "GET" | "POST";
@@ -95,11 +96,11 @@ export class FileAnalyzerUploadComponent implements OnInit {
                 const value = e.loaded / e.total;
                 this.progress = value * 100;
                 if (this.progress === 100) {
-                    this.fileUploaded.emit();
+                    this.fileUploaded.next();
                 }
             },
             onResponse: (response) => {
-                this.response.emit({file, response: JSON.parse(response)});
+                this.response.next({file, response: JSON.parse(response)});
 
             },
         });
