@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FileListComponent } from "./file-list/file-list.component";
+import { FileAnalyzerComponent } from "./file-analyzer/file-analyzer.component";
 
 const routes: Routes = [
     {
@@ -8,9 +8,8 @@ const routes: Routes = [
         children: [
             {
                 path: "",
-                pathMatch: "full",
-                component: FileListComponent
-            },
+                component: FileAnalyzerComponent
+            }
         ]
     }
 ];
@@ -19,5 +18,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class FilesRoutingModule {
+export class AnalyzerRoutingModule {
 }

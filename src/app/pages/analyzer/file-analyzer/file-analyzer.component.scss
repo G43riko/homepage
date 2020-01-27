@@ -1,0 +1,30 @@
+$background-color: #4db6ac;
+body {
+    background: linear-gradient(to top, #4F6072, #8699AA);
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    height: 100%;
+}
+.dialog {
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(black, .2);
+
+    max-height: calc(100vh - 4rem - 64px);
+    max-width: calc(100vw - 4rem);
+}
+
+#fileUpload, #filePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+
+}
+

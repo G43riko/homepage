@@ -14,6 +14,7 @@ export const AppRoutes: Routes = [
         loadChildren: () => import("./pages/foods/foods.module").then(mod => mod.FoodsModule)
     },
  */
+
     {
         path: "",
         redirectTo: "/" + AppConfig.PATH_HOME,
@@ -26,6 +27,10 @@ export const AppRoutes: Routes = [
     {
         path     : AppConfig.PATH_PROJECTS,
         component: ProjectsComponent
+    },
+    {
+        path: AppConfig.PATH_FILE_ANALYZER,
+        loadChildren: () => import("./pages/analyzer/analyzer.module").then((mod) => mod.AnalyzerModule),
     },
     {
         path     : AppConfig.PATH_ABOUT,

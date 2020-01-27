@@ -9,7 +9,11 @@ import { FilesRoutingModule } from "./files-routes.module";
 import { MyFilesComponent } from "./my-files/my-files.component";
 
 @NgModule({
-    declarations: [FileListComponent, FileUploadComponent, MyFilesComponent],
+    declarations: [
+        FileListComponent,
+        FileUploadComponent,
+        MyFilesComponent,
+    ],
     imports: [
         SharedModule,
         MaterialModule,

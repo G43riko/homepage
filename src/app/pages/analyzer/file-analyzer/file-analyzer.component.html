@@ -1,0 +1,8 @@
+<main>
+    <article [style.display]="uploaded ? 'none' : 'flex'" id="fileUpload">
+        <app-file-analyzer-upload (fileUploaded)="uploaded=true" (response)="processResponse($event)"></app-file-analyzer-upload>
+    </article>
+    <article *ngIf="uploaded" id="filePreview">
+        <app-file-analyzer-preview></app-file-analyzer-preview>
+    </article>
+</main>

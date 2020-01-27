@@ -78,3 +78,13 @@ body {
         }
     }
 }
+
+.hidden {
+    display: none !important;
+}
+
+.content {
+    .comment {
+        opacity: 0.5;
+    }
+}

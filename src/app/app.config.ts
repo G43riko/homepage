@@ -43,6 +43,7 @@ export class AppConfig {
     public static readonly PATH_YOUTUBE = "youtube";
     public static readonly PATH_SONGS = "songs";
     public static readonly PATH_FILES = "files";
+    public static readonly PATH_FILE_ANALYZER = "analyzer";
     public static readonly PATH_TODO = "todo";
     public static readonly PATH_BROWSER = "browser";
     public static readonly PATH_FOODS = "foods";
@@ -132,6 +133,12 @@ export class AppConfig {
             link: AppConfig.PATH_FILES,
             access: [Roles.ROLE_VISIT_FILES],
             label: "files"
+        },
+        {
+            icon: "widgets",
+            link: AppConfig.PATH_FILE_ANALYZER,
+            access: [Roles.ROLE_VISIT_FILES],
+            label: "analyzer"
         },
         /*
         {

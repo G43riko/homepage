@@ -1,0 +1,94 @@
+@import "../file-analyzer/file-analyzer.component";
+section {
+    min-width: #{"min(calc(100vw - 4rem), 600px)"};
+    @extend .dialog;
+    header {
+        padding: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $background-color;
+        text-align: center;
+        p {
+            color: #fff;
+            font-size: 40px;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            i {
+                font-size: 30px;
+                animation: fadeup .5s 1s ease both;
+            }
+            .up {
+                font-weight: bold;
+                display: inline-block;
+                margin-right: .5rem;
+                animation: faderight .5s 1.5s ease both;
+            }
+            .load {
+                display: inline-block;
+                font-weight: 100;
+                margin-left: -8px;
+                animation: faderight 1s 1.5s ease both;
+            }
+        }
+    }
+    .body {
+        padding: 1rem 3rem;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        .loading {
+            position: absolute;
+            // width: attr(data-progress percentage, 30);
+            top: 0;
+            height: 2px;
+            background: black;
+        }
+
+        i {
+            font-size: 65px;
+            color: lightgray;
+        }
+        p {
+            font-size: 14px;
+            padding-top: 15px;
+            line-height: 1.4;
+            b, a {
+                color: #4db6ac;
+            }
+        }
+
+        &.drag-over {
+            border: dashed 2px #4db6ac;
+            i {
+                box-shadow: 0 0 0 -3px #fff,
+                0 0 0 lightgray,
+                0 0 0 -3px #fff,
+                0 0 0 lightgray;
+                animation: file .5s ease both;
+            }
+            @keyframes file {
+                50% {
+                    box-shadow: -8px 8px 0 -3px #fff,
+                    -8px 8px 0 lightgray,
+                    -8px 8px 0 -3px #fff,
+                    -8px 8px 0 lightgray;
+                }
+                75%, 100% {
+                    box-shadow: -8px 8px 0 -3px #fff,
+                    -8px 8px 0 lightgray,
+                    -16px 16px 0 -3px #fff,
+                    -16px 16px 0 lightgray;
+                }
+            }
+            .pointer-none{
+                pointer-events: none;
+            }
+        }
+    }
+
+}

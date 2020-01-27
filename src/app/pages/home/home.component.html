@@ -8,15 +8,18 @@
 
     <ul>
         <li>
-            <h2><a (click)="router.navigate(['about'])" href="javascript:void(0)">{{"contactToAuthor" | translate}}</a>
+            <h2><a (click)="router.navigate(['about'])" href="/#/about">{{"contactToAuthor" | translate}}</a>
             </h2>
         </li>
         <li>
-            <h2><a (click)="router.navigate(['foods'])" href="javascript:void(0)">{{ "dailyMenus"| translate}}</a></h2>
+            <h2><a (click)="router.navigate(['foods'])" href="/#/foods">{{ "dailyMenus"| translate}}</a></h2>
+        </li>
+        <li>
+            <h2><a (click)="router.navigate(['analyzer'])" href="/#/analyzer">{{ "fileAnalyzer"| translate}}</a></h2>
         </li>
         <li>
             <h2><a (click)="router.navigate(['projects'])"
-                   href="javascript:void(0)"
+                   href="/#/projects"
             >{{ "inProgressProjects"| translate}}</a></h2>
         </li>
     </ul>

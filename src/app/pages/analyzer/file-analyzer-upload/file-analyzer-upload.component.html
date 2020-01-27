@@ -1,0 +1,18 @@
+<section>
+    <header>
+        <p>
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            <span class="up">File</span>
+            <span class="load">Analyzer</span>
+        </p>
+    </header>
+    <div #dropArea class="body">
+        <input type="file" #fileInput style="display: none">
+        <div [style.width.px]="this.progress" data-progress="23" class="loading"></div>
+        <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+        <p class="pointer-none">
+            <strong>Drag and drop</strong> files here <br/>
+                                 or <a href="" id="triggerFile" (click)="showUpload($event)">browse</a> to begin the upload
+        </p>
+    </div>
+</section>

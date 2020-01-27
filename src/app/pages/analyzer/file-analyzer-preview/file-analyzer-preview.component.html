@@ -1,0 +1,21 @@
+<section>
+    <header>
+        <h3>{{response?.originalName}}</h3>
+    </header>
+    <main>
+        <div #previewBody class="content"></div>
+        <aside>
+            <div *ngFor="let info of infos">
+                <ng-container [ngSwitch]="info.type">
+                    <ng-container *ngSwitchCase="'divider'">
+                        <hr><h4>{{ info.key }}</h4>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        <span>{{info.key}}</span>:
+                        <strong>{{info.value}}</strong>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </aside>
+    </main>
+</section>

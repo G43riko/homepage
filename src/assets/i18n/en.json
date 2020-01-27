@@ -2,6 +2,7 @@
     "welcome": "Welocme",
     "availableServices": "Available pages",
     "contactToAuthor": "Contact to author",
+    "fileAnalyzer": "File analyzer",
     "dailyMenus": "Daily menu for specific restaurants",
     "inProgressProjects": "List of projects",
     "menu": {
@@ -11,7 +12,8 @@
         "home": "Home",
         "profile": "Profile",
         "mixes": "Playlists",
-        "files": "Files"
+        "files": "Files",
+        "analyzer": "Analyzer"
     },
     "common": {
         "search": "Search",
