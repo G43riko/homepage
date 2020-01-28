@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { TextHighlightService } from "../text-highlight.service";
+import { budget } from "@angular/fire/remote-config";
+import { HistogramGeneratorService } from "../../services/histogram-generator.service";
+import { TextHighlightService } from "../../services/text-highlight.service";
 
 export interface Response {
     originalName: string;
@@ -20,7 +22,6 @@ export interface Response {
 function getInfos(response: Response): { key: string, value: string }[] {
     const result = [];
 
-    result.push({key: "Name", value: response.originalName});
     result.push({key: "Size", value: response.size + " bytes"});
     result.push({key: "MimeType", value: response.extensionByMimeType});
     result.push({key: "Encoding", value: response.encoding});
@@ -36,11 +37,13 @@ function getInfos(response: Response): { key: string, value: string }[] {
 })
 export class FileAnalyzerPreviewComponent {
     @ViewChild("previewBody", {static: true}) public readonly previewBody: ElementRef<HTMLElement>;
+    @ViewChild("histograms", {static: true}) public readonly histograms: ElementRef<HTMLElement>;
+
     private uploadedFile: File;
     public response: Response;
     public readonly infos: { key: string, value?: string | number, type?: "divider" }[] = [];
-
-    public constructor(public readonly textHighlightService: TextHighlightService) {
+    public constructor(public readonly textHighlightService: TextHighlightService,
+                       private readonly histogramGeneratorService: HistogramGeneratorService) {
 
     }
 
@@ -55,18 +58,29 @@ export class FileAnalyzerPreviewComponent {
         const reader = new FileReader();
         switch (previewType) {
             case "image":
-                const src = URL.createObjectURL(uploadedFile);
-                const image = document.createElement("image") as HTMLImageElement;
+                const image = document.createElement("img") as HTMLImageElement;
                 image.onload = () => {
                     this.infos.push({key: "Image data", type: "divider"});
                     this.infos.push({key: "Width", value: image.width + " px"});
                     this.infos.push({key: "Height", value: image.height + " px"});
+                    // TODO: color channels, MD5, SHA1, SHA256, Bit depth, Bits Per Sample
+
+                    const createHistogram = (type: any) => {
+                        const canvas = this.histogramGeneratorService.generateImageHistogram(image, 255, 100, type);
+                        canvas.style.maxWidth = "100%";
+                        this.histograms.nativeElement.append(canvas);
+                    };
+                    createHistogram("red");
+                    createHistogram("green");
+                    createHistogram("blue");
+                    createHistogram("avg");
                 };
-                image.src = src;
-                this.previewBody.nativeElement.style.background = `url("${ src }")`;
-                this.previewBody.nativeElement.style.backgroundRepeat = "no-repeat";
-                this.previewBody.nativeElement.style.backgroundSize = "contain";
-                this.previewBody.nativeElement.style.backgroundPosition = "center center";
+                const imageWrapper = document.createElement("div");
+                imageWrapper.className = "image-wrapper";
+                imageWrapper.append(image);
+
+                this.previewBody.nativeElement.append(imageWrapper);
+                image.src = URL.createObjectURL(uploadedFile);
 
                 break;
             case "html":
@@ -103,11 +117,25 @@ export class FileAnalyzerPreviewComponent {
                 this.previewBody.nativeElement.append(audio);
 
                 audio.onloadeddata = () => {
-                    this.infos.push({key: "Audio data", type: "divider"});
-                    this.infos.push({key: "Duration", value: audio.duration + " s"});
-                    this.infos.push({key: "Text tracks", value: audio.textTracks && audio.textTracks.length || 0});
-                    this.infos.push({key: "Audio tracks", value: audio.audioTracks && audio.audioTracks.length || 0});
+                    reader.onload = async () => {
+                        const audioContext = new AudioContext();
+                        const audioBuffer = await audioContext.decodeAudioData(reader.result as ArrayBuffer);
+                        const canvas = this.histogramGeneratorService.generateAudioHistogram(audioBuffer, this.previewBody.nativeElement.clientWidth, 200, 200);
+                        canvas.style.maxWidth = "100%";
+                        canvas.style.height = "calc(100% - 62px)";
+                        this.previewBody.nativeElement.append(canvas);
+
+                        this.infos.push({key: "Audio data", type: "divider"});
+                        this.infos.push({key: "Channels", value: audioBuffer.numberOfChannels});
+                        this.infos.push({key: "Sample rate", value: audioBuffer.sampleRate});
+                        this.infos.push({key: "Duration", value: audio.duration + " s"});
+                        this.infos.push({key: "Text tracks", value: audio.textTracks && audio.textTracks.length || 0});
+                        this.infos.push({key: "Audio tracks", value: audio.audioTracks && audio.audioTracks.length || 0});
+                    };
+                    reader.readAsArrayBuffer(uploadedFile);
+
                 };
+
                 break;
             case "video":
                 const video = document.createElement("video");

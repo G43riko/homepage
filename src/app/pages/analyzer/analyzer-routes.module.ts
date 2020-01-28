@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FileAnalyzerComponent } from "./file-analyzer/file-analyzer.component";
+import { FileAnalyzerComponent } from "./components/file-analyzer/file-analyzer.component";
 
 const routes: Routes = [
     {

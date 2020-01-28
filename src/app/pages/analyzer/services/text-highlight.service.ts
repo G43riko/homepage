@@ -10,7 +10,7 @@ export interface HighlightData {
     keywords: KeywordData[];
 }
 
-const createAnyRegex = (data: string[], {prefix = "", suffix = "", flags  ="g"}): RegExp => {
+const createAnyRegex = (data: string[], {prefix = "", suffix = "", flags  = "g"}): RegExp => {
     return new RegExp(`${prefix}(${ data.join("|") })${suffix}`, flags);
 };
 
@@ -23,6 +23,10 @@ const highlightData: { [key: string]: KeywordData[] } = {
         {
             match: /\d+\.\d+\.\d+/g,
             color: "#0000ff",
+        },
+        {
+            match: /^#.*$/gm,
+            mapFunction: (e) => `<span class="comment">${e}</span>`
         }
     ],
     markdown: [
@@ -37,31 +41,35 @@ const highlightData: { [key: string]: KeywordData[] } = {
             }
         },
         {
-            match: /^[ \t]*#{1}[ \t](.*$)/mg,
+            match: /^\s*#{1}\s(.*$)/mg,
             mapFunction: (e, text) => `<h1>${text}</h1>`,
         },
         {
-            match: /^[ \t]*#{2}[ \t](.*$)/mgi,
+            match: /^\s*#{2}\s(.*$)/mgi,
             mapFunction: (e, text) => `<h2>${text}</h2>`,
         },
         {
-            match: /^[ \t]*#{3}[ \t](.*$)/mgi,
+            match: /^\s*#{3}\s(.*$)/mgi,
             mapFunction: (e, text) => `<h3>${text}</h3>`,
         },
         {
-            match: /^[ \t]*#{4}[ \t](.*$)/mgi,
+            match: /^\s*#{4}\s(.*$)/mgi,
             mapFunction: (e, text) => `<h4>${text}</h4>`,
         },
         {
-            match: /^[ \t]*#{5}[ \t](.*$)/mgi,
+            match: /^\s*#{5}\s(.*$)/mgi,
             mapFunction: (e, text) => `<h5>${text}</h5>`,
         },
         {
-            match: /^[ \t]*#{6}[ \t](.*$)/mgi,
+            match: /^\s*#{6}\s(.*$)/mgi,
             mapFunction: (e, text) => `<h6>${text}</h6>`,
         },
         {
-            match: /`{1}(.*)`{1}/mg,
+            match: /`{3}((.|\n|\r)*?)`{3}/mg,
+            mapFunction: (e, text) => `<pre>${text}</pre>`,
+        },
+        {
+            match: /`{1}(.*?)`{1}/mg,
             mapFunction: (e, text) => `<pre>${text}</pre>`,
         },
         {
@@ -72,6 +80,22 @@ const highlightData: { [key: string]: KeywordData[] } = {
             match: /[*_](.+)[*_]/mg,
             mapFunction: (e, text) => `<em>${text}</em>`
         },
+
+        {
+            match: /\s*-\s+\[ ]\s+/mg,
+            mapFunction: () => `<br><input type="checkbox" disabled>`
+        },
+        {
+            match: /\s*-\s+\[x]\s+/mgi,
+            mapFunction: () => `<br><input type="checkbox" checked disabled>`
+        },
+        // "aaaaaaaaa-".replace(/((a{3})*?)-/g, function(){console.log(arguments); return arguments[1].replace(/a{3}/g, "_") + "A"})
+        /*
+        {
+            match: /(( {3}|\t)*?)-/g,
+            mapFunction: (match, spaces, ...rest) => spaces.replace(/( {3}|\t)/g, "\t - " + rest[rest.length - 1]),
+        },
+         */
         {
             match: /~~(.+)~~/mg,
             mapFunction: (e, text) => `<del>${text}</del>`
@@ -87,13 +111,23 @@ const highlightData: { [key: string]: KeywordData[] } = {
             mapFunction: (e) => `<span class="comment">${e}</span>`
         }
     ],
+    sql: [
+        {
+            match: /--.*$/gm,
+            mapFunction: (e) => `<span class="comment">${e}</span>`
+        },
+        {
+            match: createAnyRegex(["SELECT", "FROM", "WHERE", "JOIN", "ORDER", "BY", "DISTINCT", "GROUP", "LEFT", "RIGHT", "INNER", "OUTER", "ON", "AS", "\\|\\|", "&&", "="], {prefix:"\\s", suffix:"\\s", flags: "gmi"}),
+            color: "#ff0000",
+        },
+    ],
     properties: [
         {
-            match: /^((\w|\\ |)*)[ \t]*=/gm,
+            match: /^((\w|\\ |)*)\s*=/gm,
             mapFunction: (e, key) => `<span style="color: #ff0000">${key}</span> =`
         },
         {
-            match: /^((\w|\\ |)*)[ \t]*:/gm,
+            match: /^((\w|\\ |)*)\s*:/gm,
             mapFunction: (e, key) => `<span style="color: #ff0000">${key}</span> :`
         },
         {

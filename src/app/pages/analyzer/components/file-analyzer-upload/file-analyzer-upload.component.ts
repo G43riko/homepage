@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
-import { AppConfig } from "../../../app.config";
+import { AppConfig } from "../../../../app.config";
 import { Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
 interface RequestParams {
