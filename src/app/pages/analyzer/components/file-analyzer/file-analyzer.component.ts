@@ -8,7 +8,18 @@ import { FileAnalyzerPreviewComponent } from "../file-analyzer-preview/file-anal
 })
 export class FileAnalyzerComponent implements OnInit {
     @ViewChild(FileAnalyzerPreviewComponent, {static: true}) private fileAnalyzerPreview: FileAnalyzerPreviewComponent;
-    public uploaded = false;
+    public uploadDisplay = "flex";
+    public previewDisplay = "none";
+    public set uploaded(value: boolean) {
+        if (value) {
+            this.uploadDisplay = "none";
+            this.previewDisplay = "flex";
+        }
+        else {
+            this.uploadDisplay = "flex";
+            this.previewDisplay = "none";
+        }
+    }
 
     public ngOnInit(): void {
         // EMPTY

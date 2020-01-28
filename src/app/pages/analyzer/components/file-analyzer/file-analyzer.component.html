@@ -1,9 +1,9 @@
 <main>
-    <article [style.display]="uploaded ? 'none' : 'flex'" id="fileUpload">
+    <article [style.display]="uploadDisplay" id="fileUpload">
         <app-file-analyzer-upload (fileUploaded)="uploaded=true"
-                                  (response)="previw.processServerResponse($event.response, $event.file)"></app-file-analyzer-upload>
+                                  (response)="uploaded = true; preview.processServerResponse($event.response, $event.file)"></app-file-analyzer-upload>
     </article>
-    <article [style.display]="uploaded ? 'flex' : 'none'" id="filePreview">
-        <app-file-analyzer-preview #previw></app-file-analyzer-preview>
+    <article [style.display]="previewDisplay" id="filePreview">
+        <app-file-analyzer-preview #preview></app-file-analyzer-preview>
     </article>
 </main>
