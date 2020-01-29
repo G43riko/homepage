@@ -43,6 +43,7 @@ section {
         position: relative;
         .loading {
             position: absolute;
+            transition: width .1s;
             // width: attr(data-progress percentage, 30);
             top: 0;
             height: 2px;

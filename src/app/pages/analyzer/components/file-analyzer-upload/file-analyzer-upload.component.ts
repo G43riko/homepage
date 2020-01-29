@@ -38,7 +38,7 @@ export class FileAnalyzerUploadComponent implements OnInit {
     @ViewChild("dropArea", {static: true}) private readonly dropArea: ElementRef<HTMLDivElement>;
     @Output() public readonly fileUploaded = new EventEmitter<void>();
     @Output() public readonly response = new EventEmitter<{response: Response, file: File}>();
-    public progress = 0;
+    public progress = -1;
 
     public ngOnInit(): void {
         this.initDragAndDrop();
@@ -88,6 +88,7 @@ export class FileAnalyzerUploadComponent implements OnInit {
     private onFileUpload(file: File): void {
         const formData = new FormData();
         formData.append("file", file);
+        this.progress = 0;
         sendRequest({
             content: formData,
             method: "POST",
@@ -95,13 +96,14 @@ export class FileAnalyzerUploadComponent implements OnInit {
             onProgress: (e) => {
                 const value = e.loaded / e.total;
                 this.progress = value * 100;
+                console.log("Progress", this.progress);
                 if (this.progress === 100) {
                     this.fileUploaded.next();
                 }
             },
             onResponse: (response) => {
+                this.progress = -1;
                 this.response.next({file, response: JSON.parse(response)});
-
             },
         });
     }
