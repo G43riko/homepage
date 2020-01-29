@@ -36,10 +36,10 @@ function createImageHistogramCanvas(data: number[], width: number, height: numbe
 
     temporaryContext.fillStyle = color;
     const pxHeight = height / max;
-    const barWidth = 255 / width;
+    const barWidth = width / 255;
     for (let i = 0; i < width; i++) {
         const size = data[i] * pxHeight;
-        temporaryContext.fillRect(i, height - size, barWidth, size);
+        temporaryContext.fillRect(i * barWidth, height - size, barWidth, size);
     }
 
     return result;

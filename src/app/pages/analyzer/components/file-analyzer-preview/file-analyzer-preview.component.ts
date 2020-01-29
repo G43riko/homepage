@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
 import { budget } from "@angular/fire/remote-config";
 import { HistogramGeneratorService } from "../../services/histogram-generator.service";
 import { TextHighlightService } from "../../services/text-highlight.service";
@@ -36,15 +36,24 @@ function getInfos(response: Response): { key: string, value: string }[] {
     styleUrls: ["./file-analyzer-preview.component.scss"]
 })
 export class FileAnalyzerPreviewComponent {
+    @Output() public readonly reset = new EventEmitter<void>();
     @ViewChild("previewBody", {static: true}) public readonly previewBody: ElementRef<HTMLElement>;
     @ViewChild("histograms", {static: true}) public readonly histograms: ElementRef<HTMLElement>;
-
     private uploadedFile: File;
     public response: Response;
     public readonly infos: { key: string, value?: string | number, type?: "divider" }[] = [];
     public constructor(public readonly textHighlightService: TextHighlightService,
                        private readonly histogramGeneratorService: HistogramGeneratorService) {
 
+    }
+
+    public resetPreview(): void {
+        this.reset.next();
+        this.previewBody.nativeElement.innerHTML = "";
+        this.histograms.nativeElement.innerHTML = "";
+        this.infos.splice(0, this.infos.length);
+        delete this.uploadedFile;
+        delete this.response;
     }
 
     public processServerResponse(response: Response, uploadedFile: File): void {
@@ -66,8 +75,9 @@ export class FileAnalyzerPreviewComponent {
                     // TODO: color channels, MD5, SHA1, SHA256, Bit depth, Bits Per Sample
 
                     const createHistogram = (type: any) => {
-                        const canvas = this.histogramGeneratorService.generateImageHistogram(image, 255, 100, type);
+                        const canvas = this.histogramGeneratorService.generateImageHistogram(image, 400, 100, type);
                         canvas.style.maxWidth = "100%";
+                        canvas.style.border = "3px solid black";
                         this.histograms.nativeElement.append(canvas);
                     };
                     createHistogram("red");

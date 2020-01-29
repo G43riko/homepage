@@ -1,9 +1,9 @@
 <main>
     <article [style.display]="uploadDisplay" id="fileUpload">
-        <app-file-analyzer-upload (fileUploaded)="uploaded=true"
+        <app-file-analyzer-upload (fileUploaded)="uploaded = true"
                                   (response)="uploaded = true; preview.processServerResponse($event.response, $event.file)"></app-file-analyzer-upload>
     </article>
     <article [style.display]="previewDisplay" id="filePreview">
-        <app-file-analyzer-preview #preview></app-file-analyzer-preview>
+        <app-file-analyzer-preview #preview (reset)="uploaded = false"></app-file-analyzer-preview>
     </article>
 </main>

@@ -11,15 +11,24 @@ section {
         color: #fff;
         background: $background-color;
         box-shadow: 0 2px 5px rgba(black, .2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+            word-break: break-all;
+        }
     }
     main {
         background: #fff;
         display: flex;
         flex-grow: 1;
         overflow: hidden;
+        // flex-wrap: wrap;
+
         .content {
             overflow: auto;
             // padding: 1rem;
+            // flex-basis: 400px;
             flex-grow: 1;
 
         }
@@ -33,6 +42,38 @@ section {
             max-width: 250px;
             background: $background-color;
         }
+
+        @media only screen and (max-width: 726px) {
+            flex-direction: column;
+            overflow-y: auto;
+            .content {
+                overflow: visible;
+            }
+            aside {
+                overflow-y: visible;
+                max-width: max-content;
+            }
+        }
     }
 }
 
+.analyzer-button {
+    outline: none;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    border: solid 1px white;
+    color: white;
+    background: transparent;
+    padding: 8px 7px;
+    font-size: 12px;
+    border-radius: 4px;
+    font-family: Roboto;
+    line-height: 1;
+    cursor: pointer;
+    flex-basis: 100px;
+    &:hover{
+        background: white;
+        color: $background-color;
+    }
+}
