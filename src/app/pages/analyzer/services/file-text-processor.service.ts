@@ -38,8 +38,10 @@ export class FileTextProcessorService {
 
         return new Promise<FileProcessResult>((success, reject) => {
             reader.onload = () => {
-                const result = JSON.stringify(JSON.parse(reader.result as string), null, 4);
-                success({previewContent: result});
+                const result = document.createElement("pre");
+                result.innerText = JSON.stringify(JSON.parse(reader.result as string), null, 4);
+                result.style.padding = "1rem";
+                success({previewContent: [result]});
             };
             reader.readAsText(uploadedFile);
         });

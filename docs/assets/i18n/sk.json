@@ -3,8 +3,12 @@
     "availableServices": "Stránka zatial obsahuje",
     "contactToAuthor": "Kontakt na autora",
     "fileAnalyzer": "Analyzér súborov",
+    "externalServices": "Externé projekty",
     "dailyMenus": "Denné menu vybraných reštaurácií",
     "inProgressProjects": "Zoznam rozpracovaných projektov",
+    "projectList": {
+        "shareDesk": "Aplikácia na online kreslenie"
+    },
     "menu": {
         "projects": "Projekty",
         "foods": "Denné menu",
