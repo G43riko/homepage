@@ -24,7 +24,7 @@ export class SearchFoodPipe implements PipeTransform {
             const index = StringUtils.removeAccentedCharacters(menu.name.toLowerCase())
                 .indexOf(query);
             if (index >= 0) {
-                menu.name = menu.name.substr(0, index) +
+                menu.nameHTML = menu.name.substr(0, index) +
                     tagStart +
                     menu.name.substr(index, query.length) +
                     tagEnd +

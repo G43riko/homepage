@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { StringUtils } from "gtools/out/utils/StringUtils";
 import { of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
@@ -18,7 +19,27 @@ export class RestaurantRowComponent implements OnInit {
     public dailyMenu: DailyMenu | null;
     public restaurant?: Restaurant;
     public loading = false;
-    @Input() public searchedFood: string;
+    public restaurantMatch = false;
+    public localSearchedMath: string;
+
+    @Input() public set searchedFood(key: string) {
+        this.localSearchedMath = key;
+        this.restaurantMatch = this.isRestaurantMatch();
+        this.changeDetectorRef.markForCheck();
+    }
+
+    private isRestaurantMatch(): boolean {
+        if (!this.restaurant || !this.localSearchedMath || this.localSearchedMath.length < 3) {
+            return false;
+        }
+        const lowerSearch = StringUtils.removeAccentedCharacters(this.localSearchedMath.toLowerCase());
+
+        return StringUtils.removeAccentedCharacters(this.restaurant.name)
+                          .toLowerCase()
+                          .indexOf(lowerSearch) >= 0 || StringUtils.removeAccentedCharacters(this.restaurant.key as any)
+                                                                   .toLowerCase()
+                                                                   .indexOf(lowerSearch) >= 0;
+    }
 
     @Input()
     public set restaurantKey(key: string) {
@@ -45,6 +66,7 @@ export class RestaurantRowComponent implements OnInit {
 
     public constructor(private readonly dailyMenuHttpService: DailyMenuHttpService,
                        private readonly restaurantHttpService: RestaurantHttpService,
+                       private readonly changeDetectorRef: ChangeDetectorRef,
                        private readonly mapService: MapsService,
                        private readonly dialog: MatDialog) {
     }
@@ -66,16 +88,16 @@ export class RestaurantRowComponent implements OnInit {
 
     public getIconByType(type: string): string {
         switch (type) {
-        case "pizza":
-            return "local_pizza";
-        case "burger":
-            return "hamburger";
-        case "fish":
-            return "fish";
-        case "salad":
-            return "salad";
-        default:
-            return "restaurant";
+            case "pizza":
+                return "local_pizza";
+            case "burger":
+                return "hamburger";
+            case "fish":
+                return "fish";
+            case "salad":
+                return "salad";
+            default:
+                return "restaurant";
 
         }
     }

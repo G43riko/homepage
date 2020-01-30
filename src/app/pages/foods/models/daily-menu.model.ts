@@ -7,6 +7,7 @@ export interface DailyMenu extends AnyInterface {
     id: number;
     dishes: {
         name: string;
+        nameHTML?: string;
         weight?: string;
         type?: string | "pizza" | "soup" | "fish" | "steak" | "meat" | "food" | "special" | "empty";
         price?: number;

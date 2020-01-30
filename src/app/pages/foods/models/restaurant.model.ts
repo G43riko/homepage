@@ -14,6 +14,7 @@ export class Restaurant {
     public homepage?: string;
     public restauracieSmeLink?: string;
     public address?: Address;
+    public nameHtml?: string;
 
     public zomatoId?: string;
     public zomatoLink?: string;

@@ -56,10 +56,10 @@
 
     <!--
         <div *ngIf="snapshot | async as snap">
-            <div *ngIf="downloadUrl | async as url">
+            <div *ngIf="downloadUrl | async as object">
                 <h3>Results!</h3>
-                <img [src]="url" alt="">
-                <a [href]="url">Download me!</a>
+                <img [src]="object" alt="">
+                <a [href]="object">Download me!</a>
             </div>
 
             <button (click)="task.pause()">Pause</button>

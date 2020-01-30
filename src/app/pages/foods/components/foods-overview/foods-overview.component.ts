@@ -43,4 +43,5 @@ export class FoodsOverviewComponent implements OnInit {
     public openFeedback(): void {
         this.bottomSheet.open(FeedbackDialogComponent, {data: {screen: "Foods"}});
     }
+
 }
