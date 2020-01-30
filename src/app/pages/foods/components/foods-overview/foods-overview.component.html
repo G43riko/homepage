@@ -31,8 +31,8 @@
             <app-restaurant-selector></app-restaurant-selector>
         </mat-sidenav>
 
-        <mat-sidenav-content *ngIf="authService.user$" [style.min-height]="minHeight">
-            <mat-list>
+        <mat-sidenav-content *ngIf="authService.user$" [style.min-height]="minHeight" style="display: flex; justify-content: center">
+            <mat-list style="width: fit-content; max-width: 100%">
                 <ng-container *ngFor="let selectedRestaurant of selectedRestaurants; let i=index">
                     <mat-divider *ngIf="i > 0"></mat-divider>
                     <app-restaurant-row [searchedFood]="searchFood.value"

@@ -3,29 +3,31 @@
 >
     <span [class.searched]="restaurantMatch">{{restaurant.name}}</span>
     <small> - {{restaurantHttpService.getDistance(restaurant.address)}} {{'foods.fromYou' | translate}}</small>
-    <mat-icon (click)="showMap(restaurant)"
-              *ngIf="restaurant.address"
-              matTooltip="{{'shared.showMap' | translate}}"
-    >map
-    </mat-icon>
+    <button *ngIf="restaurant.address"
+            (click)="showMap(restaurant)"
+            mat-icon-button
+            color="primary"
+            matTooltip="{{'shared.showMap' | translate}}">
+        <mat-icon >map</mat-icon>
+    </button>
 
-    <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
-              *ngIf="restaurant.homepage"
-              matTooltip="{{'foods.showHomePage' | translate}}"
-    >home
-    </mat-icon>
+    <button *ngIf="restaurant.homepage"
+            (click)="restaurantHttpService.openHomepage(restaurant)"
+            mat-icon-button
+            color="primary"
+            matTooltip="{{'foods.showHomePage' | translate}}">
+        <mat-icon>home</mat-icon>
+    </button>
 </h2>
 
 <mat-list-item *ngIf="dailyMenu === null">
     <small mat-line class="centered-vertically">
         {{'foods.cannotGetDailyMenu' | translate}}.
-        <ng-container *ngIf="restaurant.homepage">
-            {{'foods.tryHomepage' | translate}}
-            <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
-                      matTooltip="{{'foods.showHomePage' | translate}}"
-            >home
-            </mat-icon>
-        </ng-container>
+        <button *ngIf="restaurant.homepage"
+                mat-button
+                (click)="restaurantHttpService.openHomepage(restaurant)"
+                color="primary"
+        >{{'foods.tryHomepage' | translate}}</button>
     </small>
 </mat-list-item>
 
@@ -33,13 +35,11 @@
     <mat-list-item *ngIf="!dailyMenu.dishes.length">
         <small mat-line class="centered-vertically">
             {{'foods.restaurantHasNoPublicMenu' | translate}}.
-            <ng-container *ngIf="restaurant.homepage">
-                {{'foods.tryHomepage' | translate}}
-                <mat-icon (click)="restaurantHttpService.openHomepage(restaurant)"
-                          matTooltip="{{'foods.showHomePage' | translate}}"
-                >home
-                </mat-icon>
-            </ng-container>
+            <button *ngIf="restaurant.homepage"
+                    mat-button
+                    (click)="restaurantHttpService.openHomepage(restaurant)"
+                    color="primary"
+            >{{'foods.tryHomepage' | translate}}</button>
         </small>.
     </mat-list-item>
     <ng-container *ngFor="let dish of (restaurantMatch ? dailyMenu.dishes : (dailyMenu.dishes | searchFoodPipe: localSearchedMath))">
@@ -50,12 +50,14 @@
                            mat-list-icon
                            type="food"
             ></app-icon-list>
-            <mat-icon (click)="restaurantHttpService.openFoodImages(dish.name)"
-                      *ngIf="dish.type !== 'special'"
-                      mat-list-icon
-                      style="order:2"
-            >image
-            </mat-icon>
+            <button *ngIf="dish.type !== 'special'"
+                    (click)="restaurantHttpService.openFoodImages(dish.name)"
+                    style="order:2"
+                    mat-icon-button
+                    color="primary"
+                    matTooltip="{{'foods.showDishImages' | translate}}">
+                <mat-icon >image</mat-icon>
+            </button>
 
             <h4 *ngIf="dish.type !== 'special'; else showTitle"
                 mat-line [innerHTML]="(!restaurantMatch && localSearchedMath) && dish.nameHTML || dish.name"

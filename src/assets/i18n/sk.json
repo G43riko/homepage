@@ -50,6 +50,7 @@
         "noFilterResults": "Filtru nevyhovujú žiadne výsledky",
         "feedbackPanel": "Spätná väzba",
         "distance": "Vzialenosť",
+        "unknownDistance": "Neznáma vzialenosť",
         "login":{
             "login": "Prihlásiť",
             "logout": "Odhlásiť",
@@ -80,6 +81,7 @@
         "forSpecificRestaurantsClickOn": "Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu",
         "forRestaurantSelectionClickOn": "Vyberte si reštaurácie klikuntím na ikonu",
         "showHomePage": "Zobraziť domovskú stránku",
+        "showDishImages": "Zobraziť obrázky jedla",
         "tryHomepage": "Skúste navštíviť domovskú stránku",
         "cannotGetDailyMenu": "Nepodarili sa získať denné menu",
         "restaurantHasNoPublicMenu": "Reštaurácia nemá zverejnené menu",

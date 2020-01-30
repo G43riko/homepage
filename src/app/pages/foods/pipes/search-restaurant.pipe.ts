@@ -6,7 +6,7 @@ import { Restaurant } from "../models/restaurant.model";
 })
 export class SearchRestaurantPipe implements PipeTransform {
 
-    public transform(value: Restaurant[], key: string): Restaurant[] {
+    public transform(value: {restaurant: Restaurant, distance: number}[], key: string): {restaurant: Restaurant, distance: number}[] {
         if (!key) {
             return value;
         }
@@ -14,12 +14,12 @@ export class SearchRestaurantPipe implements PipeTransform {
             .trim();
 
         return value.filter((restaurant) => {
-            if (restaurant.key && restaurant.key.toLowerCase()
+            if (restaurant.restaurant.key && restaurant.restaurant.key.toLowerCase()
                 .includes(searchedKey)) {
                 return true;
             }
 
-            return restaurant.name && restaurant.name.toLowerCase()
+            return restaurant.restaurant.name && restaurant.restaurant.name.toLowerCase()
                 .includes(searchedKey);
 
         });

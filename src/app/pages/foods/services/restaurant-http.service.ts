@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable, of } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { AppConfig } from "../../../app.config";
 import { Address } from "../../../shared/models/person/address.model";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
@@ -15,7 +15,7 @@ const URL = AppConfig.BASE_URL + "/restaurants";
 
 @Injectable()
 export class RestaurantHttpService extends AbstractHttpService {
-    private restaurants: Observable<{ [key: string]: Restaurant }> = this.loadRestaurants();
+    private restaurants: Observable<{ [key: string]: { restaurant: Restaurant, distance: number } }> = this.loadRestaurants();
 
     public constructor(private readonly geoLocationService: GeoLocationService,
                        private readonly translateService: TranslateService,
@@ -29,21 +29,18 @@ export class RestaurantHttpService extends AbstractHttpService {
 
     public getDistance(coordinates: Address): string {
         const distance = this.geoLocationService.distanceFrom(coordinates);
-        if (!distance) {
-            return this.translateService.instant("shared.distance");
-        }
-
-        if (distance < 1) {
-            return (distance * 1000).toFixed(0) + " m ";
-        }
-
-        return distance.toFixed(2) + " km ";
+        return this.geoLocationService.formatDistance(distance);
     }
 
     public getRestaurants(): Observable<Restaurant[]> {
         return this.restaurants.pipe(map((restaurants) => {
-            return Object.values(restaurants);
+            return Object.values(restaurants)
+                         .map((restaurant) => restaurant.restaurant);
         }));
+    }
+
+    public getWrappers(): Observable<{ restaurant: Restaurant, distance: number }[]> {
+        return this.restaurants.pipe(map((restaurants) => Object.values(restaurants)));
     }
 
     public openHomepage(restaurant: Restaurant): void {
@@ -52,7 +49,7 @@ export class RestaurantHttpService extends AbstractHttpService {
 
     public getRestaurantByKey(key: string): Observable<Restaurant | null> {
         return this.restaurants.pipe(
-            map((restaurants) => restaurants[key]),
+            map((restaurants) => restaurants[key].restaurant),
             catchError(() => of(null))
         );
     }
@@ -62,20 +59,19 @@ export class RestaurantHttpService extends AbstractHttpService {
     }
 
     private loadRestaurants(): any {
-        const url = "https://g43riko.github.io/foods/assets/data/restaurantsData.json";
+        return this.geoLocationService.coordinates.pipe(switchMap((coordinates: Address) => {
+            return this.http.get<{ restaurant: Restaurant, distance: number }[]>(`${ URL }/byDistance?latitude=${ coordinates.latitude }&longitude=${ coordinates.longitude }`)
+                       .pipe(
+                           catchError(this.handleError<{ restaurant: Restaurant, distance: number }[]>("getRestaurants")),
+                           map((data: { restaurant: Restaurant, distance: number }[]) => {
+                               const result: any = {};
+                               data.filter((restaurant: { restaurant: Restaurant, distance: number }) => restaurant.restaurant.key)
+                                   .forEach((restaurant) => {
+                                       result[restaurant.restaurant.key as string] = restaurant;
+                                   });
 
-        return this.http.get<Restaurant[]>(url)
-            .pipe(
-                catchError(this.handleError<Restaurant[]>("getRestaurants"))
-            )
-            .pipe(map((data: Restaurant[]) => {
-                const result: any = {};
-                data.filter((restaurant: Restaurant) => restaurant.key)
-                    .forEach((restaurant) => {
-                        result[restaurant.key as string] = restaurant;
-                    });
-
-                return result;
-            }));
+                               return result;
+                           }));
+        }));
     }
 }

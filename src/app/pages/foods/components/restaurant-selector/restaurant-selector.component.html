@@ -9,9 +9,9 @@
     </mat-form-field>
     <mat-selection-list (selectionChange)="change($event, user)">
         <mat-list-option *ngFor="let restaurant of allRestaurants | searchRestaurant : searchRestaurant.value"
-                         [selected]="isSelected(restaurant, user)"
-                         [value]="restaurant.key">
-            {{restaurant.name}}
+                         [selected]="isSelected(restaurant.restaurant, user)"
+                         [value]="restaurant.restaurant.key">
+            {{restaurant.restaurant.name}} <small style="font-size: 11px">{{getFormattedDistance(restaurant.distance)}}</small>
         </mat-list-option>
     </mat-selection-list>
 </div>
@@ -19,7 +19,7 @@
     <div class="restaurant-selector-wrapper">
         <mat-selection-list [disabled]="true">
             <mat-list-option *ngFor="let restaurant of allRestaurants">
-                {{restaurant.name}}
+                {{restaurant.restaurant.name}} <small style="font-size: 11px">{{getFormattedDistance(restaurant.distance)}}</small>
             </mat-list-option>
         </mat-selection-list>
     </div>

@@ -30,3 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 use https://www.npmjs.com/package/ngx-device-detector for disable animation on mobiles
 show if restaurant allow take away or if allow delivery
 show properties files as table with and commented rows has colspan=2
+
+
+
+- [ ] tooltip to show first image from google
+- [ ] change fonts
