@@ -6,6 +6,22 @@
     bottom: 0;
     left: 0;
     right: 0;
+
+    mat-toolbar-row {
+        @media only screen and (max-width: 1024px) {
+            font-size: 17px;
+            mat-form-field {
+                width: 120px;
+            }
+        }
+        @media only screen and (max-width: 724px) {
+            font-size: 14px;
+            mat-form-field {
+                width: 80px;
+            }
+        }
+
+    }
 }
 
 .one-row-warning {

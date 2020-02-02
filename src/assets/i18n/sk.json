@@ -78,7 +78,7 @@
         }
     },
     "foods": {
-        "forSpecificRestaurantsClickOn": "Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu",
+        "forSpecificRestaurantsClickOn": "Pre výber iba reštaurácií sa prihláste",
         "forRestaurantSelectionClickOn": "Vyberte si reštaurácie klikuntím na ikonu",
         "showHomePage": "Zobraziť domovskú stránku",
         "showDishImages": "Zobraziť obrázky jedla",

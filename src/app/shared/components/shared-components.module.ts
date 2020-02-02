@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { G43SharedPipesModule } from "@g43/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { MaterialModule } from "../modules/material.module";
 import { SharedPipesModule } from "../pipes/shared-pipes.module";
@@ -24,6 +25,7 @@ import { WidgetComponent } from "./widget/widget.component";
         SharedPipesModule,
         RouterModule,
         ReactiveFormsModule,
+        G43SharedPipesModule,
         TranslateModule,
     ],
     declarations: [

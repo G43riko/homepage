@@ -9,7 +9,7 @@
             <span class="divider"></span>
 
             <span *ngIf="!(authService.user$ | async)" class="one-row-warning">
-                {{"foods.forSpecificRestaurantsClickOn" | translate}}  <mat-icon>account_circle</mat-icon>
+                {{"foods.forSpecificRestaurantsClickOn" | translate}}
             </span>
 
             <span class="divider"></span>
@@ -31,8 +31,8 @@
             <app-restaurant-selector></app-restaurant-selector>
         </mat-sidenav>
 
-        <mat-sidenav-content *ngIf="authService.user$" [style.min-height]="minHeight" style="display: flex; justify-content: center">
-            <mat-list style="width: fit-content; max-width: 100%">
+        <mat-sidenav-content *ngIf="authService.user$" [style.min-height]="minHeight">
+            <mat-list style="width: fit-content; max-width: 100%; margin: 0 auto">
                 <ng-container *ngFor="let selectedRestaurant of selectedRestaurants; let i=index">
                     <mat-divider *ngIf="i > 0"></mat-divider>
                     <app-restaurant-row [searchedFood]="searchFood.value"
@@ -41,7 +41,8 @@
                 </ng-container>
             </mat-list>
             <span *ngIf="selectedRestaurants && selectedRestaurants.length === 0" class="one-row-warning">
-                {{"foods.forRestaurantSelectionClickOn" | translate}} <mat-icon>menu</mat-icon>
+                {{"foods.forRestaurantSelectionClickOn" | translate}}
+                <mat-icon>menu</mat-icon>
             </span>
         </mat-sidenav-content>
     </mat-sidenav-container>

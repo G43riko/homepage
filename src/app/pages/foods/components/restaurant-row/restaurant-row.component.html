@@ -2,13 +2,14 @@
     style="position: sticky;top: 0;background: #fafafa;z-index:1"
 >
     <span [class.searched]="restaurantMatch">{{restaurant.name}}</span>
-    <small> - {{restaurantHttpService.getDistance(restaurant.address)}} {{'foods.fromYou' | translate}}</small>
+    <small
+        style="margin-left: 16px"> {{restaurantHttpService.getDistance(restaurant.address)}} {{'foods.fromYou' | translate}}</small>
     <button *ngIf="restaurant.address"
             (click)="showMap(restaurant)"
             mat-icon-button
             color="primary"
             matTooltip="{{'shared.showMap' | translate}}">
-        <mat-icon >map</mat-icon>
+        <mat-icon>place</mat-icon>
     </button>
 
     <button *ngIf="restaurant.homepage"
@@ -21,8 +22,8 @@
 </h2>
 
 <mat-list-item *ngIf="dailyMenu === null">
-    <small mat-line class="centered-vertically">
-        {{'foods.cannotGetDailyMenu' | translate}}.
+    <small class="centered-vertically" mat-line style="display: flex; flex-wrap: wrap">
+        <span style="padding: 0 16px">{{'foods.cannotGetDailyMenu' | translate}}.</span>
         <button *ngIf="restaurant.homepage"
                 mat-button
                 (click)="restaurantHttpService.openHomepage(restaurant)"
@@ -33,8 +34,8 @@
 
 <ng-container *ngIf="dailyMenu">
     <mat-list-item *ngIf="!dailyMenu.dishes.length">
-        <small mat-line class="centered-vertically">
-            {{'foods.restaurantHasNoPublicMenu' | translate}}.
+        <small class="centered-vertically" mat-line style="display: flex; flex-wrap: wrap">
+            <span style="padding: 0 16px">{{'foods.restaurantHasNoPublicMenu' | translate}}.</span>
             <button *ngIf="restaurant.homepage"
                     mat-button
                     (click)="restaurantHttpService.openHomepage(restaurant)"

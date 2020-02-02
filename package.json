@@ -63,6 +63,7 @@
         "tslint-clean-code": "^0.2.10",
         "tslint-consistent-codestyle": "^1.16.0",
         "tslint-sonarts": "^1.9.0",
+        "webpack-bundle-analyzer": "^3.6.0",
         "zone.js": "~0.10.2"
     },
     "devDependencies": {
