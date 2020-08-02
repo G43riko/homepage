@@ -1,21 +1,21 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
-import {AbstractDetailComponent} from "../../../../shared/components/abstract-detail.component";
-import {MapDialogComponent} from "../../../../shared/components/map-dialog/map-dialog.component";
-import {Person} from "../../../../shared/models/person/person.model";
-import {MapsService} from "../../../../shared/services/maps.service";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {UtilsService} from "../../../../shared/services/utils.service";
-import {PersonHttpService} from "../../services/person-http.service";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { AbstractDetailComponent } from "../../../../shared/components/abstract-detail.component";
+import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
+import { Person } from "../../../../shared/models/person/person.model";
+import { MapsService } from "../../../../shared/services/maps.service";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { UtilsService } from "../../../../shared/services/utils.service";
+import { PersonHttpService } from "../../services/person-http.service";
 
 @Component({
-    selector: "app-person-detail",
+    selector   : "app-person-detail",
     templateUrl: "./person-detail.component.html",
-    styleUrls: ["./person-detail.component.scss"]
+    styleUrls  : ["./person-detail.component.scss"]
 })
 export class PersonDetailComponent extends AbstractDetailComponent<Person, PersonHttpService> implements OnInit {
     public timer: any;
@@ -62,7 +62,6 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
     public setDetail(detail: Person): void {
         this.selectedDetail = detail;
         this.loading = false;
-        // this.detailForm.setValue(Person.toModel(this.selectedDetail), {onlySelf: true});
         this.detailForm.patchValue(this.selectedDetail);
     }
 

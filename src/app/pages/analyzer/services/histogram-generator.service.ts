@@ -69,9 +69,7 @@ function createAudioHistogramCanvas(data: number[], width: number, height: numbe
 }
 
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class HistogramGeneratorService {
     public generateImageHistogram(image: HTMLImageElement, width: number, height: number, type: "red" | "green" | "blue" | "avg" | "alpha"): HTMLCanvasElement {
         const temporaryCanvas = document.createElement("canvas") as HTMLCanvasElement;

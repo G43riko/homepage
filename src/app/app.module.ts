@@ -1,9 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material";
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { G43_NOTIFICATION_TOKEN } from "@g43/common";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -27,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         AppComponent,
         AccountProfileComponent
     ],
-    imports: [
+    imports  : [
         BrowserAnimationsModule, // NoopAnimationsModule
         CoreModule,
         SharedModule,
@@ -36,9 +35,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         FirebaseModule,
         TranslateModule.forRoot({
             loader: {
-                provide: TranslateLoader,
+                provide   : TranslateLoader,
                 useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
+                deps      : [HttpClient]
             }
         }),
         ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production})
@@ -48,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             provide: G43_NOTIFICATION_TOKEN, useClass: NotificationService
         },
         {
-            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            provide : MAT_SNACK_BAR_DEFAULT_OPTIONS,
             useValue: {
                 duration: AppConfig.DEFAULT_ALERT_DURATION
             }

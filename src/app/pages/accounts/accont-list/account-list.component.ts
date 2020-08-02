@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MatCheckboxChange } from "@angular/material";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 import { Roles } from "../../../shared/enums/roles.enum";
 import { User } from "../../../shared/models/auth.model";
 import { AuthService } from "../../../shared/services/auth.service";

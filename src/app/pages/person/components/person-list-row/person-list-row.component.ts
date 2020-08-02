@@ -1,25 +1,26 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {MatPaginator, MatSort} from "@angular/material";
-import {Router} from "@angular/router";
-import {Roles} from "../../../../shared/enums/roles.enum";
-import {User} from "../../../../shared/models/auth.model";
-import {Account} from "../../../../shared/models/person/account.model";
-import {Person} from "../../../../shared/models/person/person.model";
-import {AuthService} from "../../../../shared/services/auth.service";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {PersonHttpService} from "../../services/person-http.service";
-import {PersonListRowCellSelectComponent} from "../person-list-row-cell-select/person-list-row-cell-select.component";
+import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { Router } from "@angular/router";
+import { Roles } from "../../../../shared/enums/roles.enum";
+import { User } from "../../../../shared/models/auth.model";
+import { Account } from "../../../../shared/models/person/account.model";
+import { Person } from "../../../../shared/models/person/person.model";
+import { AuthService } from "../../../../shared/services/auth.service";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { PersonHttpService } from "../../services/person-http.service";
+import { PersonListRowCellSelectComponent } from "../person-list-row-cell-select/person-list-row-cell-select.component";
 
 @Component({
-    selector: "app-person-list-row",
+    selector   : "app-person-list-row",
     templateUrl: "./person-list-row.component.html",
-    styleUrls: ["./person-list-row.component.scss"]
+    styleUrls  : ["./person-list-row.component.scss"]
 })
-export class PersonListRowComponent implements OnInit {
+export class PersonListRowComponent {
     @Input() public person: Person;
     @Input() public user: User;
     @Output() public readonly onRemove = new EventEmitter<number>();
-    public readonly Roles = Roles;
+    public readonly Roles              = Roles;
     @Input() private readonly index: number;
     @ViewChild(MatPaginator, {static: true}) private readonly paginator: MatPaginator;
     @ViewChild(MatSort, {static: true}) private readonly sort: MatSort;
@@ -30,9 +31,6 @@ export class PersonListRowComponent implements OnInit {
                        private readonly notificationService: NotificationService,
                        public readonly authService: AuthService) {
 
-    }
-
-    public ngOnInit(): void {
     }
 
     public getTitle(account: Account): string {
@@ -58,7 +56,7 @@ export class PersonListRowComponent implements OnInit {
         }, (error) => this.notificationService.openErrorNotification(error));
     }
 
-    public showDetail(person_id: number | string): void {
-        this.router.navigateByUrl("/persons/" + person_id);
+    public showDetail(personId: number | string): void {
+        this.router.navigateByUrl("/persons/" + personId);
     }
 }

@@ -2,22 +2,19 @@ import { Injectable } from "@angular/core";
 import { FileProcessResult } from "./file-image-processor.service";
 import { HistogramGeneratorService } from "./histogram-generator.service";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class FileAudioProcessorService {
-
     public constructor(private readonly histogramGeneratorService: HistogramGeneratorService) {
     }
 
     public processAudio(uploadedFile: File): Promise<FileProcessResult> {
         const infos: FileProcessResult["infos"] = [];
-        const reader = new FileReader();
-        const audio = document.createElement("audio");
-        audio.src = URL.createObjectURL(uploadedFile);
-        audio.style.width = "100%";
-        audio.controls = true;
-        const previewObjects: HTMLElement[] = [audio];
+        const reader                            = new FileReader();
+        const audio                             = document.createElement("audio") as HTMLAudioElement & MediaStream;
+        audio.src                               = URL.createObjectURL(uploadedFile);
+        audio.style.width                       = "100%";
+        audio.controls                          = true;
+        const previewObjects: HTMLElement[]     = [audio];
 
         return new Promise<FileProcessResult>((success, reject) => {
             audio.onloadeddata = () => {
@@ -34,7 +31,7 @@ export class FileAudioProcessorService {
                     infos.push({key: "Sample rate", value: audioBuffer.sampleRate});
                     infos.push({key: "Duration", value: audio.duration + " s"});
                     infos.push({key: "Text tracks", value: audio.textTracks && audio.textTracks.length || 0});
-                    infos.push({key: "Audio tracks", value: audio.audioTracks && audio.audioTracks.length || 0});
+                    infos.push({key: "Audio tracks", value: audio.getAudioTracks && audio.getAudioTracks().length || 0});
 
                     success({infos, previewContent: previewObjects});
                 };

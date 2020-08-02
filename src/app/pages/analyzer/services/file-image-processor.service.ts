@@ -5,11 +5,10 @@ export interface FileProcessResult {
     infos?: { key: string, value?: string | number, type?: "divider" }[];
     histograms?: HTMLElement[];
     previewContent: HTMLElement[] | string;
+    afterAddCallback?: () => void;
 }
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class FileImageProcessorService {
     public constructor(private readonly histogramGeneratorService: HistogramGeneratorService) {
     }

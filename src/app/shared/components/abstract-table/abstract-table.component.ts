@@ -1,6 +1,7 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { MatPaginator, MatSort, Sort } from "@angular/material";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort, Sort } from "@angular/material/sort";
 import { merge, Observable, of } from "rxjs";
 import { catchError, delay, map, startWith, switchMap, tap } from "rxjs/operators";
 import { ColumnConfig } from "./column-config";
@@ -11,11 +12,11 @@ import { TableConfig } from "./table-config";
     templateUrl: "./abstract-table.component.html",
     styleUrls  : ["./abstract-table.component.scss"]
 })
-export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
+export class AbstractTableComponent<T = any> implements OnInit {
     public readonly selection = new SelectionModel<T>(true, []);
 
-    @ViewChild(MatPaginator, {static: false}) public paginator: MatPaginator;
-    @ViewChild(MatSort, {static: false}) public sort: MatSort;
+    @ViewChild(MatPaginator, {static: true}) public paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) public sort: MatSort;
     @Input() public tableConfig: TableConfig;
     @Input() public data: Observable<T[]> | T[];
     @Input() public templates: { [key: string]: TemplateRef<any> } = {};
@@ -62,7 +63,7 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         return columnsNames;
     }
 
-    public ngAfterViewInit(): void {
+    public ngOnInit(): void {
         if (!this.tableConfig) {
             return;
         }
@@ -122,8 +123,6 @@ export class AbstractTableComponent<T = any> implements OnInit, AfterViewInit {
         return columnConfig.label || "";
     }
 
-    public ngOnInit(): void {
-    }
 
     public isAllSelected(): boolean {
         const numSelected = this.selection.selected.length;

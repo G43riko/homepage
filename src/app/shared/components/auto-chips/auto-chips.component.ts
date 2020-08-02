@@ -1,19 +1,22 @@
-import {COMMA, ENTER, SPACE} from "@angular/cdk/keycodes";
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from "@angular/material";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import { COMMA, ENTER, SPACE } from "@angular/cdk/keycodes";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
-    selector: "app-auto-chips",
+    selector   : "app-auto-chips",
     templateUrl: "./auto-chips.component.html",
-    styleUrls: ["./auto-chips.component.scss"],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: AutoChipsComponent,
-        multi: true
-    }]
+    styleUrls  : ["./auto-chips.component.scss"],
+    providers  : [
+        {
+            provide    : NG_VALUE_ACCESSOR,
+            useExisting: AutoChipsComponent,
+            multi      : true
+        }
+    ]
 })
 export class AutoChipsComponent implements ControlValueAccessor {
     @Input() public allItems: string[] = [];
@@ -36,11 +39,11 @@ export class AutoChipsComponent implements ControlValueAccessor {
     }
 
     public onChange(value: any): void {
-
+        // empty;
     }
 
     public onTouch(value: any): void {
-
+        // empty;
     }
 
     public writeValue(obj: any): void {

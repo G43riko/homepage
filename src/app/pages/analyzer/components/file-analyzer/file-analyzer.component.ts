@@ -1,27 +1,28 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { FileAnalyzerPreviewComponent } from "../file-analyzer-preview/file-analyzer-preview.component";
+import { Component, ViewChild } from "@angular/core";
+import { FileAnalyzerPreviewComponent, Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
 @Component({
-    selector: "app-file-analyzer",
+    selector   : "app-file-analyzer",
     templateUrl: "./file-analyzer.component.html",
-    styleUrls: ["./file-analyzer.component.scss"]
+    styleUrls  : ["./file-analyzer.component.scss"],
 })
-export class FileAnalyzerComponent implements OnInit {
+export class FileAnalyzerComponent {
     @ViewChild(FileAnalyzerPreviewComponent, {static: true}) private fileAnalyzerPreview: FileAnalyzerPreviewComponent;
-    public uploadDisplay = "flex";
+    public uploadDisplay  = "flex";
     public previewDisplay = "none";
+
     public set uploaded(value: boolean) {
         if (value) {
-            this.uploadDisplay = "none";
+            this.uploadDisplay  = "none";
             this.previewDisplay = "flex";
-        }
-        else {
-            this.uploadDisplay = "flex";
+        } else {
+            this.uploadDisplay  = "flex";
             this.previewDisplay = "none";
         }
     }
 
-    public ngOnInit(): void {
-        // EMPTY
+    public onFileResponse(data: { response: Response, file: File }): void {
+        this.uploaded = true;
+        this.fileAnalyzerPreview.processServerResponse(data.response, data.file);
     }
 }

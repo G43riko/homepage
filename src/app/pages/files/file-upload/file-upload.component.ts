@@ -1,21 +1,21 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {UploadTaskSnapshot} from "@angular/fire/storage/interfaces";
-import {FormControl} from "@angular/forms";
-import {MatSnackBar} from "@angular/material";
-import {Observable} from "rxjs";
-import {finalize} from "rxjs/operators";
-import {User} from "../../../shared/models/auth.model";
-import {AnalyticsService} from "../../../shared/services/analytics.service";
-import {AuthService} from "../../../shared/services/auth.service";
-import {FileUploadWrapper} from "./file-upload-wrapper";
-import {FileUploadService} from "./file-upload.service";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { UploadTaskSnapshot } from "@angular/fire/storage/interfaces";
+import { FormControl } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { User } from "../../../shared/models/auth.model";
+import { AnalyticsService } from "../../../shared/services/analytics.service";
+import { AuthService } from "../../../shared/services/auth.service";
+import { FileUploadWrapper } from "./file-upload-wrapper";
+import { FileUploadService } from "./file-upload.service";
 
 const emptyFileList = {length: 0, item: (index: number) => null};
 
 @Component({
-    selector: "app-file-upload",
+    selector   : "app-file-upload",
     templateUrl: "./file-upload.component.html",
-    styleUrls: ["./file-upload.component.scss"]
+    styleUrls  : ["./file-upload.component.scss"]
 })
 export class FileUploadComponent implements OnInit {
     public percentage: Observable<number | undefined>;
@@ -26,10 +26,10 @@ export class FileUploadComponent implements OnInit {
 
     public readonly uploadTasks: FileUploadWrapper[] = [];
     public shared: boolean;
-    public files: FileList = emptyFileList;
-    @Output() public readonly onFileUploaded = new EventEmitter<User>();
-    public readonly shareWith = new FormControl();
-    public readonly mapper = (e: User) => e ? e.displayName : null;
+    public files: FileList                           = emptyFileList;
+    @Output() public readonly onFileUploaded         = new EventEmitter<User>();
+    public readonly shareWith                        = new FormControl();
+    public readonly mapper                           = (e: User) => e ? e.displayName : null;
 
     public constructor(public readonly authService: AuthService,
                        private readonly snackBar: MatSnackBar,
@@ -52,18 +52,17 @@ export class FileUploadComponent implements OnInit {
             this.analyticsService.eventUploadFile(file.name);
             try {
                 const uploadTask = this.fileUploadService.uploadFile(file, user, sharedWith);
-                const index = this.uploadTasks.length;
+                const index      = this.uploadTasks.length;
                 this.uploadTasks.push(uploadTask);
                 this.percentage = uploadTask.percentageChanges;
-                this.snapshot = uploadTask.snapshotChanges.pipe(finalize(() => {
+                this.snapshot   = uploadTask.snapshotChanges.pipe(finalize(() => {
                     this.downloadUrl = uploadTask.ref.getDownloadURL();
-                    this.files = emptyFileList;
+                    this.files       = emptyFileList;
                     this.onFileUploaded.emit(user);
                     this.snackBar.open("Súbor bol úspešne nahratý", "Zavrieť");
                     this.uploadTasks.splice(index, 1);
                 }));
-            }
-            catch (uploadError) {
+            } catch (uploadError) {
                 this.snackBar.open("Pri uploade nastala chyba: " + uploadError, "Zavrieť");
             }
             // this.task = this.fileUploadService.uploadFile(file, user, sharedWith);
@@ -83,11 +82,11 @@ export class FileUploadComponent implements OnInit {
         return snapshot.state === "running" && snapshot.bytesTransferred < snapshot.totalBytes;
     }
 
-    public checkClick($event: MouseEvent, file_input: HTMLInputElement, uploadButton: HTMLButtonElement): void {
+    public checkClick($event: MouseEvent, fileInput: HTMLInputElement, uploadButton: HTMLButtonElement): void {
         if ($event.target === uploadButton) {
             return;
         }
-        file_input.click();
+        fileInput.click();
 
     }
 }

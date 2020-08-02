@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
-import {AngularFireAuth} from "@angular/fire/auth";
-import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
-import {Router} from "@angular/router";
-import {auth} from "firebase/app";
-import {Observable, of} from "rxjs";
-import {fromPromise} from "rxjs/internal-compatibility";
-import {switchMap} from "rxjs/operators";
-import {Roles} from "../enums/roles.enum";
-import {User} from "../models/auth.model";
-import {AnalyticsService} from "./analytics.service";
+import { Injectable } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { Router } from "@angular/router";
+import { auth } from "firebase/app";
+import { Observable, of } from "rxjs";
+import { fromPromise } from "rxjs/internal-compatibility";
+import { switchMap } from "rxjs/operators";
+import { Roles } from "../enums/roles.enum";
+import { User } from "../models/auth.model";
+import { AnalyticsService } from "./analytics.service";
 
 @Injectable({
     providedIn: "root"
@@ -35,7 +35,7 @@ export class AuthService {
     public async googleSigning(): Promise<void> {
         const provider = new auth.GoogleAuthProvider();
 
-        const credentials = await this.afAuth.auth.signInWithPopup(provider);
+        const credentials = await this.afAuth.signInWithPopup(provider);
         this.analyticsService.login("google");
 
         return this.updateUserData(credentials.user);
@@ -46,7 +46,7 @@ export class AuthService {
     }
 
     public async signOut(): Promise<boolean> {
-        await this.afAuth.auth.signOut();
+        await this.afAuth.signOut();
         this.analyticsService.signOut();
 
         return this.router.navigate(["/"]);
@@ -76,7 +76,6 @@ export class AuthService {
     }
 
     public getAccounts(): Observable<User[]> {
-        // return this.afs.collection("users").get().toPromise();
         return this.afs.collection("users").valueChanges() as any;
     }
 

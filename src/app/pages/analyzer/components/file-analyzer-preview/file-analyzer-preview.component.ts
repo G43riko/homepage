@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
 import { FileAudioProcessorService } from "../../services/file-audio-processor.service";
 import { FileImageProcessorService, FileProcessResult } from "../../services/file-image-processor.service";
+import { FileMapProcessorService } from "../../services/file-map-processor.service";
 import { FileTextProcessorService } from "../../services/file-text-processor.service";
 import { FileVideoProcessorService } from "../../services/file-video-processor.service";
 
@@ -32,12 +33,12 @@ function getInfos(response: Response): { key: string, value: string }[] {
 }
 
 @Component({
-    selector: "app-file-analyzer-preview",
+    selector   : "app-file-analyzer-preview",
     templateUrl: "./file-analyzer-preview.component.html",
-    styleUrls: ["./file-analyzer-preview.component.scss"]
+    styleUrls  : ["./file-analyzer-preview.component.scss"]
 })
 export class FileAnalyzerPreviewComponent {
-    @Output() public readonly reset = new EventEmitter<void>();
+    @Output() public readonly reset                                                     = new EventEmitter<void>();
     @ViewChild("previewBody", {static: true}) public readonly previewBody: ElementRef<HTMLElement>;
     @ViewChild("histograms", {static: true}) public readonly histograms: ElementRef<HTMLElement>;
     private uploadedFile: File;
@@ -46,6 +47,7 @@ export class FileAnalyzerPreviewComponent {
 
     public constructor(private readonly audioProcessorService: FileAudioProcessorService,
                        private readonly textProcessorService: FileTextProcessorService,
+                       private readonly mapProcessorService: FileMapProcessorService,
                        private readonly videoProcessorService: FileVideoProcessorService,
                        private readonly imageProcessorService: FileImageProcessorService) {
 
@@ -54,14 +56,14 @@ export class FileAnalyzerPreviewComponent {
     public resetPreview(): void {
         this.reset.next();
         this.previewBody.nativeElement.innerHTML = "";
-        this.histograms.nativeElement.innerHTML = "";
+        this.histograms.nativeElement.innerHTML  = "";
         this.infos.splice(0, this.infos.length);
         delete this.uploadedFile;
         delete this.response;
     }
 
     public processServerResponse(response: Response, uploadedFile: File): void {
-        this.response = response;
+        this.response     = response;
         this.uploadedFile = uploadedFile;
         this.infos.push(...getInfos(this.response));
         this.showPreview(this.response.previewType, this.uploadedFile);
@@ -71,9 +73,13 @@ export class FileAnalyzerPreviewComponent {
         const result = await resultPromise;
         if (typeof result.previewContent === "string") {
             this.previewBody.nativeElement.style.padding = "1rem";
-            this.previewBody.nativeElement.innerHTML = result.previewContent;
+            this.previewBody.nativeElement.innerHTML     = result.previewContent;
         } else {
             this.previewBody.nativeElement.append(...result.previewContent);
+        }
+
+        if (typeof result.afterAddCallback === "function") {
+            result.afterAddCallback();
         }
 
         if (Array.isArray(result.infos)) {
@@ -94,6 +100,9 @@ export class FileAnalyzerPreviewComponent {
                 this.showFileProcessResult(this.textProcessorService.processHTML(uploadedFile)).then(() => {
                     this.showContentData(this.response.contentData);
                 });
+                break;
+            case "map":
+                this.showFileProcessResult(this.mapProcessorService.processMapFilePromise(uploadedFile));
                 break;
             case "pdf":
                 this.showFileProcessResult(this.textProcessorService.processPDF(uploadedFile));
@@ -117,13 +126,16 @@ export class FileAnalyzerPreviewComponent {
             case "formatted":
                 reader.onload = () => {
                     this.previewBody.nativeElement.style.padding = "1rem";
-                    this.previewBody.nativeElement.innerHTML = `<pre>${ reader.result }</pre>`;
+                    this.previewBody.nativeElement.innerHTML     = `<pre>${reader.result}</pre>`;
                     this.showContentData(this.response.contentData);
                 };
                 reader.readAsText(uploadedFile);
                 break;
             case "highlight":
-                this.showFileProcessResult(this.textProcessorService.processHighlightedText(uploadedFile, this.response.highlight as string)).then(() => {
+                this.showFileProcessResult(this.textProcessorService.processHighlightedText(
+                    uploadedFile,
+                    this.response.highlight as string,
+                )).then(() => {
                     this.showContentData(this.response.contentData, true);
                 });
                 break;

@@ -1,27 +1,24 @@
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {Component, Input, OnInit} from "@angular/core";
-import {FormControl, Validators} from "@angular/forms";
-import {MatChipInputEvent} from "@angular/material";
-import {Email} from "../../../../shared/models/person/email.model";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { Component, Input } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { Email } from "../../../../shared/models/person/email.model";
 
 @Component({
-    selector: "app-email",
+    selector   : "app-email",
     templateUrl: "./email.component.html",
-    styleUrls: ["./email.component.scss"]
+    styleUrls  : ["./email.component.scss"]
 })
-export class EmailComponent implements OnInit {
-    @Input() public disabled = true;
+export class EmailComponent {
+    @Input() public disabled           = true;
     @Input() public emailList: Email[] = [];
     @Input() public isNew: boolean;
-    public showInactive = new FormControl(false);
-    public values = new FormControl("", Validators.email);
-    public visible = true;
-    public addOnBlur = true;
+    public showInactive                = new FormControl(false);
+    public values                      = new FormControl("", Validators.email);
+    public visible                     = true;
+    public addOnBlur                   = true;
 
     public readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-    public ngOnInit(): void {
-    }
 
     public add(event: MatChipInputEvent): void {
         if (this.values.errors) {

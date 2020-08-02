@@ -150,9 +150,7 @@ function highlightLocally(content: string, data: HighlightData): string {
     return result;
 }
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class TextHighlightService {
     public highlight(content: string, type: keyof typeof highlightData): string {
         return highlightLocally(content, {keywords: highlightData[type]});

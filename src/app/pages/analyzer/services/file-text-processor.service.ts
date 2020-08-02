@@ -2,9 +2,7 @@ import { Injectable } from "@angular/core";
 import { FileProcessResult } from "./file-image-processor.service";
 import { TextHighlightService } from "./text-highlight.service";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class FileTextProcessorService {
     public constructor(private readonly textHighlightService: TextHighlightService) {
 
