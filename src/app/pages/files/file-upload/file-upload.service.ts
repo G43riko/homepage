@@ -1,12 +1,13 @@
-import {Injectable} from "@angular/core";
-import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/storage";
-import {AppConfig} from "../../../app.config";
-import {User} from "../../../shared/models/auth.model";
-import {AuthService} from "../../../shared/services/auth.service";
-import {FileUploadWrapper} from "./file-upload-wrapper";
+import { Injectable } from "@angular/core";
+import { AngularFireStorage, AngularFireUploadTask } from "@angular/fire/storage";
+import { AppConfig } from "../../../shared/app-config";
+import { User } from "../../../shared/models/auth.model";
+import { AuthService } from "../../../shared/services/auth.service";
+import { ConfigService } from "../../../shared/services/config.service";
+import { FileUploadWrapper } from "./file-upload-wrapper";
 
-const IMAGES_FOLDER = "images";
-const IMAGES_OWNED_PREFIX = "owned";
+const IMAGES_FOLDER        = "images";
+const IMAGES_OWNED_PREFIX  = "owned";
 const IMAGES_SHARED_PREFIX = "shared";
 
 interface CustomMetadata {
@@ -18,12 +19,11 @@ interface CustomMetadata {
     active: string;
 }
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class FileUploadService {
 
     public constructor(private readonly storage: AngularFireStorage,
+                       private readonly configService: ConfigService<AppConfig>,
                        public readonly authService: AuthService) {
     }
 
@@ -38,9 +38,9 @@ export class FileUploadService {
     private getCustomMetadata(user: User, sharedWith: string): CustomMetadata {
         return {
             sharedWith,
-            app: AppConfig.TITLE,
+            app       : this.configService.get("title"),
             uploadedBy: user.uid,
-            active: "true"
+            active    : "true"
         };
     }
 

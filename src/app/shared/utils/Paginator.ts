@@ -1,9 +1,9 @@
-import {AppConfig} from "../../app.config";
-import {AbstractPaginator} from "./AbstractPaginator";
+import { AppStaticConfig } from "../../appStaticConfig";
+import { AbstractPaginator } from "./AbstractPaginator";
 
 export class Paginator<T = any> extends AbstractPaginator<T> {
     public constructor(private readonly allItems: T[],
-                       _itemsPerPage = AppConfig.ITEMS_PER_PAGE) {
+                       _itemsPerPage = AppStaticConfig.ITEMS_PER_PAGE) {
         super(_itemsPerPage);
         this._lastPage = allItems ? Math.floor(allItems.length / this._itemsPerPage) : 0;
         this._reCalcList();

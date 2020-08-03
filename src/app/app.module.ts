@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -10,10 +10,12 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AppConfig } from "./app.config";
+import { AppStaticConfig } from "./appStaticConfig";
 import { AccountProfileComponent } from "./pages/account-profile/account-profile.component";
+import { AppConfig } from "./shared/app-config";
 import { CoreModule } from "./shared/core.module";
 import { FirebaseModule } from "./shared/modules/firebase.module";
+import { ConfigService } from "./shared/services/config.service";
 import { NotificationService } from "./shared/services/notification.service";
 import { SharedModule } from "./shared/shared.module";
 
@@ -26,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         AppComponent,
         AccountProfileComponent
     ],
-    imports  : [
+    imports     : [
         BrowserAnimationsModule, // NoopAnimationsModule
         CoreModule,
         SharedModule,
@@ -42,18 +44,28 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         }),
         ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production})
     ],
-    providers: [
+    providers   : [
         {
-            provide: G43_NOTIFICATION_TOKEN, useClass: NotificationService
+            provide : G43_NOTIFICATION_TOKEN,
+            useClass: NotificationService
         },
         {
-            provide : MAT_SNACK_BAR_DEFAULT_OPTIONS,
-            useValue: {
-                duration: AppConfig.DEFAULT_ALERT_DURATION
-            }
+            provide   : MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useFactory: (configService: ConfigService<AppConfig>) => ({
+                duration: configService.get("notificationDuration"),
+            }),
+            deps      : [ConfigService],
+        },
+        {
+            provide   : APP_INITIALIZER,
+            useFactory: (configService: ConfigService<AppStaticConfig>) => {
+                return () => configService.init();
+            },
+            multi     : true,
+            deps      : [ConfigService],
         }
     ],
-    bootstrap: [
+    bootstrap   : [
         AppComponent
     ]
 })

@@ -1,8 +1,11 @@
-<div class="avatar-wrapper"><img *ngIf="movie.avatar" [src]="movie.avatar[0]" alt="" class="avatar"></div>
-<div class="info-wrapper top" style="cursor: pointer">
+<div class="avatar-wrapper">
+    <img *ngIf="movie.avatar" [src]="movie.avatar[0]" alt="Image avatar" class="avatar">
+</div>
+<div class="info-wrapper top">
     <div (click)="movieService.showMovieDetail(movie.id)"
          [title]="movie.titleSk || movie.title"
-         class="title">
+         class="title"
+    >
         <span>{{movie.titleSk || movie.title}}</span>
     </div>
 </div>

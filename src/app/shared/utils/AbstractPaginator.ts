@@ -1,12 +1,12 @@
-import {BehaviorSubject} from "rxjs";
-import {AppConfig} from "../../app.config";
+import { BehaviorSubject } from "rxjs";
+import { AppStaticConfig } from "../../appStaticConfig";
 
 export abstract class AbstractPaginator<T = any> {
-    public list = new BehaviorSubject<T[]>([]);
+    public list         = new BehaviorSubject<T[]>([]);
     protected _lastPage = 0;
-    protected _count = 0;
+    protected _count    = 0;
 
-    protected constructor(protected readonly _itemsPerPage = AppConfig.ITEMS_PER_PAGE) {
+    protected constructor(protected readonly _itemsPerPage = AppStaticConfig.ITEMS_PER_PAGE) {
     }
 
     protected _actualPage = 0;

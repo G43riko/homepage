@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
-import { AppConfig } from "../../../../app.config";
+import { AppStaticConfig } from "../../../../appStaticConfig";
 import { Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
 interface RequestParams {
@@ -90,11 +90,11 @@ export class FileAnalyzerUploadComponent implements OnInit {
         formData.append("file", file);
         this.progress = 0;
         sendRequest({
-            content: formData,
-            method: "POST",
-            url: AppConfig.BASE_URL + "/poc/analyze/file",
+            content   : formData,
+            method    : "POST",
+            url       : AppStaticConfig.BASE_URL + "/poc/analyze/file",
             onProgress: (e) => {
-                const value = e.loaded / e.total;
+                const value   = e.loaded / e.total;
                 this.progress = value * 100;
                 console.log("Progress", this.progress);
                 if (this.progress === 100) {

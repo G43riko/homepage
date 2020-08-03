@@ -1,17 +1,17 @@
-import {Subject} from "rxjs";
-import {debounceTime, take} from "rxjs/operators";
-import {AppConfig} from "../../app.config";
-import {AbstractPaginator} from "./AbstractPaginator";
-import {PaginatorService} from "./paginable-service.model";
+import { Subject } from "rxjs";
+import { debounceTime, take } from "rxjs/operators";
+import { AppStaticConfig } from "../../appStaticConfig";
+import { AbstractPaginator } from "./AbstractPaginator";
+import { PaginatorService } from "./paginable-service.model";
 
 export class ApiPaginator<T = any> extends AbstractPaginator<T> {
-    private groupedItems = 1;
-    private searchKey = "";
+    private groupedItems         = 1;
+    private searchKey            = "";
     private readonly searchByKey = new Subject();
 
     public constructor(private readonly service: PaginatorService<T>,
                        {
-                           pageSize = AppConfig.ITEMS_PER_PAGE,
+                           pageSize = AppStaticConfig.ITEMS_PER_PAGE,
                            debounce = 300
                        }) {
         super(pageSize);

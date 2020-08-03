@@ -4,13 +4,13 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
-import { AppConfig } from "../../app.config";
+import { AppStaticConfig } from "../../appStaticConfig";
 
 @NgModule({
     declarations: [],
     imports: [
         CommonModule,
-        AngularFireModule.initializeApp(AppConfig.FIREBASE_AUTH)
+        AngularFireModule.initializeApp(AppStaticConfig.FIREBASE_AUTH)
     ],
     exports: [
         AngularFireModule,

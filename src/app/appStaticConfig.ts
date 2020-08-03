@@ -2,8 +2,7 @@ import { environment } from "../environments/environment";
 import { MenuItemModel } from "./shared/components/menu-item.model";
 import { Roles } from "./shared/enums/roles.enum";
 
-export class AppConfig {
-    public static readonly TITLE           = "Homepage";
+export class AppStaticConfig {
     public static readonly BASE_URL        = environment.base_url;
     public static readonly ITEMS_PER_PAGE  = 10;
     public static readonly YOUTUBE_API_URL = "https://www.googleapis.com/youtube/v3/search";
@@ -25,8 +24,6 @@ export class AppConfig {
         storageBucket: "foods-5d312.appspot.com",
         messagingSenderId: "265768844504"
     };
-
-    public static readonly DEFAULT_ALERT_DURATION = 2000;
 
     public static readonly PATH_PROJECTS = "projects";
     public static readonly PATH_ABOUT = "about";
@@ -90,126 +87,126 @@ export class AppConfig {
     ];
 
     public static readonly FA_ICONS = [
-        ...AppConfig.FA_FOOD_ICONS,
-        ...AppConfig.FA_MOVIE_ICONS,
-        ...AppConfig.FA_TECHNOLOGY_ICONS
+        ...AppStaticConfig.FA_FOOD_ICONS,
+        ...AppStaticConfig.FA_MOVIE_ICONS,
+        ...AppStaticConfig.FA_TECHNOLOGY_ICONS
     ];
 
     public static readonly AUTH_COOKIE_KEY = "__auth_key__";
 
     public static readonly MENU_ITEMS: MenuItemModel[] = [
         {
-            icon: "home",
-            link: AppConfig.PATH_HOME,
+            icon  : "home",
+            link  : AppStaticConfig.PATH_HOME,
             access: "",
-            label: "home"
+            label : "home"
         },
         {
-            icon: "account_circle",
-            link: AppConfig.PATH_PROFILE,
+            icon  : "account_circle",
+            link  : AppStaticConfig.PATH_PROFILE,
             access: [Roles.ROLE_VISITOR],
-            label: "profile"
+            label : "profile"
         },
         {
-            icon: "queue_music",
-            link: AppConfig.PATH_MIXES,
+            icon  : "queue_music",
+            link  : AppStaticConfig.PATH_MIXES,
             access: [Roles.ROLE_VISIT_MIXES],
-            label: "mixes"
+            label : "mixes"
         },
         {
-            icon: "supervisor_account",
-            link: AppConfig.PATH_ACCOUNTS,
+            icon  : "supervisor_account",
+            link  : AppStaticConfig.PATH_ACCOUNTS,
             access: [Roles.ROLE_VISIT_ACCOUNTS],
-            label: "accounts"
+            label : "accounts"
         },
         {
-            icon: "new_releases",
-            link: AppConfig.PATH_PROJECTS,
+            icon  : "new_releases",
+            link  : AppStaticConfig.PATH_PROJECTS,
             access: "",
-            label: "projects"
+            label : "projects"
         },
         {
-            icon: "file_copy",
-            link: AppConfig.PATH_FILES,
+            icon  : "file_copy",
+            link  : AppStaticConfig.PATH_FILES,
             access: [Roles.ROLE_VISIT_FILES],
-            label: "files"
+            label : "files"
         },
         {
-            icon: "widgets",
-            link: AppConfig.PATH_FILE_ANALYZER,
+            icon  : "widgets",
+            link  : AppStaticConfig.PATH_FILE_ANALYZER,
             access: "",
-            label: "analyzer"
+            label : "analyzer"
         },
         /*
         {
             icon: "block layout",
-            link: AppConfig.PATH_IMAGES,
+            link: AppStaticConfig.PATH_IMAGES,
             label: "images",
         },
         {
             icon: "marker",
-            link: AppConfig.PATH_LOCATION,
+            link: AppStaticConfig.PATH_LOCATION,
             label: "location",
         },
         */
         {
-            icon: "contacts",
-            link: AppConfig.PATH_PERSONS,
+            icon  : "contacts",
+            link  : AppStaticConfig.PATH_PERSONS,
             access: [Roles.ROLE_VISIT_PERSONS],
-            label: "persons"
+            label : "persons"
         },
         {
-            icon: "movie",
-            link: AppConfig.PATH_MOVIES,
+            icon  : "movie",
+            link  : AppStaticConfig.PATH_MOVIES,
             access: [Roles.ROLE_VISIT_MOVIES],
-            label: "movies"
+            label : "movies"
         },
         /*
         {
             icon: "marker",
-            link: AppConfig.PATH_DEMOS,
+            link: AppStaticConfig.PATH_DEMOS,
             label: "demos",
         },
         */
         {
-            icon: "library_music",
-            link: AppConfig.PATH_SONGS,
+            icon  : "library_music",
+            link  : AppStaticConfig.PATH_SONGS,
             access: [Roles.ROLE_VISIT_SONGS],
-            label: "songs"
+            label : "songs"
         },
         {
-            icon: "restaurant",
-            link: AppConfig.PATH_FOODS,
+            icon  : "restaurant",
+            link  : AppStaticConfig.PATH_FOODS,
             access: "",
-            label: "foods"
+            label : "foods"
         },
         /*
         {
             icon: "",
-            link: AppConfig.PATH_YOUTUBE,
+            link: AppStaticConfig.PATH_YOUTUBE,
             label: "youtube",
         },
         {
             icon: "",
-            link: AppConfig.PATH_BROWSER,
+            link: AppStaticConfig.PATH_BROWSER,
             label: "browser",
         },
         {
             icon: "",
-            link: AppConfig.PATH_FOODS,
+            link: AppStaticConfig.PATH_FOODS,
             label: "foods",
         },
         */
         {
-            icon: "info",
-            link: AppConfig.PATH_ABOUT,
+            icon  : "info",
+            link  : AppStaticConfig.PATH_ABOUT,
             access: "",
-            label: "about"
+            label : "about"
         }
         /*
         {
             icon: "",
-            link: AppConfig.PATH_TODO,
+            link: AppStaticConfig.PATH_TODO,
             label: "todo",
         },
         */

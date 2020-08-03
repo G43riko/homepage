@@ -2,13 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { AppConfig } from "../../../app.config";
+import { AppStaticConfig } from "../../../appStaticConfig";
 import { Person } from "../../../shared/models/person/person.model";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 
-const URL = AppConfig.BASE_URL + "/persons";
+const URL = AppStaticConfig.BASE_URL + "/persons";
 
 @Injectable()
 export class PersonHttpService extends AbstractHttpService {

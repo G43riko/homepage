@@ -130,7 +130,7 @@ export class AuthService {
         //     console.log("Data: ", e);
         // });
         // userRef.update({
-        //     access: firestore.FieldValue.arrayUnion(AppConfig.PATH_PROFILE) as any,
+        //     access: firestore.FieldValue.arrayUnion(AppStaticConfig.PATH_PROFILE) as any,
         // });
         return userRef.set(this.localUser, {merge: true});
     }

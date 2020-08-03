@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AppConfig } from "./app.config";
+import { AppStaticConfig } from "./appStaticConfig";
 import { AuthGuard } from "./auth.guard";
 import { AboutComponent } from "./pages/about/about.component";
 import { ProjectsComponent } from "./pages/about/projects/projects.component";
@@ -8,80 +8,80 @@ import { HomeComponent } from "./pages/home/home.component";
 import { Roles } from "./shared/enums/roles.enum";
 
 export const AppRoutes: Routes = [
-/*
-    {
-        path: "**",
-        loadChildren: () => import("./pages/foods/foods.module").then(mod => mod.FoodsModule)
-    },
- */
+    /*
+        {
+            path: "**",
+            loadChildren: () => import("./pages/foods/foods.module").then(mod => mod.FoodsModule)
+        },
+     */
 
     {
-        path: "",
-        redirectTo: "/" + AppConfig.PATH_HOME,
-        pathMatch: "full"
+        path      : "",
+        redirectTo: "/" + AppStaticConfig.PATH_HOME,
+        pathMatch : "full"
     },
     {
-        path: AppConfig.PATH_HOME,
+        path     : AppStaticConfig.PATH_HOME,
         component: HomeComponent
     },
     {
-        path     : AppConfig.PATH_PROJECTS,
+        path     : AppStaticConfig.PATH_PROJECTS,
         component: ProjectsComponent
     },
     {
-        path: AppConfig.PATH_FILE_ANALYZER,
+        path        : AppStaticConfig.PATH_FILE_ANALYZER,
         loadChildren: () => import("./pages/analyzer/analyzer.module").then((mod) => mod.AnalyzerModule),
     },
     {
-        path     : AppConfig.PATH_ABOUT,
+        path     : AppStaticConfig.PATH_ABOUT,
         component: AboutComponent
     },
     {
-        path: AppConfig.PATH_MIXES,
+        path        : AppStaticConfig.PATH_MIXES,
         loadChildren: () => import("./pages/mixes/mixes.module").then((mod) => mod.MixesModule),
-        canActivate: [AuthGuard],
-        data       : {
+        canActivate : [AuthGuard],
+        data        : {
             allowedFor: [Roles.ROLE_VISIT_MIXES]
         }
     },
     {
-        path: AppConfig.PATH_PROFILE,
-        component: AccountProfileComponent,
+        path       : AppStaticConfig.PATH_PROFILE,
+        component  : AccountProfileComponent,
         canActivate: [AuthGuard],
-        data: {
+        data       : {
             allowedFor: [Roles.ROLE_VISITOR]
         }
     },
     {
-        path: AppConfig.PATH_SONGS,
-        loadChildren: () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
+        path            : AppStaticConfig.PATH_SONGS,
+        loadChildren    : () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
         canActivateChild: [AuthGuard],
-        data: {
+        data            : {
             allowedFor: [Roles.ROLE_VISIT_SONGS]
         }
     },
     {
-        path: AppConfig.PATH_FOODS,
+        path        : AppStaticConfig.PATH_FOODS,
         loadChildren: () => import("./pages/foods/foods.module").then((mod) => mod.FoodsModule)
     },
     {
-        path: AppConfig.PATH_FILES,
-        loadChildren: () => import("./pages/files/files.module").then((mod) => mod.FilesModule),
+        path            : AppStaticConfig.PATH_FILES,
+        loadChildren    : () => import("./pages/files/files.module").then((mod) => mod.FilesModule),
         canActivateChild: [AuthGuard],
-        data: {
+        data            : {
             allowedFor: [Roles.ROLE_VISIT_FILES]
         }
     },
     {
-        path: AppConfig.PATH_ACCOUNTS,
-        loadChildren: () => import("./pages/accounts/accounts.module").then((mod) => mod.AccountsModule),
+        path            : AppStaticConfig.PATH_ACCOUNTS,
+        loadChildren    : () => import("./pages/accounts/accounts.module").then((mod) => mod.AccountsModule),
         canActivateChild: [AuthGuard],
-        data: {
+        data            : {
             allowedFor: [Roles.ROLE_VISIT_ACCOUNTS]
         }
     },
     {
-        path            : AppConfig.PATH_MOVIES,
+        path            : AppStaticConfig.PATH_MOVIES,
         loadChildren    : () => import("./pages/movies/movies.module").then((mod) => mod.MoviesModule),
         canActivateChild: [AuthGuard],
         data            : {
@@ -89,7 +89,7 @@ export const AppRoutes: Routes = [
         }
     },
     {
-        path            : AppConfig.PATH_PERSONS,
+        path            : AppStaticConfig.PATH_PERSONS,
         loadChildren    : () => import("./pages/person/person.module").then((mod) => mod.PersonModule),
         canActivateChild: [AuthGuard],
         data            : {

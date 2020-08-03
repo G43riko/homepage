@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { AppConfig } from "../../../app.config";
+import { AppStaticConfig } from "../../../appStaticConfig";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
@@ -12,8 +12,8 @@ import { MovieSource } from "../models/movie-source.type";
 import { MovieType } from "../models/movie-type.type";
 import { Movie } from "../models/movie.model";
 
-const URL = AppConfig.BASE_URL + "/movies";
-const URL_EXTERNAL = AppConfig.BASE_URL + "/external-movies";
+const URL          = AppStaticConfig.BASE_URL + "/movies";
+const URL_EXTERNAL = AppStaticConfig.BASE_URL + "/external-movies";
 
 @Injectable()
 export class MovieHttpService extends AbstractHttpService<Movie> implements PaginatorService<Movie> {
@@ -23,7 +23,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
 
     public getMovies(): Observable<Movie[]> {
         return this.http.get<Movie[]>(URL + "/?limit=1000")
-            .pipe(
+                   .pipe(
                 catchError(this.handleError<Movie[]>("getMovies"))
             );
     }

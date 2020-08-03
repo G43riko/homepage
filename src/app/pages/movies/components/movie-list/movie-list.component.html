@@ -10,10 +10,10 @@
             <mat-radio-button [checked]="previewType === 'grid'" value="grid">Grid</mat-radio-button>
         </mat-radio-group>
     </section>
-    <mat-form-field style="flex-grow: 1">
+    <mat-form-field class="flex-grow-1">
         <input #searchPatter
-               matInput
                (input)="paginator.search(searchPatter.value)"
+               matInput
                placeholder="Search"
                type="search">
         <mat-icon matSuffix>search</mat-icon>
@@ -25,12 +25,13 @@
                 mat-button>{{director.name}}</button>
     </ng-template>
     <ng-template #cellTitle let-row="row">
-        <div style="display: flex; flex-direction: row">
+        <div class="flex-row">
             <img (click)="openImageDetail(row.avatar)"
                  *ngIf="row.avatar"
                  [src]="row.avatar"
                  alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
-            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="flex-column"
+                 style="justify-content: space-between;">
                 <strong>{{row.titleSk || row.title}}</strong>
                 <div *ngIf="row.titleSk" class="sub header">{{row.title}}</div>
             </div>
@@ -42,7 +43,8 @@
     <ng-template #cellDetail let-row="row">
         <button (click)="movieService.showMovieDetail(row.id)"
                 color="primary"
-                mat-mini-fab>
+                mat-mini-fab
+        >
             <mat-icon>chevron_right</mat-icon>
         </button>
     </ng-template>
@@ -57,8 +59,12 @@
         <app-movie-poster-preview *ngFor="let movie of paginator.list | async | movieFilter: searchPattern"
                                   [movie]="movie"></app-movie-poster-preview>
     </div>
-    <div style="text-align: center">
-        <button (click)="paginator.loadNext()" class="next-loader" color="primary" mat-raised-button>Load next movies
+    <div class="align-center">
+        <button (click)="paginator.loadNext()"
+                class="next-loader"
+                color="primary"
+                mat-raised-button
+        >Load next movies
         </button>
     </div>
 </ng-container>

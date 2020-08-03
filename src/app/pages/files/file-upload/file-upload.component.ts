@@ -72,7 +72,7 @@ export class FileUploadComponent implements OnInit {
             //     this.files = emptyFileList;
             //     this.onFileUploaded.emit(user);
             //     this.snackBar.open("Súbor bol úspešne nahratý", "Zavrieť", {
-            //         duration: AppConfig.DEFAULT_ALERT_DURATION,
+            //         duration: AppStaticConfig.DEFAULT_ALERT_DURATION,
             //     });
             // }));
         }

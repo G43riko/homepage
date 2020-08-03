@@ -2,17 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { AppConfig } from "../../../app.config";
+import { AppStaticConfig } from "../../../appStaticConfig";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Maker } from "../models/maker.model";
 
-const URL = AppConfig.BASE_URL + "/external-movies";
+const URL = AppStaticConfig.BASE_URL + "/external-movies";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class ExternalMovieService extends AbstractHttpService {
     public constructor(http: HttpClient, authService: AuthService, notificationService: NotificationService) {
         super(http, authService, notificationService, URL);

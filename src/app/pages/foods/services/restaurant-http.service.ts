@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable, of } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
-import { AppConfig } from "../../../app.config";
+import { catchError, map, switchMap } from "rxjs/operators";
+import { AppStaticConfig } from "../../../appStaticConfig";
 import { Address } from "../../../shared/models/person/address.model";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
@@ -11,7 +11,7 @@ import { GeoLocationService } from "../../../shared/services/geo-location.servic
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Restaurant } from "../models/restaurant.model";
 
-const URL = AppConfig.BASE_URL + "/restaurants";
+const URL = AppStaticConfig.BASE_URL + "/restaurants";
 
 @Injectable()
 export class RestaurantHttpService extends AbstractHttpService {
