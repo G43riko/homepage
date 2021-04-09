@@ -77,7 +77,7 @@
         </div>
         <div class="col technologies">
             <h3>{{'about.technologies' | translate}}</h3>
-            <div *ngFor="let technology of technologies" class="technology-row">
+            <div *ngFor="let technology of technologies$ | async" class="technology-row">
                 <div
                     [ngStyle]="{width: technology.skill + '%', background: 'rgb(' + (255 - technology.skill * 2.5) + ', ' + (technology.skill * 2.5) + ', 0)'}"
                     class="slider"

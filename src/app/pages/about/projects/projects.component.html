@@ -9,7 +9,7 @@
             <th>{{'projects.docs' | translate}}</th>
             <th>{{'projects.sources' | translate}}</th>
         </tr>
-        <tr *ngFor="let project of projects">
+        <tr *ngFor="let project of projects$ | async">
             <td>{{project.name | localTitle : translateService.currentLang}}</td>
             <td>{{'projects.teams.' + project.team | translate}}</td>
             <td>
