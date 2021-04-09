@@ -2,7 +2,6 @@
 
 import {getTestBed} from "@angular/core/testing";
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from "@angular/platform-browser-dynamic/testing";
-
 import "hammerjs";
 import "zone.js/dist/zone-testing";
 

@@ -32,11 +32,11 @@ export class LocationService extends AbstractHttpService {
 
     }
 
-    private _getIpFromGeoLocation(success: (data: Position) => void, errorCallback: (error: string) => void): void {
+    private _getIpFromGeoLocation(success: (data: unknown) => void, errorCallback: (error: string) => void): void {
         // observer.
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition((position) => {
-                navigator.geolocation.getCurrentPosition((data: Position) => {
+                navigator.geolocation.getCurrentPosition((data) => {
                     success(data);
                 });
             },
