@@ -1,5 +1,5 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
 import { merge, Observable, of } from "rxjs";
@@ -48,6 +48,9 @@ export class AbstractTableComponent<T = any> implements OnInit {
     }
 
     private paginateData(data: T[], paginator: MatPaginator): T[] {
+        if (!paginator) {
+            return data;
+        }
         return data.splice(paginator.pageSize * paginator.pageIndex, paginator.pageSize);
     }
 
@@ -67,14 +70,14 @@ export class AbstractTableComponent<T = any> implements OnInit {
         if (!this.tableConfig) {
             return;
         }
-        const observables: EventEmitter<any>[] = [];
+        const observables: Observable<any>[] = [of(null as any)];
 
-        if (this.tableConfig.columns.some((column) => Boolean(column.sort))) {
+        if (this.sort && this.tableConfig.columns.some((column) => Boolean(column.sort))) {
             this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
             observables.push(this.sort.sortChange);
         }
 
-        if (this.tableConfig.paginator) {
+        if (this.paginator && this.tableConfig.paginator) {
             observables.push(this.paginator.page);
         }
 
@@ -95,20 +98,21 @@ export class AbstractTableComponent<T = any> implements OnInit {
 
                 return this.data.pipe(
                     map((data) => ({
-                        data       : this.transformData(data),
-                        totalLength: data.length
-                    }),
-                    tap(() => this.changeDetectorRef.detectChanges())
+                            data       : this.transformData(data),
+                            totalLength: data.length
+                        }),
+                        tap(() => this.changeDetectorRef.detectChanges())
                     ));
             }),
             map((data: { data: T[]; totalLength: number }) => {
-                this.resultsLength    = data.totalLength;
+                this.resultsLength = data.totalLength;
                 this.isLoadingResults = false;
 
                 return data.data;
             }),
-            catchError(() => {
+            catchError((error) => {
                 this.isLoadingResults = false;
+                console.error(error);
 
                 return of([]);
             })
@@ -148,7 +152,7 @@ export class AbstractTableComponent<T = any> implements OnInit {
     }
 
     private sortData(data: any[], sort: Sort): any[] {
-        if (!sort.active || !sort.direction) {
+        if (!sort || !sort.active || !sort.direction) {
             return data;
         }
 

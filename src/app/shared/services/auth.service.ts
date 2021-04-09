@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { auth } from "firebase/app";
+import firebase from "firebase";
 import { Observable, of } from "rxjs";
 import { fromPromise } from "rxjs/internal-compatibility";
 import { switchMap } from "rxjs/operators";
 import { Roles } from "../enums/roles.enum";
 import { User } from "../models/auth.model";
 import { AnalyticsService } from "./analytics.service";
+import auth = firebase.auth;
 
 @Injectable({
     providedIn: "root"

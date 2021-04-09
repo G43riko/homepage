@@ -16,12 +16,12 @@ export class GeoLocationService {
 
             return;
         }
-        navigator.geolocation.getCurrentPosition((position: Position) => {
+        navigator.geolocation.getCurrentPosition((position) => {
             this.coordinates.next({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
-        }, (error: PositionError) => this.coordinates.error(error));
+        }, (error) => this.coordinates.error(error));
     }
 
     public cleanUp(): void {

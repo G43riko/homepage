@@ -58,8 +58,8 @@ export class FileAnalyzerPreviewComponent {
         this.previewBody.nativeElement.innerHTML = "";
         this.histograms.nativeElement.innerHTML  = "";
         this.infos.splice(0, this.infos.length);
-        delete this.uploadedFile;
-        delete this.response;
+        this.uploadedFile = null as any;
+        this.response = null as any;
     }
 
     public processServerResponse(response: Response, uploadedFile: File): void {

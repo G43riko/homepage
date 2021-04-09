@@ -18,7 +18,7 @@ import {PersonHttpService} from "../../services/person-http.service";
 export class PersonListComponent implements OnInit {
     public readonly Roles = Roles;
     public data: Person[];
-    public personData: Observable<Person[]>;
+    public personData: Observable<Person[]> = this.personHttpService.getPersons();
     public personConfig: TableConfig;
 
     public constructor(private readonly route: ActivatedRoute,
@@ -29,7 +29,6 @@ export class PersonListComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.personData = this.personHttpService.getPersons();
         // this.personService.getPersons().subscribe((data: Person[]) => {
         //     this.data = data;
         // }, (error) => this.notificationService.openErrorNotification(error));
