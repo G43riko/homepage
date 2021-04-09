@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CoreModule } from "../../shared/core.module";
+import { MaterialModule } from "../../shared/modules/material.module";
 import { SharedModule } from "../../shared/shared.module";
 import { CsfdUserDetailComponent } from "./components/csfd-user-detail/csfd-user-detail.component";
 import { ExternalLinksComponent } from "./components/external-links/external-links.component";
@@ -25,7 +26,8 @@ import { MovieService } from "./services/movie.service";
     imports     : [
         CoreModule,
         SharedModule,
-        MoviesRoutingModule
+        MoviesRoutingModule,
+        MaterialModule,
     ],
     providers   : [
         MovieHttpService,

@@ -40,12 +40,12 @@
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
-        <mat-card-controlls>
+        <mat-card-actions>
             <button (click)="searchMovie()" [disabled]="loading || movieSearchForm.invalid" color="primary"
                     mat-raised-button>
                 Hladať
             </button>
-        </mat-card-controlls>
+        </mat-card-actions>
         <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
     </mat-card>

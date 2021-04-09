@@ -1,30 +1,36 @@
 {
   "configVersion": 1,
-  "timestamp": 1580669872996,
+  "timestamp": 1617981987191,
   "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
-        "/10.a6755774be8ab3a429eb.js",
-        "/11.8660192534a9c6a5964f.js",
-        "/12.24efa18ec9489e3374f1.js",
-        "/13.2b64ae0714befd208daa.js",
-        "/14.a2430e51c51a2a89ea6d.js",
-        "/6.103800127e7194c8f83e.js",
-        "/7.a7a06db344365889979f.js",
-        "/8.eaf79cd88ead20b04dec.js",
-        "/9.8c457c1b58fe62d55d9b.js",
-        "/common.cd736a97dd550f95bbb2.js",
+        "/10.5a3df3cfb8aec6ec8455.js",
+        "/11.247276eea4e14fe38a2d.js",
+        "/12.754d7fb52578cb0b9175.js",
+        "/13.9b10b05f482005d8c2d1.js",
+        "/14.b25c129f511cf57cdd38.js",
+        "/15.4e303ac4be46827d5023.js",
+        "/16.891dab9be3158f2285e6.js",
+        "/2.2209ed29435273189508.js",
+        "/7.55a3dbaf270d5055b9f1.js",
+        "/8.6f1a0eec3f38b7cd7fc1.js",
+        "/9.1b0df66e6c957c0fa9a8.js",
+        "/common.7f776c89eb0a55a95ac6.js",
         "/favicon.ico",
         "/index.html",
-        "/main.12363adb20bef59863bb.js",
-        "/polyfills-es5.1b7c6787b0865f9e950e.js",
-        "/polyfills.8e6a4f9479945bb25fc6.js",
-        "/runtime.f2741b22b8a69937c02d.js",
-        "/styles.1809e6b271ade31a693c.css"
+        "/main.78acc0ec96007819c764.js",
+        "/manifest.webmanifest",
+        "/polyfills-es5.4ed83dc4e487078765e5.js",
+        "/polyfills.a5a424ea4ad07a6667f0.js",
+        "/runtime.899b74474e2d55f9d8be.js",
+        "/styles.9368a47a27f17605d321.css"
       ],
       "patterns": []
     },
@@ -32,7 +38,11 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
+        "/assets/config.json",
         "/assets/favicons/android-chrome-192x192.png",
         "/assets/favicons/android-chrome-256x256.png",
         "/assets/favicons/android-chrome-512x512.png",
@@ -119,15 +129,18 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/10.a6755774be8ab3a429eb.js": "64b09ba7d639b5428bd2dcfca8a60b07e8fb7bcb",
-    "/11.8660192534a9c6a5964f.js": "175226c0888236aba8dc4f4aa60e960904f20bed",
-    "/12.24efa18ec9489e3374f1.js": "334d746c7702593998adfae152ac66b71ee32476",
-    "/13.2b64ae0714befd208daa.js": "8f7bf60c750adbdc356e26e66d8c08fc61dad171",
-    "/14.a2430e51c51a2a89ea6d.js": "5923ba729d8f6a176478a2c0f8777a36a5c9e4af",
-    "/6.103800127e7194c8f83e.js": "64d6ed46fa53fa045ad8e1510a98f5808b1b2acc",
-    "/7.a7a06db344365889979f.js": "779d2d8e05ae03d5e8c89f2ad3132696bd0e6fdc",
-    "/8.eaf79cd88ead20b04dec.js": "70325b49ce81637eabc4eaf894a4d348dd911fc6",
-    "/9.8c457c1b58fe62d55d9b.js": "4667f29645f3c4c7009f4b734f44ef4d1f41c5e3",
+    "/10.5a3df3cfb8aec6ec8455.js": "1c19ba50413d18f3202c50417f419bee34517167",
+    "/11.247276eea4e14fe38a2d.js": "5ed4d743df49f776b8867ca28bc1bc539d55af40",
+    "/12.754d7fb52578cb0b9175.js": "a4ec343fbf8e469a23fd1410b6a4bde78d6e18fe",
+    "/13.9b10b05f482005d8c2d1.js": "278c0e5d4da3ff751bf188df291f844f47fd9686",
+    "/14.b25c129f511cf57cdd38.js": "841a19b69500baff491dab9f699c9a6a42a05a47",
+    "/15.4e303ac4be46827d5023.js": "c614a8a70360f72dda7227cfecbe1f3c818ab008",
+    "/16.891dab9be3158f2285e6.js": "9530ed7bb99ebf89e46cd046abb75fbaf6ef0f7b",
+    "/2.2209ed29435273189508.js": "3c29f8b2ecd37a8c440adba064bbede83c3b2159",
+    "/7.55a3dbaf270d5055b9f1.js": "7d0a58caba8204825cc6921656cec623815fc523",
+    "/8.6f1a0eec3f38b7cd7fc1.js": "c150a6c63ce3de1ea0b5de363ce44c6f742c1e8d",
+    "/9.1b0df66e6c957c0fa9a8.js": "e287661b02d317c102f8bbed423fc75db9b88612",
+    "/assets/config.json": "0931ed7f23934833d9e97a1d5c990e7e425e4bda",
     "/assets/favicons/android-chrome-192x192.png": "3cf551005ece5371e801e17491e11023d2818498",
     "/assets/favicons/android-chrome-256x256.png": "9bd023b3c802db576731d7723300f38c53e7e2ca",
     "/assets/favicons/android-chrome-512x512.png": "e7a511d893d4401569c345001cc17b2a57d25950",
@@ -140,7 +153,7 @@
     "/assets/favicons/safari-pinned-tab.svg": "2f886bf89b8c39cb52e4dd180df616c70b23d6a8",
     "/assets/font-awesome.min.css": "88af80502c44cd52ca81ffe7dc7276b7eccb06cf",
     "/assets/i18n/en.json": "9aa777d55e6e82171ebc54d37b74e936cd87d07d",
-    "/assets/i18n/sk.json": "8a4aceccdde61b679277037ede3165e016af36d2",
+    "/assets/i18n/sk.json": "846951d643f2892d3556dee9b8d299ef5f4e0c81",
     "/assets/icons.json": "b382526cf3065ce8eb20e1ad91191875a508af5b",
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -208,14 +221,15 @@
     "/assets/themes/default/assets/fonts/icons.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/assets/themes/default/assets/fonts/icons.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/assets/themes/default/assets/images/flags.png": "4a552ecb123ded5040ddda01d626103cc65db055",
-    "/common.cd736a97dd550f95bbb2.js": "c23b0f1dd1620a5d4e160b46b1f454e600086901",
+    "/common.7f776c89eb0a55a95ac6.js": "3932299a9568fe051cd43a0f7bd6f2530023df65",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "4c047e39092b781ec997cbdc050b84b8f84821e1",
-    "/main.12363adb20bef59863bb.js": "bf170d210b924fda3f80994d78deafb4438affb6",
-    "/polyfills-es5.1b7c6787b0865f9e950e.js": "3c669a4f463438415cad995d486802d8422720b7",
-    "/polyfills.8e6a4f9479945bb25fc6.js": "05e57ef02e4d463510c31e6fa3b527036b9af712",
-    "/runtime.f2741b22b8a69937c02d.js": "e51b043bb1331ad62f6f7e312ea5afef58c6aa17",
-    "/styles.1809e6b271ade31a693c.css": "702a5f03761c0905dbbe3eb8e4381769d06fd4d3"
+    "/index.html": "b7869dff63f62248085142863d9f8d36a35d7494",
+    "/main.78acc0ec96007819c764.js": "2694b06151f019424cf48d497d6831d526c5526a",
+    "/manifest.webmanifest": "47a7cb917eabde10db79aab78f4d4cf4913f9c87",
+    "/polyfills-es5.4ed83dc4e487078765e5.js": "74efbde4fa70f165151671d2f40fd07528068ca5",
+    "/polyfills.a5a424ea4ad07a6667f0.js": "4c693efa4064f8b3135c4bfc59efc57d2531966c",
+    "/runtime.899b74474e2d55f9d8be.js": "4303c09320b3fba93a8940783b3c35ff96447c40",
+    "/styles.9368a47a27f17605d321.css": "88af73d8cddadff8ed894f7ee00bda7d988800b0"
   },
   "navigationUrls": [
     {
@@ -234,5 +248,6 @@
       "positive": false,
       "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
     }
-  ]
+  ],
+  "navigationRequestStrategy": "performance"
 }

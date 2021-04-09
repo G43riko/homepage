@@ -16,6 +16,10 @@
         "home": "Domov",
         "profile": "Profil",
         "mixes": "Playlisty",
+        "accounts": "Účty",
+        "songs": "Pesničky",
+        "persons": "Osoby",
+        "movies": "Filmy",
         "files": "Súbory",
         "analyzer": "Analyzér"
     },
@@ -51,7 +55,7 @@
         "feedbackPanel": "Spätná väzba",
         "distance": "Vzialenosť",
         "unknownDistance": "Neznáma vzialenosť",
-        "login":{
+        "login": {
             "login": "Prihlásiť",
             "logout": "Odhlásiť",
             "with": {
