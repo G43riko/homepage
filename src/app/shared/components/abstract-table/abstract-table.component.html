@@ -54,13 +54,13 @@
                 <th *matHeaderCellDef="let row"
                     mat-header-cell
                     mat-sort-header>
-                    {{getLabel(columnConfig, row)}}
+                    {{getLabel(columnConfig, row) | async}}
                 </th>
             </ng-template>
             <ng-template #sortDisabled>
                 <th *matHeaderCellDef="let row"
                     mat-header-cell>
-                    {{getLabel(columnConfig, row)}}
+                    {{getLabel(columnConfig, row) | async}}
                 </th>
             </ng-template>
 

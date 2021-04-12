@@ -11,6 +11,11 @@ table {
     border-radius: 50%;
 }
 
+.example-container {
+    width: 100%;
+    overflow: auto;
+}
+
 
 @media screen and (max-width: 960px) {
     .mat-table22 {

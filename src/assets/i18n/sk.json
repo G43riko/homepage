@@ -68,6 +68,37 @@
             "message": "Správa"
         }
     },
+    "movies": {
+        "addNew": "Pridať nový",
+        "openDetail": "Zobraziť detail",
+        "directors": "Režisér",
+        "ratings": "Hodnotenie",
+        "duration": "Dĺžka",
+        "genres": "Žánre",
+        "countries": "Krajiny",
+        "detail": {
+            "pilot": "Obsah",
+            "update": "Upraviť",
+            "save": "Uložiť",
+            "back": "Naspäť",
+            "directors": "Režiséry",
+            "makers": "Tvorcovia"
+        },
+        "adminSection": {
+            "title": "Administratíva"
+        },
+        "personalInfo": {
+            "title": "Osobné info",
+            "wantSee": "Chcem vidieť",
+            "saw": "Videné"
+        },
+        "search": "Hladať",
+        "loadNext": "Načítať ďalšie",
+        "show": {
+            "grid": "Mrižku",
+            "table": "Tabuľku"
+        }
+    },
     "projects": {
         "title": "Projekty",
         "name": "Názov",

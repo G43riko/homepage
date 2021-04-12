@@ -119,12 +119,15 @@ export class AbstractTableComponent<T = any> implements OnInit {
         ).subscribe((data) => this.realData = data);
     }
 
-    public getLabel(columnConfig: ColumnConfig, row: T): string {
+    public getLabel(columnConfig: ColumnConfig, row: T): Observable<string> {
         if (typeof columnConfig.customLabel === "function") {
             throw new Error("'customLabel' is no implemented");
         }
+        if (columnConfig.label$) {
+            return columnConfig.label$;
+        }
 
-        return columnConfig.label || "";
+        return of(columnConfig.label || "");
     }
 
 

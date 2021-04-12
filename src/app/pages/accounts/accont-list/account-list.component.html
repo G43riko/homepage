@@ -2,7 +2,7 @@
     <table [dataSource]="accounts" mat-table>
 
         <!-- Position Column -->
-        <ng-container matColumnDef="displayName">
+        <ng-container matColumnDef="displayName" sticky>
             <th *matHeaderCellDef mat-header-cell> Name</th>
             <td *matCellDef="let element" mat-cell>
                 <img [src]="element.photoURL" alt="" class="example-header-image">
