@@ -1,5 +1,5 @@
-<div *ngIf="authService.user$ | async as user" class="example-container mat-elevation-z8">
-    <table [dataSource]="accounts" mat-table>
+<div class="example-container mat-elevation-z8">
+    <table [dataSource]="accounts$ | async" mat-table>
 
         <!-- Position Column -->
         <ng-container matColumnDef="displayName" sticky>
@@ -16,12 +16,12 @@
             <td *matCellDef="let element" mat-cell> {{element.email}} </td>
         </ng-container>
 
-        <ng-container *ngFor="let role of roles" matColumnDef="{{role}}">
+        <ng-container *ngFor="let role of roles; trackBy: trackByFn" matColumnDef="{{role}}">
             <th *matHeaderCellDef mat-header-cell> {{role.replace("ROLE_", "")}} </th>
             <td *matCellDef="let element" mat-cell>
-                <mat-checkbox (change)="changeRole(role, element, user, $event)"
+                <mat-checkbox (change)="changeRole(role, element, $event)"
                               [checked]="element.roles[role]"
-                              [disabled]="!authService.checkAuthorization(user, Roles.ROLE_UPDATE_ACCOUNTS)"></mat-checkbox>
+                              [disabled]="!(canUpdate$ | async)"></mat-checkbox>
             </td>
         </ng-container>
 

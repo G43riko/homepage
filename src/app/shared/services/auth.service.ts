@@ -15,22 +15,21 @@ import auth = firebase.auth;
     providedIn: "root"
 })
 export class AuthService {
-    public readonly user$: Observable<User | undefined>;
+    public readonly user$ = this.afAuth.authState.pipe(
+        switchMap((user) => {
+            if (user) {
+                return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            }
+
+            return of(undefined);
+        }),
+    );
     private localUser: User;
 
     public constructor(private readonly router: Router,
                        private readonly afAuth: AngularFireAuth,
                        private readonly analyticsService: AnalyticsService,
                        private readonly afs: AngularFirestore) {
-        this.user$ = this.afAuth.authState.pipe(
-            switchMap((user) => {
-                if (user) {
-                    return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-                }
-
-                return of(undefined);
-            })
-        );
     }
 
     public async googleSigning(): Promise<void> {
@@ -77,7 +76,7 @@ export class AuthService {
     }
 
     public getAccounts(): Observable<User[]> {
-        return this.afs.collection("users").valueChanges() as any;
+        return this.afs.collection<User>("users").valueChanges();
     }
 
     public updateRole(role: any, user: any, checked: boolean): Observable<void> {

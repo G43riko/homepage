@@ -72,7 +72,7 @@ export class AbstractTableComponent<T = any> implements OnInit {
         }
         const observables: Observable<any>[] = [of(null as any)];
 
-        if (this.sort && this.tableConfig.columns.some((column) => Boolean(column.sort))) {
+        if (this. sort && this.tableConfig.columns.some((column) => Boolean(column.sort))) {
             this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
             observables.push(this.sort.sortChange);
         }

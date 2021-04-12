@@ -1,9 +1,10 @@
-import { Component, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
 import { FileAnalyzerPreviewComponent, Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
 @Component({
     selector   : "app-file-analyzer",
     templateUrl: "./file-analyzer.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls  : ["./file-analyzer.component.scss"],
 })
 export class FileAnalyzerComponent {
