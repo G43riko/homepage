@@ -20,6 +20,10 @@ export class MovieService {
                 return window.open("https://www.themoviedb.org/" + path + "/" + id, "_blank");
         }
     }
+    public showMovieCreateForm(): void {
+        this.router.navigateByUrl("/movies/new");
+    }
+
 
     public showMovieDetail(movieId: number | string): void {
         this.router.navigateByUrl("/movies/" + movieId);

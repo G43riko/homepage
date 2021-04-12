@@ -6,12 +6,14 @@
 
         <button (click)="showDetail(row.id)"
                 color="primary"
-                mat-mini-fab>
+                matTooltip="Zobraziť detail"
+                mat-icon-button>
             <mat-icon>chevron_right</mat-icon>
         </button>
         <button (click)="remove(row)"
                 color="primary"
-                mat-mini-fab>
+                matTooltip="Odstrániť"
+                mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>
         <!--        <button (click)="showDetail(row.id)" class="circular ui icon button hiddenable">-->
@@ -33,7 +35,7 @@
                         [data]="personData">
     </app-abstract-table>
 
-    <button mat-fab class="floating-add" (click)="createNew()">
+    <button mat-fab class="floating-add" (click)="createNew()" matTooltip="Pridať osobu">
         <mat-icon>add</mat-icon>
     </button>
 </div>

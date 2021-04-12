@@ -1,28 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
-import { NotificationService } from "../../../../shared/services/notification.service";
-import { ApiPaginator } from "../../../../shared/utils/ApiPaginator";
 import { Movie } from "../../models/movie.model";
-import { MovieHttpService } from "../../services/movie-http.service";
+import { MovieListService } from "../../services/movie-list.service";
 import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector   : "app-movie-list",
     templateUrl: "./movie-list.component.html",
-    styleUrls  : ["./movie-list.component.scss"]
+    styleUrls  : ["./movie-list.component.scss"],
+    providers: [
+        MovieListService,
+    ]
 })
-export class MovieListComponent implements OnInit {
-    public previewType: "table" | "grid" = "table";
-    public selectedAll                   = false;
-    // public paginator: Paginator<Movie>;
-    public readonly paginator: ApiPaginator<Movie>;
-    public searchPattern: string;
-
-    public movieData: Observable<Movie[]>;
+export class MovieListComponent implements OnDestroy{
+    public readonly previewType$ = this.movieListService.previewType$;
+    public selectedAll           = false;
+    public readonly movieList$   = this.movieListService.movieList$;
     public readonly movieConfig: TableConfig = {
         selection      : "multi",
         paginateOptions: [5, 10, 20, 50, 100],
@@ -74,17 +69,18 @@ export class MovieListComponent implements OnInit {
         ]
     };
 
-    public constructor(movieHttpService: MovieHttpService,
-                       private readonly dialog: MatDialog,
-                       private readonly router: Router,
-                       public readonly movieService: MovieService,
-                       private readonly notificationService: NotificationService) {
-        this.paginator = new ApiPaginator(movieHttpService, {pageSize: 10});
-        this.movieData = movieHttpService.getMovies();
-
-    }
-
-    public ngOnInit(): void {
+    private readonly io = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                this.movieListService.loadNext(10);
+            }
+        });
+    });
+    public constructor(
+        private readonly dialog: MatDialog,
+        private readonly movieService: MovieService,
+        private readonly movieListService: MovieListService
+    ) {
     }
 
     public openImageDetail(url: string): void {
@@ -94,33 +90,45 @@ export class MovieListComponent implements OnInit {
     }
 
     public setPreviewType(previewType: "table" | "grid"): void {
-        this.previewType = previewType;
-        this.paginator.firstPage();
+        this.movieListService.setPreviewType(previewType);
+        this.io.takeRecords().forEach((e) => this.io.unobserve(e.target));
         if (previewType !== "grid") {
             return;
         }
         setTimeout(() => {
-            const io = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        this.paginator.loadNext(10);
-                        console.log("intersecting");
-                    }
-                });
-            });
-            io.observe(document.querySelector(".next-loader") as Element);
+            this.io.observe(document.querySelector(".next-loader") as Element);
         }, 10);
     }
 
     public selectAll(checkbox: HTMLInputElement): void {
-        console.log(checkbox);
         const elements: NodeListOf<any> = document.getElementsByName("personSelector");
         for (let i = 0; i < elements.length; i++) {
             elements[i].checked = !this.selectedAll;
         }
     }
 
-    public createNew(): void {
-        this.router.navigateByUrl("/movies/new");
+    public ngOnDestroy(): void {
+        this.io.disconnect();
     }
+
+    public onAddMovieClick(): void {
+        this.movieService.showMovieCreateForm();
+    }
+
+    public onLoadNextClick(): void {
+        this.movieListService.loadNext();
+    }
+
+    public onSearchPatternChange(value: string): void {
+        this.movieListService.searchPatternChange(value);
+    }
+
+    public onShowMakerDetailClick(makerId: string): void {
+        this.movieService.showMakerDetail(makerId);
+    }
+
+    public onShowMovieDetailClick(movieId: string): void {
+        this.movieService.showMovieDetail(movieId);
+    }
+
 }

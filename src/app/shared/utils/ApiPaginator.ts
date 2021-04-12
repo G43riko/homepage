@@ -1,10 +1,11 @@
 import { Subject } from "rxjs";
-import { debounceTime, take } from "rxjs/operators";
+import { debounceTime, first, take, takeUntil } from "rxjs/operators";
 import { AppStaticConfig } from "../../appStaticConfig";
 import { AbstractPaginator } from "./AbstractPaginator";
 import { PaginatorService } from "./paginable-service.model";
 
 export class ApiPaginator<T = any> extends AbstractPaginator<T> {
+    private readonly killer$     = new Subject();
     private groupedItems         = 1;
     private searchKey            = "";
     private readonly searchByKey = new Subject();
@@ -15,12 +16,20 @@ export class ApiPaginator<T = any> extends AbstractPaginator<T> {
                            debounce = 300
                        }) {
         super(pageSize);
-        service.getCount().pipe(take(1)).subscribe((count) => {
+        service.getCount().pipe(first()).subscribe((count) => {
             this._lastPage = Math.floor(count / this._itemsPerPage);
-            this._count = count;
+            this._count    = count;
             this._reCalcList();
         });
-        this.searchByKey.pipe(debounceTime(debounce)).subscribe(() => this._reCalcList());
+        this.searchByKey.pipe(
+            debounceTime(debounce),
+            takeUntil(this.killer$),
+        ).subscribe(() => this._reCalcList());
+    }
+
+    public cleanUp(): void {
+        this.killer$.next();
+        this.killer$.complete();
     }
 
     public search(key: string): void {
@@ -32,15 +41,15 @@ export class ApiPaginator<T = any> extends AbstractPaginator<T> {
         const start = (this._actualPage + this.groupedItems) * this._itemsPerPage;
         this.groupedItems++;
         this.service.getList(count, start, this.searchKey).pipe(take(1)).subscribe((data) => {
-            this.list.next(this.list.value.concat(data));
+            this.listSource$.next(this.listSource$.value.concat(data));
         });
     }
 
     protected _reCalcList(): void {
         this.groupedItems = 1;
-        const start = this._actualPage * this._itemsPerPage;
+        const start       = this._actualPage * this._itemsPerPage;
         this.service.getList(this._itemsPerPage, start, this.searchKey).pipe(take(1)).subscribe((data) => {
-            this.list.next(data);
+            this.listSource$.next(data);
         });
     }
 }

@@ -21,7 +21,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
         super(http, authService, notificationService, URL);
     }
 
-    public getMovies(): Observable<Movie[]> {
+    public fetchMovies(): Observable<Movie[]> {
         return this.http.get<Movie[]>(URL + "/?limit=1000")
                    .pipe(
                 catchError(this.handleError<Movie[]>("getMovies"))
