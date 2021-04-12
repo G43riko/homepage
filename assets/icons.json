@@ -1,0 +1,282 @@
+[
+    {
+        "name": "Javascript",
+        "pattern": "(javascript|js)",
+        "icon": "js",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Typescript",
+        "pattern": "(typescript|js)",
+        "icon": "ts",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Git",
+        "pattern": "(^git$)",
+        "icon": "git",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Github",
+        "pattern": "github",
+        "icon": "github",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Gitlab",
+        "pattern": "gitlab",
+        "icon": "gitlab",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Bitbucket",
+        "pattern": "bitbucket",
+        "icon": "bitbucket",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Bootstrap",
+        "pattern": "bootstrap",
+        "icon": "bootstrap",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Codepen",
+        "pattern": "codepen",
+        "icon": "codepen",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "CSS",
+        "pattern": "css",
+        "icon": "css3",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Docker",
+        "pattern": "docker",
+        "icon": "docker",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Facebook",
+        "pattern": "(facebook|fb)",
+        "icon": "facebook",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Firebase",
+        "pattern": "firebase",
+        "icon": "firebase",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Grunt",
+        "pattern": "grunt",
+        "icon": "grunt",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Gulp",
+        "pattern": "gulp",
+        "icon": "gulp",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Hackerrank",
+        "pattern": "hackerrank",
+        "icon": "hackerrank",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "HTML",
+        "pattern": "html",
+        "icon": "html5",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Instagram",
+        "pattern": "instagram",
+        "icon": "instagram",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Java",
+        "pattern": "java$",
+        "icon": "java",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Jira",
+        "pattern": "jira",
+        "icon": "jira",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "linkedin",
+        "pattern": "linked.?in",
+        "icon": "linkedin",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Mixcloud",
+        "pattern": "mixcloud",
+        "icon": "mixcloud",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "MongoDB",
+        "pattern": "mongo.?db",
+        "icon": "mongodb",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "NodeJS",
+        "pattern": "node.?js",
+        "icon": "nodejs",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "NPM",
+        "pattern": "npm",
+        "icon": "npm",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "PHP",
+        "pattern": "php",
+        "icon": "php",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Postgresql",
+        "pattern": "postgres",
+        "icon": "posgres",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Python",
+        "pattern": "python",
+        "icon": "python",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Redis",
+        "pattern": "redis",
+        "icon": "redis",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "SASS",
+        "pattern": "sass",
+        "icon": "sass",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Skype",
+        "pattern": "skype",
+        "icon": "skype",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "SocketIO",
+        "pattern": "socket.?io",
+        "icon": "socketio",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Twitter",
+        "pattern": "twitter",
+        "icon": "twitter",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Wordpress",
+        "pattern": "wordpress",
+        "icon": "wordpress",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "Youtube",
+        "pattern": "youtube",
+        "icon": "youtube",
+        "iconType": "fa",
+        "type": "technology"
+    },
+    {
+        "name": "IMDB",
+        "pattern": "imdb",
+        "icon": "imdb",
+        "iconType": "fa",
+        "type": "movie"
+    },
+    {
+        "name": "CSFD",
+        "pattern": "csfd",
+        "icon": "csfd",
+        "iconType": "fa",
+        "type": "movie"
+    },
+    {
+        "name": "Fish",
+        "pattern": "fish",
+        "icon": "fish",
+        "iconType": "fa",
+        "type": "food"
+    },
+    {
+        "name": "Burger",
+        "pattern": "burger",
+        "icon": "hamburger",
+        "iconType": "fa",
+        "type": "food"
+    },
+    {
+        "name": "Pepper",
+        "pattern": "pepper",
+        "icon": "pepper",
+        "iconType": "fa",
+        "type": "food"
+    },
+    {
+        "name": "Salad",
+        "pattern": "salad",
+        "icon": "salad",
+        "iconType": "fa",
+        "type": "food"
+    }
+]

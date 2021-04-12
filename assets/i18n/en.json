@@ -1,0 +1,86 @@
+{
+    "welcome": "Welocme",
+    "availableServices": "Available pages",
+    "contactToAuthor": "Contact to author",
+    "fileAnalyzer": "File analyzer",
+    "externalServices": "External services",
+    "dailyMenus": "Daily menu for specific restaurants",
+    "inProgressProjects": "List of projects",
+    "menu": {
+        "projects": "Projects",
+        "foods": "Daily menus",
+        "about": "Contacts",
+        "home": "Home",
+        "profile": "Profile",
+        "mixes": "Playlists",
+        "files": "Files",
+        "analyzer": "Analyzer"
+    },
+    "common": {
+        "search": "Search",
+        "hi": "Hi",
+        "share": "Share",
+        "shareWith": "Share with",
+        "send": "Send",
+        "cancel": "cancel"
+    },
+    "about": {
+        "basicInfo": "Basic info",
+        "education": "Education",
+        "work": "Work",
+        "languages": "Languages",
+        "technologies": "Technologies"
+    },
+    "files": {
+        "upload": {
+            "image": "Upload image"
+        },
+        "uploaded": {
+            "images": "Uploaded images"
+        },
+        "sharedWithMe": "Shared with me",
+        "chooseFile": "Choose file",
+        "orDragItHere": "or drop it here"
+    },
+    "shared": {
+        "showMap": "Show map",
+        "noFilterResults": "Filtru nevyhovujú žiadne výsledky",
+        "feedbackPanel": "Feedback",
+        "distance": "Distance",
+        "login":{
+            "login": "Login",
+            "logout": "Logout",
+            "with": {
+                "google": "Login using Google",
+                "facebook": "Login using Facebook"
+            }
+        },
+        "feedback": {
+            "screen": "Screen",
+            "message": "Message"
+        }
+    },
+    "projects": {
+        "title": "Projects",
+        "name": "Name",
+        "team": "Team",
+        "technologies": "Technologies",
+        "demo": "Demo",
+        "docs": "Documentation",
+        "sources": "Sources",
+        "teams": {
+            "fiit": "FIIT",
+            "home": "Home project"
+        }
+    },
+    "foods": {
+        "forSpecificRestaurantsClickOn": "Pre výber iba konkrétnych reštaurácií sa prihláste kliknutím na ikonu",
+        "forRestaurantSelectionClickOn": "Vyberte si reštaurácie klikuntím na ikonu",
+        "showHomePage": "Show home page",
+        "tryHomepage": "Try visit homepage",
+        "cannotGetDailyMenu": "Cannot get daily menu",
+        "restaurantHasNoPublicMenu": "Restaurant has no public menu",
+        "fromYou": "from you",
+        "restaurantSelection": "Choose restaurant"
+    }
+}
