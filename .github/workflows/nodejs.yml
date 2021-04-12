@@ -2,7 +2,7 @@ name: Node CI
 
 on:
     push:
-        branches: [ master, development ]
+        branches: [ master, develop ]
 jobs:
   build:
     timeout-minutes: 5
