@@ -33,7 +33,7 @@ import { MovieService } from "./services/movie.service";
         MovieHttpService,
         ExternalMovieService,
         MovieService,
-        MakerHttpService
+        MakerHttpService,
     ],
     declarations: [
         CsfdUserDetailComponent,

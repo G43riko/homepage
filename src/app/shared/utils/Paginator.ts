@@ -17,6 +17,6 @@ export class Paginator<T = any> extends AbstractPaginator<T> {
 
     protected _reCalcList(): void {
         const start = this._actualPage * this._itemsPerPage;
-        this.list.next(this.allItems ? this.allItems.slice(start, start + this._itemsPerPage) : []);
+        this.listSource$.next(this.allItems ? this.allItems.slice(start, start + this._itemsPerPage) : []);
     }
 }

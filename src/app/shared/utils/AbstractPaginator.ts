@@ -2,7 +2,8 @@ import { BehaviorSubject } from "rxjs";
 import { AppStaticConfig } from "../../appStaticConfig";
 
 export abstract class AbstractPaginator<T = any> {
-    public list         = new BehaviorSubject<T[]>([]);
+    protected listSource$         = new BehaviorSubject<T[]>([]);
+    public list$         = this.listSource$.asObservable();
     protected _lastPage = 0;
     protected _count    = 0;
 

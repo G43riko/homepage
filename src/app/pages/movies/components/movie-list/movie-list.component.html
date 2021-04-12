@@ -1,27 +1,31 @@
 <div class="top-controls">
-
-    <!--    <mat-button-toggle-group (valueChange)="setPreviewType($event)" aria-label="Preview type" name="preview typye">-->
-    <!--        <mat-button-toggle value="table">Table</mat-button-toggle>-->
-    <!--        <mat-button-toggle value="grid">Grid</mat-button-toggle>-->
-    <!--    </mat-button-toggle-group>-->
     <section class="preview-type">
-        <mat-radio-group (change)="setPreviewType($event.value)" aria-label="Preview type" name="preview typye">
+        <mat-radio-group *ngIf="previewType$ | async as previewType"
+                         (change)="setPreviewType($event.value)"
+                         aria-label="Preview type"
+                         name="preview type">
             <mat-radio-button [checked]="previewType === 'table'" value="table">Table</mat-radio-button>
             <mat-radio-button [checked]="previewType === 'grid'" value="grid">Grid</mat-radio-button>
         </mat-radio-group>
     </section>
     <mat-form-field class="flex-grow-1">
         <input #searchPatter
-               (input)="paginator.search(searchPatter.value)"
+               (input)="onSearchPatternChange(searchPatter.value)"
                matInput
                placeholder="Search"
                type="search">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </div>
-<ng-container *ngIf="previewType === 'table'">
+
+<ng-container [ngSwitch]="previewType$ | async">
+    <ng-container *ngSwitchCase="'table'" [ngTemplateOutlet]="previewTypeTable"></ng-container>
+    <ng-container *ngSwitchCase="'grid'" [ngTemplateOutlet]="previewTypeGrid"></ng-container>
+</ng-container>
+
+<ng-template #previewTypeTable>
     <ng-template #cellDirectors let-row="row">
-        <button (click)="movieService.showMakerDetail(director.id)" *ngFor="let director of row.directors"
+        <button (click)="onShowMakerDetailClick(director.id)" *ngFor="let director of row.directors"
                 mat-button>{{director.name}}</button>
     </ng-template>
     <ng-template #cellTitle let-row="row">
@@ -41,7 +45,7 @@
         <app-external-links type="movie" [holder]="row"></app-external-links>
     </ng-template>
     <ng-template #cellDetail let-row="row">
-        <button (click)="movieService.showMovieDetail(row.id)"
+        <button (click)="onShowMovieDetailClick(row.id)"
                 color="primary"
                 mat-mini-fab
         >
@@ -50,21 +54,24 @@
     </ng-template>
     <app-abstract-table [tableConfig]="movieConfig"
                         [templates]="{title: cellTitle, external: cellExternal, detail: cellDetail, directors: cellDirectors}"
-                        [data]="movieData"></app-abstract-table>
-</ng-container>
+                        [data]="movieList$"></app-abstract-table>
+</ng-template>
 
-
-<ng-container *ngIf="previewType === 'grid'">
+<ng-template #previewTypeGrid>
     <div class="grid-movies">
-        <app-movie-poster-preview *ngFor="let movie of paginator.list | async | movieFilter: searchPattern"
+        <app-movie-poster-preview *ngFor="let movie of movieList$ | async"
                                   [movie]="movie"></app-movie-poster-preview>
     </div>
     <div class="align-center">
-        <button (click)="paginator.loadNext()"
+        <button (click)="onLoadNextClick()"
                 class="next-loader"
                 color="primary"
                 mat-raised-button
         >Load next movies
         </button>
     </div>
-</ng-container>
+</ng-template>
+
+<button mat-fab class="floating-add" (click)="onAddMovieClick()">
+    <mat-icon>add</mat-icon>
+</button>
