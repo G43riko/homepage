@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
+import { of } from "rxjs";
+import { first, map, shareReplay, startWith, switchMap } from "rxjs/operators";
 import { AbstractDetailComponent } from "../../../../shared/components/abstract-detail.component";
 import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
 import { Person } from "../../../../shared/models/person/person.model";
@@ -13,14 +13,28 @@ import { UtilsService } from "../../../../shared/services/utils.service";
 import { PersonHttpService } from "../../services/person-http.service";
 
 @Component({
-    selector   : "app-person-detail",
-    templateUrl: "./person-detail.component.html",
-    styleUrls  : ["./person-detail.component.scss"]
+    selector       : "app-person-detail",
+    templateUrl    : "./person-detail.component.html",
+    styleUrls      : ["./person-detail.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonDetailComponent extends AbstractDetailComponent<Person, PersonHttpService> implements OnInit {
-    public timer: any;
-    public readonly countries: string[] = [];
-    public filteredCountries: Observable<string[]>;
+    public readonly countries$ = this.utilService.countries$;
+
+    public readonly filteredCountries$ = this.countries$.pipe(
+        switchMap((countries) => {
+            const countriesFilter$ = this.detailForm.get("address.country")?.valueChanges.pipe(startWith("")) ?? of("");
+
+            return countriesFilter$.pipe(
+                map((countriesFilter) => {
+                    const filterValue = countriesFilter.toLowerCase();
+
+                    return countries.filter((country) => country.toLowerCase().includes(filterValue));
+                })
+            );
+        }),
+        shareReplay(1),
+    );
 
     public constructor(route: ActivatedRoute,
                        router: Router,
@@ -34,54 +48,50 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
     }
 
     public ngOnInit(): void {
-        this.utilService.getCountries().subscribe((countries) => {
-            this.countries.push(...countries);
-            const formAddress = this.detailForm.controls.address as FormGroup;
-            this.filteredCountries = formAddress.controls.country.valueChanges.pipe(
-                startWith(""),
-                map((value) => this._filter(value))
-            );
-        });
-
         this.initialization();
     }
 
     public save(): void {
-        const method = this.isNew ? this.httpService.add : this.httpService.update;
-        method.call(this.httpService, this.selectedDetail).subscribe((data) => this.setDetail(data));
+        this.loadingSource$.next(true);
+        this.isNew$.pipe(
+            switchMap((isNew) => {
+                const method = isNew ? this.httpService.add : this.httpService.update;
+
+                return method.call(this.httpService, this.selectedDetail);
+            }),
+            first(),
+        ).subscribe({
+            next    : (data) => this.setDetail(data),
+            complete: () => this.loadingSource$.next(false),
+        });
     }
 
     public showMap(): void {
         this.dialog.open(MapDialogComponent, {
-            width: "95%",
+            width : "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrlFromAddress(this.detailForm.value.address)
+            data  : this.mapService.getLocationEmbedUrlFromAddress(this.detailForm.value.address)
         });
     }
 
     public setDetail(detail: Person): void {
         this.selectedDetail = detail;
-        this.loading = false;
+        // this.loading = false;
+        this.loadingSource$.next(false);
         this.detailForm.patchValue(this.selectedDetail);
-    }
-
-    private _filter(value: string): string[] {
-        const filterValue = value.toLowerCase();
-
-        return this.countries.filter((country) => country.toLowerCase().includes(filterValue));
     }
 
     protected createForm(): FormGroup {
         return this.formBuilder.group({
-            name: ["", {validators: Validators.required}],
-            surName: ["", {validators: Validators.required}],
-            nick: "",
+            name    : ["", {validators: Validators.required}],
+            surName : ["", {validators: Validators.required}],
+            nick    : "",
             birthday: ["", {validators: Validators.pattern(/(\d|\?){2}\.(\d|\?){2}.(\d|\?){4}/)}],
-            gender: ["", {validators: Validators.required}],
-            address: this.formBuilder.group({
-                country: "",
-                city: "",
-                street: "",
+            gender  : ["", {validators: Validators.required}],
+            address : this.formBuilder.group({
+                country     : "",
+                city        : "",
+                street      : "",
                 streetNumber: ""
             })
         });

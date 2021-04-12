@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {Account} from "../../../../shared/models/person/account.model";
-import {Person} from "../../../../shared/models/person/person.model";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { Account } from "../../../../shared/models/person/account.model";
+import { Person } from "../../../../shared/models/person/person.model";
 
 @Component({
     selector: "app-person-list-row-cell-account",
     templateUrl: "./person-list-row-cell-account.component.html",
-    styleUrls: ["./person-list-row-cell-account.component.scss"]
+    styleUrls: ["./person-list-row-cell-account.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonListRowCellAccountComponent implements OnInit {
 

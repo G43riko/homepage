@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnInit } from "@angular/core";
 import { Movie } from "../../models/movie.model";
 import { MovieService } from "../../services/movie.service";
 
@@ -6,6 +6,7 @@ import { MovieService } from "../../services/movie.service";
     selector   : "app-movie-poster-preview",
     templateUrl: "./movie-poster-preview.component.html",
     styleUrls  : ["./movie-poster-preview.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host       : {
         class: "movie-wrapper"
     }

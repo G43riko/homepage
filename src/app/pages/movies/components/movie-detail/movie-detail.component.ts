@@ -1,17 +1,18 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AbstractDetailComponent} from "../../../../shared/components/abstract-detail.component";
-import {Roles} from "../../../../shared/enums/roles.enum";
-import {AuthService} from "../../../../shared/services/auth.service";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../services/movie-http.service";
-import {MovieService} from "../../services/movie.service";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AbstractDetailComponent } from "../../../../shared/components/abstract-detail.component";
+import { Roles } from "../../../../shared/enums/roles.enum";
+import { AuthService } from "../../../../shared/services/auth.service";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { Movie } from "../../models/movie.model";
+import { MovieHttpService } from "../../services/movie-http.service";
+import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-detail",
     templateUrl: "./movie-detail.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./movie-detail.component.scss"]
 })
 export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHttpService> implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
@@ -11,6 +11,7 @@ import { MovieService } from "../../services/movie.service";
     selector   : "app-movie-list",
     templateUrl: "./movie-list.component.html",
     styleUrls  : ["./movie-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         MovieListService,
     ]

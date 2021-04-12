@@ -1,15 +1,16 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {finalize} from "rxjs/operators";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {MovieSource} from "../../models/movie-source.type";
-import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../services/movie-http.service";
-import {MovieService} from "../../services/movie.service";
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { finalize } from "rxjs/operators";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { MovieSource } from "../../models/movie-source.type";
+import { Movie } from "../../models/movie.model";
+import { MovieHttpService } from "../../services/movie-http.service";
+import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-search",
     templateUrl: "./movie-search.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./movie-search.component.scss"]
 })
 export class MovieSearchComponent implements OnInit {

@@ -1,31 +1,30 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
-import { merge, Observable, of } from "rxjs";
-import { catchError, delay, map, startWith, switchMap, tap } from "rxjs/operators";
+import { BehaviorSubject, merge, Observable, of } from "rxjs";
+import { catchError, delay, map, startWith, switchMap } from "rxjs/operators";
 import { ColumnConfig } from "./column-config";
 import { TableConfig } from "./table-config";
 
 @Component({
     selector   : "app-abstract-table",
     templateUrl: "./abstract-table.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls  : ["./abstract-table.component.scss"]
 })
 export class AbstractTableComponent<T = any> implements OnInit {
     public readonly selection = new SelectionModel<T>(true, []);
 
-    @ViewChild(MatPaginator, {static: true}) public paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) public sort: MatSort;
+    @ViewChild(MatPaginator, {static: true}) public readonly paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) public readonly sort: MatSort;
     @Input() public tableConfig: TableConfig;
     @Input() public data: Observable<T[]> | T[];
     @Input() public templates: { [key: string]: TemplateRef<any> } = {};
     public realData: T[]                                           = [];
     public resultsLength                                           = 0;
-    public isLoadingResults                                        = true;
-
-    public constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
-    }
+    private readonly loadingSource$ = new BehaviorSubject<boolean>(true);
+    public readonly loading$ = this.loadingSource$.asObservable();
 
     public get pageSize(): number {
         return this.tableConfig.pageSize || 10;
@@ -51,6 +50,7 @@ export class AbstractTableComponent<T = any> implements OnInit {
         if (!paginator) {
             return data;
         }
+
         return data.splice(paginator.pageSize * paginator.pageIndex, paginator.pageSize);
     }
 
@@ -84,7 +84,7 @@ export class AbstractTableComponent<T = any> implements OnInit {
         merge(...observables).pipe(
             startWith({}),
             switchMap(() => {
-                this.isLoadingResults = true;
+                this.loadingSource$.next(true);
 
                 if (!this.data) {
                     return of({data: [], totalLength: 0});
@@ -101,17 +101,16 @@ export class AbstractTableComponent<T = any> implements OnInit {
                             data       : this.transformData(data),
                             totalLength: data.length
                         }),
-                        tap(() => this.changeDetectorRef.detectChanges())
                     ));
             }),
             map((data: { data: T[]; totalLength: number }) => {
                 this.resultsLength = data.totalLength;
-                this.isLoadingResults = false;
+                this.loadingSource$.next(false);
 
                 return data.data;
             }),
             catchError((error) => {
-                this.isLoadingResults = false;
+                this.loadingSource$.next(false);
                 console.error(error);
 
                 return of([]);

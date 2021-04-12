@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Phone } from "../../../../shared/models/person/phone.model";
@@ -7,7 +7,8 @@ import { Phone } from "../../../../shared/models/person/phone.model";
 @Component({
     selector   : "app-numbers",
     templateUrl: "./number.component.html",
-    styleUrls  : ["./number.component.scss"]
+    styleUrls  : ["./number.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberComponent {
     @Input() public disabled            = true;

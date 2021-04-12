@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { Account } from "../../../../shared/models/person/account.model";
 
 @Component({
     selector: "app-account",
     templateUrl: "./account.component.html",
-    styleUrls: ["./account.component.scss"]
+    styleUrls: ["./account.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class AccountComponent implements OnInit {

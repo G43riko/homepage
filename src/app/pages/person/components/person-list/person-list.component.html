@@ -29,7 +29,7 @@
     <ng-template #cellBirthday let-row="row">
         {{row.birthday | date:"dd.MM.yyyy"}}
     </ng-template>
-    <app-abstract-table *ngIf="personData"
+    <app-abstract-table *ngIf="personData$ | async as personData"
                         [tableConfig]="personConfig"
                         [templates]="{options: cellOptions, contacts: cellSelect, birthday: cellBirthday}"
                         [data]="personData">

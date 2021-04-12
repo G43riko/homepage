@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { forkJoin, Observable } from "rxjs";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
@@ -9,75 +9,66 @@ import { NotificationService } from "../../../../shared/services/notification.se
 import { PersonHttpService } from "../../services/person-http.service";
 
 @Component({
-    selector: "app-person-list",
-    templateUrl: "./person-list.component.html",
-    // templateUrl: "./tmp-list.component.html",
-    styleUrls: ["./person-list.component.scss"]
+    selector       : "app-person-list",
+    templateUrl    : "./person-list.component.html",
+    styleUrls      : ["./person-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class PersonListComponent implements OnInit {
-    public readonly Roles = Roles;
-    public data: Person[];
-    public personData: Observable<Person[]> = this.personHttpService.getPersons();
-    public personConfig: TableConfig;
+export class PersonListComponent {
+    public readonly Roles                             = Roles;
+    public readonly personData$: Observable<Person[]> = this.personHttpService.getPersons();
+    public readonly personConfig: TableConfig         = {
+        stickyEnd      : 3,
+        columns        : [
+            {
+                name  : "contacts",
+                nowrap: true,
+            },
+            {
+                name         : "name",
+                customContent: (person) => (person.name || "") + " " + (person.surName || "")
+            },
+            {
+                name : "nick",
+                label: "Nick",
+                sort : true
+            },
+            {
+                name : "birthday",
+                label: "Birthday",
+                sort : true
+            },
+            {
+                name   : "account",
+                label  : "Account",
+                visible: false
+            },
+            {
+                name  : "options",
+                width : "9em",
+                nowrap: true,
+            }
+        ],
+        selectOptions  : [
+            {
+                action: console.log,
+                icon  : "delete",
+                label : "Delete"
+            }
+        ],
+        stickyHeader   : true,
+        selection      : "multi",
+        paginateOptions: [5, 10, 20, 50, 100],
+        pageSize       : 10,
+        paginator      : true
+    };
 
     public constructor(private readonly route: ActivatedRoute,
                        private readonly router: Router,
                        public readonly authService: AuthService,
                        private readonly personHttpService: PersonHttpService,
                        private readonly notificationService: NotificationService) {
-    }
-
-    public ngOnInit(): void {
-        // this.personService.getPersons().subscribe((data: Person[]) => {
-        //     this.data = data;
-        // }, (error) => this.notificationService.openErrorNotification(error));
-
-        this.personConfig = {
-            stickyEnd: 3,
-            columns: [
-                {
-                    name: "contacts",
-                    nowrap: true,
-                },
-                {
-                    name: "name",
-                    customContent: (person) => (person.name || "") + " " + (person.surName || "")
-                },
-                {
-                    name: "nick",
-                    label: "Nick",
-                    sort: true
-                },
-                {
-                    name: "birthday",
-                    label: "Birthday",
-                    sort: true
-                },
-                {
-                    name: "account",
-                    label: "Account",
-                    visible: false
-                },
-                {
-                    name: "options",
-                    width: "9em",
-                    nowrap: true,
-                }
-            ],
-            selectOptions: [
-                {
-                    action: console.log,
-                    icon: "delete",
-                    label: "Delete"
-                }
-            ],
-            stickyHeader: true,
-            selection: "multi",
-            paginateOptions: [5, 10, 20, 50, 100],
-            pageSize: 10,
-            paginator: true
-        };
     }
 
     public remove(persons: Person[]): void {

@@ -1,15 +1,16 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MatDialog} from "@angular/material/dialog";
-import {Observable} from "rxjs";
-import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
-import {ImageDialogComponent} from "../../../../shared/components/image-dialog/image-dialog.component";
-import {Maker} from "../../models/maker.model";
-import {MakerHttpService} from "../../services/maker-http.service";
-import {MovieService} from "../../services/movie.service";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Observable } from "rxjs";
+import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
+import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
+import { Maker } from "../../models/maker.model";
+import { MakerHttpService } from "../../services/maker-http.service";
+import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector: "app-movie-makers",
     templateUrl: "./maker-list.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./maker-list.component.scss"]
 })
 

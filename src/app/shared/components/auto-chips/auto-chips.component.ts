@@ -1,16 +1,16 @@
 import { COMMA, ENTER, SPACE } from "@angular/cdk/keycodes";
-import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
-import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Component({
-    selector   : "app-auto-chips",
-    templateUrl: "./auto-chips.component.html",
-    styleUrls  : ["./auto-chips.component.scss"],
-    providers  : [
+    selector       : "app-auto-chips",
+    templateUrl    : "./auto-chips.component.html",
+    styleUrls      : ["./auto-chips.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers      : [
         {
             provide    : NG_VALUE_ACCESSOR,
             useExisting: AutoChipsComponent,
@@ -19,24 +19,17 @@ import { map } from "rxjs/operators";
     ]
 })
 export class AutoChipsComponent implements ControlValueAccessor {
-    @Input() public allItems: string[] = [];
-    @Input() public separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
-    @Input() public placeholder: string;
-    @Input() public disabled = false;
-    @Input() public items: string[] = [];
-    public selectable = true;
-    public removable = true;
-    public addOnBlur = true;
-    public itemCtrl = new FormControl();
-    public filteredItems: Observable<string[]>;
+    @Input() public readonly allItems: string[] = [];
+    @Input() public readonly separatorKeysCodes = [ENTER, COMMA, SPACE];
+    @Input() public readonly placeholder: string;
+    public readonly items: string[]             = [];
+    public readonly addOnBlur                   = true;
+    public readonly itemCtrl                    = new FormControl();
+    public readonly filteredItems$              = this.itemCtrl.valueChanges.pipe(
+        map((item: string | null) => item ? this._filter(item) : this.allItems.slice()));
 
-    @ViewChild("itemInput", {static: false}) public itemInput: ElementRef<HTMLInputElement>;
-    @ViewChild("auto", {static: false}) public matAutocomplete: MatAutocomplete;
-
-    public constructor() {
-        this.filteredItems = this.itemCtrl.valueChanges.pipe(
-            map((item: string | null) => item ? this._filter(item) : this.allItems.slice()));
-    }
+    @ViewChild("itemInput") public itemInput: ElementRef<HTMLInputElement>;
+    @ViewChild("auto") public matAutocomplete: MatAutocomplete;
 
     public onChange(value: any): void {
         // empty;
@@ -47,7 +40,10 @@ export class AutoChipsComponent implements ControlValueAccessor {
     }
 
     public writeValue(obj: any): void {
-        this.items = Array.isArray(obj) ? obj : [];
+        this.items.splice(0, this.items.length);
+        if (Array.isArray(obj)) {
+            this.items.push(...obj);
+        }
     }
 
     public registerOnChange(fn: any): void {
@@ -59,38 +55,30 @@ export class AutoChipsComponent implements ControlValueAccessor {
     }
 
     public setDisabledState?(isDisabled: boolean): void {
-        this.disabled = isDisabled;
         isDisabled ? this.itemCtrl.disable() : this.itemCtrl.enable();
     }
 
     public add(event: MatChipInputEvent): void {
-        if (!this.matAutocomplete.isOpen) {
-            const input = event.input;
-            const value = event.value;
-
-            if ((value || "").trim()) {
-                this.items.push(value.trim());
-                this.onChange(this.items);
-            }
-
-            if (input) {
-                input.value = "";
-            }
-
-            this.itemCtrl.setValue(null);
+        if (this.matAutocomplete.isOpen) {
+            return;
         }
+
+        const input = event.input;
+        const value = event.value;
+
+        if ((value || "").trim()) {
+            this.items.push(value.trim());
+            this.onChange(this.items);
+        }
+
+        if (input) {
+            input.value = "";
+        }
+
+        this.itemCtrl.setValue(null);
     }
 
-    public remove(item: string): void {
-        const index = this.items.indexOf(item);
-
-        if (index >= 0) {
-            this.items.splice(index, 1);
-        }
-        this.onChange(this.items);
-    }
-
-    public selected(event: MatAutocompleteSelectedEvent): void {
+    public onItemSelect(event: MatAutocompleteSelectedEvent): void {
         this.items.push(event.option.viewValue);
         this.onChange(this.items);
         this.itemInput.nativeElement.value = "";
@@ -103,4 +91,8 @@ export class AutoChipsComponent implements ControlValueAccessor {
         return this.allItems.filter((item) => item.toLowerCase().startsWith(filterValue));
     }
 
+    public removeByIndex(index: number): void {
+        this.items.splice(index, 1);
+        this.onChange(this.items);
+    }
 }

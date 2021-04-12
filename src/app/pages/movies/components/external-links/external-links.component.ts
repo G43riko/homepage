@@ -1,10 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { MovieType } from "../../models/movie-type.type";
 import { MovieService } from "../../services/movie.service";
 
 @Component({
     selector: "app-external-links",
     templateUrl: "./external-links.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./external-links.component.scss"]
 })
 export class ExternalLinksComponent {

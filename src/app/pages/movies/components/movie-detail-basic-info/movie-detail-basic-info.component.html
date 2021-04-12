@@ -31,9 +31,13 @@
             <input formControlName="duration" label="Movie duration" matInput placeholder="Trvanie" type="number">
             <span matSuffix>min</span>
         </mat-form-field>
-        <app-auto-chips [allItems]="countries" [placeholder]="'Krajna pôvodu'"
-                        formControlName="countries"></app-auto-chips>
-        <app-auto-chips [allItems]="genres" [placeholder]="'Žánre'"
-                        formControlName="genres"></app-auto-chips>
+        <app-auto-chips [allItems]="countries"
+                        [placeholder]="'Krajna pôvodu'"
+                        formControlName="countries"
+        ></app-auto-chips>
+        <app-auto-chips [allItems]="genres"
+                        [placeholder]="'Žánre'"
+                        formControlName="genres"
+        ></app-auto-chips>
     </mat-card-content>
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { Router } from "@angular/router";
@@ -14,7 +14,8 @@ import { PersonListRowCellSelectComponent } from "../person-list-row-cell-select
 @Component({
     selector   : "app-person-list-row",
     templateUrl: "./person-list-row.component.html",
-    styleUrls  : ["./person-list-row.component.scss"]
+    styleUrls  : ["./person-list-row.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonListRowComponent {
     @Input() public person: Person;

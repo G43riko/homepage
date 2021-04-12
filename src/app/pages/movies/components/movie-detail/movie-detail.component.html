@@ -5,7 +5,7 @@
         <mat-card-title>Movie detail</mat-card-title>
 
         <mat-card-content class="flex-row">
-            <app-movie-search (movieSearched)="setDetail($event)" *ngIf="isNew" class="full-width"></app-movie-search>
+            <app-movie-search (movieSearched)="setDetail($event)" *ngIf="isNew$ | async" class="full-width"></app-movie-search>
             <mat-accordion *ngIf="authService.checkAuthorization(user, Roles.ROLE_ADMIN_MOVIES)"
                            class="full-width">
                 <mat-expansion-panel class="mat-elevation-z2">
@@ -38,7 +38,7 @@
                                       *ngIf="csfdId.value"
                                       matSuffix
                                       svgIcon="csfd"
-                            >link</mat-icon>
+                            ></mat-icon>
                         </mat-form-field>
                         <br>
                         <mat-form-field *ngIf="detailForm.value.imdbId || !disabled"
@@ -113,8 +113,7 @@
                     color="primary"
                     mat-raised-button>{{'movies.detail.save' | translate}}
             </button>
-            <button (click)="back()"
-                    *ngIf="!disabled" mat-raised-button>{{'movies.detail.back' | translate}}
+            <button (click)="back()" mat-raised-button>{{'movies.detail.back' | translate}}
             </button>
             <button (click)="edit()"
                     *ngIf="disabled && authService.checkAuthorization(user, Roles.ROLE_UPDATE_MOVIES)"
@@ -125,7 +124,7 @@
     </mat-card>
     <ng-template #loading>
         <div style="display: flex; justify-content: center;">
-            <mat-spinner *ngIf="loading"></mat-spinner>
+            <mat-spinner *ngIf="loading$ | async"></mat-spinner>
         </div>
     </ng-template>
 </form>
