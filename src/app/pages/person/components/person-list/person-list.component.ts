@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {forkJoin, Observable} from "rxjs";
-import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
-import {Roles} from "../../../../shared/enums/roles.enum";
-import {Person} from "../../../../shared/models/person/person.model";
-import {AuthService} from "../../../../shared/services/auth.service";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {PersonHttpService} from "../../services/person-http.service";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { forkJoin, Observable } from "rxjs";
+import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
+import { Roles } from "../../../../shared/enums/roles.enum";
+import { Person } from "../../../../shared/models/person/person.model";
+import { AuthService } from "../../../../shared/services/auth.service";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { PersonHttpService } from "../../services/person-http.service";
 
 @Component({
     selector: "app-person-list",
@@ -37,7 +37,8 @@ export class PersonListComponent implements OnInit {
             stickyEnd: 3,
             columns: [
                 {
-                    name: "contacts"
+                    name: "contacts",
+                    nowrap: true,
                 },
                 {
                     name: "name",
@@ -60,7 +61,8 @@ export class PersonListComponent implements OnInit {
                 },
                 {
                     name: "options",
-                    width: "9em"
+                    width: "9em",
+                    nowrap: true,
                 }
             ],
             selectOptions: [

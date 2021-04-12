@@ -8,6 +8,7 @@ export interface ColumnConfig {
     label?: string;
     label$?: Observable<string>;
     visible?: boolean;
+    nowrap?: boolean;
     customLabel?: (row: any) => string;
     customContent?: (row: any) => string;
     template?: TemplateRef<any>;
