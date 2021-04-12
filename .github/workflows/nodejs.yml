@@ -3,7 +3,7 @@ name: Node CI
 #   Add auto deployment to github pages
 on:
     push:
-        branches: [ master, develop ]
+        branches: [ develop ]
 jobs:
   build:
     timeout-minutes: 5
