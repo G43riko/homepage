@@ -6,6 +6,15 @@
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "shortcuts": [
+   {
+        "name": "Create new person",
+        "short_name": "Add person",
+        "description": "Create and add new person",
+        "url": "/#/persons/quick-create",
+        "icons": [{ "src": "/assets/icons/icon-192x192.png", "sizes": "192x192" }]
+      },
+   ],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
