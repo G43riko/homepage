@@ -1,0 +1,60 @@
+<div class="quick-create-wrapper">
+    <h2></h2>
+    <mat-card style="max-width: min(512px, 100%);;">
+        <mat-card-title>{{'persons.quit-create.title' | translate}}</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="createForm">
+<!--                <mat-form-field class="full-width">-->
+<!--                    <mat-label>{{'persons.quit-create.nick' | translate}}</mat-label>-->
+<!--                    <input type="text" required matInput formControlName="nick" placeholder="Nick">-->
+<!--                </mat-form-field>-->
+
+
+                <mat-form-field *ngIf="!createForm.get('splitName')?.value" class="full-width">
+                    <mat-label>{{'persons.quit-create.nameAndSurname' | translate}}</mat-label>
+                    <input type="text" required autocomplete="off" formControlName="rawName" matInput>
+                    <mat-checkbox matSuffix formControlName="splitName" class="example-margin">Split</mat-checkbox>
+                </mat-form-field>
+
+                <div *ngIf="createForm.get('splitName')?.value" class="half-width" style="display: inline-flex; width: 100%; align-items: center">
+                    <mat-form-field style="width: 50%;">
+                        <mat-label>{{'persons.quit-create.name' | translate}}</mat-label>
+                        <input type="text" autocomplete="off" matInput formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field style="width: 50%;">
+                        <mat-label>{{'persons.quit-create.surName' | translate}}</mat-label>
+                        <input type="text" autocomplete="off" matInput formControlName="surName">
+                        <mat-checkbox matSuffix formControlName="splitName" class="example-margin">Split</mat-checkbox>
+                    </mat-form-field>
+<!--                    <div>-->
+<!--                        <mat-checkbox style="max-width: 20%;" matSuffix class="example-margin">Split</mat-checkbox>-->
+<!--                    </div>-->
+                </div>
+
+                <div>
+                    <mat-radio-group formControlName="gender" required aria-label="Gender">
+                        <mat-radio-button value="male">Muž</mat-radio-button>
+                        <mat-radio-button value="female">Žena</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <mat-form-field class="full-width">
+                    <mat-label>{{'persons.quit-create.phone' | translate}}</mat-label>
+                    <span matPrefix>+421 &nbsp;</span>
+                    <input type="tel" matInput placeholder="905 123 456" formControlName="phone">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <mat-label>{{'persons.quit-create.email' | translate}}</mat-label>
+                    <input type="email" matInput placeholder="abc@def.ghi" formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [disabled]="createForm.invalid" (click)="onPersonCreateClick()" color="primary">Create</button>
+            <button mat-raised-button (click)="onBackClick()">Back</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

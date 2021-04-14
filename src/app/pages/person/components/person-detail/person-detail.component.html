@@ -4,13 +4,14 @@
     <div style="display: flex; justify-content: center;">
         <mat-spinner *ngIf="loading$ | async"></mat-spinner>
     </div>
-    <form *ngIf="selectedDetail" [formGroup]="detailForm" class="full-width" style="align-content: center">
+    <form *ngIf="selectedDetail$ | async as selectedDetail" [formGroup]="detailForm" class="full-width" style="align-content: center">
         <div class="flex-row">
             <div>
                 <mat-form-field class="full-width">
                     <input matInput
                            formControlName="name"
-                           placeholder="Meno">
+                           [placeholder]="'persons.detail.name' | translate"
+                    >
                     <mat-error *ngIf="detailForm.get('name').hasError('required')">
                         Name is <strong>required</strong>
                     </mat-error>
@@ -20,7 +21,8 @@
                 <mat-form-field class="full-width">
                     <input matInput
                            formControlName="surName"
-                           placeholder="Priezvisko">
+                           [placeholder]="'persons.detail.surName' | translate"
+                    >
                     <mat-error *ngIf="detailForm.get('surName').hasError('required')">
                         Surname is <strong>required</strong>
                     </mat-error>
@@ -30,7 +32,8 @@
                 <mat-form-field class="full-width">
                     <input matInput
                            formControlName="nick"
-                           placeholder="Prezívka">
+                           [placeholder]="'persons.detail.nick' | translate"
+                    >
                 </mat-form-field>
             </div>
         </div>
@@ -39,7 +42,8 @@
                 <mat-form-field class="full-width">
                     <input matInput
                            formControlName="birthday"
-                           placeholder="Dátum narodenia">
+                           [placeholder]="'persons.detail.name' | translate"
+                    >
                 </mat-form-field>
             </div>
             <div>

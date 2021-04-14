@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppStaticConfig } from "../../../appStaticConfig";
-import { Person } from "../../../shared/models/person/person.model";
+import { Person, PersonId } from "../../../shared/models/person/person.model";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
@@ -41,7 +41,7 @@ export class PersonHttpService extends AbstractHttpService {
             );
     }
 
-    public delete(personId: number): Observable<string> {
+    public delete(personId: PersonId): Observable<string> {
         return this.http.delete<string>(URL + "/" + personId)
             .pipe(
                 catchError(this.handleError<string>("delete person with id" + personId))

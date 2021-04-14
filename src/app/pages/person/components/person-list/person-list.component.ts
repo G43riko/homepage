@@ -1,23 +1,25 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { forkJoin, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { Roles } from "../../../../shared/enums/roles.enum";
 import { Person } from "../../../../shared/models/person/person.model";
 import { AuthService } from "../../../../shared/services/auth.service";
-import { NotificationService } from "../../../../shared/services/notification.service";
-import { PersonHttpService } from "../../services/person-http.service";
+import { PersonListService } from "./person-list.service";
 
 @Component({
     selector       : "app-person-list",
     templateUrl    : "./person-list.component.html",
     styleUrls      : ["./person-list.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers      : [
+        PersonListService,
+    ]
 })
 
 export class PersonListComponent {
     public readonly Roles                             = Roles;
-    public readonly personData$: Observable<Person[]> = this.personHttpService.getPersons();
+    public readonly user$                             = this.authService.user$;
+    public readonly personData$: Observable<Person[]> = this.personService.persons$;
     public readonly personConfig: TableConfig         = {
         stickyEnd      : 3,
         columns        : [
@@ -64,25 +66,21 @@ export class PersonListComponent {
         paginator      : true
     };
 
-    public constructor(private readonly route: ActivatedRoute,
-                       private readonly router: Router,
-                       public readonly authService: AuthService,
-                       private readonly personHttpService: PersonHttpService,
-                       private readonly notificationService: NotificationService) {
+    public constructor(
+        private readonly personService: PersonListService,
+        private readonly authService: AuthService,
+    ) {
     }
 
     public remove(persons: Person[]): void {
-        const deleteRequests = persons.map((person) => this.personHttpService.delete(person.id));
-        forkJoin(deleteRequests).subscribe(() => {
-            this.notificationService.openSuccessNotification("Person successfully removed");
-        }, (error) => this.notificationService.openErrorNotification(error));
+        this.personService.deletePerson(...persons.map((p) => p.id));
     }
 
-    public createNew(): void {
-        this.router.navigateByUrl("/persons/new");
+    public onAddPersonClick(): void {
+        this.personService.showPersonCreateForm();
     }
 
-    public showDetail(person_id: number | string): void {
-        this.router.navigateByUrl("/persons/" + person_id);
+    public onShowDetailClick(personId: number | string): void {
+        this.personService.showDetail(personId);
     }
 }

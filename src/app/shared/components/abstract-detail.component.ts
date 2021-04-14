@@ -7,14 +7,15 @@ import { NotificationService } from "../services/notification.service";
 
 export abstract class AbstractDetailComponent<T extends { id: number } = any, S extends AbstractHttpService = AbstractHttpService<T>> {
     public selectedDetail: T;
-    public isNew                      = false;
-    public readonly isNew$            = this.route.params.pipe(
+    protected readonly selectedDetailSource$ = new BehaviorSubject<T | null>(null);
+    public readonly selectedDetail$        = this.selectedDetailSource$.asObservable();
+    public readonly isNew$                 = this.route.params.pipe(
         map((data) => data.id === "new"),
         shareReplay(1),
     );
-    protected readonly loadingSource$ = new BehaviorSubject<boolean>(false);
-    public readonly loading$          = this.loadingSource$.asObservable();
-    public readonly detailForm        = this.createForm();
+    protected readonly loadingSource$      = new BehaviorSubject<boolean>(false);
+    public readonly loading$               = this.loadingSource$.asObservable();
+    public readonly detailForm             = this.createForm();
 
     public readonly loading = true;
 
@@ -41,7 +42,7 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
                     return this.router.navigate([this.listUrl]);
                 }
 
-                if(this.disabled) {
+                if (this.disabled) {
                     return of(window.history.back());
                 }
                 this.loadingSource$.next(true);
@@ -59,6 +60,7 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
 
     public setDetail(detail: T): void {
         this.selectedDetail = detail;
+        this.selectedDetailSource$.next(detail);
         this.detailForm.patchValue(detail);
     }
 
@@ -81,7 +83,7 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
                 this.setDisabled(!!detail);
                 this.setDetail(detail ? detail : {} as any);
             },
-            error: (error) => this.notificationService.openErrorNotification(error),
+            error   : (error) => this.notificationService.openErrorNotification(error),
             complete: () => this.loadingSource$.next(false)
         });
     }

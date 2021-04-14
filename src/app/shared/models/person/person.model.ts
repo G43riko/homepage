@@ -1,11 +1,13 @@
-import {GenderType} from "gtools";
-import {Account} from "./account.model";
-import {Address} from "./address.model";
-import {Email} from "./email.model";
-import {Phone} from "./phone.model";
+import { GenderType } from "gtools";
+import { Account } from "./account.model";
+import { Address } from "./address.model";
+import { Email } from "./email.model";
+import { Phone } from "./phone.model";
+
+export type PersonId = number;
 
 export class Person {
-    public id: number;
+    public id: PersonId;
     public name: string;
     public surName?: string;
     public birthday?: string;

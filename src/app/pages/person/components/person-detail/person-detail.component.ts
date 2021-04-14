@@ -76,7 +76,7 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
 
     public setDetail(detail: Person): void {
         this.selectedDetail = detail;
-        // this.loading = false;
+        this.selectedDetailSource$.next(detail);
         this.loadingSource$.next(false);
         this.detailForm.patchValue(this.selectedDetail);
     }

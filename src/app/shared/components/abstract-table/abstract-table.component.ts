@@ -13,7 +13,7 @@ import { TableConfig } from "./table-config";
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls  : ["./abstract-table.component.scss"]
 })
-export class AbstractTableComponent<T = any> implements OnInit {
+export class AbstractTableComponent<T = unknown> implements OnInit {
     public readonly selection = new SelectionModel<T>(true, []);
 
     @ViewChild(MatPaginator, {static: true}) public readonly paginator: MatPaginator;

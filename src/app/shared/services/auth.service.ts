@@ -80,7 +80,7 @@ export class AuthService {
     }
 
     public updateRole(role: any, user: any, checked: boolean): Observable<void> {
-        return fromPromise(this.afs.doc(`users/${user.uid}`).set({
+        return fromPromise (this.afs.doc(`users/${user.uid}`).set({
             roles: {
                 [role]: checked
             }
