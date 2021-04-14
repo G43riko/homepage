@@ -18,8 +18,23 @@
             "type": "image/png"
         }
     ],
+    "shortcuts": [
+        {
+            "name": "Create new contact",
+            "short_name": "New contact",
+            "description": "Create and save new contact",
+            "url": "/#/persons/quick-create",
+            "icons": [
+                {
+                    "src": "/assets/icons/icons-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
     "theme_color": "#b92b27",
     "background_color": "#ffffff",
-    "start_url": "/foods/",
+    "scope": "./",
+    "start_url": "./",
     "display": "standalone"
 }
