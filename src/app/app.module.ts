@@ -42,7 +42,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
                 deps      : [HttpClient]
             }
         }),
-        ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production})
+        ServiceWorkerModule.register("ngsw-worker.js", {enabled: environment.production}),
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers   : [
         {

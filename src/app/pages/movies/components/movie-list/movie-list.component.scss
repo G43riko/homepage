@@ -25,3 +25,9 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.floating-add {
+    position: fixed;
+    right: 3em;
+    bottom: 3em;
+}

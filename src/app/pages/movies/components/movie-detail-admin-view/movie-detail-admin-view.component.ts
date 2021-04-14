@@ -1,15 +1,16 @@
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {Component, Input, OnInit} from "@angular/core";
-import {FormGroup} from "@angular/forms";
-import {MiscUtils} from "gtools";
-import {MovieSource} from "../../models/movie-source.type";
-import {MovieType} from "../../models/movie-type.type";
-import {Movie} from "../../models/movie.model";
-import {MovieHttpService} from "../../services/movie-http.service";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { MiscUtils } from "gtools";
+import { MovieSource } from "../../models/movie-source.type";
+import { MovieType } from "../../models/movie-type.type";
+import { Movie } from "../../models/movie.model";
+import { MovieHttpService } from "../../services/movie-http.service";
 
 @Component({
     selector: "app-movie-detail-admin-view",
     templateUrl: "./movie-detail-admin-view.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./movie-detail-admin-view.component.scss"],
     animations: [
         trigger("detailExpand", [

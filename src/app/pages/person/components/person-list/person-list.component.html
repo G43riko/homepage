@@ -1,10 +1,9 @@
-<div *ngIf="authService.user$ | async as user" class="person-wrapper">
+<div class="person-wrapper">
     <ng-template #cellSelect let-row="row">
         <app-person-list-row-cell-select [person]="row"></app-person-list-row-cell-select>
     </ng-template>
     <ng-template #cellOptions let-row="row">
-
-        <button (click)="showDetail(row.id)"
+        <button (click)="onShowDetailClick(row.id)"
                 color="primary"
                 matTooltip="Zobraziť detail"
                 mat-icon-button>
@@ -16,7 +15,7 @@
                 mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>
-        <!--        <button (click)="showDetail(row.id)" class="circular ui icon button hiddenable">-->
+        <!--        <button (click)="onShowDetailClick(row.id)" class="circular ui icon button hiddenable">-->
         <!--            <i class="icon angle right"></i>-->
         <!--        </button>-->
         <!--        <button (click)="remove([row])"-->
@@ -29,13 +28,13 @@
     <ng-template #cellBirthday let-row="row">
         {{row.birthday | date:"dd.MM.yyyy"}}
     </ng-template>
-    <app-abstract-table *ngIf="personData"
+    <app-abstract-table *ngIf="personData$ | async as personData"
                         [tableConfig]="personConfig"
                         [templates]="{options: cellOptions, contacts: cellSelect, birthday: cellBirthday}"
                         [data]="personData">
     </app-abstract-table>
 
-    <button mat-fab class="floating-add" (click)="createNew()" matTooltip="Pridať osobu">
+    <button mat-fab class="floating-add" (click)="onAddPersonClick()" matTooltip="Pridať osobu">
         <mat-icon>add</mat-icon>
     </button>
 </div>

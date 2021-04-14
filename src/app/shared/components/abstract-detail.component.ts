@@ -1,13 +1,23 @@
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AbstractHttpService} from "../services/abstract-http.service";
-import {NotificationService} from "../services/notification.service";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { BehaviorSubject, of } from "rxjs";
+import { finalize, first, map, shareReplay, switchMap, tap } from "rxjs/operators";
+import { AbstractHttpService } from "../services/abstract-http.service";
+import { NotificationService } from "../services/notification.service";
 
 export abstract class AbstractDetailComponent<T extends { id: number } = any, S extends AbstractHttpService = AbstractHttpService<T>> {
     public selectedDetail: T;
-    public isNew = false;
-    public loading = false;
-    public detailForm = this.createForm();
+    protected readonly selectedDetailSource$ = new BehaviorSubject<T | null>(null);
+    public readonly selectedDetail$        = this.selectedDetailSource$.asObservable();
+    public readonly isNew$                 = this.route.params.pipe(
+        map((data) => data.id === "new"),
+        shareReplay(1),
+    );
+    protected readonly loadingSource$      = new BehaviorSubject<boolean>(false);
+    public readonly loading$               = this.loadingSource$.asObservable();
+    public readonly detailForm             = this.createForm();
+
+    public readonly loading = true;
 
     protected constructor(protected readonly formBuilder: FormBuilder,
                           private readonly route: ActivatedRoute,
@@ -22,28 +32,35 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
     }
 
     public save(): void {
-        console.log(this.detailForm.value);
         this.setDisabled(true);
     }
 
     public back(): void {
-        if (this.isNew || this.disabled) {
-            this.router.navigate([this.listUrl]);
-        } else {
-            this.loading = true;
-            this.httpService.getDetail(this.selectedDetail.id).subscribe((data) => {
-                this.setDetail(data);
-                this.setDisabled(true);
-                this.loading = false;
-            }, (error) => {
-                this.loading = false;
-                this.notificationService.openErrorNotification(error);
-            });
-        }
+        this.isNew$.pipe(
+            switchMap((isNew) => {
+                if (isNew) {
+                    return this.router.navigate([this.listUrl]);
+                }
+
+                if (this.disabled) {
+                    return of(window.history.back());
+                }
+                this.loadingSource$.next(true);
+
+                return this.httpService.getDetail(this.selectedDetail.id).pipe(
+                    finalize(() => this.loadingSource$.next(false)),
+                    tap((data) => {
+                        this.setDetail(data);
+                        this.setDisabled(true);
+                    })
+                );
+            }),
+        ).subscribe();
     }
 
     public setDetail(detail: T): void {
         this.selectedDetail = detail;
+        this.selectedDetailSource$.next(detail);
         this.detailForm.patchValue(detail);
     }
 
@@ -56,24 +73,19 @@ export abstract class AbstractDetailComponent<T extends { id: number } = any, S 
     }
 
     protected initialization(): void {
-        this.route.params.subscribe((data: any) => {
-            const actId = data.id;
-            if (actId === "new") {
-                this.setDetail({} as T);
-                this.isNew = true;
-                this.setDisabled(false);
-            } else {
-                this.loading = true;
-                this.httpService.getDetail(actId).subscribe((detail: T) => {
-                    this.setDetail(detail);
-                    this.setDisabled(true);
-                    this.loading = false;
-                }, (error) => {
-                    this.notificationService.openErrorNotification(error);
-                    this.loading = false;
-                });
-            }
-        }, (error) => this.notificationService.openErrorNotification(error));
+        this.loadingSource$.next(true);
+        this.route.params.pipe(
+            tap(() => this.loadingSource$.next(true)),
+            switchMap((data) => data.id === "new" ? of(null) : this.httpService.getDetail(data.id)),
+            first(),
+        ).subscribe({
+            next    : (detail) => {
+                this.setDisabled(!!detail);
+                this.setDetail(detail ? detail : {} as any);
+            },
+            error   : (error) => this.notificationService.openErrorNotification(error),
+            complete: () => this.loadingSource$.next(false)
+        });
     }
 
     protected abstract createForm(): FormGroup;

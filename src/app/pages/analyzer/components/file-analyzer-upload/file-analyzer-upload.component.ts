@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { AppStaticConfig } from "../../../../appStaticConfig";
 import { Response } from "../file-analyzer-preview/file-analyzer-preview.component";
 
@@ -31,6 +31,7 @@ function sendRequest({method = "GET", url, onResponse = (response: any) => {}, c
 @Component({
     selector: "app-file-analyzer-upload",
     templateUrl: "./file-analyzer-upload.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./file-analyzer-upload.component.scss"]
 })
 export class FileAnalyzerUploadComponent implements OnInit {

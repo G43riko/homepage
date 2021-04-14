@@ -1,19 +1,25 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {PersonDetailComponent} from "./components/person-detail/person-detail.component";
-import {PersonListComponent} from "./components/person-list/person-list.component";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { PersonDetailComponent } from "./components/person-detail/person-detail.component";
+import { PersonListComponent } from "./components/person-list/person-list.component";
+import { PersonQuickCreateComponent } from "./components/person-quick-create/person-quick-create.component";
 
 const routes: Routes = [
     {
-        path: "",
+        path    : "",
         children: [
             {
-                path: "",
+                path     : "",
                 pathMatch: "full",
                 component: PersonListComponent
             },
             {
-                path: ":id",
+                path     : "quick-create",
+                component: PersonQuickCreateComponent,
+            },
+
+            {
+                path     : ":id",
                 component: PersonDetailComponent
             }
         ]

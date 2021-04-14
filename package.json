@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "serve": "ng serve --configuration=localhost",
+        "serve": "ng serve --configuration=localhost --host=0.0.0.0",
         "serve:prod": "ng serve --configuration=production",
-        "serve:mock": "ng serve --configuration=mock",
+        "serve:mock": "ng serve --configuration=mock --host=0.0.0.0",
         "build": "ng build --configuration=production",
         "build:stats": "ng build --configuration=production --stats-json",
         "build:github": "ng build --configuration=production --outputPath=docs",

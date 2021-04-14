@@ -6,29 +6,16 @@
     </div>
     <h2>{{"availableServices" | translate}}: </h2>
 
-    <ul>
-        <li>
-            <h2><a routerLink="/about">{{"contactToAuthor" | translate}}</a>
-            </h2>
-        </li>
-        <li>
-            <h2><a routerLink="/foods">{{ "dailyMenus"| translate}}</a></h2>
-        </li>
-        <li>
-            <h2><a routerLink="/analyzer">{{ "fileAnalyzer"| translate}}</a></h2>
-        </li>
-        <li>
-            <h2><a routerLink="/projects">{{ "inProgressProjects"| translate}}</a></h2>
-        </li>
-    </ul>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option routerLink="/about">{{"contactToAuthor" | translate}}</mat-list-option>
+        <mat-list-option routerLink="/foods">{{"dailyMenus" | translate}}</mat-list-option>
+        <mat-list-option routerLink="/analyzer">{{"fileAnalyzer" | translate}}</mat-list-option>
+        <mat-list-option routerLink="/projects">{{"inProgressProjects" | translate}}</mat-list-option>
+    </mat-selection-list>
+
+
     <h2>{{"externalServices" | translate}}: </h2>
-    <ul>
-        <li>
-            <h2><a href="https://share-desk.herokuapp.com"
-                   rel="noopener noreferrer"
-                   target="_blank"
-            >{{"projectList.shareDesk" | translate}}</a>
-            </h2>
-        </li>
-    </ul>
+    <mat-selection-list [multiple]="false" (selectionChange)="this.onExternalLinkClick($event)">
+        <mat-list-option value="https://share-desk.herokuapp.com">{{"projectList.shareDesk" | translate}}</mat-list-option>
+    </mat-selection-list>
 </div>

@@ -1,7 +1,7 @@
 <mat-form-field class="email-list" [ngClass]="{'full-width': isNew}">
     <mat-chip-list #chipList [disabled]="disabled">
-        <mat-chip (removed)="remove(i)"
-                  *ngFor="let email of  emailList | activePipe: showInactive.value && !isNew; let i = index"
+        <mat-chip *ngFor="let email of  emailList | activePipe: showInactive.value && !isNew; let i = index"
+                  (removed)="remove(i)"
                   class="person-email"
                   [removable]="!disabled"
                   [selectable]="false">
@@ -10,7 +10,7 @@
         </mat-chip>
         <input (matChipInputTokenEnd)="add($event)"
                label="Email"
-               [matChipInputAddOnBlur]="addOnBlur"
+               [matChipInputAddOnBlur]="true"
                [matChipInputFor]="chipList"
                [formControl]="values"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

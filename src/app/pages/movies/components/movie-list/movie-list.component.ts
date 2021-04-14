@@ -1,5 +1,6 @@
-import { Component, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { TranslateService } from "@ngx-translate/core";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
 import { Movie } from "../../models/movie.model";
@@ -10,6 +11,7 @@ import { MovieService } from "../../services/movie.service";
     selector   : "app-movie-list",
     templateUrl: "./movie-list.component.html",
     styleUrls  : ["./movie-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         MovieListService,
     ]
@@ -31,7 +33,7 @@ export class MovieListComponent implements OnDestroy{
             },
             {
                 name         : "directors",
-                label        : "Režisér",
+                label$       : this.translateService.get("movies.directors"),
                 customContent: (row: Movie) => row.directors.map((director) => director.name).join(", ")
             },
             {
@@ -40,22 +42,22 @@ export class MovieListComponent implements OnDestroy{
             },
             {
                 name         : "rating",
-                label        : "Hodnotenie",
+                label$       : this.translateService.get("movies.ratings"),
                 customContent: (row: Movie) => row.rating + " %"
             },
             {
                 name         : "duration",
-                label        : "Dĺžka",
+                label$       : this.translateService.get("movies.duration"),
                 customContent: (row: Movie) => row.duration + " min"
             },
             {
                 name         : "genres",
-                label        : "Žánre",
+                label$       : this.translateService.get("movies.genres"),
                 customContent: (row: Movie) => row.genres.join(", ")
             },
             {
                 name         : "countries",
-                label        : "Krajny",
+                label$       : this.translateService.get("movies.countries"),
                 customContent: (row: Movie) => row.countries.join(", ")
             },
             {
@@ -79,6 +81,7 @@ export class MovieListComponent implements OnDestroy{
     public constructor(
         private readonly dialog: MatDialog,
         private readonly movieService: MovieService,
+        private readonly translateService: TranslateService,
         private readonly movieListService: MovieListService
     ) {
     }

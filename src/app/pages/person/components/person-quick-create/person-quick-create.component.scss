@@ -1,0 +1,16 @@
+.quick-create-wrapper {
+    display: flex;
+    justify-content: center;
+
+    mat-card {
+        max-width: 400px;
+    }
+}
+
+.half-width {
+    display: flex;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}

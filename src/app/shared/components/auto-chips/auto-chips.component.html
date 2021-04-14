@@ -1,28 +1,25 @@
 <mat-form-field class="full-width">
-    <mat-chip-list #chipList>
-
+    <mat-chip-list #chipList [disabled]="itemCtrl.disabled">
         <mat-chip
-            (removed)="remove(item)"
-            *ngFor="let item of items"
-            [disabled]="disabled"
-            [removable]="removable"
-            [selectable]="selectable">
+            *ngFor="let item of items, let index = index"
+            (removed)="removeByIndex(index)"
+            [removable]="itemCtrl.enabled"
+        >
             {{item}}
-            <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+            <mat-icon *ngIf="itemCtrl.enabled" matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input #itemInput
                (focus)="onTouch(itemInput.value)"
                (matChipInputTokenEnd)="add($event)"
-               [disabled]="disabled"
                [formControl]="itemCtrl"
                [matAutocomplete]="auto"
-               [matChipInputAddOnBlur]="addOnBlur"
+               [matChipInputAddOnBlur]="true"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [placeholder]="placeholder">
     </mat-chip-list>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onItemSelect($event)">
+        <mat-option *ngFor="let item of filteredItems$ | async" [value]="item">
             {{item}}
         </mat-option>
     </mat-autocomplete>

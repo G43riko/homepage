@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewChild } from "@angular/core";
 import { FileAudioProcessorService } from "../../services/file-audio-processor.service";
 import { FileImageProcessorService, FileProcessResult } from "../../services/file-image-processor.service";
 import { FileMapProcessorService } from "../../services/file-map-processor.service";
@@ -35,6 +35,7 @@ function getInfos(response: Response): { key: string, value: string }[] {
 @Component({
     selector   : "app-file-analyzer-preview",
     templateUrl: "./file-analyzer-preview.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls  : ["./file-analyzer-preview.component.scss"]
 })
 export class FileAnalyzerPreviewComponent {

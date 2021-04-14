@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
-import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
-import {NotificationService} from "../../../../shared/services/notification.service";
-import {ExternalMovieService} from "../../services/external-movie.service";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
+import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
+import { NotificationService } from "../../../../shared/services/notification.service";
+import { ExternalMovieService } from "../../services/external-movie.service";
 
 @Component({
     selector: "app-csfd-user-detail",
     templateUrl: "./csfd-user-detail.component.html",
     styleUrls: ["./csfd-user-detail.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class CsfdUserDetailComponent implements OnInit {

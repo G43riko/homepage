@@ -4,15 +4,15 @@
                          (change)="setPreviewType($event.value)"
                          aria-label="Preview type"
                          name="preview type">
-            <mat-radio-button [checked]="previewType === 'table'" value="table">Table</mat-radio-button>
-            <mat-radio-button [checked]="previewType === 'grid'" value="grid">Grid</mat-radio-button>
+            <mat-radio-button [checked]="previewType === 'table'" value="table">{{"movies.show.table" | translate}}</mat-radio-button>
+            <mat-radio-button [checked]="previewType === 'grid'" value="grid">{{"movies.show.grid" | translate}}</mat-radio-button>
         </mat-radio-group>
     </section>
     <mat-form-field class="flex-grow-1">
         <input #searchPatter
                (input)="onSearchPatternChange(searchPatter.value)"
                matInput
-               placeholder="Search"
+               [placeholder]="'movies.search' | translate"
                type="search">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
@@ -47,7 +47,8 @@
     <ng-template #cellDetail let-row="row">
         <button (click)="onShowMovieDetailClick(row.id)"
                 color="primary"
-                mat-mini-fab
+                [matTooltip]="'movies.openDetail' | translate"
+                mat-icon-button
         >
             <mat-icon>chevron_right</mat-icon>
         </button>
@@ -67,11 +68,13 @@
                 class="next-loader"
                 color="primary"
                 mat-raised-button
-        >Load next movies
+        >{{'movies.loadNext' | translate}}
         </button>
     </div>
 </ng-template>
 
-<button mat-fab class="floating-add" (click)="onAddMovieClick()">
+<button mat-fab class="floating-add"
+        [matTooltip]="'movies.addNew' | translate"
+        (click)="onAddMovieClick()">
     <mat-icon>add</mat-icon>
 </button>

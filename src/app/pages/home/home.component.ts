@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { MatSelectionListChange } from "@angular/material/list";
 
 @Component({
     selector   : "app-home",
     templateUrl: "./home.component.html",
-    styleUrls  : ["./home.component.scss"]
 })
 export class HomeComponent {
-    public constructor(public readonly router: Router) {
+    public onExternalLinkClick(event: MatSelectionListChange): void {
+        window.open(event.options[0].value, "__blank");
     }
 }

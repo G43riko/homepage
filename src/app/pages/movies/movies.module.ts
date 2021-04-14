@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { TranslateModule } from "@ngx-translate/core";
 import { CoreModule } from "../../shared/core.module";
 import { MaterialModule } from "../../shared/modules/material.module";
 import { SharedModule } from "../../shared/shared.module";
@@ -25,6 +26,7 @@ import { MovieService } from "./services/movie.service";
 @NgModule({
     imports     : [
         CoreModule,
+        TranslateModule,
         SharedModule,
         MoviesRoutingModule,
         MaterialModule,
