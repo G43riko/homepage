@@ -9,20 +9,12 @@
                 mat-icon-button>
             <mat-icon>chevron_right</mat-icon>
         </button>
-        <button (click)="remove(row)"
+        <button (click)="onRemoveClick(row)"
                 color="primary"
                 matTooltip="Odstrániť"
                 mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>
-        <!--        <button (click)="onShowDetailClick(row.id)" class="circular ui icon button hiddenable">-->
-        <!--            <i class="icon angle right"></i>-->
-        <!--        </button>-->
-        <!--        <button (click)="remove([row])"-->
-        <!--                *ngIf="authService.checkAuthorization(user, [Roles.ROLE_UPDATE_PERSONS])"-->
-        <!--                class="circular ui icon button hiddenable">-->
-        <!--            <i class="icon remove"></i>-->
-        <!--        </button>-->
     </ng-template>
 
     <ng-template #cellBirthday let-row="row">

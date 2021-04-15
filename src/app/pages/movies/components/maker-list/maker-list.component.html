@@ -1,4 +1,4 @@
-<app-abstract-table [data]="makersData"
+<app-abstract-table [data]="makersData | async"
                     [templates]="{name: cellName, external: cellExternal, detail: cellDetail, birthday: cellBirthday}"
                     [tableConfig]="makerConfig"></app-abstract-table>
 

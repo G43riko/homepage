@@ -55,7 +55,7 @@
     </ng-template>
     <app-abstract-table [tableConfig]="movieConfig"
                         [templates]="{title: cellTitle, external: cellExternal, detail: cellDetail, directors: cellDirectors}"
-                        [data]="movieList$"></app-abstract-table>
+                        [data]="movieList$ | async"></app-abstract-table>
 </ng-template>
 
 <ng-template #previewTypeGrid>

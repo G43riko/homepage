@@ -111,20 +111,29 @@ export class AuthService {
     private updateUserData(user: any): Promise<void> {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
         const providerData = user.providerData && user.providerData[0] || {};
-        this.localUser = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName || providerData.displayName || null,
-            photoURL: user.photoURL || providerData.photoURL || null,
-            roles: {
-                [Roles.ROLE_VISITOR]: true,
-                [Roles.ROLE_VISIT_ABOUT]: true,
-                [Roles.ROLE_VISIT_MOVIES]: false,
-                [Roles.ROLE_VISIT_SONGS]: false,
-                [Roles.ROLE_VISIT_ACCOUNTS]: false,
-                [Roles.ROLE_VISIT_PERSONS]: false
-            }
-        };
+
+        return userRef.get().pipe(
+            switchMap((existingUser) => {
+                this.localUser = existingUser.data() || {
+                    uid: user.uid,
+                    email: user.email,
+                    created: Date.now(),
+                    displayName: user.displayName || providerData.displayName || null,
+                    photoURL: user.photoURL || providerData.photoURL || null,
+                    roles: {
+                        [Roles.ROLE_VISITOR]: true,
+                        [Roles.ROLE_VISIT_ABOUT]: true,
+                        [Roles.ROLE_VISIT_MOVIES]: false,
+                        [Roles.ROLE_VISIT_SONGS]: false,
+                        [Roles.ROLE_VISIT_ACCOUNTS]: false,
+                        [Roles.ROLE_VISIT_PERSONS]: false
+                    }
+                } as any;
+
+                return userRef.set(this.localUser, {merge: true});
+            })
+        ).toPromise();
+
 
         // userRef.get().subscribe((e) => {
         //     console.log("Data: ", e);
@@ -132,6 +141,6 @@ export class AuthService {
         // userRef.update({
         //     access: firestore.FieldValue.arrayUnion(AppStaticConfig.PATH_PROFILE) as any,
         // });
-        return userRef.set(this.localUser, {merge: true});
+        // return userRef.set(this.localUser, {merge: true});
     }
 }

@@ -7,10 +7,10 @@
     <h2>{{"availableServices" | translate}}: </h2>
 
     <mat-selection-list [multiple]="false">
-        <mat-list-option routerLink="/about">{{"contactToAuthor" | translate}}</mat-list-option>
-        <mat-list-option routerLink="/foods">{{"dailyMenus" | translate}}</mat-list-option>
-        <mat-list-option routerLink="/analyzer">{{"fileAnalyzer" | translate}}</mat-list-option>
-        <mat-list-option routerLink="/projects">{{"inProgressProjects" | translate}}</mat-list-option>
+        <mat-list-option aria-label="About" routerLink="/about">{{"contactToAuthor" | translate}}</mat-list-option>
+        <mat-list-option aria-label="Foods" routerLink="/foods">{{"dailyMenus" | translate}}</mat-list-option>
+        <mat-list-option aria-label="Analyzer" routerLink="/analyzer">{{"fileAnalyzer" | translate}}</mat-list-option>
+        <mat-list-option aria-label="Projects" routerLink="/projects">{{"inProgressProjects" | translate}}</mat-list-option>
     </mat-selection-list>
 
 

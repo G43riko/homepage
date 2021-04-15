@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
-import { Roles } from "../../../../shared/enums/roles.enum";
 import { Person } from "../../../../shared/models/person/person.model";
 import { AuthService } from "../../../../shared/services/auth.service";
 import { PersonListService } from "./person-list.service";
@@ -17,7 +16,6 @@ import { PersonListService } from "./person-list.service";
 })
 
 export class PersonListComponent {
-    public readonly Roles                             = Roles;
     public readonly user$                             = this.authService.user$;
     public readonly personData$: Observable<Person[]> = this.personService.persons$;
     public readonly personConfig: TableConfig         = {
@@ -73,7 +71,7 @@ export class PersonListComponent {
     ) {
     }
 
-    public remove(person: Person): void {
+    public onRemoveClick(person: Person): void {
         this.personService.deletePerson(person.id);
     }
 

@@ -2,7 +2,7 @@
 
 <div id="sideBar"></div>
 
-<app-abstract-table [data]="songsService.getSongs()"
+<app-abstract-table [data]="songsService.getSongs() | async"
                     [tableConfig]="songsConfig"
                     [templates]="{preview: columnPreview, video: columnVideo}"></app-abstract-table>
 

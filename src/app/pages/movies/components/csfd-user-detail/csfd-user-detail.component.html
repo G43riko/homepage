@@ -1,7 +1,7 @@
 <pre>
     {{userDetail | json}}
 </pre>
-<app-abstract-table [data]="userMovies"
+<app-abstract-table [data]="userMovies$ | async"
                     [tableConfig]="userMoviesConfig"
                     [templates]="{link: cellLink, userRating: cellRating}"
                     class="user-movies-wrapper"></app-abstract-table>

@@ -15,7 +15,7 @@ import { ExternalMovieService } from "../../services/external-movie.service";
 export class CsfdUserDetailComponent implements OnInit {
     public loading = false;
     public userDetail: any;
-    public readonly userMovies = new BehaviorSubject<any[]>([]);
+    public readonly userMovies$                   = new BehaviorSubject<any[]>([]);
     public readonly userMoviesConfig: TableConfig = {
         selection: "multi",
         paginateOptions: [5, 10, 20, 50, 100],
@@ -58,7 +58,7 @@ export class CsfdUserDetailComponent implements OnInit {
             this.id = data.id;
             this.loading = true;
             this.externalMovieService.getCsfdUserDetail(this.id).subscribe((movies) => {
-                this.userMovies.next(movies);
+                this.userMovies$.next(movies);
                 this.loading = false;
             }, (error) => {
                 this.notificationService.openErrorNotification(error);
@@ -70,7 +70,7 @@ export class CsfdUserDetailComponent implements OnInit {
     public loadMore(): void {
         this.loading = true;
         this.externalMovieService.getCsfdUserDetail(this.id, ++this.actualPage).subscribe((movies) => {
-            this.userMovies.next([...this.userMovies.value, ...movies]);
+            this.userMovies$.next([...this.userMovies$.value, ...movies]);
             this.loading = false;
         }, (error) => {
             this.notificationService.openErrorNotification(error);
