@@ -28,10 +28,9 @@
     <ng-template #cellBirthday let-row="row">
         {{row.birthday | date:"dd.MM.yyyy"}}
     </ng-template>
-    <app-abstract-table *ngIf="personData$ | async as personData"
-                        [tableConfig]="personConfig"
+    <app-abstract-table [tableConfig]="personConfig"
                         [templates]="{options: cellOptions, contacts: cellSelect, birthday: cellBirthday}"
-                        [data]="personData">
+                        [data]="personData$ | async">
     </app-abstract-table>
 
     <button mat-fab class="floating-add" (click)="onAddPersonClick()" matTooltip="Pridať osobu">

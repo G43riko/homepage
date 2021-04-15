@@ -17,54 +17,57 @@ export class PersonHttpService extends AbstractHttpService {
     }
 
     public getPersons(): Observable<Person[]> {
-        return this.http.get<Person[]>(URL)
-            .pipe(
-                catchError(this.handleError<Person[]>("getPersons"))
-            );
+        return this.http.get<Person[]>(URL).pipe(
+            catchError(this.handleError<Person[]>("getPersons"))
+        );
     }
 
     public getDetail(personId: number): Observable<Person> {
-        return this.http.get<Person>(URL + "/" + personId)
-            .pipe(
-                map(Person.parse),
-                catchError(this.handleError<Person>("cannot get person with id " + personId))
-            );
+        return this.http.get<Person>(URL + "/" + personId).pipe(
+            map(Person.parse),
+            catchError(this.handleError<Person>("cannot get person with id " + personId))
+        );
     }
 
     public update(person: Person): Observable<Person> {
         return this.http.put<Person>(URL + "/" + person.id, person, {
             headers: this.getHeaders()
-        })
-            .pipe(
-                map(Person.parse),
-                catchError(this.handleError<Person>("update person with id" + person.id))
-            );
+        }).pipe(
+            map(Person.parse),
+            catchError(this.handleError<Person>("update person with id" + person.id))
+        );
     }
 
     public delete(personId: PersonId): Observable<string> {
-        return this.http.delete<string>(URL + "/" + personId)
-            .pipe(
-                catchError(this.handleError<string>("delete person with id" + personId))
-            );
+        return this.http.delete<string>(URL + "/" + personId).pipe(
+            catchError(this.handleError<string>("delete person with id" + personId))
+        );
+    }
+
+    public quickCreate(person: unknown): Observable<Person> {
+        return this.http.post<Person>(URL + "/quick-create", person, {
+            headers: this.getHeaders()
+        }).pipe(
+            map(Person.parse),
+            catchError(this.handleError<Person>("quickCreate"))
+        );
     }
 
     public add(person: Person): Observable<Person> {
         return this.http.post<Person>(URL, JSON.stringify(person), {
             headers: this.getHeaders()
-        })
-            .pipe(
-                map(Person.parse),
-                catchError(this.handleError<Person>("add person"))
-            );
+        }).pipe(
+            map(Person.parse),
+            catchError(this.handleError<Person>("add person"))
+        );
     }
 
     public addAll(persons: Person[]): Observable<Person[]> {
         return this.http.post<Person[]>(URL + "/all", JSON.stringify(persons), {
             headers: this.getHeaders()
-        })
-            .pipe(
-                map((data) => data.map(Person.parse)),
-                catchError(this.handleError<Person[]>("addAll persons"))
-            );
+        }).pipe(
+            map((data) => data.map(Person.parse)),
+            catchError(this.handleError<Person[]>("addAll persons"))
+        );
     }
 }

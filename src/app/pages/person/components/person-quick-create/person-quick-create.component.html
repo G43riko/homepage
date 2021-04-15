@@ -31,6 +31,7 @@
 <!--                    </div>-->
                 </div>
 
+
                 <div>
                     <mat-radio-group formControlName="gender" required aria-label="Gender">
                         <mat-radio-button value="male">Muž</mat-radio-button>
@@ -38,6 +39,12 @@
                     </mat-radio-group>
                 </div>
 
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Dátum narodenia</mat-label>
+                    <input matInput autocomplete="off" formControlName="birthday" [matDatepicker]="picker" placeholder="DD/MM/YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <mat-form-field class="full-width">
                     <mat-label>{{'persons.quit-create.phone' | translate}}</mat-label>
                     <span matPrefix>+421 &nbsp;</span>

@@ -29,6 +29,7 @@ export class PersonListComponent {
             },
             {
                 name         : "name",
+                label        : "Name",
                 customContent: (person) => (person.name || "") + " " + (person.surName || "")
             },
             {
@@ -54,7 +55,7 @@ export class PersonListComponent {
         ],
         selectOptions  : [
             {
-                action: console.log,
+                action: () => alert("Action is not implemented"),
                 icon  : "delete",
                 label : "Delete"
             }
@@ -72,8 +73,8 @@ export class PersonListComponent {
     ) {
     }
 
-    public remove(persons: Person[]): void {
-        this.personService.deletePerson(...persons.map((p) => p.id));
+    public remove(person: Person): void {
+        this.personService.deletePerson(person.id);
     }
 
     public onAddPersonClick(): void {

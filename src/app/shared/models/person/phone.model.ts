@@ -1,23 +1,18 @@
 export class Phone {
-    public number: string;
-    public active: boolean;
     public number_id: string;
 
-    public constructor(number = "", active = true) {
-        this.number = number;
-        this.active = active;
+    public constructor(public readonly phoneNumber = "", public readonly active = true) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public static parse(number: any): Phone | null {
-        if (!number) {
+    public static parse(phoneNumber: any): Phone | null {
+        if (!phoneNumber) {
             return null;
         }
 
-        const result: Phone = new Phone();
+        const result: Phone = new Phone(phoneNumber.number ?? phoneNumber.phoneNumber, phoneNumber.active);
 
-        result.number_id = number.number_id;
-        result.number    = number.number;
-        result.active    = number.active;
+        result.number_id   = phoneNumber.number_id;
 
         return result;
     }

@@ -2,18 +2,120 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
-import { BehaviorSubject, merge, Observable, of } from "rxjs";
-import { catchError, delay, map, startWith, switchMap } from "rxjs/operators";
+import { MatTableDataSource } from "@angular/material/table";
+import { BehaviorSubject, merge, Observable, of, Subject } from "rxjs";
+import { catchError, delay, first, map, shareReplay, startWith, switchMap } from "rxjs/operators";
 import { ColumnConfig } from "./column-config";
 import { TableConfig } from "./table-config";
 
 @Component({
-    selector   : "app-abstract-table",
-    templateUrl: "./abstract-table.component.html",
+    selector       : "app-abstract-table",
+    templateUrl    : "./abstract-table.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls  : ["./abstract-table.component.scss"]
+    styleUrls      : ["./abstract-table.component.scss"]
 })
-export class AbstractTableComponent<T = unknown> implements OnInit {
+export class AbstractTableComponent<T = unknown> {
+    public readonly selection          = new SelectionModel<T>(true, []);
+    public readonly dataSource         = new MatTableDataSource<T>([]);
+    private readonly dataChangeSource$ = new Subject();
+
+    @ViewChild(MatPaginator)
+    public set paginator(paginator: MatPaginator) {
+        this.dataSource.paginator = paginator;
+        this.dataChangeSource$.next();
+    }
+
+    @ViewChild(MatSort)
+    public set sort(sort: MatSort) {
+        this.dataSource.sort = sort;
+        this.dataChangeSource$.next();
+    }
+
+    @Input()
+    public set data(data: T[]) {
+        this.dataSource.data = data ?? [];
+        this.dataChangeSource$.next();
+    }
+
+    public readonly isAllSelected$ = merge(this.dataChangeSource$, this.selection.changed).pipe(
+        startWith(null),
+        map(() => this.dataSource.data.length === this.selection.selected.length),
+        shareReplay(1),
+    );
+
+
+    @Input() public tableConfig: TableConfig;
+
+
+    @Input() public templates: { [key: string]: TemplateRef<unknown> } = {};
+
+    private readonly loadingSource$ = new BehaviorSubject<boolean>(false);
+    public readonly loading$        = this.loadingSource$.asObservable();
+
+
+    public get pageSize(): number {
+        return this.tableConfig.pageSize || 10;
+    }
+
+    public get pageSizeOptions(): number[] {
+        if (!this.tableConfig || !this.tableConfig.paginateOptions) {
+            return [5, 10, 20];
+        }
+
+        return this.tableConfig.paginateOptions;
+    }
+
+    public get visibleColumns(): ColumnConfig[] {
+        if (!this.tableConfig) {
+            return [];
+        }
+
+        return this.tableConfig.columns.filter((column) => column.visible !== false);
+    }
+
+
+    public get displayedColumns(): string[] {
+        if (!this.tableConfig) {
+            return [];
+        }
+        const columnsNames = this.visibleColumns.map((column) => column.name);
+        if (this.tableConfig.selection) {
+            return ["select", ...columnsNames];
+        }
+
+        return columnsNames;
+    }
+
+    public getLabel(columnConfig: ColumnConfig, row: T): Observable<string> {
+        if (typeof columnConfig.customLabel === "function") {
+            throw new Error("'customLabel' is no implemented");
+        }
+        if (columnConfig.label$) {
+            return columnConfig.label$;
+        }
+
+        return of(columnConfig.label || "");
+    }
+
+    public getContent(columnConfig: ColumnConfig, row: any): string {
+        if (typeof columnConfig.customContent === "function") {
+            return columnConfig.customContent(row);
+        }
+
+        return row[columnConfig.name];
+    }
+
+    public masterToggle(): void {
+        this.isAllSelected$.pipe(
+            first()
+        ).subscribe((isAllSelected) => {
+            isAllSelected ? this.selection.clear() :
+                this.selection.select(...this.dataSource.data);
+        });
+    }
+}
+
+export class AbstractTableComponent2<T = unknown> implements OnInit {
     public readonly selection = new SelectionModel<T>(true, []);
 
     @ViewChild(MatPaginator, {static: true}) public readonly paginator: MatPaginator;
@@ -22,9 +124,11 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
     @Input() public data: Observable<T[]> | T[];
     @Input() public templates: { [key: string]: TemplateRef<any> } = {};
     public realData: T[]                                           = [];
+    private readonly realDataSource$                               = new BehaviorSubject<T[]>([]);
+    public readonly realData$                                      = this.realDataSource$.asObservable();
     public resultsLength                                           = 0;
-    private readonly loadingSource$ = new BehaviorSubject<boolean>(true);
-    public readonly loading$ = this.loadingSource$.asObservable();
+    private readonly loadingSource$                                = new BehaviorSubject<boolean>(true);
+    public readonly loading$                                       = this.loadingSource$.asObservable();
 
     public get pageSize(): number {
         return this.tableConfig.pageSize || 10;
@@ -47,10 +151,6 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
     }
 
     private paginateData(data: T[], paginator: MatPaginator): T[] {
-        if (!paginator) {
-            return data;
-        }
-
         return data.splice(paginator.pageSize * paginator.pageIndex, paginator.pageSize);
     }
 
@@ -72,7 +172,7 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
         }
         const observables: Observable<any>[] = [of(null as any)];
 
-        if (this. sort && this.tableConfig.columns.some((column) => Boolean(column.sort))) {
+        if (this.sort && this.tableConfig.columns.some((column) => Boolean(column.sort))) {
             this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
             observables.push(this.sort.sortChange);
         }
@@ -115,7 +215,10 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
 
                 return of([]);
             })
-        ).subscribe((data) => this.realData = data);
+        ).subscribe((data) => {
+            this.realDataSource$.next(data);
+            this.realData = data;
+        });
     }
 
     public getLabel(columnConfig: ColumnConfig, row: T): Observable<string> {
@@ -154,7 +257,7 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
     }
 
     private sortData(data: any[], sort: Sort): any[] {
-        if (!sort || !sort.active || !sort.direction) {
+        if (!sort.active || !sort.direction) {
             return data;
         }
 
@@ -171,9 +274,10 @@ export class AbstractTableComponent<T = unknown> implements OnInit {
             this.selection.select(...this.realData);
     }
 
-    private transformData(data: any[]): any[] {
-        const result = this.sortData([...data], this.sort);
-        if (this.tableConfig.paginator) {
+    private transformData(data: T[]): T[] {
+        const result = this.sort ? this.sortData([...data], this.sort) : data;
+
+        if (this.paginator && this.tableConfig.paginator) {
             return this.paginateData(result, this.paginator);
         }
 

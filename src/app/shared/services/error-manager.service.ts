@@ -5,14 +5,14 @@ import { Injectable } from "@angular/core";
 })
 export class ErrorManagerService {
     public getMessageFromError(error: Response | string, defaultError: string): string {
-        let message = defaultError;
         if (typeof error === "string") {
-            message = error;
-        } else if (error.status === 0) {
-            message = "Stránka je nedostupná";
-
+            return error;
         }
 
-        return message;
+        if (error.status === 0) {
+            return "Stránka je nedostupná";
+        }
+
+        return defaultError;
     }
 }

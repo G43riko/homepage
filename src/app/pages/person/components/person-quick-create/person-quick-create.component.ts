@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { Email } from "../../../../shared/models/person/email.model";
-import { Person } from "../../../../shared/models/person/person.model";
-import { Phone } from "../../../../shared/models/person/phone.model";
+import { Router } from "@angular/router";
 import { NotificationService } from "../../../../shared/services/notification.service";
 import { PersonHttpService } from "../../services/person-http.service";
 
@@ -19,6 +17,7 @@ export class PersonQuickCreateComponent {
         surName  : "",
         gender  : "",
         name     : "",
+        birthday: "",
         email    : "",
         splitName: false,
     });
@@ -26,19 +25,16 @@ export class PersonQuickCreateComponent {
     public constructor(
         private readonly personHttpService: PersonHttpService,
         private readonly formBuilder: FormBuilder,
+        private readonly router: Router,
         private readonly notificationService: NotificationService,
     ) {
     }
 
-
-    private getName(value: any): { name: string, surName: string} | {nick: string} {
+    private getName(value: any): string[] {
         const trimmedSurName = value.surName?.trim();
         const trimmedName    = value.name?.trim();
         if (trimmedSurName && trimmedName) {
-            return {
-                name   : trimmedName,
-                surName: trimmedSurName,
-            };
+            return [trimmedName, trimmedSurName];
         }
 
         const trimmedRawName = value.rawName?.trim();
@@ -47,65 +43,25 @@ export class PersonQuickCreateComponent {
             throw new Error("Name is not valid");
         }
 
-        const splitName = trimmedRawName.split(" ");
-
-        if (splitName.length === 1) {
-            return {
-                nick: splitName[0].trim(),
-            };
-        }
-        if (splitName.length === 2) {
-            return {
-                name   : splitName[0].trim(),
-                surName: splitName[1].trim(),
-            };
-        }
-
-        if (splitName.length === 3) {
-            return {
-                name      : splitName[0].trim(),
-                nick: splitName[1].trim(),
-                surName   : splitName[2].trim(),
-            };
-        }
-
-        this.notificationService.openErrorNotification("Name is not valid");
-        throw new Error("Name is not valid");
+        return trimmedRawName.split(" ");
     }
 
     public onPersonCreateClick(): void {
         const value = this.createForm.value;
 
-        const data = this.getName(value) as any;
-
-        const numbers: Person["numbers"] = [];
-        const emails: Person["emails"]   = [];
-
-        if (value.phone) {
-            numbers.push({
-                active: true,
-                number: value.number,
-            } as Phone);
-        }
-
-        if (value.email) {
-            emails.push({
-                active: true,
-                email : value.email,
-            } as Email);
-        }
-        this.personHttpService.add({
-            numbers,
-            emails,
+        this.personHttpService.quickCreate({
+            phoneNumber: value.phone,
+            email: value.email,
             gender: value.gender,
-            nick: data.nick,
-            name: data.name,
-            surName: data.surName,
-        } as Person).subscribe(() => {
+            birthday: value.birthday,
+            name: this.getName(value),
+        }).subscribe(() => {
             this.notificationService.openSuccessNotification("Person created");
+            this.router.navigateByUrl("/persons");
         }, (error) => this.notificationService.openErrorNotification("Error during creation " + error));
     }
 
     public onBackClick(): void {
+        this.router.navigateByUrl("/persons");
     }
 }

@@ -3,7 +3,7 @@
     <div *ngIf="loading$ | async" class="example-loading-shade">
         <mat-spinner></mat-spinner>
     </div>
-    <table mat-table [dataSource]="realData" matSort>
+    <table mat-table [dataSource]="dataSource" matSort>
 
         <!--First column with checkboxes-->
         <ng-container *ngIf="tableConfig.selection"
@@ -12,9 +12,8 @@
                 <div *ngIf="tableConfig.selection === 'multi'"
                      style="display: flex;justify-content: center;align-items: center;">
                     <mat-checkbox (change)="$event ? masterToggle() : null"
-                                  [checked]="selection.hasValue() && isAllSelected()"
-                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                  [aria-label]="checkboxLabel()">
+                                  [checked]="selection.hasValue() && (isAllSelected$ | async)"
+                                  [indeterminate]="selection.hasValue() && !(isAllSelected$ | async)">
                     </mat-checkbox>
                     <button *ngIf="tableConfig.selectOptions && tableConfig.selectOptions.length"
                             [disabled]="selection.isEmpty()"
@@ -36,8 +35,7 @@
             <td mat-cell *matCellDef="let row" style="width: 6em; text-align: center">
                 <mat-checkbox (click)="$event.stopPropagation()"
                               (change)="$event ? selection.toggle(row) : null"
-                              [checked]="selection.isSelected(row)"
-                              [aria-label]="checkboxLabel(row)">
+                              [checked]="selection.isSelected(row)">
                 </mat-checkbox>
             </td>
         </ng-container>
@@ -53,7 +51,7 @@
             <ng-template #sortEnabled>
                 <th *matHeaderCellDef="let row"
                     mat-header-cell
-                    mat-sort-header>
+                    [mat-sort-header]="columnConfig.name">
                     {{getLabel(columnConfig, row) | async}}
                 </th>
             </ng-template>
