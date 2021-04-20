@@ -34,6 +34,7 @@ export class AppStaticConfig {
     public static readonly PATH_PROFILE = "profile";
     public static readonly PATH_MIXES = "mixes";
     public static readonly PATH_IMAGES = "images";
+    public static readonly PATH_GALLERY = "gallery";
     public static readonly PATH_PERSONS = "persons";
     public static readonly PATH_MOVIES = "movies";
     public static readonly PATH_IMAGE_UPLOAD = "upload";
@@ -141,7 +142,7 @@ export class AppStaticConfig {
         {
             icon: "block layout",
             link: AppStaticConfig.PATH_IMAGES,
-            label: "images",
+            label: "gallery",
         },
         {
             icon: "marker",

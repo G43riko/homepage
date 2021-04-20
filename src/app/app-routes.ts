@@ -25,6 +25,10 @@ export const AppRoutes: Routes = [
         component: HomeComponent
     },
     {
+        path     : AppStaticConfig.PATH_GALLERY,
+        loadChildren: () => import("./pages/gallery/gallery.module").then((mod) => mod.GalleryModule),
+    },
+    {
         path     : AppStaticConfig.PATH_PROJECTS,
         component: ProjectsComponent
     },

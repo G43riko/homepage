@@ -1,0 +1,8 @@
+.gallery-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    app-gallery-filter {
+        flex: 0 0 40px;
+    }
+}
