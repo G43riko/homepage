@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
-  selector: 'app-gallery-home',
-  templateUrl: './gallery-home.component.html',
-  styleUrls: ['./gallery-home.component.scss']
+    selector       : "app-gallery-home",
+    templateUrl    : "./gallery-home.component.html",
+    styleUrls      : ["./gallery-home.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryHomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class GalleryHomeComponent {
 
 }

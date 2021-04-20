@@ -1,0 +1,10 @@
+<div class="background" (click)="back()">
+    <div class="left panel" ><button (click)="openPrev(); $event.stopPropagation();"><</button></div>
+    <div class="center">
+        <div class="image-preview" swapDirective (swipeRight)="openNext()" (swipeLeft)="openPrev()" (click)="$event.stopPropagation()">
+            <img [src]="selectedUrl$ | async" alt="" style="pointer-events: none">
+        </div>
+<!--        <div class="images-list"></div>-->
+    </div>
+    <div class="right panel"><button (click)="openNext(); $event.stopPropagation();">></button></div>
+</div>

@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { GalleryService } from "./gallery-service";
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+    selector       : "app-gallery",
+    templateUrl    : "./gallery.component.html",
+    styleUrls      : ["./gallery.component.scss"],
+    providers: [
+        GalleryService
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent {
+    public readonly urls$ = this.galleryService.urls$;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    public constructor(
+        private readonly galleryService: GalleryService,
+    ) {
+    }
+    public onImageAtIndex(index: number): void {
+        this.galleryService.openImageAtIndex(index);
+    }
 }

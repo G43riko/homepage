@@ -1,1 +1,5 @@
-<p>gallery-filter works!</p>
+<mat-chip-list #list [multiple]="true" [selectable]="true">
+    <mat-chip *ngFor="let label of labels$ | async" #chip=matChip (click)="chip.selected = !chip.selected">
+        {{label.name}}
+    </mat-chip>
+</mat-chip-list>

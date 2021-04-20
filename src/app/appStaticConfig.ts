@@ -121,6 +121,12 @@ export class AppStaticConfig {
             label : "accounts"
         },
         {
+            icon  : "collections",
+            link  : AppStaticConfig.PATH_GALLERY,
+            access: "",
+            label : "gallery"
+        },
+        {
             icon  : "new_releases",
             link  : AppStaticConfig.PATH_PROJECTS,
             access: "",
