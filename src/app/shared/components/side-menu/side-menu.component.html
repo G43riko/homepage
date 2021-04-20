@@ -1,13 +1,11 @@
 <mat-nav-list>
-    <ng-container *ngFor="let menu of menuItems">
-        <button *ngIf="!menu.access || authService.canShowMenuItem(authService.user$ | async, menu.access)"
-                mat-menu-item
-                class="menu-item"
-                routerLink="/{{menu.link}}"
-                routerLinkActive="active"
-        >
-            <span>{{"menu." + menu.label | translate }}</span>
-            <mat-icon class="icon">{{menu.icon}}</mat-icon>
-        </button>
-    </ng-container>
+    <button *ngFor="let menu of menuItems$ | async"
+            mat-menu-item
+            class="menu-item"
+            routerLink="/{{menu.link}}"
+            routerLinkActive="active"
+    >
+        <span>{{"menu." + menu.label | translate }}</span>
+        <mat-icon class="icon">{{menu.icon}}</mat-icon>
+    </button>
 </mat-nav-list>
