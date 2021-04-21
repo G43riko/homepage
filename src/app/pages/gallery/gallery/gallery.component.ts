@@ -8,7 +8,7 @@ import { GalleryService } from "./gallery-service";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
-    public readonly urls$ = this.galleryService.urls$;
+    public readonly images$ = this.galleryService.images$;
 
     public constructor(
         private readonly galleryService: GalleryService,

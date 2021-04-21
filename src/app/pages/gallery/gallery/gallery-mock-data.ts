@@ -9,58 +9,83 @@ export class GalleryMockData {
     }));
 
     public static images: Readonly<GalleryImage[]> = [
-        "After Match_s.jpg",
-        "Blue Flower_s.jpg",
-        "Bratislava Destroyed_s.jpg",
-        "Bratislava Night_s.jpg",
-        "Bratislava's Castle 5_s.jpg",
-        "Castle_s.jpg",
-        "Crystal Ball_s.jpg",
-        "Cubes_s.jpg",
-        "Dark Image_s.jpg",
-        "destroyed building_s.jpg",
-        "Dragon Fighter_s.jpg",
-        "Erika Circle_s.jpg",
-        "Erika Deufalt_s.jpg",
-        "Erika White_s.jpg",
-        "Erika_s.jpg",
-        "Flower Long_s.jpg",
-        "Flower of Glass_s.jpg",
-        "Flower Short_s.jpg",
-        "Gabriel Black_s.jpg",
-        "Gabriel City_s.jpg",
-        "Gabriel Frozen_s.jpg",
-        "Gabriel Hairy_s.jpg",
-        "Gabriel highlights_s.jpg",
-        "Gabriel lights_s.jpg",
-        "Gabriel Metal_s.jpg",
-        "Gabriel Multicolor _s.jpg",
-        "Gabriel of Glass_s.jpg",
-        "Gabriel Pieces_s.jpg",
-        "Gabriel Stray_s.jpg",
-        "Gabriel White_s.jpg",
-        "Gabs of Titans_s.jpg",
-        "Heart_s.jpg",
-        "MIchael's tower_s.jpg",
-        "Mirrors_s.jpg",
-        "Nikusa Balls_s.jpg",
-        "Nikusa Circle_s.jpg",
-        "Nikusa Hairy _s.jpg",
-        "Nikusa Heart 2_s.jpg",
-        "Nikusa Heart_s.jpg",
-        "Nikusa lentilky_s.jpg",
-        "Nikusa Pink_s.jpg",
-        "Nikusa Sunset_s.jpg",
-        "Waterfall_s.jpg",
-    ].map((name) => ({
-        url: "http://g43.clanweb.eu/blog/showtrail/" + name,
-        name: name.replace(".jpg", ""),
-        tags: [] as string[],
-    })).concat(
+        ["After Match_s.jpg", ["Photoshop"]],
+        ["Blue Flower_s.jpg", ["Cinema 4D"]],
+        ["Bratislava Destroyed_s.jpg", ["Photoshop"]],
+        ["Bratislava Night_s.jpg", ["Photoshop"]],
+        ["Bratislava's Castle 5_s.jpg", ["Photoshop"]],
+        ["Castle_s.jpg", ["Photoshop"]],
+        ["Crystal Ball_s.jpg", ["Cinema 4D"]],
+        ["Cubes_s.jpg", ["Cinema 4D"]],
+        ["Dark Image_s.jpg", ["Photoshop"]],
+        ["destroyed building_s.jpg", ["Photoshop"]],
+        ["Dragon Fighter_s.jpg", ["Photoshop"]],
+        ["Erika Circle_s.jpg", ["Cinema 4D"]],
+        ["Erika Deufalt_s.jpg", ["Cinema 4D"]],
+        ["Erika White_s.jpg", ["Cinema 4D"]],
+        ["Erika_s.jpg", ["Cinema 4D"]],
+        ["Flower Long_s.jpg", ["Cinema 4D"]],
+        ["Flower of Glass_s.jpg", ["Cinema 4D"]],
+        ["Flower Short_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Black_s.jpg", ["Cinema 4D"]],
+        ["Gabriel City_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Frozen_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Hairy_s.jpg", ["Cinema 4D"]],
+        ["Gabriel highlights_s.jpg", ["Cinema 4D"]],
+        ["Gabriel lights_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Metal_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Multicolor _s.jpg", ["Cinema 4D"]],
+        ["Gabriel of Glass_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Pieces_s.jpg", ["Cinema 4D"]],
+        ["Gabriel Stray_s.jpg", ["Cinema 4D"]],
+        ["Gabriel White_s.jpg", ["Cinema 4D"]],
+        ["Gabs of Titans_s.jpg", ["Photoshop"]],
+        ["Heart_s.jpg", ["Cinema 4D"]],
+        ["MIchael's tower_s.jpg", ["Photoshop"]],
+        ["Mirrors_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Balls_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Circle_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Hairy _s.jpg", ["Cinema 4D"]],
+        ["Nikusa Heart 2_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Heart_s.jpg", ["Cinema 4D"]],
+        ["Nikusa lentilky_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Pink_s.jpg", ["Cinema 4D"]],
+        ["Nikusa Sunset_s.jpg", ["Cinema 4D"]],
+        ["Waterfall_s.jpg", ["Photoshop"]],
+    // ].map((name: string | [string, string[]]) => {
+    ].map((name: any) => {
+        const realName = typeof name === "string" ? name : name[0];
+        const tags = (typeof name === "string" ? [] : name[1]) ;
+
+        return {
+            tags,
+            url: "http://g43.clanweb.eu/blog/showtrail/" + realName,
+            name: realName.replace(".jpg", ""),
+        };
+    }).concat(
         ...new Array(7).fill(null).map((_, i) => ({
             url: "http://g43.clanweb.eu/blog/showtrail/niks/img" + (i + 1) + ".jpg",
             name: "Picture " + (i + 1),
             tags: ["Niks"],
         })),
+    ).concat(
+        ...[
+            ["Erika Stars.jpg", ["Photoshop"]],
+            ["nikusa 2.jpg", ["Cinema 4D"]],
+            ["Snob.jpg", ["Cinema 4D"]],
+            ["Erika CinemaTest 2.jpg", ["Photoshop"]],
+            ["srdco.jpg", ["Cinema 4D"]],
+            ["Planetka modra.jpg", ["Photoshop"]],
+            ["Nikol.jpg", ["Photoshop"]],
+        ].map((name: any) => {
+            const realName = typeof name === "string" ? name : name[0];
+            const tags = (typeof name === "string" ? [] : name[1]) ;
+
+            return {
+                tags,
+                url: "http://g43.clanweb.eu/blog/showtrail/misc/" + realName,
+                name: realName.replace(".jpg", ""),
+            };
+        })
     );
 }

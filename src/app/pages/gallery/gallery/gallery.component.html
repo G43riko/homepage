@@ -1,5 +1,5 @@
-<div *ngFor="let url of urls$ | async; let index=index" class="img-wrapper" (click)="onImageAtIndex(index)">
-    <img [src]="url" alt="Pokemon image">
+<div *ngFor="let image of images$ | async; let index=index" class="img-wrapper" (click)="onImageAtIndex(index)">
+    <img [src]="image.url" alt="Pokemon image" [title]="image.name">
 </div>
 <!--<router-outlet></router-outlet>-->
 <app-gallery-image-detail></app-gallery-image-detail>
