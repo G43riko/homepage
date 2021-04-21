@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { of } from "rxjs";
+import { MatChip } from "@angular/material/chips";
+import { GalleryService } from "../gallery/gallery-service";
 
 @Component({
     selector   : "app-gallery-filter",
@@ -8,9 +9,15 @@ import { of } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryFilterComponent {
-    public readonly labels$ = of([{name: "Blender"}, {name: "Cinema 4D"}]);
+    // public readonly labels$ = of([{name: "Blender"}, {name: "Cinema 4D"}]);
+    public readonly labels$ = this.galleryService.tags$;
 
-    public constructor() {
+    public constructor(
+        private readonly galleryService: GalleryService,
+    ) {
     }
 
+    public onChange(event: MatChip[]): void {
+        this.galleryService.setFilter(event.map((chip) => chip.value));
+    }
 }

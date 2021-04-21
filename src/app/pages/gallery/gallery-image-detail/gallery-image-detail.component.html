@@ -1,4 +1,7 @@
-<div class="background" (click)="back()">
+<div class="background" [class.active]="selectedUrl$ | async" (click)="back()">
+    <div class="controls">
+        <button (click)="onFullscreenClick()">FULLSCREEN</button>
+    </div>
     <div class="left panel" ><button (click)="openPrev(); $event.stopPropagation();"><</button></div>
     <div class="center">
         <div class="image-preview" swapDirective (swipeRight)="openNext()" (swipeLeft)="openPrev()" (click)="$event.stopPropagation()">

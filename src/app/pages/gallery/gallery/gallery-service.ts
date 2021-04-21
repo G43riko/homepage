@@ -2,15 +2,42 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { BehaviorSubject, combineLatest, of, Subject } from "rxjs";
-import { first, map, switchMap, takeUntil } from "rxjs/operators";
+import { first, map, shareReplay, switchMap, takeUntil } from "rxjs/operators";
 import { GalleryMockData } from "./gallery-mock-data";
 
 @Injectable()
 export class GalleryService implements OnDestroy {
     private readonly killer$              = new Subject();
     private readonly selectedIndexSource$ = new BehaviorSubject<number>(-1);
-    public readonly images$               = of(GalleryMockData.pokemons);
+    private readonly filterSource$ = new BehaviorSubject<string[]>([]);
+    private readonly allImages$ = of(GalleryMockData.images);
+    public readonly images$               = this.allImages$.pipe(
+        switchMap((images) => {
+            return this.filterSource$.pipe(
+                map((tags) => {
+                    if (!tags?.length) {
+                        return images;
+                    }
+
+                    return images.filter((image) => {
+                        return image.tags.some((tag) => tags.includes(tag));
+                    });
+                })
+            );
+        }),
+        shareReplay(1),
+    );
     public readonly urls$                 = this.images$.pipe(map((images) => images.map((image) => image.url)));
+
+    public readonly tags$ = this.allImages$.pipe(
+        map((images) => {
+            const result = new Set();
+            images.forEach((image) => image.tags.forEach((tag) => result.add(tag)));
+
+            return Array.from(result);
+        }),
+        shareReplay(1),
+    );
 
     public readonly selectedImage$ = this.images$.pipe(
         switchMap((images) => this.selectedIndexSource$.pipe(
@@ -85,5 +112,9 @@ export class GalleryService implements OnDestroy {
     public ngOnDestroy(): void {
         this.killer$.next();
         this.killer$.complete();
+    }
+
+    public setFilter(tags: string[]): void {
+        this.filterSource$.next(tags);
     }
 }

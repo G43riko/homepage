@@ -4,12 +4,28 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.3);
+    user-select: none;
+    background: rgba(0, 0, 0, 0.6);
 
+    backdrop-filter: blur(10px);
+    transition: 0.3s all;
     display: grid;
+    pointer-events: all;
     grid-template-columns: 20px auto 20px;
 }
 
+.controls {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.background:not(.active) {
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.0);
+    opacity: 0;
+    backdrop-filter: blur(0);
+}
 .panel {
     display: flex;
     justify-content: center;

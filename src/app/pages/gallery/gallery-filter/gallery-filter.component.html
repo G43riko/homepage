@@ -1,5 +1,7 @@
-<mat-chip-list #list [multiple]="true" [selectable]="true">
-    <mat-chip *ngFor="let label of labels$ | async" #chip=matChip (click)="chip.selected = !chip.selected">
-        {{label.name}}
+<mat-chip-list #list multiple selectable>
+    <mat-chip *ngFor="let label of labels$ | async"
+              (click)="chip.selected = !chip.selected; onChange(list.selected)"
+              [value]="label" #chip=matChip>
+        {{label}}
     </mat-chip>
 </mat-chip-list>

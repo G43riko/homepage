@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener } from "@angular/core";
 import { delay, first } from "rxjs/operators";
 import { GalleryService } from "../gallery/gallery-service";
 
@@ -10,8 +10,8 @@ import { GalleryService } from "../gallery/gallery-service";
 })
 export class GalleryImageDetailComponent {
     public readonly selectedUrl$ = this.galleryService.selectedUrl$;
-
     public constructor(
+        private readonly elementRef: ElementRef,
         private readonly galleryService: GalleryService,
     ) {
         this.selectedUrl$.pipe(first(), delay(0)).subscribe((id) => {
@@ -53,5 +53,13 @@ export class GalleryImageDetailComponent {
 
     public openNext(): void {
         this.galleryService.next();
+    }
+
+    public onFullscreenClick(): void {
+        if(document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.body.requestFullscreen();
+        }
     }
 }
