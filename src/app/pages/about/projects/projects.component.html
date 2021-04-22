@@ -26,10 +26,10 @@
                    style="text-decoration: none; color: black"
             >{{project.documentation | parseUrl:'host'}}</a></td>
             <td><a *ngIf="project.sources"
-                   [href]="project.sources"
+                   [href]="project.sources.url"
                    target="_blank"
                    style="text-decoration: none; color: black"
-            >{{project.sources | parseUrl:'host'}}</a>
+            >{{project.sources.service}}</a>
             </td>
         </tr>
     </table>

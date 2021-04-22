@@ -126,8 +126,10 @@
         "docs": "Dokumentácia",
         "sources": "Zdrojové kódy",
         "teams": {
-            "fiit": "FIIT",
-            "home": "Domáci projekt"
+            "FIIT": "FIIT",
+            "QBSW": "QBSW",
+            "IBL": "IBL",
+            "HOME": "Domáci projekt"
         }
     },
     "foods": {
