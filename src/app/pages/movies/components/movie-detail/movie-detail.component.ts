@@ -5,6 +5,7 @@ import { AbstractDetailComponent } from "../../../../shared/components/abstract-
 import { Roles } from "../../../../shared/enums/roles.enum";
 import { AuthService } from "../../../../shared/services/auth.service";
 import { NotificationService } from "../../../../shared/services/notification.service";
+import { MovieSource } from "../../models/movie-source.type";
 import { Movie } from "../../models/movie.model";
 import { MovieHttpService } from "../../services/movie-http.service";
 import { MovieService } from "../../services/movie.service";
@@ -17,6 +18,8 @@ import { MovieService } from "../../services/movie.service";
 })
 export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHttpService> implements OnInit {
     public readonly Roles = Roles;
+    public readonly MovieSource = MovieSource;
+
 
     public constructor(route: ActivatedRoute,
                        router: Router,

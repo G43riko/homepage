@@ -1,10 +1,11 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {CsfdUserDetailComponent} from "./components/csfd-user-detail/csfd-user-detail.component";
-import {MakerDetailComponent} from "./components/maker-detail/maker-detail.component";
-import {MakerListComponent} from "./components/maker-list/maker-list.component";
-import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
-import {MovieListComponent} from "./components/movie-list/movie-list.component";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { CsfdUserDetailComponent } from "./components/csfd-user-detail/csfd-user-detail.component";
+import { MakerDetailComponent } from "./components/maker-detail/maker-detail.component";
+import { MakerListComponent } from "./components/maker-list/maker-list.component";
+import { MovieDetailComponent } from "./components/movie-detail/movie-detail.component";
+import { MovieIndex } from "./components/movie-index";
+import { MovieListComponent } from "./components/movie-list/movie-list.component";
 
 const routes: Routes = [
     {
@@ -13,7 +14,11 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                component: MovieListComponent
+                component: MovieIndex
+            },
+            {
+                path: "list",
+                component: MovieListComponent,
             },
             {
                 path: "makers/:id",

@@ -1,6 +1,6 @@
-<button (click)="load('csfd')" *ngIf="!csfdMovie" mat-raised-button>Load CSFD</button>
-<button (click)="load('imdb')" *ngIf="!imdbMovie" mat-raised-button>Load IMDB</button>
-<button (click)="load('movieDb', movieForm.value.type)" *ngIf="!movieDbMovie" mat-raised-button>Load MovieDB</button>
+<button (click)="load(MovieSource.csfd)" *ngIf="!csfdMovie" mat-raised-button>Load CSFD</button>
+<button (click)="load(MovieSource.imdb)" *ngIf="!imdbMovie" mat-raised-button>Load IMDB</button>
+<button (click)="load(MovieSource.movieDb, movieForm.value.type)" *ngIf="!movieDbMovie" mat-raised-button>Load MovieDB</button>
 <div class="mat-elevation-z2">
     <table [dataSource]="dataSource"
            class="full-width"

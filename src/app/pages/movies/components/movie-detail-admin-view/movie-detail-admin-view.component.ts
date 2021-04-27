@@ -21,6 +21,7 @@ import { MovieHttpService } from "../../services/movie-http.service";
     ]
 })
 export class MovieDetailAdminViewComponent implements OnInit {
+    public readonly MovieSource = MovieSource;
     @Input() public movieForm: FormGroup;
     public displayedColumns: string[] = [];
     public csfdMovie: Movie;
@@ -38,19 +39,19 @@ export class MovieDetailAdminViewComponent implements OnInit {
 
     public load(source: MovieSource, type: MovieType = "movie"): void {
         switch (source) {
-        case "csfd":
+        case MovieSource.csfd:
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.csfdId).subscribe((response) => {
                 this.csfdMovie = response;
                 this.setData();
             });
             break;
-        case "imdb":
+        case MovieSource.imdb:
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.imdbId).subscribe((response) => {
                 this.imdbMovie = response;
                 this.setData();
             });
             break;
-        case "movieDb":
+        case MovieSource.movieDb:
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.movieDbId, type).subscribe((response) => {
                 this.movieDbMovie = response;
                 this.setData();

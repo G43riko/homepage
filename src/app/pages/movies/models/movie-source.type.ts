@@ -1,1 +1,5 @@
-export type MovieSource =  "csfd" | "imdb" | "movieDb";
+export enum MovieSource {
+    csfd    = "csfd",
+    imdb    = "imdb",
+    movieDb = "movieDb",
+}

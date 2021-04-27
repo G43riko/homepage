@@ -34,7 +34,7 @@
                                    formControlName="csfdId"
                                    matInput
                                    placeholder="CSFD">
-                            <mat-icon (click)="movieService.openMovieExternal('csfd', csfdId.value)"
+                            <mat-icon (click)="movieService.openMovieExternal(MovieSource.csfd, csfdId.value)"
                                       *ngIf="csfdId.value"
                                       matSuffix
                                       svgIcon="csfd"
@@ -48,7 +48,7 @@
                                    formControlName="imdbId"
                                    matInput
                                    placeholder="IMDB">
-                            <mat-icon (click)="movieService.openMovieExternal('imdb', imdbId.value)"
+                            <mat-icon (click)="movieService.openMovieExternal(MovieSource.imdb, imdbId.value)"
                                       *ngIf="imdbId.value"
                                       matSuffix
                                       svgIcon="imdb">
@@ -63,7 +63,7 @@
                                    matInput
                                    placeholder="MovieDB">
                             <mat-icon
-                                (click)="movieService.openMovieExternal('movieDb', movieDbId.value, selectedDetail.type)"
+                                (click)="movieService.openMovieExternal(MovieSource.movieDb, movieDbId.value, selectedDetail.type)"
                                 *ngIf="movieDbId.value"
                                 matSuffix
                                 svgIcon="movieDb">link

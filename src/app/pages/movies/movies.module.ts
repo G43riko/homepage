@@ -11,9 +11,12 @@ import { MakerPreviewListComponent } from "./components/maker-preview-list/maker
 import { MovieDetailAdminViewComponent } from "./components/movie-detail-admin-view/movie-detail-admin-view.component";
 import { MovieDetailBasicInfoComponent } from "./components/movie-detail-basic-info/movie-detail-basic-info.component";
 import { MovieDetailComponent } from "./components/movie-detail/movie-detail.component";
+import { MovieIndex } from "./components/movie-index";
 import { MovieListComponent } from "./components/movie-list/movie-list.component";
 import { MoviePosterPreviewComponent } from "./components/movie-poster-preview/movie-poster-preview.component";
 import { MovieSearchComponent } from "./components/movie-search/movie-search.component";
+import { IsNotInLibraryPipe } from "./components/popular-movies/is-not-in-library.pipe";
+import { PopularMoviesComponent } from "./components/popular-movies/popular-movies.component";
 import { ExternalMakerDirective } from "./directives/external-maker.directive";
 import { ExternalMovieDirective } from "./directives/external-movie.directive";
 import { MoviesRoutingModule } from "./movies-routes.module";
@@ -39,6 +42,9 @@ import { MovieService } from "./services/movie.service";
     ],
     declarations: [
         CsfdUserDetailComponent,
+        IsNotInLibraryPipe,
+        MovieIndex,
+        PopularMoviesComponent,
         MovieListComponent,
         MovieSearchComponent,
         MovieDetailAdminViewComponent,

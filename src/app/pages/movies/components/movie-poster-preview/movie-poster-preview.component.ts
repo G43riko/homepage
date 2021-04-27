@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnInit } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    Renderer2
+} from "@angular/core";
 import { Movie } from "../../models/movie.model";
 import { MovieService } from "../../services/movie.service";
 
@@ -11,24 +19,24 @@ import { MovieService } from "../../services/movie.service";
         class: "movie-wrapper"
     }
 })
-export class MoviePosterPreviewComponent implements OnInit {
+export class MoviePosterPreviewComponent {
     @Input() public movie: Movie;
 
     public constructor(public readonly movieService: MovieService,
+                       private readonly changeDetectorRef: ChangeDetectorRef,
+                       private readonly renderer2: Renderer2,
                        private readonly elementRef: ElementRef) {
     }
-
-    public ngOnInit(): void {
-    }
-
     @HostListener("click", ["$event.target"])
     private onClick(): void {
-        this.elementRef.nativeElement.classList.add("opened");
+        this.renderer2.addClass(this.elementRef.nativeElement, "opened");
+        this.changeDetectorRef.detectChanges();
     }
 
     @HostListener("mouseleave", ["$event.target"])
     private onMouseLeave(): void {
-        this.elementRef.nativeElement.classList.remove("opened");
+        this.renderer2.removeClass(this.elementRef.nativeElement, "opened");
+        this.changeDetectorRef.detectChanges();
     }
 
 }

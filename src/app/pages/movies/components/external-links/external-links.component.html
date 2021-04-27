@@ -1,49 +1,27 @@
 <ng-container *ngIf="holder">
-    <ng-container *ngIf="type === 'maker'">
-        <button (click)="movieService.openMakerExternal('csfd', holder.csfdId)"
-                *ngIf="holder.csfdId"
-                aria-label="Csfs maker page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="csfd"></mat-icon>
-        </button>
-        <button (click)="movieService.openMakerExternal('imdb', holder.imdbId)"
-                *ngIf="holder.imdbId"
-                aria-label="Imdb maker page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="imdb"></mat-icon>
-        </button>
-        <button (click)="movieService.openMakerExternal('movieDb', holder.movieDbId)"
-                *ngIf="holder.movieDbId"
-                aria-label="MovieDb maker page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="movieDb"></mat-icon>
-        </button>
-    </ng-container>
-    <ng-container *ngIf="type === 'movie'">
-        <button (click)="movieService.openMovieExternal('csfd', holder.csfdId)"
-                *ngIf="holder.csfdId"
-                aria-label="Csfd movie page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="csfd"></mat-icon>
-        </button>
-        <button (click)="movieService.openMovieExternal('imdb', holder.imdbId)"
-                *ngIf="holder.imdbId"
-                aria-label="Imdb movie page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="imdb"></mat-icon>
-        </button>
-        <button (click)="movieService.openMovieExternal('movieDb', holder.movieDbId, holder.type)"
-                *ngIf="holder.movieDbId"
-                aria-label="MovieDb movie page"
-                class="detail"
-                mat-icon-button>
-            <mat-icon svgIcon="movieDb"></mat-icon>
-        </button>
-
-    </ng-container>
+    <button *ngIf="holder.csfdId"
+            (click)="onLinkClick(MovieSource.csfd, holder.csfdId)"
+            aria-label="Csfd movie page"
+            matTooltip="CSFD page"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="csfd"></mat-icon>
+    </button>
+    <button *ngIf="holder.imdbId"
+            (click)="onLinkClick(MovieSource.imdb, holder.imdbId)"
+            aria-label="Imdb movie page"
+            matTooltip="IMDB page"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="imdb"></mat-icon>
+    </button>
+    <button *ngIf="holder.movieDbId"
+            (click)="onLinkClick(MovieSource.movieDb, holder.movieDbId, holder.type)"
+            style="filter: invert(1)"
+            aria-label="MovieDb movie page"
+            matTooltip="MovieDB page"
+            class="detail"
+            mat-icon-button>
+        <mat-icon svgIcon="movieDb"></mat-icon>
+    </button>
 </ng-container>
