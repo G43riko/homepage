@@ -27,6 +27,9 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
 
             return countriesFilter$.pipe(
                 map((countriesFilter) => {
+                    if (!countriesFilter) {
+                        return countries;
+                    }
                     const filterValue = countriesFilter.toLowerCase();
 
                     return countries.filter((country) => country.toLowerCase().includes(filterValue));
@@ -57,11 +60,23 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
             switchMap((isNew) => {
                 const method = isNew ? this.httpService.add : this.httpService.update;
 
-                return method.call(this.httpService, this.selectedDetail);
+                console.log(
+                    this.selectedDetail,
+                    this.detailForm.value
+                );
+
+                return method.call(this.httpService, Object.assign(
+                    {},
+                    this.selectedDetail,
+                    this.detailForm.value
+                ));
             }),
             first(),
         ).subscribe({
-            next    : (data) => this.setDetail(data),
+            next    : (data) => {
+                this.setDetail(data);
+                this.setDisabled(true);
+            },
             complete: () => this.loadingSource$.next(false),
         });
     }
@@ -83,10 +98,10 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
 
     protected createForm(): FormGroup {
         return this.formBuilder.group({
-            name    : ["", {validators: Validators.required}],
-            surName : ["", {validators: Validators.required}],
+            givenName    : ["", {validators: Validators.required}],
+            familyName : ["", {validators: Validators.required}],
             nick    : "",
-            birthday: ["", {validators: Validators.pattern(/(\d|\?){2}\.(\d|\?){2}.(\d|\?){4}/)}],
+            birthday: [""/*, {validators: Validators.pattern(/\d{1,2}\/\d{1,2}\/\d{4}/)}*/],
             gender  : ["", {validators: Validators.required}],
             address : this.formBuilder.group({
                 country     : "",

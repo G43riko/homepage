@@ -9,22 +9,11 @@
             <div>
                 <mat-form-field class="full-width">
                     <input matInput
-                           formControlName="name"
-                           [placeholder]="'persons.detail.name' | translate"
+                           formControlName="givenName"
+                           [placeholder]="'persons.detail.givenName' | translate"
                     >
-                    <mat-error *ngIf="detailForm.get('name').hasError('required')">
+                    <mat-error *ngIf="detailForm.get('givenName').hasError('required')">
                         Name is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field class="full-width">
-                    <input matInput
-                           formControlName="surName"
-                           [placeholder]="'persons.detail.surName' | translate"
-                    >
-                    <mat-error *ngIf="detailForm.get('surName').hasError('required')">
-                        Surname is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -36,22 +25,33 @@
                     >
                 </mat-form-field>
             </div>
-        </div>
-        <div class="flex-row">
             <div>
                 <mat-form-field class="full-width">
                     <input matInput
-                           formControlName="birthday"
-                           [placeholder]="'persons.detail.name' | translate"
+                           formControlName="familyName"
+                           [placeholder]="'persons.detail.familyName' | translate"
                     >
+                    <mat-error *ngIf="detailForm.get('familyName').hasError('required')">
+                        Surname is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-row">
+            <div>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>{{'persons.detail.birthday' | translate}}</mat-label>
+                    <input matInput autocomplete="off" formControlName="birthday" [matDatepicker]="picker" placeholder="DD/MM/YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
             <div>
-                Pohlavie:
+                {{'persons.detail.gender' | translate}}:
                 <mat-button-toggle-group formControlName="gender"
                                          aria-label="Font Style">
-                    <mat-button-toggle value="MALE">Muž</mat-button-toggle>
-                    <mat-button-toggle value="FEMALE">Žena</mat-button-toggle>
+                    <mat-button-toggle value="MAN">{{'common.man' | translate}}</mat-button-toggle>
+                    <mat-button-toggle value="WOMAN">{{'common.woman' | translate}}</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
         </div>

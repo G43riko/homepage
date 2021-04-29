@@ -6,20 +6,20 @@ export class PersonsFixture extends AbstractFixture<Person> {
     public constructor() {
         super([
             {
-                id: 111,
-                name: "EmptyPersonName",
-                accounts: [],
-                numbers: [],
-                emails: [],
-                gender: Gender.parse("")
+                id       : 111,
+                givenName: "EmptyPersonName",
+                accounts : [],
+                numbers  : [],
+                emails   : [],
+                gender   : Gender.parse("")
             },
             {
-                id: 112,
-                name: "TestPersonName",
-                surName: "TestPersonSurName",
-                birthday: "1999-11-22",
-                nick: "TestPersonNick",
-                numbers: [
+                id        : 112,
+                givenName : "TestPersonName",
+                familyName: "TestPersonSurName",
+                birthday  : "1999-11-22",
+                nick      : "TestPersonNick",
+                numbers   : [
                     {
                         phoneNumber: "0905123456",
                         active     : true,
@@ -67,12 +67,12 @@ export class PersonsFixture extends AbstractFixture<Person> {
                 }
             },
             {
-                id: 113,
-                name: "Gabriel",
-                surName: "Csollei",
-                birthday: "12.11.1993",
-                nick: "Gabo",
-                numbers: [
+                id        : 113,
+                givenName : "Gabriel",
+                familyName: "Csollei",
+                birthday  : "12.11.1993",
+                nick      : "Gabo",
+                numbers   : [
                     {
                         phoneNumber: "0905123456",
                         active     : true,

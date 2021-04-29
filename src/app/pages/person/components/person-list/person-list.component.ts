@@ -18,7 +18,7 @@ import { PersonListService } from "./person-list.service";
 export class PersonListComponent {
     public readonly user$                             = this.authService.user$;
     public readonly personData$: Observable<Person[]> = this.personService.persons$;
-    public readonly personConfig: TableConfig         = {
+    public readonly personConfig: TableConfig<Person & {contacts: unknown, name: unknown, options: unknown}>         = {
         stickyEnd      : 3,
         columns        : [
             {
@@ -28,7 +28,7 @@ export class PersonListComponent {
             {
                 name         : "name",
                 label        : "Name",
-                customContent: (person) => (person.name || "") + " " + (person.surName || "")
+                customContent: (person) => (person.givenName || "") + " " + (person.familyName || "")
             },
             {
                 name : "nick",
@@ -41,7 +41,7 @@ export class PersonListComponent {
                 sort : true
             },
             {
-                name   : "account",
+                name   : "accounts",
                 label  : "Account",
                 visible: false
             },

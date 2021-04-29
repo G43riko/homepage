@@ -56,7 +56,7 @@ export class FileMapProcessorService {
 
         const tracks = Array.from(xmlDoc.querySelectorAll("trk")).map((trackElement) => {
             return {
-                name    : trackElement.querySelector("name")?.textContent,
+                name    : trackElement.querySelector("givenName")?.textContent,
                 time    : trackElement.querySelector("time")?.textContent,
                 segments: Array.from(trackElement.querySelectorAll("trkseg")).map((segmentElement) => {
                     let minLat   = Infinity;

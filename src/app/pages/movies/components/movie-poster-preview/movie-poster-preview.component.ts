@@ -16,11 +16,13 @@ import { MovieService } from "../../services/movie.service";
     styleUrls  : ["./movie-poster-preview.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host       : {
-        class: "movie-wrapper"
+        class: "movie-wrapper",
+        "[class.not-exists]": "notExists"
     }
 })
 export class MoviePosterPreviewComponent {
     @Input() public movie: Movie;
+    @Input() public notExists: boolean;
 
     public constructor(public readonly movieService: MovieService,
                        private readonly changeDetectorRef: ChangeDetectorRef,

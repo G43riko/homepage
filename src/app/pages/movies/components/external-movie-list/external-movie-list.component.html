@@ -1,0 +1,18 @@
+<div *ngIf="movieDetails$ | async as popularMovies" class="grid-movies">
+    <div *ngFor="let movie of popularMovies; trackBy: trackByFn " class="movie-poster-wrapper">
+        <app-movie-poster-preview [notExists]="!movie.id" [movie]="movie" style="height: 100%"></app-movie-poster-preview>
+        <mat-icon *ngIf="!movie.id" (click)="onAddMovieClick(movie)" class="add-icon" matTooltip="Add to library">add_box</mat-icon>
+    </div>
+    <div *ngIf="!popularMovies.length" class="no-data-warning">
+        <h4>Cannot get list of popular movies</h4>
+    </div>
+</div>
+
+<div class="align-center">
+    <button (click)="onLoadNextClick()"
+            class="next-loader"
+            color="primary"
+            mat-raised-button
+    >{{'movies.loadNext' | translate}}
+    </button>
+</div>

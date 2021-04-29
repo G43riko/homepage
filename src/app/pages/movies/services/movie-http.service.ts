@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of, Subject, throwError } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { catchError, scan, shareReplay, startWith, switchMap } from "rxjs/operators";
 import { AppStaticConfig } from "../../../appStaticConfig";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
@@ -27,7 +27,12 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                        catchError(this.handleError<Movie[]>("getMovies"))
                    );
     }
-
+    public bulkSearchMovies(key: string, values: (string | number)[]): Observable<Movie[]> {
+        return this.http.get<Movie[]>(`${URL}/bulkSearch/${key}/${values.join(",")}`)
+                   .pipe(
+                       catchError(this.handleError<Movie[]>("bulkSearchMovies"))
+                   );
+    }
     public addMovieToDatabaseByMovieDbId(movieDbId: number | string): Observable<Movie> {
         return this.http.post<Movie>(URL_EXTERNAL + "/detail/MOVIE_DB/" + movieDbId, undefined)
                    .pipe(
@@ -124,21 +129,6 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                    .get<Movie>(URL_EXTERNAL + "/detail/" + source + "/" + id + "?transform=true&type=" + type)
                    .pipe(
                        catchError(this.handleError<Movie>("getMovieDetailFromExternalSource"))
-                   );
-    }
-
-    public getDetailByExternalId(source: MovieSource, externalId: number): Observable<Movie | null> {
-        return this.http
-                   .get<Movie>(URL + "/getByExternalId/" + source + "/" + externalId)
-                   .pipe(
-                       catchError((error) => {
-                           if (error.status === 404) {
-                               return of(null);
-                           }
-
-                           return throwError(error);
-                       }),
-                       catchError(this.handleError<Movie>("getDetailByExternalId"))
                    );
     }
 }

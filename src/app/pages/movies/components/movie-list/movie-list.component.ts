@@ -21,7 +21,7 @@ export class MovieListComponent implements OnDestroy{
     public readonly previewType$ = this.movieListService.previewType$;
     public selectedAll           = false;
     public readonly movieList$   = this.movieListService.movieList$;
-    public readonly movieConfig: TableConfig = {
+    public readonly movieConfig: TableConfig<Movie & {external: unknown, detail: unknown}> = {
         selection      : "multi",
         paginateOptions: [5, 10, 20, 50, 100],
         pageSize       : 10,

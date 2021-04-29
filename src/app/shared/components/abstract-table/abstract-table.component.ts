@@ -61,7 +61,7 @@ export class AbstractTableComponent<T = unknown> {
         return this.tableConfig.paginateOptions;
     }
 
-    public get visibleColumns(): ColumnConfig[] {
+    public get visibleColumns(): ColumnConfig<unknown>[] {
         if (!this.tableConfig) {
             return [];
         }
@@ -82,7 +82,7 @@ export class AbstractTableComponent<T = unknown> {
         return columnsNames;
     }
 
-    public getLabel(columnConfig: ColumnConfig, row: T): Observable<string> {
+    public getLabel(columnConfig: ColumnConfig<T>, row: T): Observable<string> {
         if (typeof columnConfig.customLabel === "function") {
             throw new Error("'customLabel' is no implemented");
         }
@@ -93,12 +93,12 @@ export class AbstractTableComponent<T = unknown> {
         return of(columnConfig.label || "");
     }
 
-    public getContent(columnConfig: ColumnConfig, row: any): string {
+    public getContent(columnConfig: ColumnConfig<T>, row: T): string {
         if (typeof columnConfig.customContent === "function") {
             return columnConfig.customContent(row);
         }
 
-        return row[columnConfig.name];
+        return (row as any)[columnConfig.name];
     }
 
     public masterToggle(): void {

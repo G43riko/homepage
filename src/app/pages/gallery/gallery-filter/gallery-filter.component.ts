@@ -9,7 +9,7 @@ import { GalleryService } from "../gallery/gallery-service";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryFilterComponent {
-    // public readonly labels$ = of([{name: "Blender"}, {name: "Cinema 4D"}]);
+    // public readonly labels$ = of([{givenName: "Blender"}, {givenName: "Cinema 4D"}]);
     public readonly labels$ = this.galleryService.tags$;
 
     public constructor(

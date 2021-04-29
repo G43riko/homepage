@@ -8,8 +8,8 @@ export type PersonId = number;
 
 export class Person {
     public id: PersonId;
-    public name: string;
-    public surName?: string;
+    public givenName: string;
+    public familyName?: string;
     public birthday?: string;
     public nick?: string;
     public gender: GenderType;
@@ -24,10 +24,10 @@ export class Person {
             return result;
         }
 
-        result.id = person.person_id || person.id;
-        result.name = person.name;
-        result.surName = person.surName;
-        result.gender = person.gender;
+        result.id         = person.person_id || person.id;
+        result.givenName  = person.givenName;
+        result.familyName =  person.familyName;
+        result.gender     = person.gender;
         result.birthday = person.birthday;
         result.nick = person.nick;
         result.address = person.address ? Address.parse(person.address) : new Address();
@@ -40,8 +40,8 @@ export class Person {
 
     public static toModel(person: Person): any {
         return {
-            name: person.name || "",
-            surName: person.surName || "",
+            name: person.givenName || "",
+            surName: person.familyName || "",
             nick: person.nick || "",
             gender: person.gender || "",
             birthday: person.birthday || "",

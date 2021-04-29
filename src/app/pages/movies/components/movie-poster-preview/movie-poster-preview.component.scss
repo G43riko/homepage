@@ -38,6 +38,13 @@ $radius: 5px;
         cursor: pointer;
     }
 
+    &.not-exists {
+        a, .info-wrapper.top {
+            cursor: default;
+        }
+
+    }
+
     .top {
         top: 0;
     }
@@ -64,6 +71,7 @@ $radius: 5px;
             text-decoration: none;
             color: white;
             overflow: hidden;
+
             span {
                 display: block;
                 white-space: nowrap;

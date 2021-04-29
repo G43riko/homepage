@@ -52,7 +52,7 @@ export class GalleryMockData {
         ["Nikusa Pink_s.jpg", ["Cinema 4D"]],
         ["Nikusa Sunset_s.jpg", ["Cinema 4D"]],
         ["Waterfall_s.jpg", ["Photoshop"]],
-    // ].map((name: string | [string, string[]]) => {
+    // ].map((givenName: string | [string, string[]]) => {
     ].map((name: any) => {
         const realName = typeof name === "string" ? name : name[0];
         const tags = (typeof name === "string" ? [] : name[1]) ;

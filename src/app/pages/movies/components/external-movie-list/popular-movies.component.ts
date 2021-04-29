@@ -17,13 +17,13 @@ function assignNotEmpty<T>(objA: T, objB: T): T {
 }
 
 @Component({
-    selector       : "app-top-rated-movies",
+    selector       : "app-popular-movies",
     templateUrl    : "./external-movie-list.component.html",
     styleUrls      : ["./external-movie-list.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TopRatedMoviesComponent {
-    private readonly holder = this.movieHttpService.getMovieHolder("top_rated");
+export class PopularMoviesComponent {
+    private readonly holder = this.movieHttpService.getMovieHolder("popular");
 
     public readonly movieDetails$ = this.holder.movies$.pipe(
         switchMap((movies) => {
@@ -40,7 +40,7 @@ export class TopRatedMoviesComponent {
     }
 
     public trackByFn(index: number, movie: Movie): string {
-        return String(movie.id + movie.imdbId + movie.movieDbId + movie.csfdId);
+        return String(movie.id || movie.imdbId || movie.movieDbId || movie.csfdId);
     }
 
     public onAddMovieClick(movie: Movie): void {

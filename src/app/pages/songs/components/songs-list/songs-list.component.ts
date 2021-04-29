@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
-import {SongsHttpService} from "../../services/songs-http.service";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
+import { SongsHttpService } from "../../services/songs-http.service";
 
 export interface Song {
     preview: string;
@@ -11,10 +11,11 @@ export interface Song {
 @Component({
     selector: "app-songs",
     templateUrl: "./songs-list.component.html",
-    styleUrls: ["./songs-list.component.scss"]
+    styleUrls: ["./songs-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SongsListComponent implements OnInit {
-    public readonly songsConfig: TableConfig = {
+export class SongsListComponent {
+    public readonly songsConfig: TableConfig<any> = {
         columns: [
             {
                 name: "artists",
@@ -49,8 +50,5 @@ export class SongsListComponent implements OnInit {
     };
 
     public constructor(public readonly songsService: SongsHttpService) {
-    }
-
-    public ngOnInit(): void {
     }
 }

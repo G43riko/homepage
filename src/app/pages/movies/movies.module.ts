@@ -6,7 +6,6 @@ import { ObjectMergeModule } from "../../shared/modules/object-merge/object-merg
 import { SharedModule } from "../../shared/shared.module";
 import { CsfdUserDetailComponent } from "./components/csfd-user-detail/csfd-user-detail.component";
 import { ExternalLinksComponent } from "./components/external-links/external-links.component";
-import { IsNotInLibraryPipe } from "./components/external-movie-list/is-not-in-library.pipe";
 import { PopularMoviesComponent } from "./components/external-movie-list/popular-movies.component";
 import { TopRatedMoviesComponent } from "./components/external-movie-list/top-rated-movies.component";
 import { MakerDetailComponent } from "./components/maker-detail/maker-detail.component";
@@ -45,7 +44,6 @@ import { MovieService } from "./services/movie.service";
     ],
     declarations: [
         CsfdUserDetailComponent,
-        IsNotInLibraryPipe,
         MovieIndex,
         PopularMoviesComponent,
         TopRatedMoviesComponent,

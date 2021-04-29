@@ -1,0 +1,27 @@
+
+.grid-movies {
+    $title-height: 53px;
+    $radius: 5px;
+    margin: 1rem;
+    display: grid;
+    justify-content: center;
+    grid-row-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-column-gap: 1rem;
+}
+
+.movie-poster-wrapper {
+    position: relative;
+    justify-self: center;
+    .add-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 0.25rem;
+        right: 0.25rem;
+        filter: invert(1);
+    }
+}
+
+.no-data-warning {
+    margin-top: 1rem;
+}

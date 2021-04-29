@@ -3,7 +3,7 @@
         <app-person-list-row-cell-select [person]="person"></app-person-list-row-cell-select>
     </td>
     <td>
-        {{(person.name || "") + " " + (person.surName || "")}}
+        {{(person.givenName || "") + " " + (person.familyName || "")}}
     </td>
     <td>{{person.nick}}</td>
     <td>{{person.birthday}}</td>

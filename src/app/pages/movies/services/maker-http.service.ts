@@ -6,7 +6,7 @@ import { AuthService } from "../../../shared/services/auth.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { Maker } from "../models/maker.model";
 
-const URL = AppStaticConfig.BASE_URL + "/movies/maker";
+const URL = AppStaticConfig.BASE_URL + "/v2/movies/maker";
 
 @Injectable()
 export class MakerHttpService extends AbstractHttpService<Maker> {

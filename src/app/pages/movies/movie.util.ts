@@ -8,7 +8,7 @@ export class MovieUtils {
     }
 
     public static getMakerImdbLink(imdbId: string): string {
-        return IMDB_BASE_URL + "name/" + imdbId;
+        return IMDB_BASE_URL + "givenName/" + imdbId;
     }
 
     public static getMakerMovieDbLink(movieDbId: string): string {

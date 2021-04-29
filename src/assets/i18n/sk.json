@@ -29,6 +29,8 @@
         "hi": "Ahoj",
         "share": "Zdielať",
         "shareWith": "Zdielať s",
+        "man": "Muž",
+        "woman": "Žena",
         "send": "Odoslat",
         "cancel": "Zrušiť"
     },
@@ -70,18 +72,20 @@
         }
     },
     "persons": {
-        "quit-create": {
+        "quick-create": {
             "phone": "Tel. číslo",
             "title": "Vytvorenie kontaktu",
             "nick": "Prezívka",
             "surName": "Priezvisko",
+            "birthday": "Dátum narodenia",
             "name": "Meno",
             "nameAndSurname": "Meno a priezvisko",
             "email": "Email"
         },
         "detail": {
-            "firstName": "Meno",
-            "surName": "Priezvisko",
+            "givenName": "Meno",
+            "gender": "Pohlavie",
+            "familyName": "Priezvisko",
             "birthday": "Dátum narodenia",
             "nick": "Prezívka"
         }
