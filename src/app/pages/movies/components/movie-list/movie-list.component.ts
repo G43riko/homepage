@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
+import { ObjectMergeComponent } from "../../../../shared/modules/object-merge/object-merge/object-merge.component";
 import { Movie } from "../../models/movie.model";
 import { MovieListService } from "../../services/movie-list.service";
 import { MovieService } from "../../services/movie.service";
@@ -86,9 +87,9 @@ export class MovieListComponent implements OnDestroy{
     ) {
     }
 
-    public openImageDetail(url: string): void {
+    public openMovieImages(urls: string[]): void {
         this.dialog.open(ImageDialogComponent, {
-            data: url
+            data: urls
         });
     }
 
@@ -115,7 +116,9 @@ export class MovieListComponent implements OnDestroy{
     }
 
     public onAddMovieClick(): void {
-        this.movieService.showMovieCreateForm();
+        this.dialog.open(ObjectMergeComponent, {
+        });
+        // this.movieService.showMovieCreateForm();
     }
 
     public onLoadNextClick(): void {

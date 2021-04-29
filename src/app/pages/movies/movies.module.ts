@@ -2,9 +2,13 @@ import { NgModule } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { CoreModule } from "../../shared/core.module";
 import { MaterialModule } from "../../shared/modules/material.module";
+import { ObjectMergeModule } from "../../shared/modules/object-merge/object-merge.module";
 import { SharedModule } from "../../shared/shared.module";
 import { CsfdUserDetailComponent } from "./components/csfd-user-detail/csfd-user-detail.component";
 import { ExternalLinksComponent } from "./components/external-links/external-links.component";
+import { IsNotInLibraryPipe } from "./components/external-movie-list/is-not-in-library.pipe";
+import { PopularMoviesComponent } from "./components/external-movie-list/popular-movies.component";
+import { TopRatedMoviesComponent } from "./components/external-movie-list/top-rated-movies.component";
 import { MakerDetailComponent } from "./components/maker-detail/maker-detail.component";
 import { MakerListComponent } from "./components/maker-list/maker-list.component";
 import { MakerPreviewListComponent } from "./components/maker-preview-list/maker-preview-list.component";
@@ -15,8 +19,6 @@ import { MovieIndex } from "./components/movie-index";
 import { MovieListComponent } from "./components/movie-list/movie-list.component";
 import { MoviePosterPreviewComponent } from "./components/movie-poster-preview/movie-poster-preview.component";
 import { MovieSearchComponent } from "./components/movie-search/movie-search.component";
-import { IsNotInLibraryPipe } from "./components/popular-movies/is-not-in-library.pipe";
-import { PopularMoviesComponent } from "./components/popular-movies/popular-movies.component";
 import { ExternalMakerDirective } from "./directives/external-maker.directive";
 import { ExternalMovieDirective } from "./directives/external-movie.directive";
 import { MoviesRoutingModule } from "./movies-routes.module";
@@ -33,6 +35,7 @@ import { MovieService } from "./services/movie.service";
         SharedModule,
         MoviesRoutingModule,
         MaterialModule,
+        ObjectMergeModule,
     ],
     providers   : [
         MovieHttpService,
@@ -45,6 +48,7 @@ import { MovieService } from "./services/movie.service";
         IsNotInLibraryPipe,
         MovieIndex,
         PopularMoviesComponent,
+        TopRatedMoviesComponent,
         MovieListComponent,
         MovieSearchComponent,
         MovieDetailAdminViewComponent,

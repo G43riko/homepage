@@ -1,18 +1,13 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import { ChangeDetectionStrategy, Component, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
     selector: "app-image-dialog",
     templateUrl: "./image-dialog.component.html",
-    styleUrls: ["./image-dialog.component.scss"]
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImageDialogComponent implements OnInit {
-
-    public constructor(public readonly dialogRef: MatDialogRef<ImageDialogComponent>,
-                       @Inject(MAT_DIALOG_DATA) public readonly imgSrc: string) {
-    }
-
-    public ngOnInit(): void {
+export class ImageDialogComponent {
+    public constructor(@Inject(MAT_DIALOG_DATA) public readonly imagesSrc: string[]) {
     }
 
 }

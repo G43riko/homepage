@@ -25,6 +25,14 @@
     flex-grow: 1;
 }
 
+// make tab headers sticky
+.mat-tab-header {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+    background: white;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row

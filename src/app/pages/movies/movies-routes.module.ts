@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ObjectMergeComponent } from "../../shared/modules/object-merge/object-merge/object-merge.component";
 import { CsfdUserDetailComponent } from "./components/csfd-user-detail/csfd-user-detail.component";
 import { MakerDetailComponent } from "./components/maker-detail/maker-detail.component";
 import { MakerListComponent } from "./components/maker-list/maker-list.component";
@@ -19,6 +20,10 @@ const routes: Routes = [
             {
                 path: "list",
                 component: MovieListComponent,
+            },
+            {
+                path: "merge",
+                component: ObjectMergeComponent,
             },
             {
                 path: "makers/:id",

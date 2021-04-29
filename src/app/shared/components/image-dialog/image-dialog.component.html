@@ -1,1 +1,4 @@
-<img [src]="imgSrc" alt="">
+<img *ngFor="let src of imagesSrc; let index = index"
+     style="margin: 0.5rem;"
+     [src]="src"
+     [alt]="'Movie image ' + index">

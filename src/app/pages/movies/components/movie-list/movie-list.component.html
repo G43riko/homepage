@@ -30,9 +30,9 @@
     </ng-template>
     <ng-template #cellTitle let-row="row">
         <div class="flex-row">
-            <img (click)="openImageDetail(row.avatar)"
+            <img (click)="openMovieImages(row.avatar)"
                  *ngIf="row.avatar"
-                 [src]="row.avatar"
+                 [src]="row.avatar[0]"
                  alt="row avatar" style="height: 42px; border-radius: 3px; margin-right: 1em; cursor: pointer">
             <div class="flex-column"
                  style="justify-content: space-between;">

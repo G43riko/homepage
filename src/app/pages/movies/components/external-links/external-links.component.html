@@ -17,7 +17,7 @@
     </button>
     <button *ngIf="holder.movieDbId"
             (click)="onLinkClick(MovieSource.movieDb, holder.movieDbId, holder.type)"
-            style="filter: invert(1)"
+            [style.filter]="inverted ?  'invert(1)' : 'none'"
             aria-label="MovieDb movie page"
             matTooltip="MovieDB page"
             class="detail"

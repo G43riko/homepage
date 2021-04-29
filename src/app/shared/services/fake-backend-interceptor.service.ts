@@ -1,4 +1,11 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+    HTTP_INTERCEPTORS,
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+    HttpResponse
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AbstractRestApiHandler, SimpleMemoryDatabaseService } from "@g43/common";
 import { Observable, of } from "rxjs";
@@ -50,6 +57,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     );
                 }
             }
+
+            if (request.url.endsWith("/v2/external-movies/list/popular/movieDb")) {
+                return of(new HttpResponse({
+                    status: 200,
+                    body: [],
+                }));
+            }
+
             if (request.url.endsWith("/utils/countries") && request.method === "GET") {
                 return of(new HttpResponse({
                     status: 200, body: [

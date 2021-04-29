@@ -39,7 +39,8 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
         this.selectedDetail = movie;
         this.detailForm.patchValue({
             ...movie,
-            year: new Date(movie.year, 0, 1)
+            year: new Date(movie.year, 0, 1),
+            avatar: movie.avatar?.[0] ?? ""
         });
     }
 
@@ -58,7 +59,7 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
             rating: [0, [Validators.min(0), Validators.min(100)]],
             countries: [[]],
             genres: [[]],
-            avatar: [[]],
+            avatar: [""],
             title: ["", [Validators.required, Validators.minLength(3)]],
             titleSk: [""]
         });

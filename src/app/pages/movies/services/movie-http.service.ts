@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { Observable, of, Subject, throwError } from "rxjs";
+import { catchError, scan, shareReplay, startWith, switchMap } from "rxjs/operators";
 import { AppStaticConfig } from "../../../appStaticConfig";
 import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
 import { AuthService } from "../../../shared/services/auth.service";
@@ -27,12 +27,14 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                        catchError(this.handleError<Movie[]>("getMovies"))
                    );
     }
+
     public addMovieToDatabaseByMovieDbId(movieDbId: number | string): Observable<Movie> {
         return this.http.post<Movie>(URL_EXTERNAL + "/detail/MOVIE_DB/" + movieDbId, undefined)
                    .pipe(
                        catchError(this.handleError<Movie>("addMovieToDatabaseByMovieDbId"))
                    );
     }
+
     public getMakers(): Observable<Maker[]> {
         return this.http.get<Maker[]>(URL + "/makers/?limit=1000")
                    .pipe(
@@ -49,12 +51,40 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                    );
     }
 
-    public getPopular(): Observable<Movie[]> {
-        return this.http.get<Movie[]>(URL_EXTERNAL + "/popular/movieDb", {
-            headers: this.getHeaders()
+    public getMovieHolder(type: "popular" | "top_rated"): {
+        movies$: Observable<Movie[]>,
+        loadMore(): void,
+        cleanUp(): void,
+    } {
+        const source$ = new Subject();
+
+        return {
+            movies$ : source$.pipe(
+                startWith(undefined),
+                switchMap((_, index) => this.fetchList(type, index + 1)),
+                scan((acc, curr) => [...acc, ...curr], [] as Movie[]),
+                shareReplay(1),
+            ),
+            loadMore: () => source$.next(),
+            cleanUp : () => source$.complete(),
+        };
+    }
+
+    private fetchList(type: "popular" | "top_rated", page: number): Observable<Movie[]> {
+        return this.http.get<Movie[]>(`${URL_EXTERNAL}/list/${type}/movieDb`, {
+            headers: this.getHeaders(),
+            params : {page: String(page)},
         }).pipe(
-            catchError(this.handleError<Movie[]>("getPopular"))
+            catchError(this.handleError<Movie[]>(`fetchList(${type}, ${page})`))
         );
+    }
+
+    public getPopular(): Observable<Movie[]> {
+        return this.fetchList("popular", 1);
+    }
+
+    public getTopRated(): Observable<Movie[]> {
+        return this.fetchList("top_rated", 1);
     }
 
     public getList(count: number, offset = 0, key?: string): Observable<Movie[]> {
