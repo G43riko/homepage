@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../../../shared/services/notification.service";
 import { PersonHttpService } from "../../services/person-http.service";
 
 @Component({
     selector   : "app-person-quick-create",
     templateUrl: "./person-quick-create.component.html",
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls  : ["./person-quick-create.component.scss"]
+    styleUrls  : ["./person-quick-create.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PersonQuickCreateComponent {
     public readonly createForm = this.formBuilder.group({
@@ -26,11 +27,15 @@ export class PersonQuickCreateComponent {
         private readonly personHttpService: PersonHttpService,
         private readonly formBuilder: FormBuilder,
         private readonly router: Router,
+        private readonly translateService: TranslateService,
         private readonly notificationService: NotificationService,
     ) {
     }
 
     private getName(value: any): string[] {
+        if (value.splitName) {
+            return [value.name, value.surName];
+        }
         const trimmedSurName = value.surName?.trim();
         const trimmedName    = value.name?.trim();
         if (trimmedSurName && trimmedName) {
@@ -56,12 +61,8 @@ export class PersonQuickCreateComponent {
             birthday: value.birthday,
             name: this.getName(value),
         }).subscribe(() => {
-            this.notificationService.openSuccessNotification("Person created");
+            this.notificationService.openSuccessNotification(this.translateService.instant(`persons.notification.successfully-created`));
             this.router.navigateByUrl("/persons");
-        }, (error) => this.notificationService.openErrorNotification("Error during creation " + error));
-    }
-
-    public onBackClick(): void {
-        this.router.navigateByUrl("/persons");
+        }, (error) => this.notificationService.openErrorNotification(this.translateService.instant(`persons.notification.creation-error`) + ":" + error));
     }
 }

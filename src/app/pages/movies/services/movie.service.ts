@@ -8,7 +8,7 @@ export class MovieService {
     public constructor(private readonly router: Router) {
     }
 
-    public openMovieExternal(source: MovieSource, id: string | number, type: MovieType = "movie"): Window | null {
+    public openMovieExternalMovie(source: MovieSource, id: string | number, type: MovieType = "movie"): Window | null {
         switch (source) {
             case MovieSource.csfd:
                 return window.open("https://www.csfd.cz/film/" + id, "_blank");

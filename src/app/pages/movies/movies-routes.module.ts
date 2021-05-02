@@ -38,6 +38,10 @@ const routes: Routes = [
                 component: CsfdUserDetailComponent
             },
             {
+                path: "users/csfd",
+                component: CsfdUserDetailComponent
+            },
+            {
                 path: ":id",
                 component: MovieDetailComponent
             }

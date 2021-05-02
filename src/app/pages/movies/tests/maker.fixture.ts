@@ -1,4 +1,4 @@
-import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { AbstractFixture } from "../../../shared/utils/abstract.fixture";
 import { getImageTemplate } from "../../../shared/utils/image.utils"; // TODO: fix path
 import { Maker } from "../models/maker.model";
 

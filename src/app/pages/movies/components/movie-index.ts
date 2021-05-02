@@ -24,6 +24,11 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
                     <app-movie-makers></app-movie-makers>
                 </ng-template>
             </mat-tab>
+<!--            <mat-tab label="CSFD User movies">-->
+<!--                <ng-template matTabContent>-->
+<!--                    <app-csfd-user-movies-->
+<!--                </ng-template>-->
+<!--            </mat-tab>-->
         </mat-tab-group>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,

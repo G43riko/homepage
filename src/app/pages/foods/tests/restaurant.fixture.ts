@@ -1,4 +1,4 @@
-import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { AbstractFixture } from "../../../shared/utils/abstract.fixture";
 import { Restaurant } from "../models/restaurant.model";
 
 export class RestaurantFixture extends AbstractFixture<Restaurant> {

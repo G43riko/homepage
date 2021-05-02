@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { TranslateService } from "@ngx-translate/core";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { ImageDialogComponent } from "../../../../shared/components/image-dialog/image-dialog.component";
-import { ObjectMergeComponent } from "../../../../shared/modules/object-merge/object-merge/object-merge.component";
 import { Movie } from "../../models/movie.model";
 import { MovieListService } from "../../services/movie-list.service";
 import { MovieService } from "../../services/movie.service";
@@ -17,7 +16,7 @@ import { MovieService } from "../../services/movie.service";
         MovieListService,
     ]
 })
-export class MovieListComponent implements OnDestroy{
+export class MovieListComponent {
     public readonly previewType$ = this.movieListService.previewType$;
     public selectedAll           = false;
     public readonly movieList$   = this.movieListService.movieList$;
@@ -72,13 +71,6 @@ export class MovieListComponent implements OnDestroy{
         ]
     };
 
-    private readonly io = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                this.movieListService.loadNext(10);
-            }
-        });
-    });
     public constructor(
         private readonly dialog: MatDialog,
         private readonly movieService: MovieService,
@@ -95,13 +87,9 @@ export class MovieListComponent implements OnDestroy{
 
     public setPreviewType(previewType: "table" | "grid"): void {
         this.movieListService.setPreviewType(previewType);
-        this.io.takeRecords().forEach((e) => this.io.unobserve(e.target));
         if (previewType !== "grid") {
             return;
         }
-        setTimeout(() => {
-            this.io.observe(document.querySelector(".next-loader") as Element);
-        }, 10);
     }
 
     public selectAll(checkbox: HTMLInputElement): void {
@@ -111,17 +99,12 @@ export class MovieListComponent implements OnDestroy{
         }
     }
 
-    public ngOnDestroy(): void {
-        this.io.disconnect();
-    }
-
     public onAddMovieClick(): void {
-        this.dialog.open(ObjectMergeComponent, {
-        });
-        // this.movieService.showMovieCreateForm();
+        // this.dialog.open(ObjectMergeComponent);
+        this.movieService.showMovieCreateForm();
     }
 
-    public onLoadNextClick(): void {
+    public onLoadNext(): void {
         this.movieListService.loadNext();
     }
 

@@ -1,7 +1,8 @@
-import {CommonModule} from "@angular/common";
-import {NgModule} from "@angular/core";
-import {DropZoneDirective} from "./drop-zone.directive";
-import {ExternalLinkDirective} from "./external-link.directive";
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { DropZoneDirective } from "./drop-zone.directive";
+import { ExternalLinkDirective } from "./external-link.directive";
+import { ShowAbleDirective } from "./showable.directive";
 
 @NgModule({
     imports: [
@@ -9,11 +10,13 @@ import {ExternalLinkDirective} from "./external-link.directive";
     ],
     declarations: [
         ExternalLinkDirective,
-        DropZoneDirective
+        DropZoneDirective,
+        ShowAbleDirective,
     ],
     exports: [
         ExternalLinkDirective,
-        DropZoneDirective
+        DropZoneDirective,
+        ShowAbleDirective
     ]
 })
 export class SharedDirectivesModule {

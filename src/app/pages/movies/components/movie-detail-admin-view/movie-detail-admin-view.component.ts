@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { MiscUtils } from "gtools";
 import { MovieSource } from "../../models/movie-source.type";
 import { MovieType } from "../../models/movie-type.type";
 import { Movie } from "../../models/movie.model";
@@ -61,13 +60,13 @@ export class MovieDetailAdminViewComponent implements OnInit {
     }
 
     public isExpanded(row: any): boolean {
-        return MiscUtils.isIn(row.attribute, "makers");
+        return row.attribute === "makers";
     }
 
     private setData(): void {
         const transformItem = <T extends Movie>(source: T, attribute: keyof T): any => {
             if (!source) {
-                return undefined;
+                return;
             }
 
             return source[attribute];

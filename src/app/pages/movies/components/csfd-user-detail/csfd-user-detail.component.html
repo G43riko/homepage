@@ -1,12 +1,10 @@
-<pre>
-    {{userDetail | json}}
-</pre>
-<app-abstract-table [data]="userMovies$ | async"
+
+<app-abstract-table [data]="movies$ | async"
                     [tableConfig]="userMoviesConfig"
                     [templates]="{link: cellLink, userRating: cellRating}"
                     class="user-movies-wrapper"></app-abstract-table>
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<button (click)="loadMore()" [disabled]="loading" color="primary" mat-raised-button>Načítať ďalšie</button>
+<mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+<button (click)="loadMore()" [disabled]="loading$ | async" color="primary" mat-raised-button>Načítať ďalšie</button>
 
 
 <ng-template #cellLink let-row="row">

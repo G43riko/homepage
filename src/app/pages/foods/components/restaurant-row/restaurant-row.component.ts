@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { StringUtils } from "gtools/out/utils/StringUtils";
+import { removeAccentedCharacters } from "gtools/GUtils";
 import { of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { MapDialogComponent } from "../../../../shared/components/map-dialog/map-dialog.component";
@@ -11,20 +11,21 @@ import { DailyMenuHttpService } from "../../services/daily-menu-http.service";
 import { RestaurantHttpService } from "../../services/restaurant-http.service";
 
 @Component({
-    selector: "app-restaurant-row",
+    selector   : "app-restaurant-row",
     templateUrl: "./restaurant-row.component.html",
-    styleUrls: ["./restaurant-row.component.scss"]
+    styleUrls  : ["./restaurant-row.component.scss"]
 })
 export class RestaurantRowComponent implements OnInit {
     public dailyMenu: DailyMenu | null;
     public restaurant?: Restaurant;
-    public loading = false;
+    public loading         = false;
     public restaurantMatch = false;
     public localSearchedMath: string;
 
-    @Input() public set searchedFood(key: string) {
+    @Input()
+    public set searchedFood(key: string) {
         this.localSearchedMath = key;
-        this.restaurantMatch = this.isRestaurantMatch();
+        this.restaurantMatch   = this.isRestaurantMatch();
         this.changeDetectorRef.markForCheck();
     }
 
@@ -32,11 +33,11 @@ export class RestaurantRowComponent implements OnInit {
         if (!this.restaurant || !this.localSearchedMath || this.localSearchedMath.length < 3) {
             return false;
         }
-        const lowerSearch = StringUtils.removeAccentedCharacters(this.localSearchedMath.toLowerCase());
+        const lowerSearch = removeAccentedCharacters(this.localSearchedMath.toLowerCase());
 
-        return StringUtils.removeAccentedCharacters(this.restaurant.name)
+        return removeAccentedCharacters(this.restaurant.name)
                           .toLowerCase()
-                          .indexOf(lowerSearch) >= 0 || StringUtils.removeAccentedCharacters(this.restaurant.key as any)
+                          .indexOf(lowerSearch) >= 0 || removeAccentedCharacters(this.restaurant.key as any)
                                                                    .toLowerCase()
                                                                    .indexOf(lowerSearch) >= 0;
     }
@@ -60,7 +61,7 @@ export class RestaurantRowComponent implements OnInit {
             }))
             .subscribe((dailyMenu: DailyMenu | null) => {
                 this.dailyMenu = dailyMenu;
-                this.loading = false;
+                this.loading   = false;
             });
     }
 
@@ -80,9 +81,9 @@ export class RestaurantRowComponent implements OnInit {
             return;
         }
         this.dialog.open(MapDialogComponent, {
-            width: "95%",
+            width : "95%",
             height: "95%",
-            data: this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude))
+            data  : this.mapService.getLocationEmbedUrlFromLatAndLong(Number(restaurant.address.latitude), Number(restaurant.address.longitude))
         });
     }
 

@@ -4,16 +4,10 @@
         <mat-card-title>{{'persons.quick-create.title' | translate}}</mat-card-title>
         <mat-card-content>
             <form [formGroup]="createForm">
-<!--                <mat-form-field class="full-width">-->
-<!--                    <mat-label>{{'persons.quick-create.nick' | translate}}</mat-label>-->
-<!--                    <input type="text" required matInput formControlName="nick" placeholder="Nick">-->
-<!--                </mat-form-field>-->
-
-
                 <mat-form-field *ngIf="!createForm.get('splitName')?.value" class="full-width">
                     <mat-label>{{'persons.quick-create.nameAndSurname' | translate}}</mat-label>
-                    <input type="text" required autocomplete="off" formControlName="rawName" matInput>
-                    <mat-checkbox matSuffix formControlName="splitName" class="example-margin">Split</mat-checkbox>
+                    <input type="text" autocomplete="off" formControlName="rawName" matInput>
+                    <mat-checkbox matSuffix formControlName="splitName" class="example-margin">{{'common.split' | translate}}</mat-checkbox>
                 </mat-form-field>
 
                 <div *ngIf="createForm.get('splitName')?.value" class="half-width" style="display: inline-flex; width: 100%; align-items: center">
@@ -26,9 +20,6 @@
                         <input type="text" autocomplete="off" matInput formControlName="surName">
                         <mat-checkbox matSuffix formControlName="splitName" class="example-margin">Split</mat-checkbox>
                     </mat-form-field>
-<!--                    <div>-->
-<!--                        <mat-checkbox style="max-width: 20%;" matSuffix class="example-margin">Split</mat-checkbox>-->
-<!--                    </div>-->
                 </div>
 
 
@@ -60,7 +51,7 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button [disabled]="createForm.invalid" (click)="onPersonCreateClick()" color="primary">Create</button>
-            <button mat-raised-button (click)="onBackClick()">Back</button>
+            <button mat-raised-button routerLink="/persons">Back</button>
         </mat-card-actions>
     </mat-card>
 

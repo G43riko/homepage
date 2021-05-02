@@ -1,4 +1,3 @@
-import { GenderType } from "gtools";
 import { Account } from "./account.model";
 import { Address } from "./address.model";
 import { Email } from "./email.model";
@@ -12,7 +11,7 @@ export class Person {
     public familyName?: string;
     public birthday?: string;
     public nick?: string;
-    public gender: GenderType;
+    public gender: string | null;
     public emails: Email[] = [new Email()];
     public numbers: Phone[] = [new Phone()];
     public address?: Address = new Address();

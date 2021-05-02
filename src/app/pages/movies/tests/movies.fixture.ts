@@ -1,4 +1,4 @@
-import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { AbstractFixture } from "../../../shared/utils/abstract.fixture";
 import { getImageTemplate } from "../../../shared/utils/image.utils";
 import { Movie } from "../models/movie.model";
 

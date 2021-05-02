@@ -5,10 +5,17 @@
         <mat-card-title>Movie detail</mat-card-title>
 
         <mat-card-content class="flex-row">
-            <app-movie-search (movieSearched)="setDetail($event)" *ngIf="isNew$ | async" class="full-width"></app-movie-search>
             <mat-accordion *ngIf="authService.checkAuthorization(user, Roles.ROLE_ADMIN_MOVIES)"
                            class="full-width">
-                <mat-expansion-panel class="mat-elevation-z2">
+                <mat-expansion-panel *ngIf="isNew$ | async">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Search in external source
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-movie-search (movieSearched)="setDetail($event)" class="full-width"></app-movie-search>
+                </mat-expansion-panel>
+                <mat-expansion-panel *ngIf="!(isNew$ | async)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             {{'movies.adminSection.title' | translate}}
@@ -25,7 +32,8 @@
                     <mat-card-content>
                         <mat-checkbox formControlName="saw">{{'movies.personalInfo.saw' | translate}}</mat-checkbox>
                         <br>
-                        <mat-checkbox formControlName="wantSee">{{'movies.personalInfo.wantSee' | translate}}</mat-checkbox>
+                        <mat-checkbox
+                            formControlName="wantSee">{{'movies.personalInfo.wantSee' | translate}}</mat-checkbox>
                         <br>
                         <mat-form-field *ngIf="detailForm.value.csfdId || !disabled"
                                         class="full-width">
@@ -34,11 +42,16 @@
                                    formControlName="csfdId"
                                    matInput
                                    placeholder="CSFD">
-                            <mat-icon (click)="movieService.openMovieExternal(MovieSource.csfd, csfdId.value)"
-                                      *ngIf="csfdId.value"
+                            <mat-icon *ngIf="csfdId.value"
+                                      (click)="onOpenExternalDetailClick(MovieSource.csfd, csfdId.value)"
                                       matSuffix
                                       svgIcon="csfd"
                             ></mat-icon>
+                            <mat-icon *ngIf="detailForm.enabled && csfdId.value"
+                                      (click)="onCompareWithClick(MovieSource.csfd, csfdId.value)"
+                                      matSuffix
+                            >compare
+                            </mat-icon>
                         </mat-form-field>
                         <br>
                         <mat-form-field *ngIf="detailForm.value.imdbId || !disabled"
@@ -48,8 +61,8 @@
                                    formControlName="imdbId"
                                    matInput
                                    placeholder="IMDB">
-                            <mat-icon (click)="movieService.openMovieExternal(MovieSource.imdb, imdbId.value)"
-                                      *ngIf="imdbId.value"
+                            <mat-icon *ngIf="imdbId.value"
+                                      (click)="onOpenExternalDetailClick(MovieSource.imdb, imdbId.value)"
                                       matSuffix
                                       svgIcon="imdb">
                             </mat-icon>
@@ -62,11 +75,10 @@
                                    formControlName="movieDbId"
                                    matInput
                                    placeholder="MovieDB">
-                            <mat-icon
-                                (click)="movieService.openMovieExternal(MovieSource.movieDb, movieDbId.value, selectedDetail.type)"
-                                *ngIf="movieDbId.value"
-                                matSuffix
-                                svgIcon="movieDb">
+                            <mat-icon *ngIf="movieDbId.value"
+                                      (click)="onOpenExternalDetailClick(MovieSource.movieDb, movieDbId.value, selectedDetail.type)"
+                                      matSuffix
+                                      svgIcon="movieDb">
                             </mat-icon>
                         </mat-form-field>
                     </mat-card-content>

@@ -1,7 +1,11 @@
-import {MathUtils} from "gtools";
-
 declare let YT: any;
 declare let $: any;
+
+export function pad(num: number, size: number): string {
+    const s = "00000000000000" + num;
+
+    return s.substr(s.length - size);
+}
 
 function setFullScreen(fullScreen: boolean, el: any = document.documentElement): void {
     if (fullScreen) {
@@ -11,8 +15,7 @@ function setFullScreen(fullScreen: boolean, el: any = document.documentElement):
             || el.msRequestFullscreen;
         rfs.call(el);
     } else {
-        const rfs = document.exitFullscreen
-            || (document as any).webkitExitFullscreen;
+        const rfs = document.exitFullscreen || (document as any).webkitExitFullscreen;
         // || document.mozExitFullscreen
         // || document.msExitFullscreen
         rfs.call(document);
@@ -30,14 +33,14 @@ export class GPlayer {
         this._id = id;
         this._initButtons();
         this._player = new YT.Player(id, {
-            events: {
+            events    : {
                 onStateChange: (event: any) => this.onStateChange()
             },
             playerVars: {
                 disablekb: 1, // disable keyboard
-                controls: 0, // hide controlls
-                fs: 0, // hide fullscreen button
-                showinfo: 0 // hide info
+                controls : 0, // hide controlls
+                fs       : 0, // hide fullscreen button
+                showinfo : 0 // hide info
             }
         });
     }
@@ -63,7 +66,7 @@ export class GPlayer {
     }
 
     public _initButtons(): void {
-        this.inputSlider          = document.querySelector("#slider input");
+        this.inputSlider = document.querySelector("#slider input");
         if (this.inputSlider) {
             this.inputSlider.onchange = (event: any) => {
                 this.playFrom(event.target.value);
@@ -79,23 +82,23 @@ export class GPlayer {
         const play  = document.getElementById("play");
         const pause = document.getElementById("pause");
         switch (this.getState()) {
-        case -1: // unstarted
-            break;
-        case 0: // ended
-            clearInterval(this._interval);
-            break;
-        case 1: // playing
-            play && play.classList.add("hidden");
-            pause && pause.classList.remove("hidden");
-            break;
-        case 2: // paused
-            pause && pause.classList.add("hidden");
-            play && play.classList.remove("hidden");
-            break;
-        case 3: // buffering
-            break;
-        case 5: // video cued
-            break;
+            case -1: // unstarted
+                break;
+            case 0: // ended
+                clearInterval(this._interval);
+                break;
+            case 1: // playing
+                play && play.classList.add("hidden");
+                pause && pause.classList.remove("hidden");
+                break;
+            case 2: // paused
+                pause && pause.classList.add("hidden");
+                play && play.classList.remove("hidden");
+                break;
+            case 3: // buffering
+                break;
+            case 5: // video cued
+                break;
         }
         console.log();
     }
@@ -192,7 +195,7 @@ export class GPlayer {
         const minutes = parseInt((time / 60) + "", 10);
         const seconds = time % 60;
 
-        return MathUtils.pad(minutes, 2) + ":" + MathUtils.pad(seconds, 2);
+        return pad(minutes, 2) + ":" + pad(seconds, 2);
     }
 
     public getFullName(song: any): string {
@@ -208,7 +211,8 @@ export class GPlayer {
     public playByIndex(index: number): void {
         if (GPlayer.songList && GPlayer.songList[index]) {
             this.playingSong = GPlayer.songList[index];
-            this.playByName(this._playingSong.artists.map((a: any) => a.name).join(" ") + " " + this._playingSong.title);
+            this.playByName(this._playingSong.artists.map((a: any) => a.name)
+                                .join(" ") + " " + this._playingSong.title);
 
             const element = document.getElementById("actTime");
             if (element) {

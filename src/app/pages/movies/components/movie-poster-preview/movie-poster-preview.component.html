@@ -2,7 +2,7 @@
     <img *ngIf="movie.avatar" [src]="movie.avatar[0]" alt="Image avatar" class="avatar">
 </div>
 <div class="info-wrapper top">
-    <a [routerLink]="'/movies/' + movie.id"
+    <a [routerLink]="movie.id ? '/movies/' + movie.id : ''"
        [matTooltip]="movie.titleSk || movie.title"
        class="title"
     >

@@ -23,11 +23,6 @@
             "es2017",
             "dom"
         ],
-        "paths": {
-            "gtools": [
-                "../GTools/out/*"
-            ]
-        }
     },
     "angularCompilerOptions": {
         "enableIvy": true

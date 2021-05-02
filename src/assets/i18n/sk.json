@@ -31,6 +31,7 @@
         "shareWith": "Zdielať s",
         "man": "Muž",
         "woman": "Žena",
+        "split": "Rozdeliť",
         "send": "Odoslat",
         "cancel": "Zrušiť"
     },
@@ -72,13 +73,19 @@
         }
     },
     "persons": {
+        "notification": {
+            "successfully-created": "Osoba bola vytvorená",
+            "successfully-updated": "Osoba bola upravená",
+            "successfully-deleted": "Osoba bola zmazaná",
+            "creation-error": "Chyba pri vytvární osoby"
+        },
         "quick-create": {
             "phone": "Tel. číslo",
             "title": "Vytvorenie kontaktu",
             "nick": "Prezívka",
-            "surName": "Priezvisko",
+            "familyName": "Priezvisko",
             "birthday": "Dátum narodenia",
-            "name": "Meno",
+            "givenName": "Meno",
             "nameAndSurname": "Meno a priezvisko",
             "email": "Email"
         },

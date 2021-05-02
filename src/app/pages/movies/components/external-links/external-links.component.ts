@@ -21,7 +21,7 @@ export class ExternalLinksComponent {
 
     public onLinkClick(movieDb: MovieSource, movieDbId: number | string, type?: "movie" | "tvShow"): void {
         if (this.type === "movie") {
-            this.movieService.openMovieExternal(movieDb, movieDbId, type);
+            this.movieService.openMovieExternalMovie(movieDb, movieDbId, type);
         } else if (this.type === "maker") {
             this.movieService.openMakerExternal(movieDb, movieDbId);
         } else {

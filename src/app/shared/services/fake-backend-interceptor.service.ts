@@ -7,7 +7,6 @@ import {
     HttpResponse
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AbstractRestApiHandler, SimpleMemoryDatabaseService } from "@g43/common";
 import { Observable, of } from "rxjs";
 import { delay, dematerialize, map, materialize, mergeMap, tap } from "rxjs/operators";
 import { DailyMenuFixture } from "../../pages/foods/tests/daily-menu.fixture";
@@ -16,6 +15,8 @@ import { MakersFixture } from "../../pages/movies/tests/maker.fixture";
 import { MoviesFixture } from "../../pages/movies/tests/movies.fixture";
 import { PersonsFixture } from "../../pages/person/tests/personsFixture";
 import { SongListMock } from "../../tests/mock.data";
+import { AbstractRestApiHandler } from "./tmp/g43-rest-api.handler";
+import { SimpleMemoryDatabaseService } from "./tmp/simple-memory-database.service";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -61,7 +62,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith("/v2/external-movies/list/popular/movieDb")) {
                 return of(new HttpResponse({
                     status: 200,
-                    body: [],
+                    body  : [],
                 }));
             }
 

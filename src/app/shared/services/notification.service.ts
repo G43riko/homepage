@@ -1,13 +1,12 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { G43Notification } from "@g43/common";
 import { NotificationInterface } from "../interfaces/notification.interface";
 import { ErrorManagerService } from "./error-manager.service";
 
 @Injectable({
     providedIn: "root"
 })
-export class NotificationService implements G43Notification {
+export class NotificationService {
     private readonly _defaultError = "Undefined error";
     private readonly notificationComponent: NotificationInterface = {
         showError(title: string, text: string): void {

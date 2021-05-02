@@ -1,4 +1,4 @@
-import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { AbstractFixture } from "../../../shared/utils/abstract.fixture";
 import { DailyMenu } from "../models/daily-menu.model";
 
 export class DailyMenuFixture extends AbstractFixture<DailyMenu> {

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { of } from "rxjs";
 import { first, map, shareReplay, startWith, switchMap } from "rxjs/operators";
 import { AbstractDetailComponent } from "../../../../shared/components/abstract-detail.component";
@@ -43,6 +44,7 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
                        router: Router,
                        private readonly mapService: MapsService,
                        private readonly dialog: MatDialog,
+                       private readonly translateService: TranslateService,
                        private readonly utilService: UtilsService,
                        notificationService: NotificationService,
                        formBuilder: FormBuilder,
@@ -69,13 +71,16 @@ export class PersonDetailComponent extends AbstractDetailComponent<Person, Perso
                     {},
                     this.selectedDetail,
                     this.detailForm.value
-                ));
+                )).pipe(
+                    map((data) => ({data, isNew})),
+                );
             }),
             first(),
         ).subscribe({
-            next    : (data) => {
+            next    : ({data, isNew}) => {
                 this.setDetail(data);
                 this.setDisabled(true);
+                this.notificationService.openSuccessNotification(this.translateService.instant(`persons.notification.successfully-${isNew ? "created" : "updated"}`));
             },
             complete: () => this.loadingSource$.next(false),
         });

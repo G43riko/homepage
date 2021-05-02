@@ -1,9 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { filter, first, map, shareReplay, switchMap } from "rxjs/operators";
 import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
 import { NotificationService } from "../../../../shared/services/notification.service";
 import { ExternalMovieService } from "../../services/external-movie.service";
+import { MovieHttpService } from "../../services/movie-http.service";
+
+function assignNotEmpty<T>(objA: T, objB: T): T {
+    const result: T = Object.assign({}, objA);
+
+    Object.entries(objB).forEach(([key, value]) => {
+        if(value !== null && value !== "" && typeof value !== "undefined") {
+            result[key as keyof T] = value;
+        }
+    });
+
+    return result;
+}
+
 
 @Component({
     selector       : "app-csfd-user-detail",
@@ -12,11 +26,28 @@ import { ExternalMovieService } from "../../services/external-movie.service";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None
 })
-export class CsfdUserDetailComponent implements OnInit {
-    public loading                                                                                                                   = false;
-    public userDetail: any;
-    public readonly userMovies$                                                                                                      = new BehaviorSubject<any[]>([]);
-    public readonly userMoviesConfig: TableConfig<{ title: string, userRating: unknown, year: string, added: unknown, link: string }> = {
+export class CsfdUserDetailComponent implements OnDestroy {
+    private readonly moviesHolder$ = this.route.params.pipe(
+        filter((params) => params.id),
+        map((params) => this.externalMovieService.getCsfdUserMovies(params.id)),
+        shareReplay(1),
+    );
+
+    public readonly loading$ = this.moviesHolder$.pipe(
+        switchMap((holder) => holder.loading$),
+    );
+    // public readonly movies$                                                                                                           = this.moviesHolder$.pipe(
+    //     switchMap((holder) => holder.movies$),
+    // );
+    public readonly movies$                                                                                                           = this.moviesHolder$.pipe(
+        switchMap((holder) => holder.movies$),
+        switchMap((movies) => {
+            return this.movieHttpService.bulkSearchMovies("csfdId", movies.map((movie) => movie.csfdId)).pipe(
+                map((movieDetails) => movieDetails.map((detail, index) => assignNotEmpty(detail, movies[index])))
+            );
+        }),
+    );
+    public readonly userMoviesConfig: TableConfig<{ title: string, titleSk: string, userRating: unknown, year: string, added: unknown, link: string }> = {
         selection      : "multi",
         paginateOptions: [5, 10, 20, 50, 100],
         stickyHeader   : true,
@@ -24,7 +55,8 @@ export class CsfdUserDetailComponent implements OnInit {
         columns        : [
             {
                 name : "title",
-                label: "Názov"
+                label: "Názov",
+                customContent: (row) => row.title || row.titleSk,
             },
             {
                 name : "userRating",
@@ -33,7 +65,7 @@ export class CsfdUserDetailComponent implements OnInit {
             {
                 name         : "year",
                 label        : "Rok",
-                customContent: (row) => row.year.replace(/[()]/g, "")
+                customContent: (row) => row.year
             },
             {
                 name : "added",
@@ -45,36 +77,24 @@ export class CsfdUserDetailComponent implements OnInit {
             }
         ]
     };
-    private actualPage                                                                                                               = 1;
-    private id: number;
 
-    public constructor(private readonly route: ActivatedRoute,
-                       private readonly notificationService: NotificationService,
-                       private readonly externalMovieService: ExternalMovieService) {
+    public constructor(
+        private readonly route: ActivatedRoute,
+        private readonly notificationService: NotificationService,
+        private readonly externalMovieService: ExternalMovieService,
+        private readonly movieHttpService: MovieHttpService,
+    ) {
     }
 
-    public ngOnInit(): void {
-        this.route.params.subscribe((data: any) => {
-            this.id      = data.id;
-            this.loading = true;
-            this.externalMovieService.getCsfdUserDetail(this.id).subscribe((movies) => {
-                this.userMovies$.next(movies);
-                this.loading = false;
-            }, (error) => {
-                this.notificationService.openErrorNotification(error);
-                this.loading = false;
-            });
-        }, (error) => this.notificationService.openErrorNotification(error));
+    public ngOnDestroy(): void {
+        this.moviesHolder$.pipe(
+            first()
+        ).subscribe((holder) => holder.cleanUp());
     }
 
     public loadMore(): void {
-        this.loading = true;
-        this.externalMovieService.getCsfdUserDetail(this.id, ++this.actualPage).subscribe((movies) => {
-            this.userMovies$.next([...this.userMovies$.value, ...movies]);
-            this.loading = false;
-        }, (error) => {
-            this.notificationService.openErrorNotification(error);
-            this.loading = false;
-        });
+        this.moviesHolder$.pipe(
+            first(),
+        ).subscribe((holder) => holder.loadMore());
     }
 }

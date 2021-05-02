@@ -65,7 +65,9 @@
                                   [movie]="movie"></app-movie-poster-preview>
     </div>
     <div class="align-center">
-        <button (click)="onLoadNextClick()"
+        <button (click)="onLoadNext()"
+                showAble
+                (show)="onLoadNext()"
                 class="next-loader"
                 color="primary"
                 mat-raised-button

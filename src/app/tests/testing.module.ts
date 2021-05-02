@@ -3,9 +3,8 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { BrowserModule } from "@angular/platform-browser";
-import { G43TestingModule } from "@g43/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { MaterialModule } from "../shared/modules/material.module";
 import { AngularFireAuthMockService } from "./mock-services/angular-fire-auth-mock.service";
@@ -26,7 +25,6 @@ import { AngularFirestoreMockService } from "./mock-services/angular-firestore-m
         {provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     exports     : [
-        G43TestingModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,

@@ -14,27 +14,35 @@
             </mat-form-field>
 
             <mat-radio-group formControlName="type">
-                <mat-radio-button aria-label="csdf" value="csfd">
+                <mat-radio-button aria-label="csdf" [value]="MovieSource.csfd">
                     CSFD
                 </mat-radio-button>
-                <mat-radio-button aria-label="imdb" value="imdb">
+                <mat-radio-button aria-label="imdb" [value]="MovieSource.imdb">
                     IMDB
                 </mat-radio-button>
-                <mat-radio-button aria-label="movieDb" value="movieDb">
+                <mat-radio-button aria-label="movieDb" [value]="MovieSource.movieDb">
                     MovieDB
                 </mat-radio-button>
             </mat-radio-group>
 
             <mat-list>
-                <mat-list-item *ngFor="let result of movieResults">
-                    <img [src]="result.avatar[0]" alt="Avatar" matListAvatar>
-                    <h4 mat-line>{{result.title}}</h4>
-                    <p mat-line> {{result.year}} - {{result.genres.join("/")}} </p>
-                    <p mat-line> {{result.countries.join("/")}} </p>
-                    <button (click)="searchById(result.id)" mat-icon-button>
+                <mat-list-item *ngFor="let result of movieList$ | async">
+                    <img *ngIf="result.avatar?.length" [src]="result.avatar" alt="Avatar" matListAvatar>
+                    <h4 mat-line>{{result.title || result.titleSk}}</h4>
+                    <p mat-line>
+                        {{result.year}}
+                        <ng-container *ngIf="result.year && result.genres?.length"> - </ng-container>
+                        {{result.genres?.join("/")}}
+                    </p>
+                    <p mat-line> {{result.countries?.join("/")}} </p>
+                    <button (click)="onSelectExternalMovieClick(result)"
+                            matTooltip="Select movie"
+                            mat-icon-button>
                         <mat-icon>touch_app</mat-icon>
                     </button>
-                    <button (click)="movieService.openMovieExternal(searchedType, result.id)" mat-icon-button>
+                    <button (click)="onExternalDetailClick(result)"
+                            matTooltip="Open in external source"
+                            mat-icon-button>
                         <mat-icon>info</mat-icon>
                     </button>
                 </mat-list-item>

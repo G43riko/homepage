@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { MiscUtils } from "gtools";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AppStaticConfig } from "../../appStaticConfig";
@@ -16,15 +15,17 @@ export class YoutubeService extends AbstractHttpService {
     }
 
     public searchVideo(key: string): Observable<any> {
-        const url = AppStaticConfig.YOUTUBE_API_URL + "search" + MiscUtils.objectToQueryParams({
-            q   : key,
-            part: "snippet",
-            key : AppStaticConfig.YOUTUBE_API_KEY
-        });
+        const url = `${AppStaticConfig.YOUTUBE_API_URL}search`;
 
-        return this.http.get<any>(url)
-            .pipe(
-                catchError(this.handleError<Person[]>("getPersons"))
-            );
+        return this.http.get<any>(url, {
+            params: {
+                q   : key,
+                part: "snippet",
+                key : AppStaticConfig.YOUTUBE_API_KEY
+            }
+        })
+                   .pipe(
+                       catchError(this.handleError<Person[]>("getPersons"))
+                   );
     }
 }

@@ -118,7 +118,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
 
     public getMoviesFromExternalSource(type: MovieSource, key: string): Observable<Movie[]> {
         return this.http
-                   .get<Movie[]>(URL_EXTERNAL + "/search/" + type + "/" + key + "?transform=true")
+                   .get<Movie[]>(URL_EXTERNAL + "/search/" + type + "/" + key + "?transform=dto")
                    .pipe(
                        catchError(this.handleError<Movie[]>("getMoviesFromExternalSource"))
                    );
@@ -126,7 +126,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
 
     public getMovieDetailFromExternalSource(source: MovieSource, id: string, type: MovieType = "movie"): Observable<Movie> {
         return this.http
-                   .get<Movie>(URL_EXTERNAL + "/detail/" + source + "/" + id + "?transform=true&type=" + type)
+                   .get<Movie>(URL_EXTERNAL + "/detail/" + source + "/" + id + "?transform=dto&type=" + type)
                    .pipe(
                        catchError(this.handleError<Movie>("getMovieDetailFromExternalSource"))
                    );

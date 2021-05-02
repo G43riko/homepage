@@ -1,6 +1,6 @@
-import { Gender } from "gtools";
-import { AbstractFixture } from "gtools/out/tests/abstract.fixture";
+import { parseGender } from "gtools/GUtils";
 import { Person } from "../../../shared/models/person/person.model";
+import { AbstractFixture } from "../../../shared/utils/abstract.fixture";
 
 export class PersonsFixture extends AbstractFixture<Person> {
     public constructor() {
@@ -11,7 +11,7 @@ export class PersonsFixture extends AbstractFixture<Person> {
                 accounts : [],
                 numbers  : [],
                 emails   : [],
-                gender   : Gender.parse("")
+                gender   : parseGender("")
             },
             {
                 id        : 112,
@@ -31,38 +31,39 @@ export class PersonsFixture extends AbstractFixture<Person> {
                         number_id  : "TestPersonNumber2Id"
                     }
                 ],
-                emails: [
+                emails    : [
                     {
-                        email: "abc@gmail.com",
-                        active: true,
+                        email   : "abc@gmail.com",
+                        active  : true,
                         email_id: "TestPersonEmail1Id"
                     },
                     {
-                        email: "gmail@abc.com",
-                        active: false,
+                        email   : "gmail@abc.com",
+                        active  : false,
                         email_id: "TestPersonEmail2Id"
                     }
                 ],
-                accounts: [
+                accounts  : [
                     {
-                        type: "FACEBOOK",
-                        userName: "TestPersonAccountFbUserName",
-                        active: true,
-                        link: "TestPersonAccountFbLink",
+                        type      : "FACEBOOK",
+                        userName  : "TestPersonAccountFbUserName",
+                        active    : true,
+                        link      : "TestPersonAccountFbLink",
                         account_id: 221
-                    }, {
-                        type: "LINKEDIN",
-                        userName: "TestPersonAccountLIUserName",
-                        active: true,
-                        link: "TestPersonAccountLILink",
+                    },
+                    {
+                        type      : "LINKEDIN",
+                        userName  : "TestPersonAccountLIUserName",
+                        active    : true,
+                        link      : "TestPersonAccountLILink",
                         account_id: 222
                     }
                 ],
-                gender: Gender.parse("MAN"),
-                address: {
-                    country: "SK",
-                    city: "TestPersonAddressCity",
-                    street: "TestPersonAddressStreet",
+                gender    : parseGender("MAN"),
+                address   : {
+                    country     : "SK",
+                    city        : "TestPersonAddressCity",
+                    street      : "TestPersonAddressStreet",
                     streetNumber: "TestPersonAddressStreetNumber"
                 }
             },
@@ -84,38 +85,39 @@ export class PersonsFixture extends AbstractFixture<Person> {
                         number_id  : "2"
                     }
                 ],
-                emails: [
+                emails    : [
                     {
-                        email: "gcsollei@hotmail.com",
-                        active: true,
+                        email   : "gcsollei@hotmail.com",
+                        active  : true,
                         email_id: "1"
                     },
                     {
-                        email: "gcsollei@gmail.com",
-                        active: true,
+                        email   : "gcsollei@gmail.com",
+                        active  : true,
                         email_id: "2"
                     }
                 ],
-                accounts: [
+                accounts  : [
                     {
-                        type: "FACEBOOK",
-                        userName: "Gabriel",
-                        active: true,
-                        link: "TestPersonAccountFbLink",
+                        type      : "FACEBOOK",
+                        userName  : "Gabriel",
+                        active    : true,
+                        link      : "TestPersonAccountFbLink",
                         account_id: 223
-                    }, {
-                        type: "LINKEDIN",
-                        userName: "TestPersonAccountLIUserName",
-                        active: true,
-                        link: "TestPersonAccountLILink",
+                    },
+                    {
+                        type      : "LINKEDIN",
+                        userName  : "TestPersonAccountLIUserName",
+                        active    : true,
+                        link      : "TestPersonAccountLILink",
                         account_id: 224
                     }
                 ],
-                gender: Gender.parse("MALE"),
-                address: {
-                    country: "SK",
-                    city: "Slovakia",
-                    street: "Mierová",
+                gender    : parseGender("MALE"),
+                address   : {
+                    country     : "SK",
+                    city        : "Slovakia",
+                    street      : "Mierová",
                     streetNumber: "23"
                 }
             }
