@@ -46,5 +46,5 @@
 
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" [disabled]="getDiffs() > 0">Update</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="compareData" [disabled]="getDiffs() > 0">Update</button>
 </mat-dialog-actions>

@@ -8,17 +8,24 @@
 
 
 <ng-template #cellLink let-row="row">
-    <a href="https://www.csfd.cz{{row.link}}" target="_blank">
-        <button aria-label="Example icon-button with a heart icon"
-                class="detail"
-                mat-icon-button>
-            <mat-icon style="color: #B01" svgIcon="csfd"></mat-icon>
-        </button>
-    </a>
+    <button aria-label="Example icon-button with a heart icon"
+            [externalLink]="'https://www.csfd.cz' + row.link"
+            class="detail"
+            mat-icon-button>
+        <mat-icon style="color: #B01" svgIcon="csfd"></mat-icon>
+    </button>
+    <button *ngIf="row.id"
+            mat-icon-button
+            color="primary"
+            [routerLink]="'/movies/' + row.id"
+            [matTooltip]="'movies.openDetail' | translate"
+    >
+        <mat-icon>chevron_right</mat-icon>
+    </button>
 </ng-template>
 <ng-template #cellRating let-row="row">
     <mat-icon *ngFor="let rating of [0, 1, 2, 3, 4]; let idx=index "
-              [class.active]="idx < row.userRating"
+              [class.active]="idx < (row.ratings?.userRating || 0) / 20"
     >star
     </mat-icon>
 </ng-template>

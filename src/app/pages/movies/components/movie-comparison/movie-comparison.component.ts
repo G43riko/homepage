@@ -4,7 +4,7 @@ import { ObjectMergeDefinitions } from "../../../../shared/modules/object-merger
 import { ObjectMerger, ObjectMergerResult } from "../../../../shared/modules/object-merger/object-merger";
 import { Movie } from "../../models/movie.model";
 
-interface CompareRecord<T = unknown> {
+export interface CompareRecord<T = unknown> {
     readonly valueA: T;
     readonly property: string;
     readonly matchType: string;
@@ -37,7 +37,7 @@ export class MovieComparisonComponent {
         @Optional() @Inject(MAT_DIALOG_DATA) private readonly data: { original: Movie, external: Movie }
     ) {
         console.error(data);
-        const mergeResult = ObjectMerger.mergeObject(data.external, data.original, mergeConfig);
+        const mergeResult = ObjectMerger.mergeObject(data.original, data.external, mergeConfig);
         console.log("mergeResult: ", mergeResult);
 
         this.processObjectResult(mergeResult.objectResult as any);

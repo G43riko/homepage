@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 import { AbstractDetailComponent } from "../../../../shared/components/abstract-detail.component";
 import { Roles } from "../../../../shared/enums/roles.enum";
 import { AuthService } from "../../../../shared/services/auth.service";
@@ -63,7 +64,7 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
             type     : ["movie"],
             movieDbId: [""],
             duration : [0, Validators.min(0)],
-            rating   : [0, [Validators.min(0), Validators.min(100)]],
+            rating   : [0/*, [Validators.min(0), Validators.min(100)]*/],
             countries: [[]],
             genres   : [[]],
             avatar   : [""],
@@ -77,14 +78,19 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
     }
 
     public onCompareWithClick(source: MovieSource, value: string): void {
-        this.movieHttpService.getMovieDetailFromExternalSource(source, value).subscribe({
-            next: (external: Movie) => {
+        this.movieHttpService.getMovieDetailFromExternalSource(source, value).pipe(
+            switchMap((external: Movie) =>
                 this.dialog.open(MovieComparisonComponent, {
                     data     : {external, original: this.selectedDetail},
                     maxWidth : `calc(100vw - 2rem)`,
                     maxHeight: `calc(100vh - 2rem)`,
-                });
+                }).afterClosed()
+            )
+        ).subscribe((resolvedData) => {
+            if (resolvedData) {
+
             }
+            console.error("DATA: ", resolvedData);
         });
     }
 }

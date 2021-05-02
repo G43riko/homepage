@@ -10,16 +10,17 @@
                 <mat-form-field class="full-width">
                     <input formControlName="titleSk" label="Movie titleSk" matInput placeholder="Slovenský názov">
                 </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input [matDatepicker]="picker"
-                           label="Movie year"
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Rok výroby</mat-label>
+                    <input matInput
+                           autocomplete="off"
                            formControlName="year"
-                           matInput
-                           placeholder="Rok výroby">
-                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                           [matDatepicker]="picker"
+                           placeholder="YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker
-                                    (yearSelected)="closeDatePicker(picker, $event)"
-                                    startView="multi-year"></mat-datepicker>
+                                    startView="multi-year"
+                                    (yearSelected)="closeDatePicker(picker, $event)"></mat-datepicker>
                 </mat-form-field>
             </div>
             <div *ngIf="movieForm.value.avatar"
