@@ -9,8 +9,10 @@ import { NotificationService } from "../../../../shared/services/notification.se
 import { MovieSource } from "../../models/movie-source.type";
 import { MovieType } from "../../models/movie-type.type";
 import { Movie } from "../../models/movie.model";
+import { ExternalMovieService } from "../../services/external-movie.service";
 import { MovieHttpService } from "../../services/movie-http.service";
 import { MovieService } from "../../services/movie.service";
+import { MovieComparisonComponent } from "../movie-comparison/movie-comparison.component";
 
 @Component({
     selector       : "app-movie-detail",
@@ -30,6 +32,8 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
                        formBuilder: FormBuilder,
                        notificationService: NotificationService,
                        private readonly movieService: MovieService,
+                       private readonly movieHttpService: MovieHttpService,
+                       private readonly externalMovieService: ExternalMovieService,
                        httpService: MovieHttpService) {
         super(formBuilder, route, router, httpService, notificationService, "movies");
     }
@@ -73,6 +77,14 @@ export class MovieDetailComponent extends AbstractDetailComponent<Movie, MovieHt
     }
 
     public onCompareWithClick(source: MovieSource, value: string): void {
-
+        this.movieHttpService.getMovieDetailFromExternalSource(source, value).subscribe({
+            next: (external: Movie) => {
+                this.dialog.open(MovieComparisonComponent, {
+                    data     : {external, original: this.selectedDetail},
+                    maxWidth : `calc(100vw - 2rem)`,
+                    maxHeight: `calc(100vh - 2rem)`,
+                });
+            }
+        });
     }
 }

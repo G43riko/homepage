@@ -47,7 +47,7 @@
                                       matSuffix
                                       svgIcon="csfd"
                             ></mat-icon>
-                            <mat-icon *ngIf="detailForm.enabled && csfdId.value"
+                            <mat-icon *ngIf="detailForm.disabled && csfdId.value"
                                       (click)="onCompareWithClick(MovieSource.csfd, csfdId.value)"
                                       matSuffix
                             >compare
@@ -66,6 +66,11 @@
                                       matSuffix
                                       svgIcon="imdb">
                             </mat-icon>
+                            <mat-icon *ngIf="detailForm.disabled && imdbId.value"
+                                      (click)="onCompareWithClick(MovieSource.imdb, imdbId.value)"
+                                      matSuffix
+                            >compare
+                            </mat-icon>
                         </mat-form-field>
                         <br>
                         <mat-form-field *ngIf="detailForm.value.movieDbId || !disabled"
@@ -79,6 +84,11 @@
                                       (click)="onOpenExternalDetailClick(MovieSource.movieDb, movieDbId.value, selectedDetail.type)"
                                       matSuffix
                                       svgIcon="movieDb">
+                            </mat-icon>
+                            <mat-icon *ngIf="detailForm.disabled && movieDbId.value"
+                                      (click)="onCompareWithClick(MovieSource.movieDb, movieDbId.value)"
+                                      matSuffix
+                            >compare
                             </mat-icon>
                         </mat-form-field>
                     </mat-card-content>

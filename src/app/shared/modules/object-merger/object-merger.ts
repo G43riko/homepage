@@ -113,6 +113,7 @@ export class ObjectMerger {
 
         const nonMergedDiff = findArrayDiff(valueA, valueB, config.comparator!);
 
+        console.error("nonMergedDiff", nonMergedDiff);
         const arrayResult: ObjectMergerResult<unknown>["arrayResult"] = [
             ...nonMergedDiff.missingInB.map((valA) => ({
                 valueA      : valA,
@@ -161,6 +162,7 @@ export class ObjectMerger {
 
         const arrayResult = createFilledArray<ObjectMergerResult<any>>(
             max,
+            // @ts-ignore
             (i: any) => ObjectMerger.mergeProperty(valueA[i], valueB[i], config, parent ? parent + "." + i : String(i)),
         );
 
@@ -206,7 +208,7 @@ export class ObjectMerger {
     }
 
     public static mergeObject<T>(objA: Partial<T>, objB: Partial<T>, config: ObjectMergeDefinitions<T>, parent?: string): ObjectMergerResult<T> {
-        const uniqueKeys = Array.from(new Set([...Object.keys(objA), ...Object.keys(objB)] as (string & keyof T)[]));
+        const uniqueKeys = Array.from(new Set([...Object.keys(objA ?? {}), ...Object.keys(objB ?? {})] as (string & keyof T)[]));
 
         // TODO: What is objects are empty?
         //  what is one of objects is nill
@@ -327,6 +329,23 @@ export class ObjectMerger {
                 valueB,
                 matchType   : ObjectMergeMatchType.TYPE_AND_INDENT_DIFF,
                 mergedResult: config.merger ? config.merger(valueA, valueB) : (config.keepIndent || config.keepTypes ? undefined : strA.trim() as any),
+            };
+        }
+
+        if (!strA && strB) {
+            return {
+                valueA,
+                valueB,
+                matchType: ObjectMergeMatchType.VALUE_B,
+                mergedResult: valueB,
+            };
+        }
+        if (strA && !strB) {
+            return {
+                valueA,
+                valueB,
+                matchType: ObjectMergeMatchType.VALUE_A,
+                mergedResult: valueA,
             };
         }
 

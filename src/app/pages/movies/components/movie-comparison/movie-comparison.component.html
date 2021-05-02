@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>
+    Movie comparison
+    <ng-container *ngIf="getDiffs() as diffs; else: showEquals">
+        <span> - {{diffs}} diffs</span>
+
+        <button (click)="onScrollToDiff()" matTooltip="Scroll to next difference" mat-icon-button>
+            <mat-icon>south_east</mat-icon>
+        </button>
+    </ng-container>
+    <ng-template #showEquals><span> - Resolvable</span></ng-template>
+</h2>
+<mat-dialog-content>
+    <table>
+        <tr>
+            <th>Property</th>
+            <th>Original value</th>
+            <th></th>
+            <th>Merged value</th>
+            <th></th>
+            <th>External value</th>
+        </tr>
+        <tr *ngFor="let item of compareData; trackBy: trackByFn" [ngClass]="item.matchType">
+            <td class="property"><strong>{{item.property}}</strong></td>
+            <td class="valueA">{{(item.valueA || undefined) | json}}</td>
+            <td class="merge-button">
+                <mat-icon
+                    *ngIf="item.valueA && item.valueA !== item.mergedValue && item.matchType !== 'EQUALS' && item.matchType !== 'VALUE_B'"
+                    (click)="onMergeProperty(item, 'valueA')"
+                >
+                    chevron_right
+                </mat-icon>
+            </td>
+            <td class="result">{{(item.mergedValue || undefined) | json}}</td>
+            <td class="merge-button">
+                <mat-icon
+                    *ngIf="item.valueB && item.valueB !== item.mergedValue  && item.matchType !== 'EQUALS' && item.matchType !== 'VALUE_B'"
+                    (click)="onMergeProperty(item, 'valueB')"
+                >
+                    chevron_left
+                </mat-icon>
+            </td>
+            <td class="valueB">{{(item.valueB || undefined) | json}}</td>
+        </tr>
+    </table>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="getDiffs() > 0">Update</button>
+</mat-dialog-actions>
