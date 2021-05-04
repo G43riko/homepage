@@ -1,0 +1,87 @@
+<ng-container *ngIf="detail$ | async as detail">
+    <h2 mat-dialog-title>{{detail.title}}</h2>
+    <mat-dialog-content class="mat-typography">
+        <table>
+<!--            <tr v-for="info of Object.entries(detail.basicInfo)">-->
+<!--                <td><strong>{{info[0]}}</strong></td>-->
+<!--                <td>{{info[1]}}</td>-->
+<!--            </tr>-->
+            <tr>
+                <td><strong [translate]="'real-estate.property.type'"></strong></td>
+                <td [translate]="'real-estate.type.' + detail.type"></td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.status'"></strong></td>
+                <td [translate]="'real-estate.status.' + detail.characteristics.status"></td>
+            </tr>
+            <tr v-if="detail.characteristics.construction">
+                <td><strong [translate]="'real-estate.property.construction'"></strong></td>
+                <td [translate]="'real-estate.construction.' + detail.characteristics.construction"></td>
+            </tr>
+            <tr v-if="detail.characteristics.ownership">
+                <td><strong [translate]="'real-estate.property.ownership'"></strong></td>
+                <td [translate]="'real-estate.ownership.' + detail.characteristics.ownership"></td>
+            </tr>
+            <tr v-if="typeof detail.characteristics.elevator === 'boolean'">
+                <td><strong [translate]="'real-estate.property.elevator'"></strong></td>
+                <td [translate]="'real-estate.boolean.' + detail.characteristics.elevator"></td>
+            </tr>
+            <tr v-if="typeof detail.characteristics.insulation === 'boolean'">
+                <td><strong [translate]="'real-estate.property.insulation'"></strong></td>
+                <td [translate]="'real-estate.boolean.' + detail.characteristics.insulation"></td>
+            </tr>
+            <tr v-if="typeof detail.characteristics.internet === 'boolean'">
+                <td><strong [translate]="'real-estate.property.internet'"></strong></td>
+                <td [translate]="'real-estate.boolean.' + detail.characteristics.internet"></td>
+            </tr>
+            <tr v-if="typeof detail.characteristics.cableTv === 'boolean'">
+                <td><strong [translate]="'real-estate.property.cableTv'"></strong></td>
+                <td [translate]="'real-estate.boolean.' + detail.characteristics.cableTv"></td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.operation'"></strong></td>
+                <td [translate]="'real-estate.operation.' + detail.operationType"></td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.price'"></strong></td>
+                <td>{{detail.price | json}}</td>
+            </tr>
+            <tr v-if="detail.unitPrice">
+                <td><strong [translate]="'real-estate.property.unitPrice'"></strong></td>
+                <td>{{detail.unitPrice | json}}</td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.size'"></strong></td>
+                <td>{{detail.size | json}}</td>
+            </tr>
+            <tr v-if="detail.created">
+                <td><strong [translate]="'real-estate.property.created'"></strong></td>
+                <td>{{detail.created}}</td>
+            </tr>
+            <tr v-if="detail.updated">
+                <td><strong [translate]="'real-estate.property.updated'"></strong></td>
+                <td>{{detail.updated}}</td>
+            </tr>
+            <tr v-if="detail.address.country">
+                <td><strong [translate]="'real-estate.property.country'">Country</strong></td>
+                <td>{{detail.address.country}}</td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.city'">City</strong></td>
+                <td>{{detail.address.city}}</td>
+            </tr>
+            <tr>
+                <td><strong [translate]="'real-estate.property.street'">Street</strong></td>
+                <td>{{detail.address.street}}</td>
+            </tr>
+            <tr v-if="detail.floor" >
+                <td><strong [translate]="'real-estate.property.floor'">Floor</strong></td>
+                <td>{{detail.floor | json}}</td>
+            </tr>
+        </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</ng-container>
+

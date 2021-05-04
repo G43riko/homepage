@@ -1,11 +1,11 @@
-import { Routes } from "@angular/router";
-import { AppStaticConfig } from "./appStaticConfig";
-import { AuthGuard } from "./auth.guard";
-import { AboutComponent } from "./pages/about/about.component";
-import { ProjectsComponent } from "./pages/about/projects/projects.component";
-import { AccountProfileComponent } from "./pages/account-profile/account-profile.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { Roles } from "./shared/enums/roles.enum";
+import {Routes} from "@angular/router";
+import {AppStaticConfig} from "./appStaticConfig";
+import {AuthGuard} from "./auth.guard";
+import {AboutComponent} from "./pages/about/about.component";
+import {ProjectsComponent} from "./pages/about/projects/projects.component";
+import {AccountProfileComponent} from "./pages/account-profile/account-profile.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {Roles} from "./shared/enums/roles.enum";
 
 export const AppRoutes: Routes = [
     /*
@@ -16,87 +16,96 @@ export const AppRoutes: Routes = [
      */
 
     {
-        path      : "",
+        path: "",
         redirectTo: "/" + AppStaticConfig.PATH_HOME,
-        pathMatch : "full"
+        pathMatch: "full"
     },
     {
-        path     : AppStaticConfig.PATH_HOME,
+        path: AppStaticConfig.PATH_HOME,
         component: HomeComponent
     },
     {
-        path     : AppStaticConfig.PATH_GALLERY,
+        path: AppStaticConfig.PATH_GALLERY,
         loadChildren: () => import("./pages/gallery/gallery.module").then((mod) => mod.GalleryModule),
     },
     {
-        path     : AppStaticConfig.PATH_PROJECTS,
+        path: AppStaticConfig.PATH_PROJECTS,
         component: ProjectsComponent
     },
     {
-        path        : AppStaticConfig.PATH_FILE_ANALYZER,
+        path: AppStaticConfig.PATH_FILE_ANALYZER,
         loadChildren: () => import("./pages/analyzer/analyzer.module").then((mod) => mod.AnalyzerModule),
     },
     {
-        path     : AppStaticConfig.PATH_ABOUT,
+        path: AppStaticConfig.PATH_ABOUT,
         component: AboutComponent
     },
     {
-        path        : AppStaticConfig.PATH_MIXES,
+        path: AppStaticConfig.PATH_MIXES,
         loadChildren: () => import("./pages/mixes/mixes.module").then((mod) => mod.MixesModule),
-        canActivate : [AuthGuard],
-        data        : {
+        canActivate: [AuthGuard],
+        data: {
             allowedFor: [Roles.ROLE_VISIT_MIXES]
         }
     },
+
     {
-        path       : AppStaticConfig.PATH_PROFILE,
-        component  : AccountProfileComponent,
+        path: AppStaticConfig.PATH_REAL_ESTATES,
+        loadChildren: () => import("./pages/real-estates/real-estates.module").then((mod) => mod.RealEstatesModule),
         canActivate: [AuthGuard],
-        data       : {
+        data: {
             allowedFor: [Roles.ROLE_VISITOR]
         }
     },
     {
-        path            : AppStaticConfig.PATH_SONGS,
-        loadChildren    : () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
+        path: AppStaticConfig.PATH_PROFILE,
+        component: AccountProfileComponent,
+        canActivate: [AuthGuard],
+        data: {
+            allowedFor: [Roles.ROLE_VISITOR]
+        }
+    },
+    {
+        path: AppStaticConfig.PATH_SONGS,
+        loadChildren: () => import("./pages/songs/songs.module").then((mod) => mod.SongsModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_SONGS]
         }
     },
     {
-        path        : AppStaticConfig.PATH_FOODS,
+        path: AppStaticConfig.PATH_FOODS,
         loadChildren: () => import("./pages/foods/foods.module").then((mod) => mod.FoodsModule)
     },
     {
-        path            : AppStaticConfig.PATH_FILES,
-        loadChildren    : () => import("./pages/files/files.module").then((mod) => mod.FilesModule),
+        path: AppStaticConfig.PATH_FILES,
+        loadChildren: () => import("./pages/files/files.module").then((mod) => mod.FilesModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_FILES]
         }
     },
     {
-        path            : AppStaticConfig.PATH_ACCOUNTS,
-        loadChildren    : () => import("./pages/accounts/accounts.module").then((mod) => mod.AccountsModule),
+        path: AppStaticConfig.PATH_ACCOUNTS,
+        loadChildren: () => import("./pages/accounts/accounts.module").then((mod) => mod.AccountsModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_ACCOUNTS]
         }
     },
     {
-        path            : AppStaticConfig.PATH_MOVIES,
-        loadChildren    : () => import("./pages/movies/movies.module").then((mod) => mod.MoviesModule),
+        path: AppStaticConfig.PATH_MOVIES,
+        loadChildren: () => import("./pages/movies/movies.module").then((mod) => mod.MoviesModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_MOVIES]
         }
     },
     {
-        path            : AppStaticConfig.PATH_PERSONS,
-        loadChildren    : () => import("./pages/person/person.module").then((mod) => mod.PersonModule),
+        path: AppStaticConfig.PATH_PERSONS,
+        loadChildren: () => import("./pages/person/person.module").then((mod) => mod.PersonModule),
         canActivateChild: [AuthGuard],
-        data            : {
+        data: {
             allowedFor: [Roles.ROLE_VISIT_PERSONS]
         }
     }

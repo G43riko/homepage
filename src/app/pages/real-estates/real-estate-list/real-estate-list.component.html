@@ -1,0 +1,14 @@
+<div class="real-estate-wrapper">
+    <app-abstract-table [tableConfig]="tableConfig"
+                        [data]="data$ | async"
+                        (rowClick)="onRowClick($event)"
+    >
+        <a *tableColumn="'title', let row" [routerLink]="row.id">
+            {{row.title}}
+        </a>
+
+        <div *tableColumn="'created'; let row">
+            {{row?.created | date}}
+        </div>
+    </app-abstract-table>
+</div>

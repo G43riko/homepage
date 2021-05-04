@@ -1,23 +1,46 @@
-import { SelectionModel } from "@angular/cdk/collections";
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { merge, Observable, of, Subject } from "rxjs";
-import { first, map, shareReplay, startWith } from "rxjs/operators";
-import { ColumnConfig } from "./column-config";
-import { TableConfig } from "./table-config";
+import {SelectionModel} from "@angular/cdk/collections";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList,
+    TemplateRef,
+    ViewChild
+} from "@angular/core";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
+import {merge, Observable, of, Subject} from "rxjs";
+import {first, map, shareReplay, startWith} from "rxjs/operators";
+import {AbstractTableColumnTemplateComponent} from "./abstract-table-column-template.component";
+import {ColumnConfig} from "./column-config";
+import {TableConfig} from "./table-config";
 
 @Component({
-    selector       : "app-abstract-table",
-    templateUrl    : "./abstract-table.component.html",
-    styleUrls      : ["./abstract-table.component.scss"],
+    selector: "app-abstract-table",
+    templateUrl: "./abstract-table.component.html",
+    styleUrls: ["./abstract-table.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AbstractTableComponent<T = unknown> {
-    public readonly selection          = new SelectionModel<T>(true, []);
-    public readonly dataSource         = new MatTableDataSource<T>([]);
+    public readonly selection = new SelectionModel<T>(true, []);
+    public readonly dataSource = new MatTableDataSource<T>([]);
     private readonly dataChangeSource$ = new Subject();
+
+    @Output("rowClick")
+    public readonly rowClick = new EventEmitter<T>();
+
+    public readonly columnTemplates: { [name in string]: TemplateRef<unknown> } = {};
+
+    @ContentChildren(AbstractTableColumnTemplateComponent)
+    private set setColumnTemplates(data: QueryList<AbstractTableColumnTemplateComponent>) {
+        data.forEach((item) => {
+            this.columnTemplates[item.name] = item.template;
+        });
+    }
 
     @ViewChild(MatPaginator)
     public set paginator(paginator: MatPaginator) {
@@ -108,5 +131,9 @@ export class AbstractTableComponent<T = unknown> {
             isAllSelected ? this.selection.clear() :
                 this.selection.select(...this.dataSource.data);
         });
+    }
+
+    public onRowClick(row: T): void {
+        this.rowClick.next(row);
     }
 }

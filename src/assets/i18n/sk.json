@@ -35,6 +35,127 @@
         "send": "Odoslat",
         "cancel": "Zrušiť"
     },
+    "real-estate": {
+        "status": {
+            "-": "Nezáleží",
+            "NEW": "Novostavba",
+            "COMPLETE_RECONSTRUCTION": "Kompletná rekonštrukcia",
+            "PARTIAL_RECONSTRUCTION": "Čiastočná rekonštrukcia",
+            "ORIGINAL": "Pôvodný stav",
+            "SUPERSTRUCTURE": "Nadstavba"
+        },
+        "admin": {
+            "stats": "Štatistiky",
+            "managing": "Manažment",
+            "logs": "Logy",
+            "parsedPreview": "Položky so sparsovaným prehľadom",
+            "fetchedDetail": "Položky so stiahnutým detailom",
+            "parsedDetail": "Položky so sparsovaným detailom"
+        },
+        "stats": {
+            "caption": "Základné štatistiky",
+            "totalItems": "Celkovo položiek",
+            "existingItems": "Aktívnych položiek",
+            "withParsedDetail": "Položky so sparsovaným detailom",
+            "withFetchedDetail": "Položky so stiahnutým detailom",
+            "withParsedPreview": "Položky so sparsovaným prehľadom",
+            "forRent": "Položky na prenájom",
+            "forPurchase": "Položky na kúpu",
+            "forSale": "Položky na predaj",
+            "forLease": "Položky na prenájom",
+            "forAuction": "Položky na dražbu",
+            "forExchange": "Položky na výmenu",
+            "withUnknownType": "Položky s neznámym typom"
+        },
+        "construction": {
+            "-": "Nezáleží",
+            "BRICK": "Tehlová",
+            "PREFAB": "Panelová",
+            "MIXED": "Zmiešaná"
+        },
+        "boolean": {
+            "-": "Nezáleží",
+            "1": "Áno",
+            "0": "Nie",
+            "undefined": "Nie",
+            "": "Nie",
+            "true": "Áno",
+            "false": "Nie"
+        },
+        "ownership": {
+            "BUSINESS": "Firemné",
+            "PERSONAL": "Osobné",
+            "OTHER": "Iné",
+            "-": "Nezáleží"
+        },
+        "bath": {
+            "bath": "Vaňa",
+            "shower": "Sprcha",
+            "-": "Nezáleží"
+        },
+        "operation": {
+            "SALE": "Predaj",
+            "LEASE": "Prenájon",
+            "RENT": "Nájom",
+            "EXCHANGE": "Výmena",
+            "AUCTION": "Dražba",
+            "PURCHASE": "Kúpa"
+        },
+        "type": {
+            "GARSONIER": "Garzónka",
+            "GARSONIER2": "Dvojgarzónka",
+            "BEDAPART1": "1-izb. byt",
+            "BEDAPART2": "2-izb. byt",
+            "BEDAPART3": "3-izb. byt",
+            "BEDAPART4": "4-izb. byt",
+            "BEDAPART5": "5-izb. byt",
+            "BEDAPART6": "6-izb. byt",
+            "BEDAPART7": "7-izb. byt",
+            "BEDAPART8": "8-izb. byt",
+            "BEDAPART5ORMORE": "5 a viac izbový byt",
+            "MAISSONET": "Mezonet",
+            "LOFTAPART": "Loft",
+            "APARTMNT": "Apartmán",
+            "OTHERAPART": "Iný byt"
+        },
+        "filter": {
+            "minSize": "Min. veľkosť",
+            "maxSize": "Max. veľkosť",
+            "minPrice": "Min. cena",
+            "maxPrice": "Max. cena",
+            "search": "Hladať",
+            "reset": "Reset filtrov",
+            "showAdvanced": "Zobraziť pokročilé filtre"
+        },
+        "common": {
+            "results": "Výsledky",
+            "info": "Informácie",
+            "basicInfo": "Základné informácie"
+        },
+        "property": {
+            "ownership": "Vlastníctvo",
+            "construction": "Konštrukcia",
+            "status": "Stav",
+            "created": "Vytvorené",
+            "location": "Lokácia",
+            "type": "Typ",
+            "updated": "Aktualizové",
+            "price": "Cena",
+            "unitPrice": "Jednotková cena",
+            "size": "Veľkosť",
+            "title": "Názov",
+            "address": "Adresa",
+            "operation": "Operácia",
+            "elevator": "Výťah",
+            "insulation": "Zateplenie",
+            "cableTv": "Káblová TV",
+            "internet": "Internet",
+            "country": "Štát",
+            "city": "Mesto",
+            "street": "Ulica",
+            "floor": "Poschodie"
+        }
+    },
     "about": {
         "basicInfo": "Základné informácie",
         "education": "Vzdelanie",

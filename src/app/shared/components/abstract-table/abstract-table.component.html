@@ -61,14 +61,14 @@
 
             <!--Template content-->
             <ng-container
-                *ngIf="columnConfig.template || templates[columnConfig.name]; then templateContent; else noTemplateContent">
+                *ngIf="columnTemplates[columnConfig.name] || columnConfig.template || templates[columnConfig.name]; then templateContent; else noTemplateContent">
 
             </ng-container>
             <ng-template #templateContent>
                 <td mat-cell *matCellDef="let row" [ngStyle]="{width: columnConfig.width}"
                     [style.whiteSpace]="columnConfig.nowrap ? 'nowrap' : 'normal'">
                     <ng-content
-                        *ngTemplateOutlet="columnConfig.template || templates[columnConfig.name], context:{row: row}"></ng-content>
+                        *ngTemplateOutlet="columnTemplates[columnConfig.name] || columnConfig.template || templates[columnConfig.name], context:{row: row, $implicit: row}"></ng-content>
                 </td>
             </ng-template>
             <ng-template #noTemplateContent>
@@ -79,7 +79,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: !!tableConfig.stickyHeader"></tr>
 
-        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row (click)="onRowClick(row)"></tr>
     </table>
 
     <mat-paginator *ngIf="tableConfig.paginator"

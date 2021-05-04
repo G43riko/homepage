@@ -1,6 +1,6 @@
-import { environment } from "../environments/environment";
-import { MenuItemModel } from "./shared/components/menu-item.model";
-import { Roles } from "./shared/enums/roles.enum";
+import {environment} from "../environments/environment";
+import {MenuItemModel} from "./shared/components/menu-item.model";
+import {Roles} from "./shared/enums/roles.enum";
 
 export class AppStaticConfig {
     public static readonly BASE_URL        = environment.base_url;
@@ -32,6 +32,7 @@ export class AppStaticConfig {
     public static readonly PATH_DEMOS = "demos";
     public static readonly PATH_HOME = "home";
     public static readonly PATH_PROFILE = "profile";
+    public static readonly PATH_REAL_ESTATES = "real-estates";
     public static readonly PATH_MIXES = "mixes";
     public static readonly PATH_IMAGES = "images";
     public static readonly PATH_GALLERY = "gallery";
@@ -143,6 +144,12 @@ export class AppStaticConfig {
             link  : AppStaticConfig.PATH_FILE_ANALYZER,
             access: "",
             label : "analyzer"
+        },
+        {
+            icon  : "maps_home_work",
+            link  : AppStaticConfig.PATH_REAL_ESTATES,
+            access: "",
+            label : "real-estates"
         },
         /*
         {

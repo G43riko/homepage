@@ -24,12 +24,9 @@
 </ng-container>
 
 <ng-template #previewTypeTable>
-    <ng-template #cellDirectors let-row="row">
-        <button (click)="onShowMakerDetailClick(director.id)" *ngFor="let director of row.directors"
-                mat-button>{{director.name}}</button>
-    </ng-template>
-    <ng-template #cellTitle let-row="row">
-        <div class="flex-row">
+    <app-abstract-table [tableConfig]="movieConfig"
+                        [data]="movieList$ | async">
+        <div *tableColumn="'title', let row" class="flex-row">
             <img (click)="openMovieImages(row.avatar)"
                  *ngIf="row.avatar"
                  [src]="row.avatar[0]"
@@ -40,22 +37,17 @@
                 <div *ngIf="row.titleSk" class="sub header">{{row.title}}</div>
             </div>
         </div>
-    </ng-template>
-    <ng-template #cellExternal let-row="row">
-        <app-external-links type="movie" [holder]="row"></app-external-links>
-    </ng-template>
-    <ng-template #cellDetail let-row="row">
-        <button (click)="onShowMovieDetailClick(row.id)"
+        <app-external-links *tableColumn="'external', let row" type="movie" [holder]="row"></app-external-links>
+        <button *tableColumn="'detail'; let row"
+                (click)="onShowMovieDetailClick(row.id)"
                 color="primary"
                 [matTooltip]="'movies.openDetail' | translate"
                 mat-icon-button
         >
             <mat-icon>chevron_right</mat-icon>
         </button>
-    </ng-template>
-    <app-abstract-table [tableConfig]="movieConfig"
-                        [templates]="{title: cellTitle, external: cellExternal, detail: cellDetail, directors: cellDirectors}"
-                        [data]="movieList$ | async"></app-abstract-table>
+
+    </app-abstract-table>
 </ng-template>
 
 <ng-template #previewTypeGrid>

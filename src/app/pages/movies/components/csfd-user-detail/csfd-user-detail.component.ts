@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { filter, first, map, shareReplay, switchMap } from "rxjs/operators";
-import { TableConfig } from "../../../../shared/components/abstract-table/table-config";
-import { NotificationService } from "../../../../shared/services/notification.service";
-import { ExternalMovieService } from "../../services/external-movie.service";
-import { MovieHttpService } from "../../services/movie-http.service";
+import {ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {filter, first, map, shareReplay, switchMap} from "rxjs/operators";
+import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
+import {NotificationService} from "../../../../shared/services/notification.service";
+import {ExternalMovieService} from "../../services/external-movie.service";
+import {MovieHttpService} from "../../services/movie-http.service";
 
 function assignNotEmpty<T>(objA: T, objB: T): T {
     const result: T = Object.assign({}, objA);
@@ -36,9 +36,7 @@ export class CsfdUserDetailComponent implements OnDestroy {
     public readonly loading$ = this.moviesHolder$.pipe(
         switchMap((holder) => holder.loading$),
     );
-    // public readonly movies$                                                                                                           = this.moviesHolder$.pipe(
-    //     switchMap((holder) => holder.movies$),
-    // );
+
     public readonly movies$                                                                                                           = this.moviesHolder$.pipe(
         switchMap((holder) => holder.movies$),
         switchMap((movies) => {
@@ -48,7 +46,7 @@ export class CsfdUserDetailComponent implements OnDestroy {
         }),
     );
     public readonly userMoviesConfig: TableConfig<{ title: string, titleSk: string, userRating: unknown, year: string, added: unknown, link: string }> = {
-        selection      : "multi",
+        // selection      : "multi",
         paginateOptions: [5, 10, 20, 50, 100],
         stickyHeader   : true,
         paginator      : false,
