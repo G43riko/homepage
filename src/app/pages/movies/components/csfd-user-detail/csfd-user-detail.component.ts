@@ -1,10 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {filter, first, map, shareReplay, switchMap} from "rxjs/operators";
 import {TableConfig} from "../../../../shared/components/abstract-table/table-config";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {ExternalMovieService} from "../../services/external-movie.service";
 import {MovieHttpService} from "../../services/movie-http.service";
+import {MovieSource} from "../../models/movie-source.type";
+import {Movie} from "../../models/movie.model";
 
 function assignNotEmpty<T>(objA: T, objB: T): T {
     const result: T = Object.assign({}, objA);
@@ -27,9 +29,12 @@ function assignNotEmpty<T>(objA: T, objB: T): T {
     encapsulation  : ViewEncapsulation.None
 })
 export class CsfdUserDetailComponent implements OnDestroy {
-    private readonly moviesHolder$ = this.route.params.pipe(
-        filter((params) => params.id),
-        map((params) => this.externalMovieService.getCsfdUserMovies(params.id)),
+    public readonly userId$ = this.route.queryParams.pipe(
+        map((params) => params.id),
+    );
+    private readonly moviesHolder$ = this.userId$.pipe(
+        filter((id) => id),
+        map((id) => this.externalMovieService.getCsfdUserMovies(id)),
         shareReplay(1),
     );
 
@@ -40,7 +45,7 @@ export class CsfdUserDetailComponent implements OnDestroy {
     public readonly movies$                                                                                                           = this.moviesHolder$.pipe(
         switchMap((holder) => holder.movies$),
         switchMap((movies) => {
-            return this.movieHttpService.bulkSearchMovies("csfdId", movies.map((movie) => movie.csfdId)).pipe(
+            return this.movieHttpService.bulkSearchMovies("csfdId", movies.filter((m) => !m.id).map((movie) => movie.csfdId)).pipe(
                 map((movieDetails) => movieDetails.map((detail, index) => assignNotEmpty(detail, movies[index])))
             );
         }),
@@ -78,6 +83,7 @@ export class CsfdUserDetailComponent implements OnDestroy {
 
     public constructor(
         private readonly route: ActivatedRoute,
+        private readonly router: Router,
         private readonly notificationService: NotificationService,
         private readonly externalMovieService: ExternalMovieService,
         private readonly movieHttpService: MovieHttpService,
@@ -94,5 +100,27 @@ export class CsfdUserDetailComponent implements OnDestroy {
         this.moviesHolder$.pipe(
             first(),
         ).subscribe((holder) => holder.loadMore());
+    }
+
+    public onAddMovieToDatabase(movie: Movie): void {
+        this.movieHttpService.addMovieToDatabaseByExternalIdId(MovieSource.csfd, movie.csfdId).subscribe((createdMovie) => {
+            if (!createdMovie) {
+                return this.notificationService.openSuccessNotification("Error during adding movie to database");
+            }
+            this.notificationService.openSuccessNotification("Movie was added to database");
+            movie.id = createdMovie.id;
+            movie.movieDbId = createdMovie.movieDbId;
+            movie.csfdId = createdMovie.csfdId;
+            movie.imdbId = createdMovie.imdbId;
+        });
+    }
+
+    public onSearch(id: string): void {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {id},
+            queryParamsHandling: "merge",
+            // skipLocationChange: true
+        });
     }
 }

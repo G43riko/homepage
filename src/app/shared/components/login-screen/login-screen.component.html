@@ -1,4 +1,4 @@
-<div *ngIf="authService.user$ | async as user; else login">
+<div *ngIf="user$ | async as user; else login">
     <div *ngIf="user.displayName !== 'Anonym'; else login">
         <button [matMenuTriggerFor]="accountMenu" mat-menu-item>
             <img [src]="user.photoURL"
@@ -13,7 +13,7 @@
             <button disabled mat-menu-item>
                 <span>{{user.email}}</span>
             </button>
-            <button (click)="authService.signOut()" mat-menu-item>
+            <button (click)="onSignOutClick()" mat-menu-item>
                 <mat-icon>logout</mat-icon>
                 <span>{{"shared.login.logout" | translate}}</span>
             </button>
@@ -26,7 +26,6 @@
         <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #loginMenu="matMenu">
-        <button (click)="authService.googleSigning()" mat-menu-item>{{"shared.login.with.google" | translate}}</button>
-        <!--<button mat-menu-item (click)="authService.signOut()">Sign up</button>-->
+        <button (click)="onGoogleSignInClick()" mat-menu-item>{{"shared.login.with.google" | translate}}</button>
     </mat-menu>
 </ng-template>

@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
+import {Injectable} from "@angular/core";
+import {AngularFireAuth} from "@angular/fire/auth";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
+import {Router} from "@angular/router";
 import firebase from "firebase";
-import { Observable, of } from "rxjs";
-import { fromPromise } from "rxjs/internal-compatibility";
-import { switchMap } from "rxjs/operators";
-import { Roles } from "../enums/roles.enum";
-import { User } from "../models/auth.model";
-import { AnalyticsService } from "./analytics.service";
+import {Observable, of} from "rxjs";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {switchMap} from "rxjs/operators";
+import {Roles} from "../enums/roles.enum";
+import {User} from "../models/auth.model";
+import {AnalyticsService} from "./analytics.service";
 import auth = firebase.auth;
 
 @Injectable({
@@ -57,7 +57,7 @@ export class AuthService {
     }
 
     public checkAuthorization(user: User, allowedRoles: "" | Roles | Roles[]): boolean {
-        if (allowedRoles === "") {
+        if (!allowedRoles) {
             return true;
         }
         if (!user) {

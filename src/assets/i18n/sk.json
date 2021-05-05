@@ -18,6 +18,7 @@
         "mixes": "Playlisty",
         "accounts": "Účty",
         "songs": "Pesničky",
+        "real-estates": "Nehnutelnosti",
         "persons": "Osoby",
         "movies": "Filmy",
         "files": "Súbory",
@@ -245,7 +246,7 @@
         "search": "Hladať",
         "loadNext": "Načítať ďalšie",
         "show": {
-            "grid": "Mrižku",
+            "grid": "Mriežku",
             "table": "Tabuľku"
         }
     },

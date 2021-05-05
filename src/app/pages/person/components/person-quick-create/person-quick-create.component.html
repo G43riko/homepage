@@ -24,7 +24,7 @@
 
 
                 <div>
-                    <mat-radio-group formControlName="gender" required aria-label="{{'persons.quick-create.gender' | translate}}">
+                    <mat-radio-group formControlName="gender" required [attr.aria-label]="'persons.quick-create.gender' | translate">
                         <mat-radio-button value="male">{{'common.man' | translate}}</mat-radio-button>
                         <mat-radio-button value="female">{{'common.woman' | translate}}</mat-radio-button>
                     </mat-radio-group>

@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 
 @Component({
     selector: "app-mixes-list",
     templateUrl: "./mixes-list.component.html",
-    styleUrls: ["./mixes-list.component.scss"]
+    styleUrls: ["./mixes-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MixesListComponent implements OnInit {
     private readonly delay = 5000;

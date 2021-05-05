@@ -1,3 +1,10 @@
-<p>
-    account-profile works!
-</p>
+<mat-form-field appearance="fill">
+    <mat-label>Selected language</mat-label>
+    <mat-select (selectionChange)="onLanguageChange($event.value)" [value]="currentLanguage$ | async">
+        <mat-option *ngFor="let language of languages$ | async" [value]="language">
+            {{language}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-slide-toggle>Dark theme</mat-slide-toggle>

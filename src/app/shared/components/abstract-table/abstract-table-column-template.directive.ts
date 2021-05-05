@@ -3,7 +3,7 @@ import {Directive, Input, TemplateRef} from "@angular/core";
 @Directive({
     selector: "[tableColumn]",
 })
-export class AbstractTableColumnTemplateComponent {
+export class AbstractTableColumnTemplateDirective {
     @Input("tableColumn")
     public readonly name: string;
 

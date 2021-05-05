@@ -15,7 +15,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {merge, Observable, of, Subject} from "rxjs";
 import {first, map, shareReplay, startWith} from "rxjs/operators";
-import {AbstractTableColumnTemplateComponent} from "./abstract-table-column-template.component";
+import {AbstractTableColumnTemplateDirective} from "./abstract-table-column-template.directive";
 import {ColumnConfig} from "./column-config";
 import {TableConfig} from "./table-config";
 
@@ -30,13 +30,16 @@ export class AbstractTableComponent<T = unknown> {
     public readonly dataSource = new MatTableDataSource<T>([]);
     private readonly dataChangeSource$ = new Subject();
 
+    @Input("maxHeight")
+    public readonly maxHeight: string;
+
     @Output("rowClick")
     public readonly rowClick = new EventEmitter<T>();
 
     public readonly columnTemplates: { [name in string]: TemplateRef<unknown> } = {};
 
-    @ContentChildren(AbstractTableColumnTemplateComponent)
-    private set setColumnTemplates(data: QueryList<AbstractTableColumnTemplateComponent>) {
+    @ContentChildren(AbstractTableColumnTemplateDirective)
+    private set setColumnTemplates(data: QueryList<AbstractTableColumnTemplateDirective>) {
         data.forEach((item) => {
             this.columnTemplates[item.name] = item.template;
         });

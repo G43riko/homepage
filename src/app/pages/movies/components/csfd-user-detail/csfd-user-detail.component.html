@@ -1,31 +1,47 @@
 
-<app-abstract-table [data]="movies$ | async"
-                    [tableConfig]="userMoviesConfig"
-                    [templates]="{link: cellLink, userRating: cellRating}"
-                    class="user-movies-wrapper"></app-abstract-table>
+<div style="display: flex; align-items: center; padding: 1rem">
+    <mat-form-field class="full-width" (keydown.enter)="onSearch(message.value)">
+        <mat-label>User id</mat-label>
+        <input matInput #message maxlength="256" placeholder="CSFD User id" [value]="(userId$ | async) || ''">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onSearch(message.value)" style="margin-left: 1rem">Search</button>
+</div>
+
 <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
-<button (click)="loadMore()" [disabled]="loading$ | async" color="primary" mat-raised-button>Načítať ďalšie</button>
+    <app-abstract-table *ngIf="userId$ | async"
+                        [data]="movies$ | async"
+                        maxHeight="calc(100vh - 16rem) !important"
+                        [tableConfig]="userMoviesConfig"
+                        class="user-movies-wrapper">
+        <div *tableColumn="'link'; let row">
+            <button aria-label="Example icon-button with a heart icon"
+                    [externalLink]="'https://www.csfd.cz/film/' + row.csfdId"
+                    class="detail"
+                    mat-icon-button>
+                <mat-icon style="color: #B01" svgIcon="csfd"></mat-icon>
+            </button>
+            <button *ngIf="row.id; else addToDatabase"
+                    mat-icon-button
+                    color="primary"
+                    [routerLink]="'/movies/' + row.id"
+                    [matTooltip]="'movies.openDetail' | translate"
+            >
+                <mat-icon>chevron_right</mat-icon>
+            </button>
 
+            <ng-template #addToDatabase>
+                <button mat-icon-button color="primary" matTooltip="Add movie to database">
+                    <mat-icon (click)="onAddMovieToDatabase(row)" class="add-icon">add_box</mat-icon>
+                </button>
 
-<ng-template #cellLink let-row="row">
-    <button aria-label="Example icon-button with a heart icon"
-            [externalLink]="'https://www.csfd.cz' + row.link"
-            class="detail"
-            mat-icon-button>
-        <mat-icon style="color: #B01" svgIcon="csfd"></mat-icon>
-    </button>
-    <button *ngIf="row.id"
-            mat-icon-button
-            color="primary"
-            [routerLink]="'/movies/' + row.id"
-            [matTooltip]="'movies.openDetail' | translate"
-    >
-        <mat-icon>chevron_right</mat-icon>
-    </button>
-</ng-template>
-<ng-template #cellRating let-row="row">
-    <mat-icon *ngFor="let rating of [0, 1, 2, 3, 4]; let idx=index "
-              [class.active]="idx < (row.ratings?.userRating || 0) / 20"
-    >star
-    </mat-icon>
-</ng-template>
+            </ng-template>
+        </div>
+        <div *tableColumn="'userRating'; let row">
+            <mat-icon *ngFor="let rating of [0, 1, 2, 3, 4]; let idx=index "
+                      [class.active]="idx < (row.ratings?.userRating || 0) / 20"
+            >star
+            </mat-icon>
+        </div>
+
+    </app-abstract-table>
+    <button *ngIf="userId$ | async" (click)="loadMore()" [disabled]="loading$ | async" style="margin: 1rem" color="primary" mat-raised-button>Načítať ďalšie</button>

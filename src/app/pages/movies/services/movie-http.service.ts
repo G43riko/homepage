@@ -1,16 +1,16 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { catchError, scan, shareReplay, startWith, switchMap } from "rxjs/operators";
-import { AppStaticConfig } from "../../../appStaticConfig";
-import { AbstractHttpService } from "../../../shared/services/abstract-http.service";
-import { AuthService } from "../../../shared/services/auth.service";
-import { NotificationService } from "../../../shared/services/notification.service";
-import { PaginatorService } from "../../../shared/utils/paginable-service.model";
-import { Maker } from "../models/maker.model";
-import { MovieSource } from "../models/movie-source.type";
-import { MovieType } from "../models/movie-type.type";
-import { Movie } from "../models/movie.model";
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable, Subject} from "rxjs";
+import {catchError, concatMap, scan, shareReplay, startWith} from "rxjs/operators";
+import {AppStaticConfig} from "../../../appStaticConfig";
+import {AbstractHttpService} from "../../../shared/services/abstract-http.service";
+import {AuthService} from "../../../shared/services/auth.service";
+import {NotificationService} from "../../../shared/services/notification.service";
+import {PaginatorService} from "../../../shared/utils/paginable-service.model";
+import {Maker} from "../models/maker.model";
+import {MovieSource} from "../models/movie-source.type";
+import {MovieType} from "../models/movie-type.type";
+import {Movie} from "../models/movie.model";
 
 const URL          = AppStaticConfig.BASE_URL + "/v2/movies";
 const URL_EXTERNAL = AppStaticConfig.BASE_URL + "/v2/external-movies";
@@ -33,11 +33,12 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                        catchError(this.handleError<Movie[]>("bulkSearchMovies"))
                    );
     }
-    public addMovieToDatabaseByMovieDbId(movieDbId: number | string): Observable<Movie> {
-        return this.http.post<Movie>(URL_EXTERNAL + "/detail/MOVIE_DB/" + movieDbId, undefined)
-                   .pipe(
-                       catchError(this.handleError<Movie>("addMovieToDatabaseByMovieDbId"))
-                   );
+
+    public addMovieToDatabaseByExternalIdId(source: MovieSource, id: number | string): Observable<Movie> {
+        return this.http.post<Movie>(`${URL_EXTERNAL}/detail/${source}/${id}`, undefined)
+            .pipe(
+                catchError(this.handleError<Movie>("addMovieToDatabaseByExternalIdId"))
+            );
     }
 
     public getMakers(): Observable<Maker[]> {
@@ -56,7 +57,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                    );
     }
 
-    public getMovieHolder(type: "popular" | "top_rated"): {
+    public getMovieHolder(type: "popular" | "top_rated", source: MovieSource): {
         movies$: Observable<Movie[]>,
         loadMore(): void,
         cleanUp(): void,
@@ -66,7 +67,7 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
         return {
             movies$ : source$.pipe(
                 startWith(undefined),
-                switchMap((_, index) => this.fetchList(type, index + 1)),
+                concatMap((_, index) => this.fetchList(type, index + 1, source)),
                 scan((acc, curr) => [...acc, ...curr], [] as Movie[]),
                 shareReplay(1),
             ),
@@ -75,21 +76,13 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
         };
     }
 
-    private fetchList(type: "popular" | "top_rated", page: number): Observable<Movie[]> {
-        return this.http.get<Movie[]>(`${URL_EXTERNAL}/list/${type}/movieDb`, {
+    private fetchList(type: "popular" | "top_rated", page: number, source: MovieSource): Observable<Movie[]> {
+        return this.http.get<Movie[]>(`${URL_EXTERNAL}/list/${type}/${source}`, {
             headers: this.getHeaders(),
             params : {page: String(page)},
         }).pipe(
             catchError(this.handleError<Movie[]>(`fetchList(${type}, ${page})`))
         );
-    }
-
-    public getPopular(): Observable<Movie[]> {
-        return this.fetchList("popular", 1);
-    }
-
-    public getTopRated(): Observable<Movie[]> {
-        return this.fetchList("top_rated", 1);
     }
 
     public getList(count: number, offset = 0, key?: string): Observable<Movie[]> {

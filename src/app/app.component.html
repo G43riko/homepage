@@ -3,7 +3,14 @@
         <button (click)="snav.toggle()" mat-icon-button title="Toggle sidenav">
             <mat-icon>menu</mat-icon>
         </button>
+        <ng-container *ngFor="let item of startTemplates$ | async">
+            <ng-container *ngTemplateOutlet="item"></ng-container>
+        </ng-container>
         <span class="divider"></span>
+        <ng-container *ngFor="let item of endTemplates$ | async">
+            <ng-container *ngTemplateOutlet="item"></ng-container>
+        </ng-container>
+
         <app-login-screen></app-login-screen>
     </mat-toolbar>
 

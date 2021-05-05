@@ -15,7 +15,7 @@ import {MapDialogComponent} from "./map-dialog/map-dialog.component";
 import {PaginatorComponent} from "./paginator/paginator.component";
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {WidgetComponent} from "./widget/widget.component";
-import {AbstractTableColumnTemplateComponent} from "./abstract-table/abstract-table-column-template.component";
+import {AbstractTableColumnTemplateDirective} from "./abstract-table/abstract-table-column-template.directive";
 
 @NgModule({
     imports: [
@@ -31,7 +31,7 @@ import {AbstractTableColumnTemplateComponent} from "./abstract-table/abstract-ta
         PaginatorComponent,
         LoginScreenComponent,
         AbstractTableComponent,
-        AbstractTableColumnTemplateComponent,
+        AbstractTableColumnTemplateDirective,
         MapDialogComponent,
         WidgetComponent,
         AutoChipsComponent,
@@ -47,7 +47,7 @@ import {AbstractTableColumnTemplateComponent} from "./abstract-table/abstract-ta
         PaginatorComponent,
         LoginScreenComponent,
         AbstractTableComponent,
-        AbstractTableColumnTemplateComponent,
+        AbstractTableColumnTemplateDirective,
         WidgetComponent,
         MapDialogComponent,
         AutoChipsComponent,

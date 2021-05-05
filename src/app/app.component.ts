@@ -1,28 +1,33 @@
-import { MediaMatcher } from "@angular/cdk/layout";
-import { ChangeDetectorRef, Component } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer, Title } from "@angular/platform-browser";
-import { NavigationEnd, Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { AppStaticConfig } from "./appStaticConfig";
-import { AppConfig } from "./shared/app-config";
-import { AnalyticsService } from "./shared/services/analytics.service";
-import { AuthService } from "./shared/services/auth.service";
-import { ConfigService } from "./shared/services/config.service";
-import { IconService } from "./shared/services/icon.service";
+import {MediaMatcher} from "@angular/cdk/layout";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from "@angular/core";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer, Title} from "@angular/platform-browser";
+import {NavigationEnd, Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {AppStaticConfig} from "./appStaticConfig";
+import {AppConfig} from "./shared/app-config";
+import {AnalyticsService} from "./shared/services/analytics.service";
+import {AuthService} from "./shared/services/auth.service";
+import {ConfigService} from "./shared/services/config.service";
+import {IconService} from "./shared/services/icon.service";
+import {MenuService} from "./shared/services/menu.service";
 
 @Component({
     selector   : "app-root",
     templateUrl: "./app.component.html",
-    styleUrls  : ["./app.component.scss"]
+    styleUrls  : ["./app.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
     public mobileQuery: MediaQueryList;
+    public readonly startTemplates$ = this.menuService.startTemplates$;
+    public readonly endTemplates$ = this.menuService.endTemplates$;
     public constructor(private readonly changeDetectorRef: ChangeDetectorRef,
                        private readonly media: MediaMatcher,
                        titleService: Title,
                        private readonly configService: ConfigService<AppConfig>,
                        private readonly translateService: TranslateService,
+                       private readonly menuService: MenuService,
                        private readonly analyticsService: AnalyticsService,
                        private readonly router: Router,
                        public readonly authService: AuthService,

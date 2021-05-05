@@ -1,5 +1,5 @@
 <div *ngIf="tableConfig" class="mat-elevation-z8"
-     [style.max-height]="'calc(100vh - 65px - ' + 66 + 'px)'">
+     [style.max-height]="maxHeight || 'calc(100vh - 65px - ' + 66 + 'px)'">
 
     <table mat-table [dataSource]="dataSource" matSort>
         <!--First column with checkboxes-->

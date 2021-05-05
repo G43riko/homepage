@@ -1,12 +1,12 @@
 <div class="top-controls">
     <section class="preview-type">
-        <mat-radio-group *ngIf="previewType$ | async as previewType"
-                         (change)="setPreviewType($event.value)"
-                         aria-label="Preview type"
-                         name="preview type">
-            <mat-radio-button [checked]="previewType === 'table'" value="table">{{"movies.show.table" | translate}}</mat-radio-button>
-            <mat-radio-button [checked]="previewType === 'grid'" value="grid">{{"movies.show.grid" | translate}}</mat-radio-button>
-        </mat-radio-group>
+        <mat-button-toggle-group name="Preview type"
+                                 [value]="previewType$ | async"
+                                 (change)="setPreviewType($event.value)"
+                                 aria-label="Preview type">
+            <mat-button-toggle value="table">{{"movies.show.table" | translate}}</mat-button-toggle>
+            <mat-button-toggle value="grid">{{"movies.show.grid" | translate}}</mat-button-toggle>
+        </mat-button-toggle-group>
     </section>
     <mat-form-field class="flex-grow-1">
         <input #searchPatter
