@@ -1,0 +1,108 @@
+<form [formGroup]="filterForm" style="padding: 1rem; max-width: 370px">
+    <app-auto-chips [placeholder]="'Genres'" [allItems]="genres$ | async"></app-auto-chips>
+
+    <!--Year-->
+    <div>
+        <mat-form-field *ngIf="!filterForm.get('splitYear')?.value" class="full-width">
+            <mat-label>Year</mat-label>
+            <input type="number" autocomplete="off" formControlName="year" matInput>
+            <mat-checkbox matSuffix formControlName="splitYear"
+                          class="example-margin">{{'common.split' | translate}}</mat-checkbox>
+        </mat-form-field>
+
+        <div *ngIf="filterForm.get('splitYear')?.value"
+             style="display: inline-flex; width: 100%; align-items: center">
+            <mat-form-field style="width: 50%">
+                <mat-label>Min year</mat-label>
+                <input #minYear
+                       type="number"
+                       autocomplete="off"
+                       matInput
+                       formControlName="minYear"
+                       min="1500"
+                       [max]="maxYear.value">
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+                <mat-label>Max year</mat-label>
+                <input #maxYear
+                       type="number"
+                       autocomplete="off"
+                       matInput
+                       formControlName="maxYear"
+                       [min]="minYear.value"
+                       max="2050">
+                <mat-checkbox matSuffix formControlName="splitYear"
+                              class="example-margin">{{'common.split' | translate}}</mat-checkbox>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!--Duration-->
+    <div>
+        <mat-form-field *ngIf="!filterForm.get('splitDuration')?.value" class="full-width">
+            <mat-label>Duration</mat-label>
+            <input type="number" autocomplete="off" formControlName="duration" matInput>
+            <mat-checkbox matSuffix formControlName="splitDuration"
+                          class="example-margin">{{'common.split' | translate}}</mat-checkbox>
+        </mat-form-field>
+
+        <div *ngIf="filterForm.get('splitDuration')?.value"
+             style="display: inline-flex; width: 100%; align-items: center">
+            <mat-form-field style="width: 50%">
+                <mat-label>Min duration</mat-label>
+                <input #minDuration
+                       type="number"
+                       autocomplete="off"
+                       matInput
+                       formControlName="minDuration"
+                       min="1500"
+                       [max]="maxDuration.value"
+                >
+            </mat-form-field>
+            <mat-form-field style="width: 50%">
+                <mat-label>Max duration</mat-label>
+                <input #maxDuration
+                       type="number"
+                       autocomplete="off"
+                       matInput
+                       formControlName="maxDuration"
+                       [min]="minDuration.value"
+                       max="2050"
+                >
+                <mat-checkbox matSuffix formControlName="splitDuration"
+                              class="example-margin">{{'common.split' | translate}}</mat-checkbox>
+            </mat-form-field>
+        </div>
+    </div>
+
+   <div style="display: flex; justify-content: space-between">
+       <mat-checkbox #csfd
+                     indeterminate
+                     (click)="$event.preventDefault(); onClickCheckbox(csfd, 'csfdId'); "
+                     (keydown.space)="$event.preventDefault(); onClickCheckbox(csfd, 'csfdId'); "
+       >
+           CSFD
+       </mat-checkbox>
+       <mat-checkbox #movieDb
+                     indeterminate
+                     (click)="$event.preventDefault(); onClickCheckbox(movieDb, 'movieDbId'); "
+                     (keydown.space)="$event.preventDefault(); onClickCheckbox(movieDb, 'movieDbId'); "
+       >
+           TMDB
+       </mat-checkbox>
+       <mat-checkbox #imdb
+                     indeterminate
+                     (click)="$event.preventDefault(); onClickCheckbox(imdb, 'imdbId'); "
+                     (keydown.space)="$event.preventDefault(); onClickCheckbox(imdb, 'imdbId'); "
+       >
+           IMDB
+       </mat-checkbox>
+   </div>
+
+
+    {{filterForm.value | json}}
+    <div>
+        <button color="primary" autofocus (click)="onApplyClick()" mat-raised-button>Apply</button>
+        <button mat-raised-button (click)="onResetClick()">Reset</button>
+    </div>
+</form>

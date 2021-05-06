@@ -1,13 +1,12 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
-import { ApiPaginator } from "../../../shared/utils/ApiPaginator";
-import { MovieHttpService } from "./movie-http.service";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {ApiPaginator} from "../../../shared/utils/ApiPaginator";
+import {MovieHttpService} from "./movie-http.service";
 
 @Injectable()
-export class MovieListService implements OnDestroy {
-    private readonly killer$            = new Subject<void>();
+export class MovieListService {
     private readonly previewTypeSource$ = new BehaviorSubject<"table" | "grid">("table");
-    public readonly previewType$        = this.previewTypeSource$.asObservable();
+    public readonly previewType$ = this.previewTypeSource$.asObservable();
 
     private readonly paginator = new ApiPaginator(this.movieHttpService, {pageSize: 10});
 
@@ -20,8 +19,6 @@ export class MovieListService implements OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.killer$.next();
-        this.killer$.complete();
         this.paginator.cleanUp();
     }
 

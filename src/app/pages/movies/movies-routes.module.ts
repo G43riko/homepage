@@ -9,6 +9,7 @@ import {MakerListComponent} from "./components/maker-list/maker-list.component";
 import {MovieDetailComponent} from "./components/movie-detail/movie-detail.component";
 import {MovieIndex} from "./components/movie-index";
 import {MovieListComponent} from "./components/movie-list/movie-list.component";
+import {IncompleteMoviesComponent} from "./components/Incomplete-movies/incomplete-movies.component";
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
             {
                 path: "merge",
                 component: ObjectMergeComponent,
+            },
+            {
+                path: "incomplete",
+                component: IncompleteMoviesComponent,
             },
             {
                 path: "makers/:id",

@@ -1,9 +1,10 @@
-import { ColumnConfig } from "./column-config";
+import {ColumnConfig} from "./column-config";
 
 export interface TableConfig<T = unknown> {
     pageSize?: number;
     columns: ColumnConfig<T>[];
     paginateOptions?: number[];
+    noDataLabel?: string;
     paginator?: boolean;
     stickyHeader?: boolean;
     stickyStart?: number;

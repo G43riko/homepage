@@ -1,6 +1,16 @@
-<button (click)="load(MovieSource.csfd)" *ngIf="!csfdMovie" mat-raised-button>Load CSFD</button>
-<button (click)="load(MovieSource.imdb)" *ngIf="!imdbMovie" mat-raised-button>Load IMDB</button>
-<button (click)="load(MovieSource.movieDb, movieForm.value.type)" *ngIf="!movieDbMovie" mat-raised-button>Load MovieDB</button>
+<button *ngIf="!csfdMovie && movieForm.value.csfdId"
+        (click)="load(MovieSource.csfd)"
+        mat-raised-button
+>Load CSFD</button>
+<button *ngIf="!imdbMovie && movieForm.value.imdbId"
+        (click)="load(MovieSource.imdb)"
+        mat-raised-button
+>Load IMDB</button>
+<button *ngIf="!movieDbMovie && movieForm.value.movieDbId"
+        (click)="load(MovieSource.movieDb, movieForm.value.type)"
+        mat-raised-button
+>Load MovieDB
+</button>
 <div class="mat-elevation-z2">
     <table [dataSource]="dataSource"
            class="full-width"
@@ -108,7 +118,7 @@
             <td [innerHTML]="value"></td>
         </ng-container>
         <ng-container *ngSwitchCase="'year'">
-            <td>{{value | date:"yyyy"}}</td>
+            <td>{{(value + '').length === 4 ? value : (value | date:"yyyy")}}</td>
         </ng-container>
         <ng-container *ngSwitchCase="'imageFirst'">
             <td><img [src]="value[0]" alt="Image poster" style="height: 180px"></td>

@@ -14,6 +14,7 @@ import {Movie} from "../models/movie.model";
 
 const URL          = AppStaticConfig.BASE_URL + "/v2/movies";
 const URL_EXTERNAL = AppStaticConfig.BASE_URL + "/v2/external-movies";
+const URL_MANIPULATION = AppStaticConfig.BASE_URL + "/movie-manipulation";
 
 @Injectable()
 export class MovieHttpService extends AbstractHttpService<Movie> implements PaginatorService<Movie> {
@@ -48,7 +49,11 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                    );
     }
 
-    public getGenres(): Observable<string[]> {
+    public readonly genres$ = this.fetchGenres().pipe(
+        shareReplay(1),
+    );
+
+    public fetchGenres(): Observable<string[]> {
         return this.http.get<string[]>(URL + "/genres", {
             headers: this.getHeaders()
         })
@@ -123,5 +128,13 @@ export class MovieHttpService extends AbstractHttpService<Movie> implements Pagi
                    .pipe(
                        catchError(this.handleError<Movie>("getMovieDetailFromExternalSource"))
                    );
+    }
+
+    public getMoviesWithout(key: keyof Movie): Observable<Movie[]> {
+        return this.http
+            .get<Movie[]>(`${URL_MANIPULATION}/movies-without/${key}?count=40`)
+            .pipe(
+                catchError(this.handleError<Movie[]>("getMoviesWithout"))
+            );
     }
 }

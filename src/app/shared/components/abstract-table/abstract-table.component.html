@@ -82,6 +82,10 @@
         <tr *matRowDef="let row; columns: displayedColumns;" mat-row (click)="onRowClick(row)"></tr>
     </table>
 
+    <span *ngIf="tableConfig.noDataLabel && !dataSource.data?.length" style="display: block;padding: 0.5rem;text-align: center;">
+        {{tableConfig.noDataLabel}}
+    </span>
+
     <mat-paginator *ngIf="tableConfig.paginator"
                    [length]="dataSource.data.length"
                    [pageSize]="pageSize"

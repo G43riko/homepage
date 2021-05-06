@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from "@angular/core";
 import {map, switchMap} from "rxjs/operators";
 import {NotificationService} from "../../../../shared/services/notification.service";
 import {MovieSource} from "../../models/movie-source.type";
@@ -37,6 +37,7 @@ export class TopRatedMoviesComponent {
     public constructor(
         private readonly movieHttpService: MovieHttpService,
         private readonly notificationService: NotificationService,
+        private readonly changeDetectorRef: ChangeDetectorRef,
     ) {
     }
 
@@ -56,6 +57,7 @@ export class TopRatedMoviesComponent {
             movie.id = createdMovie.id;
             movie.movieDbId = createdMovie.movieDbId;
             movie.imdbId = createdMovie.imdbId;
+            this.changeDetectorRef.markForCheck();
         });
     }
 

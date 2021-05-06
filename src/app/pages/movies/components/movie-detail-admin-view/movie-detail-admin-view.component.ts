@@ -1,16 +1,16 @@
-import { animate, state, style, transition, trigger } from "@angular/animations";
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { MovieSource } from "../../models/movie-source.type";
-import { MovieType } from "../../models/movie-type.type";
-import { Movie } from "../../models/movie.model";
-import { MovieHttpService } from "../../services/movie-http.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from "@angular/core";
+import {FormGroup} from "@angular/forms";
+import {MovieSource} from "../../models/movie-source.type";
+import {MovieType} from "../../models/movie-type.type";
+import {Movie} from "../../models/movie.model";
+import {MovieHttpService} from "../../services/movie-http.service";
 
 @Component({
     selector: "app-movie-detail-admin-view",
     templateUrl: "./movie-detail-admin-view.component.html",
-    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./movie-detail-admin-view.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger("detailExpand", [
             state("collapsed", style({height: "0px", minHeight: "0"})),
@@ -29,7 +29,10 @@ export class MovieDetailAdminViewComponent implements OnInit {
     public expandedElement: any | null;
     public movieDbMovie: Movie;
 
-    public constructor(private readonly movieHttpService: MovieHttpService) {
+    public constructor(
+        private readonly movieHttpService: MovieHttpService,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        ) {
     }
 
     public ngOnInit(): void {
@@ -42,18 +45,21 @@ export class MovieDetailAdminViewComponent implements OnInit {
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.csfdId).subscribe((response) => {
                 this.csfdMovie = response;
                 this.setData();
+                this.changeDetectorRef.markForCheck();
             });
             break;
         case MovieSource.imdb:
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.imdbId).subscribe((response) => {
                 this.imdbMovie = response;
                 this.setData();
+                this.changeDetectorRef.markForCheck();
             });
             break;
         case MovieSource.movieDb:
             this.movieHttpService.getMovieDetailFromExternalSource(source, this.movieForm.value.movieDbId, type).subscribe((response) => {
                 this.movieDbMovie = response;
                 this.setData();
+                this.changeDetectorRef.markForCheck();
             });
             break;
         }
@@ -64,12 +70,8 @@ export class MovieDetailAdminViewComponent implements OnInit {
     }
 
     private setData(): void {
-        const transformItem = <T extends Movie>(source: T, attribute: keyof T): any => {
-            if (!source) {
-                return;
-            }
-
-            return source[attribute];
+        const transformItem = <T extends Movie>(source: T, attribute: keyof T): unknown => {
+            return source?.[attribute];
         };
 
         this.displayedColumns = ["attribute", "origin"];

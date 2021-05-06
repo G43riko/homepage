@@ -8,6 +8,9 @@
             <mat-button-toggle value="grid">{{"movies.show.grid" | translate}}</mat-button-toggle>
         </mat-button-toggle-group>
     </section>
+    <button *menuItem="'end'" (click)="onToggleFilterClick()" mat-icon-button title="Toggle sidenav">
+        <mat-icon>filter_alt</mat-icon>
+    </button>
     <mat-form-field class="flex-grow-1">
         <input #searchPatter
                (input)="onSearchPatternChange(searchPatter.value)"
